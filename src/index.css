@@ -1,0 +1,86 @@
+:root {
+  --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Fredoka', -apple-system, sans-serif;
+
+  --color-bg: #FAF9DC;
+  --color-grid: rgba(35, 71, 239, 0.08);
+  /* Less visible grid using Royal Blue */
+  --color-text: #2347EF;
+  --color-text-muted: #2347EF;
+
+  --color-primary: #A6DFFD;
+  --color-primary-light: #A6DFFD;
+  --color-primary-dark: #2347EF;
+
+  --color-accent: #FF8651;
+  --color-accent-dark: #2347EF;
+
+  --color-secondary: #FDD072;
+  --color-tertiary: #A6DFFD;
+
+  --color-pink: #FFB7D5;
+  --color-green: #12B37A;
+
+  --color-surface: #A6DFFD;
+  /* No more white */
+  --color-border: #2347EF;
+
+  --nav-height: 64px;
+
+  --shadow-sm: 4px 4px 0px rgba(35, 71, 239, 0.2);
+  --shadow-md: 8px 8px 0px rgba(35, 71, 239, 0.2);
+  --shadow-lg: 12px 12px 0px rgba(35, 71, 239, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
