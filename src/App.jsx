@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, BrainCircuit, HeartHandshake, ArrowRight, Menu, Headphones, Puzzle, Speech, ChevronDown, Volume2, VolumeX, BookOpen, Monitor, Waves, Users, Smile, Baby, Flower, HandHeart, Star, Instagram, MapPin, Phone, MessageCircleHeart, Video } from 'lucide-react';
+import { Sparkles, BrainCircuit, HeartHandshake, ArrowRight, Menu, Headphones, Puzzle, Speech, ChevronDown, Volume2, VolumeX, BookOpen, Monitor, Waves, Users, Smile, Baby, Flower, HandHeart, Star, Instagram, MapPin, Phone, MessageCircleHeart, Video, CheckCircle, Smartphone, Calendar, Clock } from 'lucide-react';
 import './App.css';
 
 const fadeUp = {
@@ -88,6 +88,8 @@ function App() {
   const [isMuted, setIsMuted] = useState(true);
   const [isTomatisMuted, setIsTomatisMuted] = useState(true);
   const [tomatisPlaying, setTomatisPlaying] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isBookingComplete, setIsBookingComplete] = useState(false);
   const tomatisVideoRef = useRef(null);
 
   useEffect(() => {
@@ -112,6 +114,52 @@ function App() {
     return () => { clearTimeout(timer); observer.disconnect(); };
   }, []);
 
+  useEffect(() => {
+    if (isBookingModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+      // Give the closing animation a tiny delay before resetting the content
+      setTimeout(() => {
+        setIsBookingComplete(false);
+      }, 300);
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isBookingModalOpen]);
+
+  useEffect(() => {
+    // Listen for LeadConnector iframe message events for successful booking
+    const handleIframeMessage = (e) => {
+      let dataStr = '';
+      try {
+        if (typeof e.data === 'string') {
+          dataStr = e.data;
+        } else {
+          dataStr = JSON.stringify(e.data);
+        }
+      } catch (err) { }
+
+      // Handle the various ways GHL widget might announce success
+      if (
+        dataStr && (
+        dataStr.includes('msgsndr-booking-complete') ||
+        dataStr.includes('appointment-successful') ||
+        dataStr.includes('appointment_scheduled') ||
+        dataStr.includes('booking_completed') ||
+        dataStr.includes('calendar-booking-success') ||
+        dataStr.includes('booking'))
+      ) {
+        if (!dataStr.includes('setHeight') && !dataStr.includes('analytics')) {
+          setIsBookingComplete(true);
+        }
+      }
+    };
+    window.addEventListener('message', handleIframeMessage);
+    return () => window.removeEventListener('message', handleIframeMessage);
+  }, []);
+
   return (
     <div className="app">
       {/* Navbar */}
@@ -125,9 +173,9 @@ function App() {
             <a href="#metodo" className="nav-link">Método</a>
             <a href="#servicios" className="nav-link">Servicios</a>
 
-            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem' }}>
+            <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}>
               Agendar Cita
-            </a>
+            </button>
           </div>
           <button className="mobile-toggle">
             <Menu size={24} />
@@ -159,9 +207,9 @@ function App() {
               A través de estímulos multisensoriales, herramientas como el Método Tomatis y muchísimo amor, ayudamos a que tu pequeño gane confianza, mejore su atención y disfrute aprender.
             </motion.p>
             <motion.div className="hero-actions" variants={fadeUp}>
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-primary">
+              <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ border: 'none', cursor: 'pointer' }}>
                 Agendar primera cita <ArrowRight size={20} />
-              </a>
+              </button>
               <a href="#servicios" className="btn-outline">
                 Explorar terapias
               </a>
@@ -356,7 +404,7 @@ function App() {
       <section className="team-section bg-cream with-grid" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Thematic Background Decor for Team: Family oriented */}
         <div className="decor-handheart">
-          <HandHeart color="#ffffff" />
+          <HandHeart color="var(--color-tertiary)" />
         </div>
         <div style={{ position: 'absolute', bottom: '10%', right: '-8%', opacity: 0.05, transform: 'rotate(15deg)', pointerEvents: 'none' }}>
           <Smile size={600} color="var(--color-tertiary)" />
@@ -434,7 +482,7 @@ function App() {
               variants={fadeUp}
             >
               <div className="team-video-clipper">
-                <video src="/reviews/fam.mp4#t=1.5" controls playsInline preload="metadata" className="team-video-element"></video>
+                <video src="/reviews/fam.mp4" autoPlay loop muted playsInline preload="metadata" className="team-video-element"></video>
               </div>
             </motion.div>
           </div>
@@ -616,9 +664,9 @@ function App() {
                 En Multisensorial RD, somos una familia dedicada a cuidar del crecimiento de la tuya. Ven a visitarnos y descubre un espacio donde tu hijo se sentirá siempre como en casa mientras alcanza su máximo potencial.
               </motion.p>
               <motion.div variants={fadeUp}>
-                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-primary">
+                <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ border: 'none', cursor: 'pointer' }}>
                   Agendar Evaluación Inicial
-                </a>
+                </button>
               </motion.div>
             </div>
 
@@ -681,7 +729,7 @@ function App() {
               <ul>
                 <li><a href="#metodo">Método</a></li>
                 <li><a href="#servicios">Servicios</a></li>
-                <li><a href={whatsappUrl} target="_blank" rel="noreferrer">Agendar Cita</a></li>
+                <li><button onClick={() => setIsBookingModalOpen(true)} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', font: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}>Agendar Cita</button></li>
               </ul>
             </div>
             <div className="footer-col">
@@ -699,6 +747,123 @@ function App() {
           </div>
         </div>
       </footer>
+      {/* Booking Modal */}
+      <AnimatePresence>
+        {isBookingModalOpen && (
+          <motion.div 
+            className="booking-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            onClick={() => setIsBookingModalOpen(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(28, 78, 130, 0.85)', // Dark blue background instead of teal
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px'
+            }}
+          >
+            <motion.div 
+              className="booking-modal-content"
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              onClick={e => e.stopPropagation()}
+              style={{
+                backgroundColor: '#ffffff', // Keep calendar background matching
+                borderRadius: '32px',
+                boxShadow: '0 24px 48px rgba(0,0,0,0.15)',
+                border: '4px solid var(--color-accent)', // Coral pink border
+                width: '100%',
+                maxWidth: '850px',
+                maxHeight: '90vh',
+                overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch', // Enable native momentum scrolling on iOS
+                position: 'relative',
+                padding: '25px 5px 5px 5px'
+              }}
+            >
+              <button 
+                onClick={() => setIsBookingModalOpen(false)}
+                style={{
+                  position: 'absolute',
+                  top: '-15px',
+                  right: '-15px',
+                  background: 'var(--color-primary-dark)',
+                  border: '4px solid white',
+                  borderRadius: '50%',
+                  width: '45px',
+                  height: '45px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 10,
+                  fontSize: '1.4rem',
+                  fontWeight: 'bold',
+                  color: 'white',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+                }}
+              >
+                ✕
+              </button>
+              
+              {isBookingComplete ? (
+                <div style={{ padding: '40px 20px', textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                  <motion.div 
+                    initial={{ scale: 0.5, opacity: 0 }} 
+                    animate={{ scale: 1, opacity: 1 }} 
+                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                    style={{ background: 'var(--color-pink-light)', padding: '20px', borderRadius: '50%', marginBottom: '20px' }}
+                  >
+                    <CheckCircle size={64} color="var(--color-accent)" />
+                  </motion.div>
+                  <h2 style={{ color: 'var(--color-text)', fontSize: '2.5rem', marginBottom: '15px' }}>¡Cita Confirmada!</h2>
+                  <p style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '80%', margin: '0 auto 40px auto' }}>
+                    Hemos recibido correctamente los datos de tu cita. Nos pondremos en contacto pronto para confirmar todos los detalles.
+                  </p>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', width: '100%', maxWidth: '400px' }}>
+                    <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: '1.1rem', padding: '15px' }}>
+                      <Phone size={20} /> Escríbenos por WhatsApp
+                    </a>
+                    <a href="https://instagram.com/multisensorialrd" target="_blank" rel="noreferrer" className="btn-outline" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: '1.1rem', padding: '15px' }}>
+                      <Instagram size={20} /> Síguenos en Instagram
+                    </a>
+                  </div>
+
+                  <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', marginTop: '30px' }}>
+                    ¿Para algo más inmediato? Llámanos al <a href="tel:+18093065040" style={{ color: 'var(--color-accent)', fontWeight: 'bold' }}>+1 (809) 306-5040</a>
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div style={{ padding: '0 20px', textAlign: 'center', marginBottom: '10px' }}>
+                    <h2 style={{ color: 'var(--color-accent)', fontSize: '2rem', margin: '0' }}>Agenda tu Cita</h2>
+                    <p style={{ color: 'var(--color-text-muted)', margin: '5px 0 0 0', fontFamily: 'var(--font-primary)' }}>Elige el día y la hora que mejor funcione para ti.</p>
+                  </div>
+
+                  <iframe 
+                    src="https://api.leadconnectorhq.com/widget/booking/i0TBYq6Ec4GK21NpfPFu?primaryColor=%23EF476F&backgroundColor=%23ffffff&fontFamily=Nunito" 
+                    style={{ width: '100%', border: 'none', minHeight: '850px', borderRadius: '0 0 28px 28px' }} 
+                    scrolling="yes" 
+                    id="i0TBYq6Ec4GK21NpfPFu_1773700990303"
+                  ></iframe>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
