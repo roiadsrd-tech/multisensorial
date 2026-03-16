@@ -789,33 +789,34 @@ function App() {
                 overflowY: 'auto',
                 WebkitOverflowScrolling: 'touch', // Enable native momentum scrolling on iOS
                 position: 'relative',
-                padding: '25px 5px 5px 5px'
+                padding: '25px 0 0 0'
               }}
             >
-              <button 
-                onClick={() => setIsBookingModalOpen(false)}
-                style={{
-                  position: 'absolute',
-                  top: '-15px',
-                  right: '-15px',
-                  background: 'var(--color-primary-dark)',
-                  border: '4px solid white',
-                  borderRadius: '50%',
-                  width: '45px',
-                  height: '45px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  zIndex: 10,
-                  fontSize: '1.4rem',
-                  fontWeight: 'bold',
-                  color: 'white',
-                  boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
-                }}
-              >
-                ✕
-              </button>
+              <div style={{ position: 'sticky', top: 0, right: 0, zIndex: 10, display: 'flex', justifyContent: 'flex-end', padding: '0 12px' }}>
+                <button 
+                  onClick={() => setIsBookingModalOpen(false)} // Assuming closeBookingModal is equivalent to this
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--color-primary-dark)',
+                    border: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                    transition: 'transform 0.2s',
+                    color: '#fff'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1) rotate(90deg)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                  </svg>
+                </button>
+              </div>
               
               {isBookingComplete ? (
                 <div style={{ padding: '40px 20px', textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>

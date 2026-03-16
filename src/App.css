@@ -783,7 +783,7 @@
   position: absolute;
   top: 5%;
   left: -5%;
-  opacity: 0.5;
+  opacity: 0.3;
   transform: rotate(-10deg);
   pointer-events: none;
 }
@@ -1129,7 +1129,7 @@
   .team-video-wrapper {
     height: auto;
     max-width: 380px;
-    aspect-ratio: auto;
+    aspect-ratio: 4 / 5;
     order: -1;
   }
 
