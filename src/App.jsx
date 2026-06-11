@@ -1,7 +1,20 @@
+/* eslint-disable no-unused-vars, no-empty */
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, BrainCircuit, HeartHandshake, ArrowRight, Menu, Headphones, Puzzle, Speech, ChevronDown, Volume2, VolumeX, BookOpen, Monitor, Waves, Users, Smile, Baby, Flower, HandHeart, Star, Instagram, MapPin, Phone, MessageCircleHeart, Video, CheckCircle, Smartphone, Calendar, Clock } from 'lucide-react';
+import { Sparkles, BrainCircuit, HeartHandshake, ArrowRight, Menu, X, Headphones, Puzzle, Speech, ChevronDown, Volume2, VolumeX, BookOpen, RectangleGoggles, Waves, Users, Smile, Baby, Flower, HandHeart, Star, Instagram, Youtube, MapPin, Phone, MessageCircleHeart, Video, CheckCircle, Smartphone, Calendar, Clock, Award, ShieldCheck, Play, Car, ExternalLink } from 'lucide-react';
 import './App.css';
+import TomatisPage from './TomatisPage';
+import HomeschoolingPage from './HomeschoolingPage';
+import PropietariosPage from './PropietariosPage';
+import PsicologiaPage from './PsicologiaPage';
+import NeuropedagogiaPage from './NeuropedagogiaPage';
+import PsicopedagogiaPage from './PsicopedagogiaPage';
+import NeurofeedbackPage from './NeurofeedbackPage';
+import EvaluacionAulaVirtualPage from './EvaluacionAulaVirtualPage';
+import AcompanamientoMadresPage from './AcompanamientoMadresPage';
+import TerapiaOrofacialPage from './TerapiaOrofacialPage';
+import FisioterapiaPage from './FisioterapiaPage';
+import TerapiaConductualPage from './TerapiaConductualPage';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -17,6 +30,45 @@ const staggerContainer = {
     }
   }
 };
+
+const mediaAppearances = [
+  {
+    title: "\"La Mirada\" | IA y los límites terapéuticos",
+    speakers: "Carlos Eduardo Pérez y Carlos Pérez Díaz",
+    url: "https://www.youtube.com/watch?v=JiJXut5kviU&list=PLMWb8sBwbKFYe3kamLfPxjBnWz5ni2jc2&index=1",
+    thumbnail: "https://img.youtube.com/vi/JiJXut5kviU/maxresdefault.jpg"
+  },
+  {
+    title: "\"La Mirada\" | 'Adolescencia' de Netflix: lo que los padres deben entender",
+    speakers: "Carlos Eduardo Pérez y Carlos Pérez Díaz",
+    url: "https://www.youtube.com/watch?v=yDlEPuyxBFs&list=PLMWb8sBwbKFYe3kamLfPxjBnWz5ni2jc2&index=2",
+    thumbnail: "https://img.youtube.com/vi/yDlEPuyxBFs/maxresdefault.jpg"
+  },
+  {
+    title: "QUÉ TAN CARO ES CRIAR UN HIJO AUTISTA?",
+    speakers: "Estonoesradio | Carlos Eduardo Pérez",
+    url: "https://www.youtube.com/watch?v=NK1u6dsNqBo&list=PLMWb8sBwbKFYe3kamLfPxjBnWz5ni2jc2&index=7",
+    thumbnail: "https://img.youtube.com/vi/NK1u6dsNqBo/maxresdefault.jpg"
+  },
+  {
+    title: "Especialistas hablan sobre el espectro del autismo con Jatnna",
+    speakers: "Carlos Eduardo Pérez y Carlos Pérez Díaz",
+    url: "https://www.youtube.com/watch?v=NSRzUZ-Tqhc&list=PLMWb8sBwbKFYe3kamLfPxjBnWz5ni2jc2&index=6",
+    thumbnail: "https://img.youtube.com/vi/NSRzUZ-Tqhc/maxresdefault.jpg"
+  },
+  {
+    title: "Entrevista Mery Torrealba - Carlos Pérez",
+    speakers: "Hora de Te | 05 Octubre 2023",
+    url: "https://www.youtube.com/watch?v=lK8_ZQcQuK0&list=PLMWb8sBwbKFYe3kamLfPxjBnWz5ni2jc2&index=5",
+    thumbnail: "https://img.youtube.com/vi/lK8_ZQcQuK0/maxresdefault.jpg"
+  },
+  {
+    title: "HOMESCHOOLING (Escuela en casa) para niños con AUTISMO en RD",
+    speakers: "AzulPodcast EP 32 | Carlos Eduardo Pérez y Mery Torrealba",
+    url: "https://www.youtube.com/watch?v=ZKI_bcbkVI0&t=3s",
+    thumbnail: "https://img.youtube.com/vi/ZKI_bcbkVI0/maxresdefault.jpg"
+  },
+];
 
 const services = [
   {
@@ -45,40 +97,82 @@ const services = [
     description: "Entrenamos el cerebro sin medicamentos."
   },
   {
-    icon: <Monitor size={28} />,
-    title: "Evaluación Virtual",
-    description: "Diagnósticos clínicos y psicopedagógicos precisos."
+    icon: <RectangleGoggles size={28} />,
+    title: "Evaluación Aula Virtual",
+    description: "Software estandarizado para el diagnóstico del TDAH."
   },
   {
     icon: <Speech size={28} />,
-    title: "Método Ventura",
-    description: "Estimulación del lenguaje audiovisual."
+    title: "Acompañamiento a Madres",
+    description: "Acompañamiento psicológico en el proceso de las madres."
   },
   {
     icon: <BookOpen size={28} />,
-    title: "Homeschooling",
-    description: "Acompañamiento para niños no escolarizados."
+    title: "Homeschooling Presencial",
+    description: "Mini escuela presencial y personalizada para niños en nuestro centro."
+  },
+  {
+    icon: <Smile size={28} />,
+    title: "Terapia Orofacial",
+    description: "Mejora de las funciones de succión, masticación y habla."
+  },
+  {
+    icon: <Baby size={28} />,
+    title: "Fisioterapia",
+    description: "Desarrollo motor y fortalecimiento físico."
+  },
+  {
+    icon: <Users size={28} />,
+    title: "Terapia Conductual",
+    description: "Modificación de conducta y habilidades sociales."
   }
 ];
 
-function ServiceCard({ title, description, icon, colorClass, index }) {
+function ServiceCard({ title, description, icon, colorClass, index, onClick, isHighlighted }) {
+  const isClickable = !!onClick;
   return (
-    <motion.div
-      className={`service-card-modern ${colorClass}`}
-      variants={fadeUp}
-      whileHover={{ y: -12, rotate: index % 2 === 0 ? 1 : -1 }}
-      transition={{ type: "spring", stiffness: 300, damping: 15 }}
-      style={{ position: 'relative', zIndex: 1 }}
-    >
-      <div className="service-card-icon">
-        {icon}
-      </div>
-      <div className="service-card-info">
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
-      <div className="service-card-decor"></div>
-    </motion.div>
+    <div style={{ position: 'relative', height: '100%' }}>
+      <motion.div
+        className={`service-card-modern ${colorClass} ${isClickable ? 'clickable-card' : ''}`}
+        variants={fadeUp}
+        whileHover={isClickable ? { y: -16, scale: 1.03, rotate: index % 2 === 0 ? 1 : -1 } : { y: -12, rotate: index % 2 === 0 ? 1 : -1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          cursor: isClickable ? 'pointer' : 'default',
+          overflow: 'hidden',
+          border: '3px solid var(--color-primary-dark)',
+          boxShadow: '6px 6px 0px var(--color-primary-dark)',
+          height: '100%'
+        }}
+        onClick={onClick}
+      >
+        <div className="service-card-icon">
+          {icon}
+        </div>
+        <div className="service-card-info">
+          <h3>{title}</h3>
+          <p>{description}</p>
+          {isClickable && (
+            <span className="card-learn-more" style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              marginTop: '12px',
+              fontSize: '0.8rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              color: 'var(--color-primary-dark)',
+              borderBottom: '2px solid var(--color-primary-dark)'
+            }}>
+              Ver Más <ArrowRight size={12} />
+            </span>
+          )}
+        </div>
+        <div className="service-card-decor"></div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -90,7 +184,36 @@ function App() {
   const [tomatisPlaying, setTomatisPlaying] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isBookingComplete, setIsBookingComplete] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const tomatisVideoRef = useRef(null);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
+  const servicePagesList = [
+    { id: 'todos', label: 'Ver todos los servicios' },
+    { id: 'tomatis', label: 'Método Tomatis®' },
+    { id: 'psicologia', label: 'Psicología Clínica' },
+    { id: 'neuropedagogia', label: 'Neuropedagogía' },
+    { id: 'psicopedagogia', label: 'Psicopedagogía' },
+    { id: 'neurofeedback', label: 'Neurofeedback' },
+    { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' },
+    { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres' },
+    { id: 'homeschooling', label: 'Homeschooling Presencial' },
+    { id: 'terapia-orofacial', label: 'Terapia Orofacial' },
+    { id: 'fisioterapia', label: 'Fisioterapia' },
+    { id: 'terapia-conductual', label: 'Terapia Conductual' }
+  ];
 
   useEffect(() => {
     const video = tomatisVideoRef.current;
@@ -144,12 +267,12 @@ function App() {
       // Handle the various ways GHL widget might announce success
       if (
         dataStr && (
-        dataStr.includes('msgsndr-booking-complete') ||
-        dataStr.includes('appointment-successful') ||
-        dataStr.includes('appointment_scheduled') ||
-        dataStr.includes('booking_completed') ||
-        dataStr.includes('calendar-booking-success') ||
-        dataStr.includes('booking'))
+          dataStr.includes('msgsndr-booking-complete') ||
+          dataStr.includes('appointment-successful') ||
+          dataStr.includes('appointment_scheduled') ||
+          dataStr.includes('booking_completed') ||
+          dataStr.includes('calendar-booking-success') ||
+          dataStr.includes('booking'))
       ) {
         if (!dataStr.includes('setHeight') && !dataStr.includes('analytics')) {
           setIsBookingComplete(true);
@@ -160,27 +283,410 @@ function App() {
     return () => window.removeEventListener('message', handleIframeMessage);
   }, []);
 
+  if (currentPage === 'propietarios') {
+    return <PropietariosPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }}
+    />;
+  }
+
+  const handleNavigateService = (id) => {
+    setCurrentPage(id);
+    window.scrollTo(0, 0);
+  };
+
+  if (currentPage === 'tomatis') {
+    return <TomatisPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'homeschooling') {
+    return <HomeschoolingPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'psicologia') {
+    return <PsicologiaPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'neuropedagogia') {
+    return <NeuropedagogiaPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'psicopedagogia') {
+    return <PsicopedagogiaPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'neurofeedback') {
+    return <NeurofeedbackPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'evaluacion-aula-virtual') {
+    return <EvaluacionAulaVirtualPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'acompanamiento-madres') {
+    return <AcompanamientoMadresPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'terapia-orofacial') {
+    return <TerapiaOrofacialPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'fisioterapia') {
+    return <FisioterapiaPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
+  if (currentPage === 'terapia-conductual') {
+    return <TerapiaConductualPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onBook={() => {
+        setIsBookingModalOpen(true);
+      }}
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
   return (
     <div className="app">
       {/* Navbar */}
       <nav className="navbar">
+        {/* Promotional Banner */}
+        <div 
+          onClick={() => {
+          setCurrentPage('homeschooling');
+          window.scrollTo(0, 0);
+        }}
+        style={{
+          background: 'var(--color-accent)',
+          color: 'white',
+          padding: '4px 10px',
+          textAlign: 'center',
+          fontWeight: 700,
+          fontSize: '0.8rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '6px',
+          width: '100%',
+          cursor: 'pointer'
+        }}
+      >
+        <Star size={14} fill="white" className="hide-mobile" />
+        <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span>¡Inscripciones abiertas para Homeschooling!</span>
+          <span className="hide-mobile-inline"> Reserva tu cupo ahora.</span>
+        </span>
+        <span style={{ 
+          display: 'inline-flex', 
+          alignItems: 'center', 
+          background: 'rgba(255,255,255,0.2)', 
+          padding: '2px 10px', 
+          borderRadius: '100px', 
+          fontSize: '0.75rem',
+          gap: '4px',
+          marginLeft: '4px',
+          whiteSpace: 'nowrap'
+        }}>
+          Ver Más <ArrowRight size={12} />
+        </span>
+      </div>
+
         <div className="container nav-container">
           <div className="nav-logo">
-            <img src="/logo.webp" className="nav-logo-img" alt="Multisensorial RD Logo" style={{ height: '45px', width: 'auto' }} />
-            Multisensorial
+                                                                                                                                                <img src="/multilogo2 (1).png" className="nav-logo-img" alt="Multisensorial Logo" />
           </div>
           <div className="nav-links">
-            <a href="#metodo" className="nav-link">Método</a>
-            <a href="#servicios" className="nav-link">Servicios</a>
+            <a href="#metodo" className="nav-link" onClick={() => setCurrentPage('home')}>Método</a>
+            
+            <div 
+              className="nav-dropdown-container" 
+              onMouseEnter={() => setIsServicesDropdownOpen(true)}
+              onMouseLeave={() => setIsServicesDropdownOpen(false)}
+              style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+            >
+              <a href="#servicios" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '4px' }} onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setTimeout(() => { document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' }); }, 100); }}>
+                Servicios <ChevronDown size={16} />
+              </a>
+              <AnimatePresence>
+                {isServicesDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: '0',
+                      background: 'white',
+                      borderRadius: '12px',
+                      boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+                      padding: '10px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '5px',
+                      minWidth: '240px',
+                      zIndex: 100,
+                      border: '2px solid var(--color-primary-dark)'
+                    }}
+                  >
+                    {servicePagesList.map(s => (
+                      <button
+                        key={s.id}
+                        onClick={() => { 
+                          if (s.id === 'todos') {
+                            setCurrentPage('home');
+                            setTimeout(() => { document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' }); }, 100);
+                          } else {
+                            setCurrentPage(s.id); 
+                            window.scrollTo(0,0); 
+                          }
+                          setIsServicesDropdownOpen(false); 
+                        }}
+                        style={{
+                          textAlign: 'left',
+                          padding: s.id === 'todos' ? '10px 12px' : '8px 12px',
+                          background: s.id === 'todos' ? 'var(--color-secondary)' : 'transparent',
+                          border: 'none',
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          fontWeight: s.id === 'todos' ? 800 : 600,
+                          color: s.id === 'todos' ? 'var(--color-primary-dark)' : 'var(--color-primary-dark)',
+                          fontSize: '0.95rem',
+                          marginBottom: s.id === 'todos' ? '8px' : '0'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = s.id === 'todos' ? 'var(--color-primary-dark)' : 'var(--color-bg)';
+                          if(s.id === 'todos') e.currentTarget.style.color = 'white';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = s.id === 'todos' ? 'var(--color-secondary)' : 'transparent';
+                          if(s.id === 'todos') e.currentTarget.style.color = 'var(--color-primary-dark)';
+                        }}
+                      >
+                        {s.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}>
               Agendar Cita
             </button>
           </div>
-          <button className="mobile-toggle">
-            <Menu size={24} />
+          <button className="mobile-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div 
+                className="mobile-menu-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'rgba(28, 78, 130, 0.4)',
+                  backdropFilter: 'blur(4px)',
+                  zIndex: 140
+                }}
+              />
+              
+              <motion.div 
+                className="mobile-menu"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              >
+                <div className="mobile-menu-links">
+                  <a href="#metodo" className="mobile-menu-link" onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }}>Método</a>
+                  
+                  <div style={{ width: '100%' }}>
+                    <div 
+                      className="mobile-menu-link" 
+                      style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', border: 'none', background: 'none' }}
+                      onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                    >
+                      Servicios <ChevronDown size={20} style={{ transform: isMobileServicesOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: '0.3s' }} />
+                    </div>
+                    <AnimatePresence>
+                      {isMobileServicesOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', paddingLeft: '20px', gap: '15px', marginTop: '15px' }}
+                        >
+                          {servicePagesList.map(s => (
+                            <button
+                              key={s.id}
+                              onClick={() => {
+                                if (s.id === 'todos') {
+                                  setCurrentPage('home');
+                                  setTimeout(() => { document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' }); }, 100);
+                                } else {
+                                  setCurrentPage(s.id);
+                                  window.scrollTo(0, 0);
+                                }
+                                setIsMobileMenuOpen(false);
+                                setIsMobileServicesOpen(false);
+                              }}
+                              style={{
+                                textAlign: 'left',
+                                background: s.id === 'todos' ? 'var(--color-secondary)' : 'transparent',
+                                border: 'none',
+                                fontSize: '1.1rem',
+                                fontWeight: s.id === 'todos' ? 800 : 600,
+                                color: s.id === 'todos' ? 'var(--color-primary-dark)' : 'var(--color-primary-dark)',
+                                padding: s.id === 'todos' ? '12px 15px' : '0',
+                                borderRadius: s.id === 'todos' ? '8px' : '0',
+                                marginBottom: s.id === 'todos' ? '5px' : '0',
+                                cursor: 'pointer'
+                              }}
+                              onMouseOver={(e) => { 
+                                if(s.id === 'todos') {
+                                  e.currentTarget.style.background = 'var(--color-primary-dark)';
+                                  e.currentTarget.style.color = 'white';
+                                }
+                              }}
+                              onMouseOut={(e) => { 
+                                if(s.id === 'todos') {
+                                  e.currentTarget.style.background = 'var(--color-secondary)';
+                                  e.currentTarget.style.color = 'var(--color-primary-dark)';
+                                }
+                              }}
+                            >
+                              {s.label}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <a href="#testimonios" className="mobile-menu-link" onClick={() => setIsMobileMenuOpen(false)}>Testimonios</a>
+                  <a href="#contacto" className="mobile-menu-link" onClick={() => setIsMobileMenuOpen(false)}>Contacto</a>
+                  
+                  <button 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsBookingModalOpen(true);
+                    }} 
+                    className="btn-primary" 
+                    style={{ width: '100%', marginTop: '20px', padding: '15px', border: 'none' }}
+                  >
+                    Agendar Cita
+                  </button>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
@@ -188,13 +694,13 @@ function App() {
         {/* Decor */}
         <div className="dec-star-4 orange" style={{ top: '15%', left: '5%', opacity: 1, transform: 'scale(1.5)' }}></div>
         <div className="dec-circle" style={{ top: '-50px', right: '-50px', width: '300px', height: '300px', background: 'var(--color-secondary)', opacity: 1 }}></div>
-        <div className="dec-wiggle" style={{ top: '80%', left: '40%', opacity: 1 }}></div>
-        <div className="dec-star-4 yellow" style={{ bottom: '15%', right: '15%', opacity: 1, transform: 'scale(1.2)' }}></div>
-        <div className="dec-wiggle" style={{ top: '25%', right: '35%', opacity: 1 }}></div>
+                        <div className="dec-wiggle hide-mobile" style={{ top: '65%', left: '30%', opacity: 1 }}></div>
+                        <div className="dec-star-4 yellow" style={{ bottom: '28%', right: '12%', opacity: 1, transform: 'scale(1.2)' }}></div>
+        <div className="dec-wiggle hide-mobile" style={{ top: '25%', right: '35%', opacity: 1 }}></div>
 
         <div className="container hero-content">
           <motion.div
-            className="hero-text"
+            className="hero-header"
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
@@ -203,17 +709,6 @@ function App() {
             <motion.h1 variants={fadeUp} style={{ color: 'var(--color-text)' }}>
               Un espacio donde tu <span style={{ color: 'var(--color-accent)' }}>hijo</span> se siente seguro para aprender y crecer.
             </motion.h1>
-            <motion.p variants={fadeUp}>
-              A través de estímulos multisensoriales, herramientas como el Método Tomatis y muchísimo amor, ayudamos a que tu pequeño gane confianza, mejore su atención y disfrute aprender.
-            </motion.p>
-            <motion.div className="hero-actions" variants={fadeUp}>
-              <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ border: 'none', cursor: 'pointer' }}>
-                Agendar primera cita <ArrowRight size={20} />
-              </button>
-              <a href="#servicios" className="btn-outline">
-                Explorar terapias
-              </a>
-            </motion.div>
           </motion.div>
 
           <div className="hero-image-wrapper vertical">
@@ -233,10 +728,47 @@ function App() {
             </div>
             <div
               className="video-sound-toggle"
-              style={{ pointerEvents: 'none' }}
-              aria-label={isMuted ? "Activar sonido" : "Silenciar"}
+              onClick={() => setIsMuted(!isMuted)}
             >
               {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </div>
+          </div>
+
+          <motion.div
+            className="hero-body"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            style={{ position: 'relative', zIndex: 2 }}
+          >
+            <motion.p variants={fadeUp} className="hero-subtitle-desktop hide-mobile" style={{ marginTop: '-80px' }}>
+              A través de estímulos multisensoriales, herramientas como el Método Tomatis y muchísimo amor, ayudamos a que tu pequeño gane confianza, mejore su atención y disfrute aprender.
+            </motion.p>
+            <motion.p variants={fadeUp} className="hero-subtitle-mobile">
+              Con estímulos multisensoriales, el Método Tomatis y mucho amor, ayudamos a tu pequeño a aprender y crecer con confianza.
+            </motion.p>
+            <motion.div className="hero-actions" variants={fadeUp}>
+              <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ border: 'none', cursor: 'pointer' }}>
+                Agendar primera cita <ArrowRight size={20} />
+              </button>
+              <a href="#servicios" className="btn-outline">
+                Explorar terapias
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Media Presence Section - Static Grid */}
+        <div className="hero-media-static">
+
+          <div className="container">
+            <div className="media-static-label">PRESENCIA EN MEDIOS:</div>
+            <div className="media-logos-grid">
+              <img src="/logosasseenin/azulpodcast.webp" alt="Azul Podcast" />
+              <img src="/logosasseenin/colorvision.webp" alt="Color Visión" />
+              <img src="/logosasseenin/estonoesradio.webp" alt="Esto No Es Radio" />
+              <img src="/logosasseenin/lamirada.webp" alt="La Mirada" />
+              <img src="/logosasseenin/rnn.webp" alt="RNN" />
             </div>
           </div>
         </div>
@@ -270,9 +802,21 @@ function App() {
               variants={staggerContainer}
             >
               <motion.h2 variants={fadeUp}>Pioneros en el Método Tomatis® en RD.</motion.h2>
-              <motion.p variants={fadeUp}>
+              <motion.p variants={fadeUp} className="hide-mobile">
                 El oído no solo nos ayuda a escuchar, también activa el cerebro, y con el Método Tomatis trabajamos la escucha de tu hijo mediante una estimulación especial que fortalece su oído y le ayuda a entender, concentrarse y aprender mejor.
               </motion.p>
+              <motion.div variants={fadeUp} style={{ marginTop: '30px' }}>
+                <button 
+                  onClick={() => {
+                    setCurrentPage('tomatis');
+                    window.scrollTo(0, 0);
+                  }} 
+                  className="btn-primary" 
+                  style={{ border: 'none', cursor: 'pointer', textDecoration: 'none' }}
+                >
+                  Aprender más del Método Tomatis <ArrowRight size={20} />
+                </button>
+              </motion.div>
             </motion.div>
 
             <motion.div
@@ -280,7 +824,7 @@ function App() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
-              style={{ maxWidth: '350px', margin: '0 auto' }}
+              style={{ width: '100%', maxWidth: '500px', marginLeft: 'auto' }}
             >
               <div style={{ position: 'relative', width: '100%', aspectRatio: '851 / 1024', borderRadius: '40px', border: '8px solid var(--color-accent)', overflow: 'hidden', cursor: 'pointer' }}
                 onClick={() => setIsTomatisMuted(m => !m)}>
@@ -354,6 +898,67 @@ function App() {
               </div>
             </motion.div>
           </motion.div>
+
+          {/* Integrated Certification Authority Bar */}
+          <motion.a
+            href="https://www.tomatis.com/es/profesional/dominican-republic/?id=ChIJ9bbx3jiIr44R4PcNBiQPAqY"
+            target="_blank"
+            rel="noreferrer"
+            className="tomatis-integrated-cert-bar"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            style={{ textDecoration: 'none', color: 'inherit', display: 'flex', cursor: 'pointer' }}
+          >
+            <div className="cert-bar-graphic">
+              <div className="elegant-laurel-wreath-tiny">
+                <svg viewBox="-100 -100 200 200" fill="currentColor">
+                  <g transform="translate(0, 75)">
+                    <path d="M0,0 C-40,0 -80,-40 -80,-100" fill="none" stroke="currentColor" strokeWidth="3" />
+                    {[...Array(6)].map((_, i) => {
+                      const angle = -10 - (i * 25);
+                      const rad = (angle * Math.PI) / 180;
+                      const x = Math.sin(rad) * 90;
+                      const y = Math.cos(rad) * 90 - 90;
+                      return <path key={`l-${i}`} d="M0,0 C-10,-5 -15,-15 -5,-18 C5,-21 10,-10 0,0 Z" transform={`translate(${x}, ${y}) rotate(${angle - 90})`} />;
+                    })}
+                  </g>
+                  <g transform="translate(0, 75)">
+                    <path d="M0,0 C40,0 80,-40 80,-100" fill="none" stroke="currentColor" strokeWidth="3" />
+                    {[...Array(6)].map((_, i) => {
+                      const angle = 10 + (i * 25);
+                      const rad = (angle * Math.PI) / 180;
+                      const x = Math.sin(rad) * 90;
+                      const y = Math.cos(rad) * 90 - 90;
+                      return <path key={`r-${i}`} d="M0,0 C10,-5 15,-15 5,-18 C-5,-21 -10,-10 0,0 Z" transform={`translate(${x}, ${y}) rotate(${angle + 90})`} />;
+                    })}
+                  </g>
+                </svg>
+              </div>
+              <div className="tiny-logo-holder">
+                <img src="/branding/tomatis-official.webp" alt="Tomatis" className="tiny-tomatis-logo" />
+              </div>
+            </div>
+            <div className="cert-bar-text">
+              <h4>Certificación Oficial Tomatis®</h4>
+              <p>Única terapeuta en el país con los 4 niveles de certificación oficial.</p>
+              <span style={{ 
+                fontSize: '0.9rem', 
+                color: 'var(--color-accent)', 
+                fontWeight: 800, 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                gap: '6px', 
+                marginTop: '4px'
+              }}>
+                Ver directorio oficial <ExternalLink size={14} />
+              </span>
+            </div>
+            <div className="cert-bar-badge-right">
+              <span className="cert-badge-premium">Nivel 4</span>
+            </div>
+          </motion.a>
         </div>
       </section>
 
@@ -361,7 +966,10 @@ function App() {
 
       {/* Services Section - Accordion Style */}
       <section id="servicios" className="services-modern with-paper-image" style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#FFFFFF' }}>
-        <div className="dec-star-4 orange" style={{ bottom: '10%', left: '5%', opacity: 1, transform: 'scale(1.5)', zIndex: 1, position: 'absolute' }}></div>
+        {/* Subtle Background Logo */}
+        <div className="services-bg-logo">
+          <img src="/branding/logopng.webp" alt="" style={{ width: '100%', height: 'auto', mixBlendMode: 'multiply' }} />
+        </div>
         <div className="dec-wiggle" style={{ top: '20%', right: '15%', opacity: 1, zIndex: 1, position: 'absolute' }}></div>
         <div className="container services-container" style={{ position: 'relative', zIndex: 2 }}>
           <motion.div
@@ -383,20 +991,163 @@ function App() {
           >
             {services.map((service, index) => {
               const colors = ['orange', 'blue', 'yellow', 'pink', 'green', 'blue-dark', 'orange-light', 'yellow-bright'];
+              const specialColors = ['purple', 'teal', 'coral'];
+              const isTomatis = service.title.includes("Tomatis");
+              const isHomeschooling = service.title.toLowerCase().includes("homeschooling");
+
+              // Use special colors for the last 3 services
+              const colorClass = index >= services.length - 3
+                ? `card-${specialColors[index - (services.length - 3)]}`
+                : `card-${colors[index % colors.length]}`;
+
+              let pageKey = null;
+              if (isTomatis) pageKey = 'tomatis';
+              else if (isHomeschooling) pageKey = 'homeschooling';
+              else if (service.title === "Psicología Clínica") pageKey = 'psicologia';
+              else if (service.title === "Neuropedagogía") pageKey = 'neuropedagogia';
+              else if (service.title === "Psicopedagogía") pageKey = 'psicopedagogia';
+              else if (service.title === "Neurofeedback") pageKey = 'neurofeedback';
+              else if (service.title === "Evaluación Aula Virtual") pageKey = 'evaluacion-aula-virtual';
+              else if (service.title === "Acompañamiento a Madres") pageKey = 'acompanamiento-madres';
+              else if (service.title === "Terapia Orofacial") pageKey = 'terapia-orofacial';
+              else if (service.title === "Fisioterapia") pageKey = 'fisioterapia';
+              else if (service.title === "Terapia Conductual") pageKey = 'terapia-conductual';
+
+              const onClick = pageKey 
+                ? () => { setCurrentPage(pageKey); window.scrollTo(0, 0); }
+                : undefined;
+
               return (
-                <ServiceCard
-                  key={index}
-                  index={index}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  colorClass={`card-${colors[index % colors.length]}`}
-                />
+                <div key={index} className={isTomatis ? 'service-card-wide' : ''}>
+                  <ServiceCard
+                    index={index}
+                    title={service.title}
+                    description={service.description}
+                    icon={service.icon}
+                    colorClass={colorClass}
+                    onClick={onClick}
+                    isHighlighted={isHomeschooling}
+                  />
+                </div>
               );
             })}
           </motion.div>
         </div>
+        {/* Playful Background Decor near transition */}
+        <div className="dec-star-4 yellow" style={{ bottom: '40px', left: '8%', transform: 'scale(1.1)' }}></div>
+        <div className="dec-wiggle" style={{ bottom: '30px', right: '5%', opacity: 0.7 }}></div>
       </section>
+
+      {/* Tomatis en Ruta Section */}
+      <section className="tomatis-ruta with-grid">
+        {/* Fun Background Decor */}
+        <div style={{ position: 'absolute', top: '15%', right: '5%', opacity: 0.05, transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+          <MapPin size={400} />
+        </div>
+        <div className="dec-circle" style={{ top: '-30px', right: '10%', width: '90px', height: '90px', background: 'var(--color-pink)', opacity: 0.3 }}></div>
+        <div className="dec-wiggle" style={{ top: '30px', left: '5%', opacity: 0.8 }}></div>
+        <div className="dec-wiggle" style={{ bottom: '10%', right: '10%', opacity: 0.6 }}></div>
+
+        <div className="container">
+          <div className="ruta-layout">
+            <motion.div
+              className="ruta-text"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeUp}
+            >
+              <div className="badge-modern">TOMATIS® EN RUTA</div>
+              <h2 style={{ fontSize: '3.5rem', marginBottom: '24px' }}>Llevamos bienestar a <span style={{ color: 'var(--color-accent)' }}>donde nos necesitan</span></h2>
+              <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '32px' }}>
+                Viajamos exclusivamente a las provincias y comunidades que solicitan nuestra presencia y donde las familias nos necesitan específicamente.
+              </p>
+
+              <div className="ruta-cities-list">
+                <div className="city-chip">Nagua</div>
+                <div className="city-chip">Bonao</div>
+                <div className="city-chip">La Vega</div>
+                <div className="city-chip">San Francisco de Macorís</div>
+                <div className="city-chip">¡Y más!</div>
+              </div>
+
+              <div style={{ marginTop: '32px' }}>
+                <button
+                  onClick={() => { setCurrentPage('propietarios'); window.scrollTo(0, 0); }}
+                  className="btn-outline"
+                  style={{ cursor: 'pointer', fontSize: '0.8rem', padding: '8px 18px', letterSpacing: '0.5px' }}
+                >
+                  ¿Eres propietario de un centro?
+                </button>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="ruta-map-container"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+            >
+              <div className="stylized-map-wrapper">
+                <div className="map-image-container">
+                  <img src="/branding/mapa_rd.webp" alt="Mapa República Dominicana" className="dr-real-map" />
+
+                  {/* Overlay SVG for animation and markers */}
+                  <svg viewBox="0 0 500 350" className="map-overlay-svg">
+                    {/* City Markers with Pulse Effect */}
+                    <g className="city-marker" transform="translate(325, 230)">
+                      <circle r="12" fill="var(--color-primary)" opacity="0.2">
+                        <animate attributeName="r" values="8;15;8" dur="2s" repeatCount="indefinite" />
+                      </circle>
+                      <circle r="5" fill="var(--color-primary)" stroke="white" strokeWidth="2" />
+                    </g>
+                    <g className="city-marker" transform="translate(230, 155)">
+                      <circle r="5" fill="var(--color-accent)" stroke="white" strokeWidth="2" />
+                    </g>
+                    <g className="city-marker" transform="translate(180, 100)">
+                      <circle r="5" fill="var(--color-accent)" stroke="white" strokeWidth="2" />
+                    </g>
+                    <g className="city-marker" transform="translate(230, 105)">
+                      <circle r="5" fill="var(--color-accent)" stroke="white" strokeWidth="2" />
+                    </g>
+                    <g className="city-marker" transform="translate(280, 85)">
+                      <circle r="5" fill="var(--color-accent)" stroke="white" strokeWidth="2" />
+                    </g>
+
+                    {/* Animated Car Following the Route */}
+                    <motion.g
+                      animate={{
+                        x: [325, 230, 180, 230, 280, 325],
+                        y: [230, 155, 100, 105, 85, 230],
+                      }}
+                      transition={{
+                        duration: 18,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    >
+                      <g transform="translate(-15, -15)" className="map-car-icon">
+                        <circle cx="15" cy="15" r="18" fill="var(--color-secondary)" opacity="0.4" />
+                        <Car size={24} color="var(--color-primary-dark)" fill="var(--color-secondary)" />
+                      </g>
+                    </motion.g>
+
+                    {/* Floating Labels */}
+                    <text x="325" y="255" className="map-label main" textAnchor="middle">Santo Domingo</text>
+                    <text x="220" y="160" className="map-label" textAnchor="end">Bonao</text>
+                    <text x="170" y="105" className="map-label" textAnchor="end">La Vega</text>
+                    <text x="230" y="90" className="map-label" textAnchor="middle">SFM</text>
+                    <text x="280" y="70" className="map-label" textAnchor="middle">Nagua</text>
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+
 
       <div className="section-divider-wiggle" />
 
@@ -451,13 +1202,13 @@ function App() {
 
               <motion.div className="team-card" variants={fadeUp}>
                 <div className="team-image-container" style={{ background: '#73C6F7' }}>
-                  <img src="/carlos_perez_new.webp" alt="Carlos Pérez" className="team-image" />
+                  <img src="/carlos_perez_new.webp" alt="Carlos Eduardo Pérez" className="team-image" />
                 </div>
                 <div className="team-info">
-                  <h3>Carlos Pérez</h3>
-                  <span className="team-role">Psicólogo Clínico / Consultor Tomatis®</span>
-                  <p className="team-desc-desktop">Psicólogo clínico y Consultor Tomatis®. Especializado en la evaluación e intervención del neurodesarrollo mediante la estimulación audiosensorial.</p>
-                  <p className="team-desc-mobile">Psicólogo clínico y Consultor Tomatis®.</p>
+                  <h3>Carlos Eduardo Pérez</h3>
+                  <span className="team-role">Psicólogo Clínico / Consultor Tomatis® / Terapeuta en Neurofeedback</span>
+                  <p className="team-desc-desktop">Psicólogo clínico, Consultor Tomatis® y Terapeuta en Neurofeedback. Especializado en la evaluación e intervención del neurodesarrollo mediante la estimulación audiosensorial y el entrenamiento cerebral.</p>
+                  <p className="team-desc-mobile">Psicólogo clínico, Consultor Tomatis® y Terapeuta en Neurofeedback.</p>
                 </div>
               </motion.div>
 
@@ -467,9 +1218,9 @@ function App() {
                 </div>
                 <div className="team-info">
                   <h3>Mery Torrealba</h3>
-                  <span className="team-role">Educadora / Terapeuta Neurobiofeedback</span>
-                  <p className="team-desc-desktop">Licenciada en educación de estudiantes excepcionales. Terapeuta en neurobiofeedback y experta en evaluación de la atención en realidad virtual.</p>
-                  <p className="team-desc-mobile">Educadora y terapeuta en neurobiofeedback.</p>
+                  <span className="team-role">Lic. en Psicopedagogía / Consultor Tomatis® / Terapeuta en Neurofeedback</span>
+                  <p className="team-desc-desktop">Licenciada en Psicopedagogía, Consultor Tomatis® y Terapeuta en Neurofeedback. Experta en evaluación psicopedagógica y entrenamiento neurosensorial para el desarrollo integral infantil.</p>
+                  <p className="team-desc-mobile">Lic. en Psicopedagogía, Consultor Tomatis® y Terapeuta en Neurofeedback.</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -644,8 +1395,70 @@ function App() {
         </div>
       </section>
 
+      {/* Media & Press Section */}
+      <section className="media-section bg-cream" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="dec-circle" style={{ top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'var(--color-primary-light)', opacity: 0.5 }}></div>
+        <div className="container">
+          <motion.div
+            className="section-header-centered"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <div className="cert-tag-minimal" style={{ margin: '0 auto 16px' }}>
+              <Video size={14} color="var(--color-accent)" /> <span>Presencia en Medios</span>
+            </div>
+            <h2 style={{ fontSize: '3rem', marginBottom: '16px' }}>Entrevistas y <span style={{ color: 'var(--color-accent)' }}>Apariciones</span></h2>
+            <p style={{ maxWidth: '600px', margin: '0 auto 40px', fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>
+              Compartiendo nuestra experiencia en distintos medios de comunicación.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="media-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {mediaAppearances.map((media, idx) => (
+              <motion.a
+                key={idx}
+                href={media.url}
+                target="_blank"
+                rel="noreferrer"
+                className="media-card-modern"
+                variants={fadeUp}
+                whileHover={{ y: -10 }}
+              >
+                <div className="media-thumb-wrapper">
+                  <img src={media.thumbnail} alt={media.title} className="media-thumbnail" />
+                  <div className="media-play-overlay">
+                    <div className="play-icon-circle">
+                      <Play fill="white" size={24} />
+                    </div>
+                  </div>
+                  <div className="media-source-tag">YouTube</div>
+                </div>
+                <div className="media-content-modern">
+                  <h3 className="media-card-title">{media.title}</h3>
+                  <p className="media-card-speakers">{media.speakers}</p>
+                  <div className="media-card-footer">
+                    <span className="watch-now-text">Ver video <ArrowRight size={14} /></span>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="cta bg-blue" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="cta-bg-logo-left">
+          <img src="/branding/logopng.webp" alt="" style={{ width: '100%', height: 'auto', mixBlendMode: 'multiply' }} />
+        </div>
         <div className="dec-circle cta-circle-decor" style={{ top: '-100px', left: '-50px', width: '300px', height: '300px' }}></div>
         <div className="dec-star-4 orange" style={{ top: '30%', right: '10%' }}></div>
         <div className="dec-wiggle" style={{ bottom: '20%', left: '20%' }}></div>
@@ -659,15 +1472,10 @@ function App() {
         >
           <div className="cta-layout">
             <div className="cta-info">
-              <motion.h2 variants={fadeUp} style={{ color: 'var(--color-text)' }}>Inicia la transformación hoy.</motion.h2>
+              <motion.h2 variants={fadeUp} style={{ color: 'var(--color-text)' }}>Hoy puede ser el inicio de su progreso.</motion.h2>
               <motion.p variants={fadeUp} style={{ color: 'var(--color-text)' }} className="cta-description">
                 En Multisensorial RD, somos una familia dedicada a cuidar del crecimiento de la tuya. Ven a visitarnos y descubre un espacio donde tu hijo se sentirá siempre como en casa mientras alcanza su máximo potencial.
               </motion.p>
-              <motion.div variants={fadeUp}>
-                <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ border: 'none', cursor: 'pointer' }}>
-                  Agendar Evaluación Inicial
-                </button>
-              </motion.div>
             </div>
 
             <div className="cta-media">
@@ -675,13 +1483,19 @@ function App() {
                 <img src="/cta_image.webp" alt="Terapia Multisensorial" className="cta-img" />
               </motion.div>
             </div>
+
+            <motion.div className="cta-actions" variants={fadeUp}>
+              <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ border: 'none', cursor: 'pointer' }}>
+                Agendar Evaluación Inicial
+              </button>
+            </motion.div>
           </div>
 
           <div className="cta-bottom">
             <motion.div className="location-details-modern" variants={fadeUp}>
               <div className="location-badge">
                 <MapPin size={32} />
-                <span><strong>Ubicación:</strong> Calle Paseo Los Locutores #45, Edificio Digicolor, Nivel 1C, Santo Domingo</span>
+                <span><strong>Ubicación:</strong> Calle Teodoro Chasseriau, Las Praderas, Santo Domingo</span>
               </div>
               <div className="location-badge">
                 <Phone size={32} />
@@ -698,7 +1512,7 @@ function App() {
             >
               <iframe
                 title="Google Maps Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.0970341753177!2d-69.9392262!3d18.4729177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea5621361c47101%3A0x8fcbeb80ba7ab7e0!2sPaseo%20De%20Los%20Locutores%2045%2C%20Santo%20Domingo!5e0!3m2!1sen!2sdo!4v1709400000000!5m2!1sen!2sdo"
+                src="https://maps.google.com/maps?q=18.4644604,-69.9635049&t=&z=17&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -712,13 +1526,15 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="footer bg-blue">
+      <footer className="footer" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="footer-bg-logo-right">
+          <img src="/branding/logopng.webp" alt="" className="footer-logo-img" />
+        </div>
         <div className="container">
           <div className="footer-content">
             <div className="footer-col" style={{ gridColumn: 'span 2' }}>
               <span className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                <img src="/logo.webp" className="nav-logo-img" alt="Multisensorial Torrealba Logo" style={{ height: '80px', width: 'auto' }} />
-                Multisensorial
+                                <img src="/multilogo2 (1).png" className="nav-logo-img" alt="Multisensorial Logo" style={{ height: '90px' }} />
               </span>
               <p style={{ maxWidth: '80%' }}>
                 Centro de Estimulación Multisensorial y Neuropedagogía. Especialistas en el Método Tomatis en República Dominicana.
@@ -735,10 +1551,11 @@ function App() {
             <div className="footer-col">
               <h4>Ubicación & Contacto</h4>
               <ul>
-                <li>Calle Paseo Los Locutores #45, Edificio Digicolor</li>
+                <li>Calle Teodoro Chasseriau, Las Praderas</li>
                 <li>Santo Domingo, Rep. Dom.</li>
                 <li>Tel: +1 (809) 306-5040</li>
-                <li><a href="https://instagram.com/multisensorialrd" target="_blank" rel="noreferrer">@multisensorialrd</a></li>
+                <li>Email: <a href="mailto:multisensorialrd@gmail.com" style={{ textDecoration: 'none', color: 'inherit' }}>multisensorialrd@gmail.com</a></li>
+                <li><a href="https://instagram.com/multisensorialrd" target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: 'inherit' }}><Instagram size={16} /> @multisensorialrd</a></li>
               </ul>
             </div>
           </div>
@@ -750,7 +1567,7 @@ function App() {
       {/* Booking Modal */}
       <AnimatePresence>
         {isBookingModalOpen && (
-          <motion.div 
+          <motion.div
             className="booking-modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -771,7 +1588,7 @@ function App() {
               padding: '20px'
             }}
           >
-            <motion.div 
+            <motion.div
               className="booking-modal-content"
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
@@ -793,7 +1610,7 @@ function App() {
               }}
             >
               <div style={{ position: 'sticky', top: 0, right: 0, zIndex: 10, display: 'flex', justifyContent: 'flex-end', padding: '0 12px' }}>
-                <button 
+                <button
                   onClick={() => setIsBookingModalOpen(false)} // Assuming closeBookingModal is equivalent to this
                   style={{
                     width: '36px',
@@ -813,16 +1630,16 @@ function App() {
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 6L6 18M6 6l12 12"/>
+                    <path d="M18 6L6 18M6 6l12 12" />
                   </svg>
                 </button>
               </div>
-              
+
               {isBookingComplete ? (
                 <div style={{ padding: '40px 20px', textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                  <motion.div 
-                    initial={{ scale: 0.5, opacity: 0 }} 
-                    animate={{ scale: 1, opacity: 1 }} 
+                  <motion.div
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15 }}
                     style={{ background: 'var(--color-pink-light)', padding: '20px', borderRadius: '50%', marginBottom: '20px' }}
                   >
@@ -832,7 +1649,7 @@ function App() {
                   <p style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '80%', margin: '0 auto 40px auto' }}>
                     Hemos recibido correctamente los datos de tu cita. Nos pondremos en contacto pronto para confirmar todos los detalles.
                   </p>
-                  
+
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', width: '100%', maxWidth: '400px' }}>
                     <a href={whatsappUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: '1.1rem', padding: '15px' }}>
                       <Phone size={20} /> Escríbenos por WhatsApp
@@ -853,10 +1670,10 @@ function App() {
                     <p style={{ color: 'var(--color-text-muted)', margin: '5px 0 0 0', fontFamily: 'var(--font-primary)' }}>Elige el día y la hora que mejor funcione para ti.</p>
                   </div>
 
-                  <iframe 
-                    src="https://api.leadconnectorhq.com/widget/booking/i0TBYq6Ec4GK21NpfPFu?primaryColor=%23EF476F&backgroundColor=%23ffffff&fontFamily=Nunito" 
-                    style={{ width: '100%', border: 'none', minHeight: '850px', borderRadius: '0 0 28px 28px' }} 
-                    scrolling="yes" 
+                  <iframe
+                    src="https://api.leadconnectorhq.com/widget/booking/i0TBYq6Ec4GK21NpfPFu?primaryColor=%23EF476F&backgroundColor=%23ffffff&fontFamily=Nunito"
+                    style={{ width: '100%', border: 'none', minHeight: '850px', borderRadius: '0 0 28px 28px' }}
+                    scrolling="yes"
                     id="i0TBYq6Ec4GK21NpfPFu_1773700990303"
                   ></iframe>
                 </>

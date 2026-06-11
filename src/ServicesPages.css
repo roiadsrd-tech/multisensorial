@@ -1,0 +1,2000 @@
+/* Styles for the 9 interactive service pages */
+
+/* Common detailed page layouts */
+.service-detail-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+}
+
+.service-hero {
+  padding: 120px 0 80px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px dashed var(--color-primary-dark);
+}
+
+.service-content-section {
+  padding: 80px 0;
+  background-color: white;
+  border-bottom: 3px dashed var(--color-primary-dark);
+}
+
+.service-interactive-section {
+  padding: 100px 0;
+  background-color: var(--color-primary-light);
+  border-bottom: 3px dashed var(--color-primary-dark);
+}
+
+.interactive-container-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .interactive-container-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* 1. Psicologia Page - Breathing Circle */
+.breathing-circle-wrapper {
+  background: white;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 40px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  position: relative;
+}
+
+.breathing-circle-outer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px dashed var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: rgba(166, 223, 253, 0.2);
+}
+
+.breathing-circle-inner {
+  border-radius: 50%;
+  border: 4px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+  box-shadow: inset 4px 4px 0px rgba(0,0,0,0.05);
+}
+
+.emotion-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.emotion-btn {
+  padding: 12px;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.emotion-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--color-primary-dark);
+}
+
+/* 2. Neuropedagogia - Synapse Map */
+.synapse-map-wrapper {
+  background: white;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 40px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.synapse-map-svg {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+}
+
+.neuroped-stimulus-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.stimulus-tab {
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stimulus-tab.active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--color-primary-dark);
+}
+
+/* 3. Psicopedagogia - Scaffolding Road */
+.scaffolding-road-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scaffolding-step-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 24px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.scaffolding-step-card.active {
+  transform: scale(1.02) translate(-2px, -2px);
+  box-shadow: 8px 8px 0px var(--color-accent);
+}
+
+.scaffolding-number-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+  flex-shrink: 0;
+}
+
+.scaffolding-text {
+  flex: 1;
+}
+
+.scaffolding-text h4 {
+  font-size: 1.25rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 4px;
+}
+
+.scaffolding-text p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* 4. Neurofeedback - Wave Monitor */
+.wave-monitor-wrapper {
+  background: #111;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 40px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+}
+
+.wave-screen-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(35, 71, 239, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35, 71, 239, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.wave-display-canvas {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.eeg-status-indicator {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  color: var(--color-green);
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 3;
+}
+
+.eeg-status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-green);
+}
+
+.wave-controls-panel {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+  z-index: 3;
+}
+
+.wave-mode-btn {
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 2px solid white;
+  color: white;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  background: transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.wave-mode-btn.active {
+  background: white;
+  color: #111;
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+/* 5. Evaluacion Aula Virtual - VR Nesplora Simulator */
+.vr-classroom-simulator-container {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 50px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.simulator-left-column {
+  width: 100%;
+  position: sticky;
+  top: 100px;
+  z-index: 2;
+}
+
+.simulator-right-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+@media (max-width: 992px) {
+  .vr-classroom-simulator-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .simulator-left-column {
+    position: static;
+  }
+}
+
+/* Goggles Casing */
+.vr-headset-casing {
+  position: relative;
+  width: 100%;
+  max-width: 620px; /* Wider and more proportionate */
+  margin: 0 auto;
+  padding: 15px 0;
+}
+
+/* Back head band strap loop */
+.vr-casing-strap-back {
+  position: absolute;
+  top: -30px;
+  left: -50px;
+  right: -50px;
+  bottom: -10px;
+  background: #18181b;
+  border: 4.5px solid var(--color-primary-dark);
+  border-radius: 80px;
+  z-index: 0;
+  box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+/* Headset Foam Cushion */
+.vr-headset-cushion {
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  left: -12px;
+  right: -12px;
+  background: #27272a;
+  border: 4.5px solid var(--color-primary-dark);
+  border-radius: 65px;
+  z-index: 1;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+  pointer-events: none;
+}
+
+/* Headstraps */
+.vr-casing-strap {
+  position: absolute;
+  background: #3f3f46;
+  border: 4.5px solid var(--color-primary-dark);
+  border-radius: 8px;
+  z-index: 1;
+}
+.vr-casing-strap.strap-left {
+  width: 60px;
+  height: 32px;
+  left: -48px;
+  top: 50%;
+  transform: translateY(-50%) skewY(-6deg);
+  box-shadow: -4px 4px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+.vr-casing-strap.strap-right {
+  width: 60px;
+  height: 32px;
+  right: -48px;
+  top: 50%;
+  transform: translateY(-50%) skewY(6deg);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+.vr-casing-strap.strap-top {
+  width: 35px;
+  height: 55px;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0px -4px 0px rgba(0, 0, 0, 0.15);
+}
+.strap-buckle {
+  width: 12px;
+  height: 18px;
+  background: #cbd5e1;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 3px;
+}
+
+/* VR Headset Body */
+.vr-headset-body {
+  position: relative;
+  background: #f8fafc;
+  border: 4.5px solid var(--color-primary-dark);
+  border-radius: 75px 75px 55px 55px / 65px 65px 45px 45px; /* Tapered, curved goggles shape */
+  box-shadow: 12px 12px 0px var(--color-primary-dark);
+  padding: 35px 25px 35px 25px; /* balanced padding for physical controls */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Top control dial on headset */
+.vr-top-dial {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 12px;
+  background: #cbd5e1;
+  border-bottom: 3.5px solid var(--color-primary-dark);
+  border-left: 3.5px solid var(--color-primary-dark);
+  border-right: 3.5px solid var(--color-primary-dark);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  z-index: 3;
+}
+
+/* Cooling Vents */
+.vr-cooling-vents-top {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 3;
+}
+.vr-cooling-vents-top .vent-slot {
+  width: 8px;
+  height: 3px;
+  background: #94a3b8;
+  border-radius: 1px;
+}
+
+/* Horizontal seam line on headset */
+.vr-headset-seam {
+  position: absolute;
+  top: 48%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  border-bottom: 3.5px solid rgba(15, 23, 42, 0.08); /* Subtle seam dividing line */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* LED light status on headset */
+.vr-status-led-group {
+  position: absolute;
+  top: 15px;
+  left: 35px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 3;
+}
+.vr-status-led-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary-dark);
+}
+.vr-status-led-dot.active {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: blink-led 2s infinite;
+}
+.vr-status-led-dot.disturbed {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+  animation: blink-led 0.5s infinite;
+}
+.vr-status-led-label {
+  font-size: 0.55rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.05em;
+  font-family: monospace;
+}
+
+@keyframes blink-led {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Front cameras (like Quest 3 pill shape camera tracks) */
+.vr-sensor-cluster {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  z-index: 3;
+}
+.vr-camera-sensor {
+  width: 14px;
+  height: 24px;
+  background: #1e293b;
+  border: 2.5px solid var(--color-primary-dark);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vr-camera-sensor.sensor-center {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+.sensor-glass {
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+  box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Screen Area */
+.vr-visor-screen-area {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  background: transparent;
+  border: none; /* Removed border */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* Glossy reflection overlay on VR visor glass */
+.vr-visor-reflection {
+  display: none; /* Hide glass reflection overlay for clean screen view */
+}
+
+/* Physical bottom hardware buttons */
+.vr-bottom-hardware {
+  position: absolute;
+  bottom: 8px;
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 45px;
+  pointer-events: none;
+  z-index: 3;
+}
+.vr-volume-rocker {
+  display: flex;
+  background: #cbd5e1;
+  border: 2.5px solid var(--color-primary-dark);
+  border-radius: 4px;
+  pointer-events: auto;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+.rocker-btn {
+  padding: 0px 8px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  user-select: none;
+}
+.rocker-btn.minus {
+  border-right: 2.5px solid var(--color-primary-dark);
+}
+.vr-ipd-dial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 25px;
+  height: 12px;
+  background: #cbd5e1;
+  border: 2.5px solid var(--color-primary-dark);
+  border-radius: 3px;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+.dial-groove {
+  width: 2.5px;
+  height: 8px;
+  background: var(--color-primary-dark);
+}
+
+/* Headset Nose bridge cutout */
+.vr-nose-bridge-notch {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px; /* wider notch */
+  height: 32px; /* taller cutout */
+  background: var(--color-primary-light); /* matches service page section background */
+  border-top: 4.5px solid var(--color-primary-dark);
+  border-left: 4.5px solid var(--color-primary-dark);
+  border-right: 4.5px solid var(--color-primary-dark);
+  border-top-left-radius: 35px; /* smooth goggles nose shape */
+  border-top-right-radius: 35px;
+  z-index: 4;
+}
+
+/* Viewfinder - Circular lens frame effect */
+.vr-lens-viewfinder {
+  padding: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Classroom view inside lenses */
+.vr-classroom-scene {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(180deg, #dceefb 0%, #bce0fd 60%, #90cdf4 100%);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Floor grid perspective */
+.classroom-grid-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: #f7fafc;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 20px 10px;
+  transform: perspective(40px) rotateX(15deg);
+  transform-origin: bottom center;
+  border-top: 3px solid var(--color-primary-dark);
+  z-index: 1;
+}
+
+/* Classroom Window and Outside */
+.classroom-left-wall {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 25%;
+  height: 60%;
+  border-right: 2.5px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.classroom-window-frame {
+  width: 80%;
+  height: 85%;
+  background: white;
+  border: 2.5px solid var(--color-primary-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+.window-glass-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #90cdf4, #f7fafc);
+}
+.sky-bg {
+  position: absolute;
+  inset: 0;
+}
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+.cloud.cloud-1 {
+  width: 20px;
+  height: 10px;
+  top: 5px;
+  left: 5px;
+}
+.cloud.cloud-2 {
+  width: 30px;
+  height: 12px;
+  top: 10px;
+  right: 5px;
+}
+.outside-hills {
+  position: absolute;
+  bottom: 0;
+  width: 120%;
+  height: 35%;
+  background: #68d391;
+  border-radius: 50% 50% 0 0;
+  left: -10%;
+  border-top: 2px solid var(--color-primary-dark);
+}
+
+/* Distractor Car */
+.classroom-distractor-car {
+  position: absolute;
+  z-index: 3;
+}
+.car-body {
+  width: 26px;
+  height: 12px;
+  background: var(--color-accent);
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 4px;
+  position: relative;
+}
+.car-body::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 6px;
+  width: 12px;
+  height: 6px;
+  background: #cbd5e1;
+  border-top: 2px solid var(--color-primary-dark);
+  border-left: 2px solid var(--color-primary-dark);
+  border-right: 2px solid var(--color-primary-dark);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.car-wheel {
+  position: absolute;
+  bottom: -4px;
+  width: 6px;
+  height: 6px;
+  background: #333;
+  border: 1.5px solid var(--color-primary-dark);
+  border-radius: 50%;
+}
+.car-wheel.wheel-1 { left: 4px; }
+.car-wheel.wheel-2 { right: 4px; }
+
+.sound-waves {
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  display: flex;
+  gap: 3px;
+}
+.sound-waves span {
+  width: 3px;
+  height: 8px;
+  background: var(--color-accent);
+  border-radius: 5px;
+  animation: horn-wave 0.6s infinite alternate;
+}
+.sound-waves span:nth-child(2) { animation-delay: 0.15s; height: 12px; }
+.sound-waves span:nth-child(3) { animation-delay: 0.3s; height: 16px; }
+
+@keyframes horn-wave {
+  0% { transform: scaleY(0.4); opacity: 0.4; }
+  100% { transform: scaleY(1.2); opacity: 1; }
+}
+
+/* Classroom Clock */
+.classroom-clock {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 50%;
+}
+.clock-hand {
+  position: absolute;
+  background: var(--color-primary-dark);
+  transform-origin: bottom center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.clock-hand.hour {
+  width: 1.5px;
+  height: 5px;
+  top: 4px;
+  transform: translateX(-50%) rotate(45deg);
+}
+.clock-hand.minute {
+  width: 1px;
+  height: 7px;
+  top: 2px;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+/* Front whiteboard wall */
+.classroom-front-wall {
+  position: absolute;
+  left: 25%;
+  top: 0;
+  width: 50%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.classroom-whiteboard-wrapper {
+  width: 90%;
+  height: 80%;
+}
+.whiteboard-border {
+  width: 100%;
+  height: 100%;
+  background: #e2e8f0;
+  border: 2.5px solid var(--color-primary-dark);
+  border-radius: 8px;
+  padding: 4px;
+}
+.whiteboard-surface {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 1.5px solid var(--color-primary-dark);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.whiteboard-marker-drawings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.whiteboard-title {
+  font-family: monospace;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: 2px;
+  letter-spacing: 0.05em;
+}
+.math-formula {
+  font-family: 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: #4a5568;
+}
+.drawing-shapes {
+  margin-top: 2px;
+  opacity: 0.4;
+}
+
+/* Tapping active state on whiteboard */
+.whiteboard-active-signal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.chalk-tap-icon {
+  font-size: 1rem;
+  animation: tap-pencil 0.5s infinite alternate;
+}
+@keyframes tap-pencil {
+  0% { transform: translateY(0) rotate(0); }
+  100% { transform: translateY(-4px) rotate(-15deg); }
+}
+.tap-signal-text {
+  font-size: 0.45rem;
+  font-weight: 900;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+.tapping-ripples {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tapping-ripples span {
+  position: absolute;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  animation: tap-ripple 1s infinite;
+}
+.tapping-ripples span:nth-child(2) {
+  animation-delay: 0.5s;
+}
+@keyframes tap-ripple {
+  0% { width: 10px; height: 10px; opacity: 1; transform: translate(-50%, -50%); }
+  100% { width: 35px; height: 35px; opacity: 0; transform: translate(-50%, -50%); }
+}
+
+/* Classmate Sitting next to child */
+.classroom-right-area {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25%;
+  height: 60%;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.classmate-sitting {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 0px;
+  width: 60%;
+}
+.classmate-sitting.whispering {
+  animation: classmate-lean 0.5s forwards;
+}
+@keyframes classmate-lean {
+  0% { transform: rotate(0) translateX(0); }
+  100% { transform: rotate(-5deg) translateX(-6px); }
+}
+
+.classmate-head-container {
+  position: relative;
+  z-index: 2;
+}
+.classmate-hair {
+  position: absolute;
+  top: -3px;
+  left: -2px;
+  width: 20px;
+  height: 10px;
+  background: #b7791f; /* Brown hair */
+  border: 1.5px solid var(--color-primary-dark);
+  border-radius: 8px 8px 0 0;
+}
+.classmate-head {
+  width: 16px;
+  height: 16px;
+  background: #fbd38d; /* skin */
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 50%;
+}
+.whisper-eye {
+  width: 4px;
+  height: 2px;
+  background: var(--color-primary-dark);
+  position: absolute;
+  top: 8px;
+  left: 2px;
+  border-radius: 0 0 2px 2px;
+}
+.classmate-body {
+  width: 28px;
+  height: 22px;
+  background: #4299e1; /* Blue shirt */
+  border: 2px solid var(--color-primary-dark);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  z-index: 1;
+}
+
+/* Whisper Bubble */
+.whisper-speech-bubble {
+  position: absolute;
+  top: -32px;
+  left: -32px;
+  background: white;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 12px;
+  padding: 3px 8px;
+  z-index: 5;
+  box-shadow: 2px 2px 0 var(--color-primary-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.whisper-speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  right: 12px;
+  border-width: 6px 6px 0 0;
+  border-style: solid;
+  border-color: white transparent;
+  display: block;
+  width: 0;
+}
+.whisper-speech-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  right: 11px;
+  border-width: 7px 7px 0 0;
+  border-style: solid;
+  border-color: var(--color-primary-dark) transparent;
+  display: block;
+  width: 0;
+  z-index: -1;
+}
+.whisper-text {
+  font-family: var(--font-heading);
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+.whisper-waves {
+  display: flex;
+  gap: 1.5px;
+  margin-top: 1px;
+}
+.whisper-waves span {
+  width: 1.5px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 5px;
+  animation: whisper-anim 0.4s infinite alternate;
+}
+.whisper-waves span:nth-child(2) { animation-delay: 0.1s; height: 6px; }
+.whisper-waves span:nth-child(3) { animation-delay: 0.2s; height: 4px; }
+
+@keyframes whisper-anim {
+  0% { transform: scaleY(0.5); }
+  100% { transform: scaleY(1.2); }
+}
+
+/* Foreground Pupil Desk */
+.classroom-foreground-desk {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 40%;
+  background: #fbd38d; /* Wooden desk color */
+  border: 3px solid var(--color-primary-dark);
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10px;
+  box-shadow: inset 0 6px 12px rgba(255, 255, 255, 0.4);
+}
+.pupil-notebook {
+  width: 45px;
+  height: 30px;
+  background: white;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 4px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transform: rotate(-5deg);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+}
+.notebook-line {
+  width: 100%;
+  height: 1.5px;
+  background: #cbd5e1;
+}
+.pupil-pencil {
+  position: absolute;
+  left: 20%;
+  bottom: 12px;
+  width: 18px;
+  height: 3px;
+  background: #f56565;
+  border: 1.5px solid var(--color-primary-dark);
+  transform: rotate(35deg);
+}
+
+/* RED BUTTON ON DESK */
+.desk-test-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.desk-test-button {
+  width: 32px;
+  height: 22px;
+  background: #e2e8f0;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 3px 0 var(--color-primary-dark);
+  transition: all 0.1s ease;
+}
+.desk-test-button .button-cap {
+  width: 22px;
+  height: 12px;
+  background: #ef4444; /* red button */
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  box-shadow: inset 0 2px 2px rgba(255,255,255,0.4);
+}
+.desk-test-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--color-primary-dark);
+}
+.desk-test-button:active .button-cap {
+  top: -2px;
+}
+.desk-test-button.highlight {
+  animation: btn-glow 0.8s infinite alternate;
+}
+@keyframes btn-glow {
+  0% { box-shadow: 0 3px 0 var(--color-primary-dark), 0 0 4px #ef4444; }
+  100% { box-shadow: 0 3px 0 var(--color-primary-dark), 0 0 16px #ef4444; }
+}
+.desk-button-label {
+  font-family: var(--font-heading);
+  font-size: 0.4rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.02em;
+}
+
+/* Headset HUD Screen overlay */
+.hud-overlay-container {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  font-family: monospace;
+}
+.hud-corner {
+  position: absolute;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.45rem;
+  color: var(--color-primary-dark);
+  font-weight: 800;
+  opacity: 0.75;
+}
+.hud-corner.top-left { top: 4px; left: 4px; align-items: flex-start; }
+.hud-corner.top-right { top: 4px; right: 4px; align-items: flex-end; }
+
+.hud-battery { display: flex; align-items: center; gap: 2px; }
+
+.hud-center-scope {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scope-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(239, 71, 111, 0.4); /* soft pink/accent */
+}
+.scope-circle.outer { width: 50px; height: 50px; }
+.scope-circle.inner { width: 25px; height: 25px; }
+
+.scope-crosshairs::before,
+.scope-crosshairs::after {
+  content: "";
+  position: absolute;
+  background: rgba(239, 71, 111, 0.4);
+}
+.scope-crosshairs::before { width: 8px; height: 1px; top: 0; left: -4px; }
+.scope-crosshairs::after { width: 1px; height: 8px; left: 0; top: -4px; }
+
+.scope-scanning-alert {
+  position: absolute;
+  top: 35px;
+  width: 90px;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.scope-scanning-alert .alert-text {
+  font-size: 0.35rem;
+  color: white;
+  font-weight: 800;
+}
+.scope-scanning-alert .alert-progress-bar {
+  width: 100%;
+  height: 2px;
+  background: #333;
+  margin-top: 2px;
+  border-radius: 1px;
+  overflow: hidden;
+}
+.scope-scanning-alert .progress-fill {
+  height: 100%;
+  background: var(--color-accent);
+  width: 100%;
+  animation: fill-scan 2.8s linear;
+}
+@keyframes fill-scan {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+.hud-bottom-bar {
+  position: absolute;
+  bottom: 4px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-size: 0.42rem;
+  color: var(--color-primary-dark);
+  font-weight: 800;
+  opacity: 0.75;
+}
+
+/* CLINICIAN CONTROL PANEL */
+.clinician-control-dashboard {
+  width: 100%;
+  background: #111;
+  border: 4.5px solid var(--color-primary-dark);
+  border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--color-primary-dark);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed #333;
+  padding-bottom: 10px;
+}
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-led {
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #10b981;
+  animation: blink-led 1.5s infinite;
+}
+.header-title h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  margin: 0;
+  color: white;
+}
+.tag-clinical {
+  font-family: monospace;
+  font-size: 0.7rem;
+  background: #2d3748;
+  padding: 2px 8px;
+  border-radius: 5px;
+  border: 1px solid #4a5568;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.col-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Metric Bars */
+.metric-progress-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metric-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+.metric-value {
+  color: #10b981;
+}
+.metric-value.danger { color: #ef4444; }
+.metric-value.warning { color: var(--color-accent); }
+
+.metric-bar-outer {
+  width: 100%;
+  height: 8px;
+  background: #2d3748;
+  border-radius: 100px;
+  overflow: hidden;
+  border: 2px solid #4a5568;
+}
+.metric-bar-fill {
+  height: 100%;
+  background: #10b981;
+  border-radius: 100px;
+  width: 0;
+}
+.metric-bar-fill.danger {
+  background: #ef4444;
+}
+.metric-desc {
+  font-size: 0.6rem;
+  color: #718096;
+}
+
+/* Control buttons grid */
+.control-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+@media (max-width: 480px) {
+  .control-btn-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.control-trigger-btn {
+  background: #1e293b;
+  border: 2.5px solid #475569;
+  border-radius: 12px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.control-trigger-btn:hover:not(:disabled) {
+  background: #334155;
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+}
+.control-trigger-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.control-trigger-btn.active {
+  background: var(--color-accent);
+  border-color: white;
+  box-shadow: 0 0 12px rgba(239, 71, 111, 0.4);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+.btn-label-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.btn-title {
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.btn-sub {
+  font-size: 0.55rem;
+  color: #94a3b8;
+}
+.control-trigger-btn.active .btn-sub {
+  color: white;
+}
+
+/* Console output */
+.clinician-log-console {
+  border: 2px solid #2d3748;
+  background: #000;
+  border-radius: 12px;
+  padding: 12px;
+  font-family: monospace;
+}
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: #718096;
+  border-bottom: 1px solid #1a202c;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.blinking-cursor {
+  color: #ef4444;
+  animation: blink-led 1s infinite;
+}
+.console-lines-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+.console-line {
+  font-size: 0.65rem;
+  color: #cbd5e1;
+  display: flex;
+  gap: 6px;
+  line-height: 1.3;
+}
+.console-line.newest {
+  color: #38bdf8;
+}
+.line-timestamp {
+  color: #4a5568;
+}
+.line-prefix {
+  color: #718096;
+}
+.line-text {
+  word-break: break-all;
+}
+
+/* 6. Acompanamiento Madres - Self-Care Compass */
+.compass-widget-wrapper {
+  background: white;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 40px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 420px;
+}
+
+.compass-dial-outer {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 4px solid var(--color-primary-dark);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 4px 4px 0px rgba(35, 71, 239, 0.1);
+  background: var(--color-bg);
+}
+
+.compass-center-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: white;
+  border: 3.5px solid var(--color-primary-dark);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.compass-needle {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 100px;
+  background: var(--color-accent);
+  border-radius: 3px;
+  transform-origin: bottom center;
+  border: 1.5px solid var(--color-primary-dark);
+  z-index: 4;
+}
+
+.compass-segment-btn {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  transform-origin: bottom right;
+  border: 1.5px dashed rgba(35, 71, 239, 0.3);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.compass-segment-btn:hover {
+  opacity: 0.9;
+}
+
+.compass-segment-text {
+  position: absolute;
+  font-weight: 800;
+  font-size: 0.7rem;
+  color: var(--color-primary-dark);
+  text-transform: uppercase;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* 7. Terapia Orofacial - Muscle Map */
+.muscle-map-wrapper {
+  background: white;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 40px;
+  padding: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.facial-interactive-svg {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+}
+
+.facial-hotspot-node {
+  cursor: pointer;
+}
+
+.facial-hotspot-circle {
+  transition: all 0.2s ease;
+}
+
+.facial-hotspot-node:hover .facial-hotspot-circle {
+  r: 10;
+  stroke-width: 3;
+}
+
+.orofacial-zones-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.orofacial-zone-chip {
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 2px solid var(--color-primary-dark);
+  font-weight: 800;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.orofacial-zone-chip.active {
+  background: var(--color-accent);
+  color: white;
+  box-shadow: 2px 2px 0px var(--color-primary-dark);
+}
+
+/* 8. Fisioterapia - Milestone Timeline */
+.milestone-timeline-wrapper {
+  background: white;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 40px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fisiot-slider-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 12px;
+  border-radius: 100px;
+  background: var(--color-bg);
+  border: 3px solid var(--color-primary-dark);
+  outline: none;
+  cursor: pointer;
+}
+
+.fisiot-slider-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.fisiot-slider-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.milestones-ticks-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.milestone-tick-btn {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.milestone-tick-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-primary-dark);
+  background: white;
+}
+
+.milestone-tick-btn.active .milestone-tick-circle {
+  background: var(--color-accent);
+  transform: scale(1.2);
+}
+
+.fisiot-milestone-art {
+  width: 100%;
+  height: 180px;
+  border: 3px solid var(--color-primary-dark);
+  border-radius: 20px;
+  background: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 9. Terapia Conductual - ABA Simulator */
+.behavioral-simulator-wrapper {
+  background: white;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 40px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aba-scenarios-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aba-scenario-card {
+  padding: 16px;
+  border: 2.5px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--color-primary-dark);
+}
+
+.aba-scenario-card.active {
+  background: var(--color-secondary);
+  box-shadow: 5px 5px 0px var(--color-primary-dark);
+  transform: translate(-2px, -2px);
+}
+
+.aba-outcomes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+@media (max-width: 576px) {
+  .aba-outcomes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aba-outcome-card {
+  padding: 20px;
+  border: 3px solid var(--color-primary-dark);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+}
+
+.aba-outcome-card.reactive {
+  background: rgba(255, 183, 213, 0.2);
+}
+
+.aba-outcome-card.positive {
+  background: rgba(18, 179, 122, 0.15);
+}
+
+.aba-outcome-badge {
+  font-weight: 900;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1.5px solid var(--color-primary-dark);
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.aba-outcome-card.reactive .aba-outcome-badge {
+  background: var(--color-pink);
+  color: var(--color-primary-dark);
+}
+
+.aba-outcome-card.positive .aba-outcome-badge {
+  background: var(--color-green);
+  color: white;
+}
+
+.aba-kid-reaction-face {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  background: white;
+  margin-top: 10px;
+}
+
+/* FAQ Custom accordion styling in pages */
+.faq-accordion-item {
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  transition: all 0.2s ease;
+}
+
+.faq-accordion-item:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+}
+
+.benefits-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .benefits-grid-premium {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.benefit-card-premium {
+  background: white;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 28px;
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+.benefit-card-premium:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+}
+
+.benefit-icon-wrapper {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.benefit-content h3 {
+  font-size: 1.25rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+}
+
+.benefit-content p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Attention Kids Aula Intro Section Background Style */
+.aula-intro-section {
+  position: relative;
+  overflow: hidden;
+  background-color: white; /* Ensure base color is white under the image */
+}
+
+.aula-intro-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/services_bg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.aula-intro-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Aula Virtual Metrics Section */
+.aula-metrics-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #FAF9DC; /* Base yellow color */
+  border-bottom: 3px dashed var(--color-primary-dark);
+  padding: 100px 0;
+}
+
+.aula-metrics-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aula-metrics-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/services_bg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aula-metrics-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom Metric Card for Aula Virtual */
+.aula-metric-card {
+  border: 3.5px solid var(--color-primary-dark);
+  border-radius: 28px;
+  padding: 28px 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+  background: white; /* Fallback */
+}
+
+/* Badge at the top-right of the metric card */
+.aula-metric-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--color-primary-dark);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
+}
+
+.aula-metric-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  background: var(--color-primary-dark);
+}
+
+.aula-metric-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.aula-metric-content p {
+  font-size: 0.98rem;
+  color: var(--color-primary-dark);
+  opacity: 0.95;
+  line-height: 1.55;
+  font-weight: 600;
+}
+
