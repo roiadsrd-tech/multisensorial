@@ -15,6 +15,7 @@ import AcompanamientoMadresPage from './AcompanamientoMadresPage';
 import TerapiaOrofacialPage from './TerapiaOrofacialPage';
 import FisioterapiaPage from './FisioterapiaPage';
 import TerapiaConductualPage from './TerapiaConductualPage';
+import { Analytics } from '@vercel/analytics/react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -1682,6 +1683,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <Analytics />
     </div>
   );
 }
