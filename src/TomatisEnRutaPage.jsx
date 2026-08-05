@@ -16,7 +16,7 @@ const cityData = {
     badge: "Monseñor Nouel",
     desc: "En Bonao realizamos una jornada intensiva donde acercamos la estimulación neurosensorial del Método Tomatis® a decenas de niños. Gracias a nuestros equipos portátiles de conducción ósea y aérea, evaluamos la atención, la comunicación y el procesamiento auditivo en la villa de las hortensias, brindando orientación directa a las familias.",
     cover: "/instagram/bonao/bonao.jpeg",
-    objectPosition: "center 75%",
+    objectPosition: "center 25%",
     images: [
       "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg",
       "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (1).jpeg",
