@@ -19,36 +19,38 @@ const TomatisVisual = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const barCount = isMobile ? 6 : 10;
+
   return (
     <div className="tomatis-visual-container brain-filtering">
       <div className="filtering-scene">
         {/* Input: Chaos */}
         <div className="sound-input chaotic-spectrum">
-          {[...Array(isMobile ? 6 : 10)].map((_, i) => (
-            <motion.div
-              key={`noise-bar-${i}`}
-              className="spectrum-bar noise-bar"
-              animate={{ 
-                height: [
-                  `${Math.random() * (isMobile ? 30 : 50) + (isMobile ? 10 : 15)}px`,
-                  `${Math.random() * (isMobile ? 50 : 90) + (isMobile ? 20 : 30)}px`,
-                  `${Math.random() * (isMobile ? 20 : 30) + 5}px`,
-                  `${Math.random() * (isMobile ? 60 : 100) + (isMobile ? 20 : 30)}px`,
-                  `${Math.random() * (isMobile ? 30 : 50) + (isMobile ? 10 : 15)}px`
-                ]
-              }}
-              transition={{ 
-                duration: 0.5 + Math.random() * 0.4, 
-                repeat: Infinity,
-                repeatType: "mirror",
-                ease: "easeInOut",
-                delay: i * 0.04
-              }}
-              style={{ 
-                backgroundColor: i % 2 === 0 ? 'var(--color-accent)' : 'var(--color-pink)' 
-              }}
-            />
-          ))}
+          {[...Array(barCount)].map((_, i) => {
+            const h1 = (i * 17) % 35 + 15;
+            const h2 = (i * 23) % 55 + 30;
+            const h3 = (i * 11) % 25 + 10;
+            const h4 = (i * 29) % 65 + 25;
+            return (
+              <motion.div
+                key={`noise-bar-${i}`}
+                className="spectrum-bar noise-bar"
+                animate={{ 
+                  height: [`${h1}px`, `${h2}px`, `${h3}px`, `${h4}px`, `${h1}px`]
+                }}
+                transition={{ 
+                  duration: 0.7 + (i % 3) * 0.2, 
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                  delay: i * 0.05
+                }}
+                style={{ 
+                  backgroundColor: i % 2 === 0 ? 'var(--color-accent)' : 'var(--color-pink)' 
+                }}
+              />
+            );
+          })}
         </div>
 
         {/* The Processor: Brain */}
@@ -80,7 +82,7 @@ const TomatisVisual = () => {
 
         {/* Output: Focus */}
         <div className="sound-output organized-spectrum">
-          {[...Array(isMobile ? 6 : 10)].map((_, i) => {
+          {[...Array(barCount)].map((_, i) => {
             const delay = i * 0.15;
             return (
               <motion.div
@@ -117,7 +119,7 @@ const TomatisVisual = () => {
   );
 };
 
-const TomatisPage = ({ onBack, onNavigateService }) => {
+const TomatisPage = ({ onBack, onBook, onNavigateService }) => {
   return (
     <div className="tomatis-page bg-cream">
       {/* Mini Nav */}
