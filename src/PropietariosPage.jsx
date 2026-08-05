@@ -5,6 +5,7 @@ import {
   ArrowLeft, Building, Award, Sparkles, MapPin, Users, CheckCircle, 
   Send, HeartHandshake, ArrowRight, Shield, Globe, Star
 } from 'lucide-react';
+import Footer from './Footer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -569,10 +570,7 @@ const PropietariosPage = ({ onBack }) => {
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '50px 0', background: 'white', textAlign: 'center', borderTop: '2px dashed var(--color-border)', marginTop: 'auto' }}>
-        <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ margin: '0 auto 15px', maxHeight: '40px' }} />
-        <p style={{ color: 'var(--color-text-muted)', fontWeight: 600, fontSize: '0.95rem' }}>© 2026 Multisensorial RD. Todos los derechos reservados.</p>
-      </footer>
+      <Footer onNavigate={onBack} />
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Headphones, BrainCircuit, Waves, Star, CheckCircle, Smartphone, HeartHandshake, Speech, Smile, ExternalLink, Award } from 'lucide-react';
+import { ArrowLeft, Headphones, BrainCircuit, Waves, Star, CheckCircle, Smartphone, HeartHandshake, Speech, Smile, ExternalLink, Award, Activity } from 'lucide-react';
 import ServiceFooterExtras from './ServiceFooterExtras';
+import Footer from './Footer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -339,7 +340,9 @@ const TomatisPage = ({ onBack, onNavigateService }) => {
               { icon: <Star />, title: "Atención", desc: "Logra concentrarse por más tiempo en sus tareas escolares sin distraerse con ruidos externos.", color: "var(--color-primary)" },
               { icon: <Speech />, title: "Lenguaje", desc: "Mejora la fluidez al hablar, la pronunciación y la comprensión de instrucciones complejas.", color: "var(--color-accent)" },
               { icon: <Smile />, title: "Emociones", desc: "Reduce la irritabilidad y la ansiedad, ayudando a que el niño se sienta más seguro y tranquilo.", color: "var(--color-pink)" },
-              { icon: <CheckCircle />, title: "Aprendizaje", desc: "Facilita la adquisición de la lectura, la escritura y el aprendizaje de nuevos idiomas.", color: "var(--color-secondary)" }
+              { icon: <CheckCircle />, title: "Aprendizaje", desc: "Facilita la adquisición de la lectura, la escritura y el aprendizaje de nuevos idiomas.", color: "var(--color-secondary)" },
+              { icon: <BrainCircuit />, title: "Memoria", desc: "Mejora la retención de información, la memoria de trabajo y la agilidad para recordar conceptos.", color: "var(--color-green)" },
+              { icon: <Activity />, title: "Psicomotricidad (Gruesa y Fina)", desc: "Desarrolla el equilibrio, la coordinación corporal, el ritmo motor y el control fino manual.", color: "#8E44AD" }
             ].map((b, i) => (
               <motion.div 
                 key={i} 
@@ -381,7 +384,7 @@ const TomatisPage = ({ onBack, onNavigateService }) => {
                 Somos el <strong>único centro</strong> en todo el país que cuenta con la certificación oficial del Método Tomatis® en su máximo nivel (Nivel 4). Esto garantiza que tu hijo recibirá la intervención más avanzada, segura y especializada posible, respaldada directamente por la organización internacional en Francia.
               </p>
               <a 
-                href="https://www.tomatis.com/es/profesional/dominican-republic/?id=ChIJ9bbx3jiIr44R4PcNBiQPAqY" 
+                href="https://www.tomatis.com/es/profesional/republica-dominicana/" 
                 target="_blank" 
                 rel="noreferrer"
                 className="btn-outline tomatis-cert-btn"
@@ -434,11 +437,8 @@ const TomatisPage = ({ onBack, onNavigateService }) => {
         </div>
       </section>
 
-      {/* Footer Mirror */}
-      <footer className="bg-yellow with-grid" style={{ padding: '60px 0', textAlign: 'center' }}>
-                                                <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ margin: '0 auto 20px' }} />
-        <p>© 2026 Multisensorial RD. Todos los derechos reservados.</p>
-      </footer>
+      {/* Footer */}
+      <Footer onNavigate={onBack} onOpenBooking={onBook} />
     </div>
   );
 };

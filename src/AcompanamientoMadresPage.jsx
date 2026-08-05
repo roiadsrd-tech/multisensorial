@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Heart, Compass, Sparkles, MessageCircle, HeartHandshake, Smile, HelpCircle, ChevronDown, ChevronUp, Star, ShieldCheck } from 'lucide-react';
 import ServiceFooterExtras from './ServiceFooterExtras';
+import Footer from './Footer';
 import './ServicesPages.css';
 
 const fadeUp = {
@@ -347,10 +348,7 @@ const AcompanamientoMadresPage = ({ onBack, onBook, onNavigateService }) => {
       <ServiceFooterExtras serviceId="acompanamiento-madres" onBack={onBack} onNavigateService={onNavigateService} />
 
       {/* Footer */}
-      <footer style={{ padding: '60px 0', background: 'white', textAlign: 'center', borderTop: '2px dashed var(--color-border)' }}>
-        <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ margin: '0 auto 20px' }} />
-        <p>© 2026 Multisensorial RD. Todos los derechos reservados.</p>
-      </footer>
+      <Footer onNavigate={onBack} onOpenBooking={onBook} />
     </div>
   );
 };

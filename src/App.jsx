@@ -15,6 +15,8 @@ import AcompanamientoMadresPage from './AcompanamientoMadresPage';
 import TerapiaOrofacialPage from './TerapiaOrofacialPage';
 import FisioterapiaPage from './FisioterapiaPage';
 import TerapiaConductualPage from './TerapiaConductualPage';
+import TomatisEnRutaPage from './TomatisEnRutaPage';
+import Footer from './Footer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -131,10 +133,9 @@ const services = [
 function ServiceCard({ title, description, icon, colorClass, index, onClick, isHighlighted }) {
   const isClickable = !!onClick;
   return (
-    <div style={{ position: 'relative', height: '100%' }}>
+    <motion.div variants={fadeUp} style={{ position: 'relative', height: '100%' }}>
       <motion.div
         className={`service-card-modern ${colorClass} ${isClickable ? 'clickable-card' : ''}`}
-        variants={fadeUp}
         whileHover={isClickable ? { y: -16, scale: 1.03, rotate: index % 2 === 0 ? 1 : -1 } : { y: -12, rotate: index % 2 === 0 ? 1 : -1 }}
         transition={{ type: "spring", stiffness: 300, damping: 15 }}
         style={{
@@ -172,7 +173,7 @@ function ServiceCard({ title, description, icon, colorClass, index, onClick, isH
         </div>
         <div className="service-card-decor"></div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -184,7 +185,30 @@ function App() {
   const [tomatisPlaying, setTomatisPlaying] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isBookingComplete, setIsBookingComplete] = useState(false);
+  const [isCalendarLoading, setIsCalendarLoading] = useState(true);
+  const [shouldLoadIframe, setShouldLoadIframe] = useState(false);
+
   const [currentPage, setCurrentPage] = useState('home');
+  const [showProvincialPopup, setShowProvincialPopup] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldLoadIframe(true);
+    }, 2000);
+
+    const popupTimer = setTimeout(() => {
+      const hasBeenShown = sessionStorage.getItem('provincial_popup_shown');
+      if (!hasBeenShown) {
+        setShowProvincialPopup(true);
+        sessionStorage.setItem('provincial_popup_shown', 'true');
+      }
+    }, 10000);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(popupTimer);
+    };
+  }, []);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
@@ -202,17 +226,17 @@ function App() {
 
   const servicePagesList = [
     { id: 'todos', label: 'Ver todos los servicios' },
-    { id: 'tomatis', label: 'Método Tomatis®' },
-    { id: 'psicologia', label: 'Psicología Clínica' },
-    { id: 'neuropedagogia', label: 'Neuropedagogía' },
-    { id: 'psicopedagogia', label: 'Psicopedagogía' },
-    { id: 'neurofeedback', label: 'Neurofeedback' },
-    { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' },
-    { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres' },
-    { id: 'homeschooling', label: 'Homeschooling Presencial' },
-    { id: 'terapia-orofacial', label: 'Terapia Orofacial' },
-    { id: 'fisioterapia', label: 'Fisioterapia' },
-    { id: 'terapia-conductual', label: 'Terapia Conductual' }
+    { id: 'tomatis', label: 'Método Tomatis®', icon: <Headphones size={18} /> },
+    { id: 'psicologia', label: 'Psicología Clínica', icon: <HeartHandshake size={18} /> },
+    { id: 'neuropedagogia', label: 'Neuropedagogía', icon: <BrainCircuit size={18} /> },
+    { id: 'psicopedagogia', label: 'Psicopedagogía', icon: <Puzzle size={18} /> },
+    { id: 'neurofeedback', label: 'Neurofeedback', icon: <Waves size={18} /> },
+    { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual', icon: <RectangleGoggles size={18} /> },
+    { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres', icon: <Speech size={18} /> },
+    { id: 'homeschooling', label: 'Homeschooling Presencial', icon: <BookOpen size={18} /> },
+    { id: 'terapia-orofacial', label: 'Terapia Orofacial', icon: <Smile size={18} /> },
+    { id: 'fisioterapia', label: 'Fisioterapia', icon: <Baby size={18} /> },
+    { id: 'terapia-conductual', label: 'Terapia Conductual', icon: <Users size={18} /> }
   ];
 
   useEffect(() => {
@@ -240,6 +264,7 @@ function App() {
   useEffect(() => {
     if (isBookingModalOpen) {
       document.body.style.overflow = 'hidden';
+      setShouldLoadIframe(true);
     } else {
       document.body.style.overflow = 'unset';
       // Give the closing animation a tiny delay before resetting the content
@@ -251,6 +276,12 @@ function App() {
       document.body.style.overflow = 'unset';
     };
   }, [isBookingModalOpen]);
+
+  useEffect(() => {
+    if (isBookingComplete) {
+      setIsCalendarLoading(true);
+    }
+  }, [isBookingComplete]);
 
   useEffect(() => {
     // Listen for LeadConnector iframe message events for successful booking
@@ -440,6 +471,16 @@ function App() {
     />;
   }
 
+  if (currentPage === 'tomatis-en-ruta') {
+    return <TomatisEnRutaPage 
+      onBack={() => {
+        setCurrentPage('home');
+        window.scrollTo(0, 0);
+      }} 
+      onNavigateService={handleNavigateService}
+    />;
+  }
+
   return (
     <div className="app">
       {/* Navbar */}
@@ -537,6 +578,9 @@ function App() {
                           setIsServicesDropdownOpen(false); 
                         }}
                         style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '10px',
                           textAlign: 'left',
                           padding: s.id === 'todos' ? '10px 12px' : '8px 12px',
                           background: s.id === 'todos' ? 'var(--color-secondary)' : 'transparent',
@@ -557,7 +601,8 @@ function App() {
                           if(s.id === 'todos') e.currentTarget.style.color = 'var(--color-primary-dark)';
                         }}
                       >
-                        {s.label}
+                        {s.icon}
+                        <span>{s.label}</span>
                       </button>
                     ))}
                   </motion.div>
@@ -638,6 +683,9 @@ function App() {
                                 setIsMobileServicesOpen(false);
                               }}
                               style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '10px',
                                 textAlign: 'left',
                                 background: s.id === 'todos' ? 'var(--color-secondary)' : 'transparent',
                                 border: 'none',
@@ -662,7 +710,8 @@ function App() {
                                 }
                               }}
                             >
-                              {s.label}
+                              {s.icon}
+                              <span>{s.label}</span>
                             </button>
                           ))}
                         </motion.div>
@@ -901,7 +950,7 @@ function App() {
 
           {/* Integrated Certification Authority Bar */}
           <motion.a
-            href="https://www.tomatis.com/es/profesional/dominican-republic/?id=ChIJ9bbx3jiIr44R4PcNBiQPAqY"
+            href="https://www.tomatis.com/es/profesional/republica-dominicana/"
             target="_blank"
             rel="noreferrer"
             className="tomatis-integrated-cert-bar"
@@ -1018,7 +1067,7 @@ function App() {
                 : undefined;
 
               return (
-                <div key={index} className={isTomatis ? 'service-card-wide' : ''}>
+                <motion.div key={index} className={isTomatis ? 'service-card-wide' : ''}>
                   <ServiceCard
                     index={index}
                     title={service.title}
@@ -1028,7 +1077,7 @@ function App() {
                     onClick={onClick}
                     isHighlighted={isHomeschooling}
                   />
-                </div>
+                </motion.div>
               );
             })}
           </motion.div>
@@ -1071,11 +1120,18 @@ function App() {
                 <div className="city-chip">¡Y más!</div>
               </div>
 
-              <div style={{ marginTop: '32px' }}>
+              <div style={{ marginTop: '28px', display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <button
+                  onClick={() => { setCurrentPage('tomatis-en-ruta'); window.scrollTo(0, 0); }}
+                  className="btn-primary"
+                  style={{ cursor: 'pointer', fontSize: '1rem', padding: '14px 26px', border: 'none', borderRadius: '24px', fontWeight: 800 }}
+                >
+                  Ver fotos de visitas
+                </button>
                 <button
                   onClick={() => { setCurrentPage('propietarios'); window.scrollTo(0, 0); }}
                   className="btn-outline"
-                  style={{ cursor: 'pointer', fontSize: '0.8rem', padding: '8px 18px', letterSpacing: '0.5px' }}
+                  style={{ cursor: 'pointer', fontSize: '0.85rem', padding: '12px 18px', letterSpacing: '0.5px' }}
                 >
                   ¿Eres propietario de un centro?
                 </button>
@@ -1430,7 +1486,6 @@ function App() {
                 rel="noreferrer"
                 className="media-card-modern"
                 variants={fadeUp}
-                whileHover={{ y: -10 }}
               >
                 <div className="media-thumb-wrapper">
                   <img src={media.thumbnail} alt={media.title} className="media-thumbnail" />
@@ -1526,89 +1581,55 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="footer" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="footer-bg-logo-right">
-          <img src="/branding/logopng.webp" alt="" className="footer-logo-img" />
-        </div>
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-col" style={{ gridColumn: 'span 2' }}>
-              <span className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                                <img src="/multilogo2 (1).png" className="nav-logo-img" alt="Multisensorial Logo" style={{ height: '90px' }} />
-              </span>
-              <p style={{ maxWidth: '80%' }}>
-                Centro de Estimulación Multisensorial y Neuropedagogía. Especialistas en el Método Tomatis en República Dominicana.
-              </p>
-            </div>
-            <div className="footer-col">
-              <h4>Enlaces</h4>
-              <ul>
-                <li><a href="#metodo">Método</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><button onClick={() => setIsBookingModalOpen(true)} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', font: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}>Agendar Cita</button></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Ubicación & Contacto</h4>
-              <ul>
-                <li>Calle Teodoro Chasseriau, Las Praderas</li>
-                <li>Santo Domingo, Rep. Dom.</li>
-                <li>Tel: +1 (809) 306-5040</li>
-                <li>Email: <a href="mailto:multisensorialrd@gmail.com" style={{ textDecoration: 'none', color: 'inherit' }}>multisensorialrd@gmail.com</a></li>
-                <li><a href="https://instagram.com/multisensorialrd" target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', color: 'inherit' }}><Instagram size={16} /> @multisensorialrd</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            &copy; {new Date().getFullYear()} Centro Multisensorial RD. Todos los derechos reservados.
-          </div>
-        </div>
-      </footer>
-      {/* Booking Modal */}
-      <AnimatePresence>
-        {isBookingModalOpen && (
-          <motion.div
-            className="booking-modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            onClick={() => setIsBookingModalOpen(false)}
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(28, 78, 130, 0.85)', // Dark blue background instead of teal
-              zIndex: 9999,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '20px'
-            }}
-          >
-            <motion.div
-              className="booking-modal-content"
-              initial={{ scale: 0.95, y: 15 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 15 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              onClick={e => e.stopPropagation()}
-              style={{
-                backgroundColor: '#ffffff', // Keep calendar background matching
-                borderRadius: '32px',
-                boxShadow: '0 24px 48px rgba(0,0,0,0.15)',
-                border: '4px solid var(--color-accent)', // Coral pink border
-                width: '100%',
-                maxWidth: '850px',
-                maxHeight: '90vh',
-                overflowY: 'auto',
-                WebkitOverflowScrolling: 'touch', // Enable native momentum scrolling on iOS
-                position: 'relative',
-                padding: '25px 0 0 0'
-              }}
-            >
+      <Footer onOpenBooking={() => setIsBookingModalOpen(true)} />
+      <motion.div
+        className="booking-modal-overlay"
+        aria-hidden={!isBookingModalOpen}
+        initial={{ opacity: 0, visibility: 'hidden', display: 'none' }}
+        animate={{ 
+          opacity: isBookingModalOpen ? 1 : 0,
+          pointerEvents: isBookingModalOpen ? 'auto' : 'none',
+          visibility: isBookingModalOpen ? 'visible' : 'hidden',
+          display: isBookingModalOpen ? 'flex' : 'none'
+        }}
+        transition={{ duration: 0.15 }}
+        onClick={() => setIsBookingModalOpen(false)}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(28, 78, 130, 0.85)',
+          zIndex: 9999,
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px'
+        }}
+      >
+        <motion.div
+          className="booking-modal-content"
+          initial={{ scale: 0.95, y: 15 }}
+          animate={{ 
+            scale: isBookingModalOpen ? 1 : 0.95, 
+            y: isBookingModalOpen ? 0 : 15 
+          }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          onClick={e => e.stopPropagation()}
+          style={{
+            backgroundColor: '#ffffff', // Keep calendar background matching
+            borderRadius: '32px',
+            boxShadow: '0 24px 48px rgba(0,0,0,0.15)',
+            border: '4px solid var(--color-accent)', // Coral pink border
+            width: '100%',
+            maxWidth: '850px',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch', // Enable native momentum scrolling on iOS
+            position: 'relative',
+            padding: '25px 0 0 0'
+          }}
+        >
               <div style={{ position: 'sticky', top: 0, right: 0, zIndex: 10, display: 'flex', justifyContent: 'flex-end', padding: '0 12px' }}>
                 <button
                   onClick={() => setIsBookingModalOpen(false)} // Assuming closeBookingModal is equivalent to this
@@ -1670,15 +1691,105 @@ function App() {
                     <p style={{ color: 'var(--color-text-muted)', margin: '5px 0 0 0', fontFamily: 'var(--font-primary)' }}>Elige el día y la hora que mejor funcione para ti.</p>
                   </div>
 
-                  <iframe
-                    src="https://api.leadconnectorhq.com/widget/booking/i0TBYq6Ec4GK21NpfPFu?primaryColor=%23EF476F&backgroundColor=%23ffffff&fontFamily=Nunito"
-                    style={{ width: '100%', border: 'none', minHeight: '850px', borderRadius: '0 0 28px 28px' }}
-                    scrolling="yes"
-                    id="i0TBYq6Ec4GK21NpfPFu_1773700990303"
-                  ></iframe>
+                  {isCalendarLoading && (
+                    <div style={{ padding: '40px', textAlign: 'center', minHeight: '850px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                        style={{ width: '50px', height: '50px', border: '5px solid var(--color-pink-light)', borderTopColor: 'var(--color-accent)', borderRadius: '50%' }}
+                      />
+                      <p style={{ marginTop: '20px', color: 'var(--color-text-muted)', fontFamily: 'var(--font-primary)' }}>Cargando calendario...</p>
+                    </div>
+                  )}
+                  {shouldLoadIframe && (
+                    <iframe
+                      src="https://api.leadconnectorhq.com/widget/booking/i0TBYq6Ec4GK21NpfPFu?primaryColor=%23EF476F&backgroundColor=%23ffffff&fontFamily=Nunito"
+                      style={{ width: '100%', border: 'none', minHeight: '850px', borderRadius: '0 0 28px 28px', display: isCalendarLoading ? 'none' : 'block' }}
+                      scrolling="yes"
+                      id="i0TBYq6Ec4GK21NpfPFu_1773700990303"
+                      onLoad={() => setIsCalendarLoading(false)}
+                    ></iframe>
+                  )}
                 </>
               )}
             </motion.div>
+          </motion.div>
+
+      {/* Floating Provincial Pop-Up */}
+      <AnimatePresence>
+        {showProvincialPopup && currentPage === 'home' && (
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 40, scale: 0.95 }}
+            transition={{ delay: 2, duration: 0.4 }}
+            style={{
+              position: 'fixed',
+              bottom: '24px',
+              left: '24px',
+              zIndex: 9999,
+              width: '320px',
+              background: 'white',
+              borderRadius: '16px',
+              padding: '16px',
+              border: '1px solid #E2E8F0',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px'
+            }}
+          >
+            <button
+              onClick={() => setShowProvincialPopup(false)}
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#718096',
+                padding: '2px',
+                zIndex: 10
+              }}
+            >
+              <X size={16} />
+            </button>
+
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <div style={{ width: '64px', height: '64px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1px solid #E2E8F0' }}>
+                <img src="/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg" alt="Visita" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <div style={{ paddingRight: '12px' }}>
+                <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: 'var(--color-primary-dark)', lineHeight: 1.25 }}>
+                  ¿No vives en Santo Domingo?
+                </h4>
+                <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', lineHeight: 1.3 }}>
+                  Llevamos el Método Tomatis® a tu provincia.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setCurrentPage('tomatis-en-ruta');
+                window.scrollTo(0, 0);
+              }}
+              style={{
+                background: 'var(--color-accent)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '10px',
+                padding: '10px 14px',
+                fontWeight: 800,
+                fontSize: '0.85rem',
+                cursor: 'pointer',
+                width: '100%',
+                textAlign: 'center'
+              }}
+            >
+              Solicitar Visita
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

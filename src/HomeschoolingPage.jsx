@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, BookOpen, Star, CheckCircle, Award, ShieldCheck, HelpCircle, ChevronDown, ChevronUp, FileCheck, Landmark, Library, ClipboardCheck, Scan, GraduationCap, Zap, Sparkles, ChevronLeft, ChevronRight, Video, PenTool, MessageCircle } from 'lucide-react';
 import ServiceFooterExtras from './ServiceFooterExtras';
+import Footer from './Footer';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -549,18 +550,10 @@ const HomeschoolingPage = ({ onBack, onBook, onNavigateService }) => {
       color: "var(--color-pink)"
     },
     {
-      title: "Evidencias Digitales con Código QR",
-      shortTitle: "4. Evidencias",
-      subtitle: "Paso 4",
-      desc: "Consolidación de calificaciones y evidencias académicas en una plataforma digital segura con códigos QR. Facilita la auditoría escolar y asegura la veracidad del expediente en cualquier momento.",
-      graphic: <QRScanGraphic />,
-      color: "var(--color-secondary)"
-    },
-    {
       title: "Certificación y Homologación",
-      shortTitle: "5. Homologación",
-      subtitle: "Paso 5",
-      desc: "Emisión de certificado oficial estadounidense y estructuración física/digital del dossier con firma notarial e intérprete judicial, dejándolo 100% listo para homologar formalmente ante el MINERD.",
+      shortTitle: "4. Homologación",
+      subtitle: "Paso 4",
+      desc: "Emisión de certificado oficial estadounidense y estructuración física/digital del dossier, dejándolo listo para homologar formalmente ante el MINERD.",
       graphic: <GraduationStampGraphic />,
       color: "var(--color-green)"
     }
@@ -685,15 +678,7 @@ const HomeschoolingPage = ({ onBack, onBook, onNavigateService }) => {
       {/* Qué incluye el programa Section */}
       <section className="homeschooling-details" style={{ padding: isMobile ? '60px 0' : '100px 0' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: isMobile ? '30px' : '60px' }}>
-            <div className="badge-modern">RESPALDO Y ESTRUCTURA</div>
-            <h2 style={{ fontSize: isMobile ? '2.2rem' : '3.2rem', color: 'var(--color-primary-dark)', marginTop: '10px' }}>Doble Acreditación Oficial</h2>
-            <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)' }} className="hide-mobile">Toca los puntos interactivos del expediente escolar para descubrir cómo funciona la convalidación.</p>
-            <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)' }} className="show-mobile-only">Selecciona las pestañas de abajo para descubrir cómo funciona la convalidación.</p>
-          </div>
 
-          {/* Interactive Diploma Dashboard */}
-          <InteractiveDiploma />
 
           {/* Benefits: Creative Organic Blobs */}
           <div style={{ marginTop: isMobile ? '60px' : '100px' }}>
@@ -932,13 +917,10 @@ const HomeschoolingPage = ({ onBack, onBook, onNavigateService }) => {
               answer="Nosotros preparamos y te entregamos un expediente completo, ordenado, debidamente apostillado y notariado que recopila las evidencias de aprendizaje, reportes de calificaciones y el diploma estadounidense. Este expediente está listo para ser presentado ante el Ministerio de Educación dominicano (MINERD) para el proceso formal de homologación."
             />
             <FAQItem 
-              question="¿Es necesario que los padres sean educadores profesionales?"
-              answer="No. El programa proporciona una secuencia de contenidos completa basada en Core Knowledge, acceso a más de 1,000 recursos, guías detalladas por grado y, lo más importante, el acompañamiento directo de nuestros especialistas y profesores de Multisensorial. Nosotros estructuramos el camino para que los padres sirvan de apoyo en casa con total seguridad."
+              question="¿Quién se encarga de la adecuación curricular de mi hijo?"
+              answer="En Multisensorial ejercemos como tutores &quot;padres&quot; para la adecuación curricular del niño y así pueda tener un proceso acorde a sus necesidades (paralelo a los servicios psicopedagógicos)."
             />
-            <FAQItem 
-              question="¿Cómo funciona la socialización de los estudiantes?"
-              answer="Trabajamos en clases y talleres en pequeños grupos virtuales e interacciones programadas. Esto asegura que el estudiante interactúe con sus pares, participe en debates, exponga proyectos y colabore, desarrollando sus habilidades sociales sin la sobreestimulación de una escuela convencional."
-            />
+
             <FAQItem 
               question="¿Por qué se requiere una evaluación previa antes de ingresar?"
               answer="La evaluación previa es obligatoria porque no creemos en planes genéricos. Necesitamos entender a profundidad el perfil de procesamiento sensorial, capacidad de atención y nivel curricular actual de tu hijo para diseñar las adaptaciones específicas que aseguren su éxito en el programa. Además, los cupos son limitados por grado."
@@ -974,10 +956,7 @@ const HomeschoolingPage = ({ onBack, onBook, onNavigateService }) => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-yellow with-grid" style={{ padding: isMobile ? '40px 0' : '60px 0', textAlign: 'center' }}>
-        <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ margin: '0 auto 20px' }} />
-        <p style={{ color: 'var(--color-primary-dark)', fontWeight: 600 }}>© 2026 Multisensorial RD. Todos los derechos reservados.</p>
-      </footer>
+      <Footer onNavigate={onBack} onOpenBooking={onBook} />
     </div>
   );
 };

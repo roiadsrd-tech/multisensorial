@@ -28,7 +28,8 @@ const serviceIcons = {
   'acompanamiento-madres': <Users size={32} color="var(--color-primary-dark)" />,
   'terapia-orofacial': <Smile size={32} color="var(--color-primary-dark)" />,
   fisioterapia: <Play size={32} color="var(--color-primary-dark)" />,
-  'terapia-conductual': <Speech size={32} color="var(--color-primary-dark)" />
+  'terapia-conductual': <Speech size={32} color="var(--color-primary-dark)" />,
+  'taller-padres-homeschooling': <Users size={32} color="var(--color-primary-dark)" />
 };
 
 const serviceDescriptions = {
@@ -42,7 +43,8 @@ const serviceDescriptions = {
   'acompanamiento-madres': "Soporte y guía maternal.",
   'terapia-orofacial': "Rehabilitación motora orofacial.",
   fisioterapia: "Desarrollo motor y movimiento.",
-  'terapia-conductual': "Manejo efectivo de conductas."
+  'terapia-conductual': "Manejo efectivo de conductas.",
+  'taller-padres-homeschooling': "Guía y soporte para educar en casa."
 };
 
 const serviceData = {
@@ -51,7 +53,8 @@ const serviceData = {
     similar: [
       { id: 'neurofeedback', label: 'Neurofeedback' },
       { id: 'terapia-orofacial', label: 'Terapia Orofacial' },
-      { id: 'psicopedagogia', label: 'Psicopedagogía' }
+      { id: 'psicopedagogia', label: 'Psicopedagogía' },
+      { id: 'neuropedagogia', label: 'Neuropedagogía' }
     ],
     media: [
       { title: "\"La Mirada\" | IA y los límites terapéuticos", url: "https://www.youtube.com/watch?v=JiJXut5kviU", source: "YouTube Video" },
@@ -63,7 +66,8 @@ const serviceData = {
     similar: [
       { id: 'psicopedagogia', label: 'Psicopedagogía' },
       { id: 'neuropedagogia', label: 'Neuropedagogía' },
-      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' }
+      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' },
+      { id: 'taller-padres-homeschooling', label: 'Padres como tutores (Taller de formación para tutores en casa)' }
     ],
     media: [
       { title: "HOMESCHOOLING (Escuela en casa) para niños con AUTISMO en RD", url: "https://www.youtube.com/watch?v=ZKI_bcbkVI0", source: "AzulPodcast EP 32" }
@@ -74,7 +78,8 @@ const serviceData = {
     similar: [
       { id: 'terapia-conductual', label: 'Terapia Conductual' },
       { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres' },
-      { id: 'neuropedagogia', label: 'Neuropedagogía' }
+      { id: 'neuropedagogia', label: 'Neuropedagogía' },
+      { id: 'psicopedagogia', label: 'Psicopedagogía' }
     ],
     media: [
       { title: "\"La Mirada\" | 'Adolescencia' de Netflix: lo que los padres deben entender", url: "https://www.youtube.com/watch?v=yDlEPuyxBFs", source: "YouTube Video" }
@@ -85,7 +90,8 @@ const serviceData = {
     similar: [
       { id: 'psicopedagogia', label: 'Psicopedagogía' },
       { id: 'neurofeedback', label: 'Neurofeedback' },
-      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' }
+      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' },
+      { id: 'tomatis', label: 'Método Tomatis®' }
     ],
     media: [
       { title: "QUÉ TAN CARO ES CRIAR UN HIJO AUTISTA? - Carlos Eduardo Pérez", url: "https://www.youtube.com/watch?v=NK1u6dsNqBo", source: "Esto No Es Radio" }
@@ -96,7 +102,8 @@ const serviceData = {
     similar: [
       { id: 'neuropedagogia', label: 'Neuropedagogía' },
       { id: 'homeschooling', label: 'Homeschooling Presencial' },
-      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' }
+      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' },
+      { id: 'tomatis', label: 'Método Tomatis®' }
     ],
     media: []
   },
@@ -105,7 +112,8 @@ const serviceData = {
     similar: [
       { id: 'tomatis', label: 'Método Tomatis®' },
       { id: 'neuropedagogia', label: 'Neuropedagogía' },
-      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' }
+      { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual' },
+      { id: 'psicopedagogia', label: 'Psicopedagogía' }
     ],
     media: [
       { title: "Entrevista Mery Torrealba & Carlos Pérez | Neurofeedback", url: "https://www.youtube.com/watch?v=lK8_ZQcQuK0", source: "Hora de Te" }
@@ -116,7 +124,8 @@ const serviceData = {
     similar: [
       { id: 'psicopedagogia', label: 'Psicopedagogía' },
       { id: 'neurofeedback', label: 'Neurofeedback' },
-      { id: 'neuropedagogia', label: 'Neuropedagogía' }
+      { id: 'neuropedagogia', label: 'Neuropedagogía' },
+      { id: 'homeschooling', label: 'Homeschooling Presencial' }
     ],
     media: []
   },
@@ -125,7 +134,8 @@ const serviceData = {
     similar: [
       { id: 'psicologia', label: 'Psicología Clínica' },
       { id: 'terapia-conductual', label: 'Terapia Conductual' },
-      { id: 'psicopedagogia', label: 'Psicopedagogía' }
+      { id: 'psicopedagogia', label: 'Psicopedagogía' },
+      { id: 'neuropedagogia', label: 'Neuropedagogía' }
     ],
     media: []
   },
@@ -134,7 +144,8 @@ const serviceData = {
     similar: [
       { id: 'fisioterapia', label: 'Fisioterapia' },
       { id: 'tomatis', label: 'Método Tomatis®' },
-      { id: 'terapia-conductual', label: 'Terapia Conductual' }
+      { id: 'terapia-conductual', label: 'Terapia Conductual' },
+      { id: 'psicopedagogia', label: 'Psicopedagogía' }
     ],
     media: []
   },
@@ -143,7 +154,8 @@ const serviceData = {
     similar: [
       { id: 'terapia-orofacial', label: 'Terapia Orofacial' },
       { id: 'tomatis', label: 'Método Tomatis®' },
-      { id: 'terapia-conductual', label: 'Terapia Conductual' }
+      { id: 'terapia-conductual', label: 'Terapia Conductual' },
+      { id: 'neurofeedback', label: 'Neurofeedback' }
     ],
     media: []
   },
@@ -152,7 +164,8 @@ const serviceData = {
     similar: [
       { id: 'psicologia', label: 'Psicología Clínica' },
       { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres' },
-      { id: 'terapia-orofacial', label: 'Terapia Orofacial' }
+      { id: 'terapia-orofacial', label: 'Terapia Orofacial' },
+      { id: 'psicopedagogia', label: 'Psicopedagogía' }
     ],
     media: []
   }
