@@ -277,7 +277,7 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
                 justifyContent: 'flex-end',
                 padding: '36px 32px',
                 marginBottom: '32px',
-                backgroundImage: `linear-gradient(to top, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(0, 0, 0, 0.15) 100%), url(${activeCity.cover})`,
+                backgroundImage: `linear-gradient(to top, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(0, 0, 0, 0.15) 100%), url("${encodeURI(activeCity.cover)}")`,
                 backgroundSize: 'cover',
                 backgroundPosition: activeCity.objectPosition || 'center center'
               }}>
