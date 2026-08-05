@@ -264,44 +264,67 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
                 boxShadow: '8px 8px 0px var(--color-primary-dark)'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '24px' }}>
+              {/* City Cover Hero Banner (Image as background) */}
+              <div style={{
+                borderRadius: '24px',
+                overflow: 'hidden',
+                border: '3.5px solid var(--color-primary-dark)',
+                boxShadow: '6px 6px 0px var(--color-primary-dark)',
+                position: 'relative',
+                minHeight: '280px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                padding: '36px 32px',
+                marginBottom: '32px',
+                backgroundImage: `linear-gradient(to top, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(0, 0, 0, 0.15) 100%), url(${activeCity.cover})`,
+                backgroundSize: 'cover',
+                backgroundPosition: activeCity.objectPosition || 'center center'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  background: 'var(--color-secondary)',
+                  padding: '8px 18px',
+                  borderRadius: '20px',
+                  border: '2px solid var(--color-primary-dark)',
+                  fontWeight: 900,
+                  fontSize: '0.85rem',
+                  color: 'var(--color-primary-dark)',
+                  boxShadow: '2px 2px 0px var(--color-primary-dark)'
+                }}>
+                  ✓ Visita Realizada
+                </div>
+
                 <div>
-                  <div style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-accent)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <div style={{
+                    display: 'inline-block',
+                    background: 'var(--color-accent)',
+                    color: 'white',
+                    padding: '4px 14px',
+                    borderRadius: '14px',
+                    fontSize: '0.8rem',
+                    fontWeight: 800,
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                    marginBottom: '10px',
+                    border: '2px solid var(--color-primary-dark)'
+                  }}>
                     {activeCity.badge}
                   </div>
-                  <h3 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--color-primary-dark)', margin: '4px 0 0' }}>
+                  <h3 style={{
+                    fontSize: '2.8rem',
+                    fontWeight: 900,
+                    color: 'white',
+                    margin: 0,
+                    lineHeight: 1.1,
+                    textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                  }}>
                     {activeCity.name}
                   </h3>
                 </div>
-                <div style={{ background: '#FAF9DC', padding: '10px 20px', borderRadius: '20px', border: '2px solid var(--color-primary-dark)', fontWeight: 800, color: 'var(--color-primary-dark)' }}>
-                  Visita Realizada
-                </div>
               </div>
-
-              {/* City Cover Photo Banner */}
-              {activeCity.cover && (
-                <div style={{
-                  borderRadius: '24px',
-                  overflow: 'hidden',
-                  border: '3px solid var(--color-primary-dark)',
-                  boxShadow: '6px 6px 0px var(--color-accent)',
-                  marginBottom: '32px',
-                  maxHeight: '380px'
-                }}>
-                  <img
-                    src={activeCity.cover}
-                    alt={`Portada ${activeCity.name}`}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      objectPosition: activeCity.objectPosition || 'center center',
-                      display: 'block',
-                      maxHeight: '380px'
-                    }}
-                  />
-                </div>
-              )}
 
               <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '32px' }}>
                 {activeCity.desc}
