@@ -100,8 +100,8 @@ const services = [
   },
   {
     icon: <RectangleGoggles size={28} />,
-    title: "Evaluación Aula Virtual",
-    description: "Software estandarizado para el diagnóstico del TDAH."
+    title: "Pruebas Atencionales en Realidad Virtual",
+    description: "Evaluación objetiva y estandarizada de la atención mediante Realidad Virtual."
   },
   {
     icon: <Speech size={28} />,
@@ -231,7 +231,7 @@ function App() {
     { id: 'neuropedagogia', label: 'Neuropedagogía', icon: <BrainCircuit size={18} /> },
     { id: 'psicopedagogia', label: 'Psicopedagogía', icon: <Puzzle size={18} /> },
     { id: 'neurofeedback', label: 'Neurofeedback', icon: <Waves size={18} /> },
-    { id: 'evaluacion-aula-virtual', label: 'Evaluación Aula Virtual', icon: <RectangleGoggles size={18} /> },
+    { id: 'evaluacion-aula-virtual', label: 'Pruebas Atencionales VR', icon: <RectangleGoggles size={18} /> },
     { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres', icon: <Speech size={18} /> },
     { id: 'homeschooling', label: 'Homeschooling Presencial', icon: <BookOpen size={18} /> },
     { id: 'terapia-orofacial', label: 'Terapia Orofacial', icon: <Smile size={18} /> },
@@ -1056,7 +1056,7 @@ function App() {
               else if (service.title === "Neuropedagogía") pageKey = 'neuropedagogia';
               else if (service.title === "Psicopedagogía") pageKey = 'psicopedagogia';
               else if (service.title === "Neurofeedback") pageKey = 'neurofeedback';
-              else if (service.title === "Evaluación Aula Virtual") pageKey = 'evaluacion-aula-virtual';
+              else if (service.title.includes("Realidad Virtual") || service.title.includes("Aula Virtual")) pageKey = 'evaluacion-aula-virtual';
               else if (service.title === "Acompañamiento a Madres") pageKey = 'acompanamiento-madres';
               else if (service.title === "Terapia Orofacial") pageKey = 'terapia-orofacial';
               else if (service.title === "Fisioterapia") pageKey = 'fisioterapia';

@@ -39,7 +39,7 @@ const serviceDescriptions = {
   neuropedagogia: "Aprendizaje basado en el cerebro.",
   psicopedagogia: "Apoyo especializado en el aprendizaje.",
   neurofeedback: "Entrenamiento cerebral y atención.",
-  'evaluacion-aula-virtual': "Diagnóstico preciso de TDAH.",
+  'evaluacion-aula-virtual': "Pruebas estandarizadas de la atención.",
   'acompanamiento-madres': "Soporte y guía maternal.",
   'terapia-orofacial': "Rehabilitación motora orofacial.",
   fisioterapia: "Desarrollo motor y movimiento.",
@@ -120,7 +120,7 @@ const serviceData = {
     ]
   },
   'evaluacion-aula-virtual': {
-    title: "Evaluación Aula Virtual",
+    title: "Evaluación de la Atención en Realidad Virtual",
     similar: [
       { id: 'psicopedagogia', label: 'Psicopedagogía' },
       { id: 'neurofeedback', label: 'Neurofeedback' },
