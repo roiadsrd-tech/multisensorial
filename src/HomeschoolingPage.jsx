@@ -569,18 +569,6 @@ const HomeschoolingPage = ({ onBack, onBook, onNavigateService }) => {
 
   return (
     <div className="homeschooling-page bg-cream">
-      {/* Mini Nav */}
-      <nav className="navbar" style={{ position: 'sticky', top: 0 }}>
-        <div className="container nav-container">
-          <button onClick={onBack} className="btn-back" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 800, color: 'var(--color-primary-dark)' }}>
-            <ArrowLeft size={20} /> Volver al Inicio
-          </button>
-          <div className="nav-logo">
-            <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ margin: '0 auto' }} />
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="homeschooling-hero bg-blue with-grid" style={{ padding: isMobile ? '80px 0 40px' : '120px 0 80px', position: 'relative', overflow: 'hidden' }}>
         {/* Floating background GraduationCap (Right side, large) */}

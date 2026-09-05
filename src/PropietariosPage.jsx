@@ -76,18 +76,6 @@ const PropietariosPage = ({ onBack }) => {
 
   return (
     <div className="propietarios-page bg-cream" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Mini Nav */}
-      <nav className="navbar" style={{ position: 'sticky', top: 0, zIndex: 100, background: 'var(--color-bg)', borderBottom: '3px solid var(--color-primary-dark)' }}>
-        <div className="container nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px' }}>
-          <button onClick={onBack} className="btn-back" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 800, color: 'var(--color-primary-dark)' }}>
-            <ArrowLeft size={20} /> Volver al Inicio
-          </button>
-          <div className="nav-logo" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ maxHeight: '50px', objectFit: 'contain', margin: 0 }} />
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="propietarios-hero bg-blue with-grid" style={{ padding: '100px 0 80px', position: 'relative', overflow: 'hidden', borderBottom: '4px solid var(--color-primary-dark)' }}>
         <div className="dec-star-4 orange" style={{ top: '12%', right: '10%', transform: 'scale(1.2)', position: 'absolute' }}></div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Smile, Sparkles, Star, Speech, Award, ShieldCheck, HelpCircle, ChevronDown, ChevronUp, Activity, CheckCircle2, Heart, Wind, Flame, Check } from 'lucide-react';
+import { ArrowLeft, Smile, Sparkles, Star, Speech, Award, ShieldCheck, HelpCircle, ChevronDown, ChevronUp, ChevronRight, Activity, CheckCircle2, Heart, Wind, Flame, Check, Utensils, CupSoda, Fish, GlassWater } from 'lucide-react';
 import ServiceFooterExtras from './ServiceFooterExtras';
 import Footer from './Footer';
 import './ServicesPages.css';
@@ -10,130 +10,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } }
 };
 
-const MuscleMap = () => {
-  const [activeZone, setActiveZone] = useState('lengua');
 
-  const zones = {
-    lengua: {
-      title: "Ejercicios Linguales (Lengua)",
-      desc: "Fortalece la movilidad, agilidad y tono lingual. Ideal para corregir la pronunciación de fonemas como la 'R', 'S' y corregir la deglución atípica.",
-      color: "var(--color-pink)",
-      exercise: "✓ Chasquidos de lengua contra el paladar durante 10 repeticiones.\n✓ Sacar la lengua e intentar tocar la punta de la nariz."
-    },
-    labios: {
-      title: "Ejercicios Labiales (Labios y Mejillas)",
-      desc: "Corrige el sellado labial pasivo (respiradores bucales) y fortalece los músculos buccinadores para mejorar la dicción.",
-      color: "var(--color-accent)",
-      exercise: "✓ Lanzar besos ruidosos al aire sosteniendo la postura 5 segundos.\n✓ Inflar las mejillas alternando el aire de izquierda a derecha."
-    },
-    mandibula: {
-      title: "Ejercicios Mandibulares (Músculos Maseteros)",
-      desc: "Estimula la fuerza y alineación maxilar para una masticación más sólida y eficaz, previniendo el babeo involuntario.",
-      color: "var(--color-secondary)",
-      exercise: "✓ Realizar movimientos laterales de mandíbula de forma pausada.\n✓ Masticar alimentos de consistencia firme (zanahoria, manzanas)."
-    }
-  };
-
-  return (
-    <div style={{
-      background: 'white',
-      padding: '32px',
-      borderRadius: '32px',
-      border: '3px solid var(--color-primary-dark)',
-      boxShadow: '8px 8px 0px var(--color-primary-dark)'
-    }}>
-      <div style={{
-        background: '#FAF9DC',
-        padding: '24px',
-        borderRadius: '24px',
-        border: '2px solid var(--color-primary-dark)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <svg viewBox="0 0 200 200" style={{ width: '100%', maxWidth: '220px', height: 'auto' }}>
-          {/* Face outline */}
-          <path d="M 50,40 C 20,40 10,70 10,100 C 10,160 50,190 100,190 C 150,190 190,160 190,100 C 190,70 180,40 150,40 Z" fill="#FFF8E7" stroke="var(--color-primary-dark)" strokeWidth="4" />
-          
-          {/* Eyes */}
-          <circle cx="65" cy="80" r="9" fill="var(--color-primary-dark)" />
-          <circle cx="135" cy="80" r="9" fill="var(--color-primary-dark)" />
-          
-          {/* Cheeks */}
-          <circle cx="45" cy="115" r="14" fill="#FFD1DC" opacity="0.6" />
-          <circle cx="155" cy="115" r="14" fill="#FFD1DC" opacity="0.6" />
-
-          {/* Nose */}
-          <path d="M 100,85 L 95,110 L 105,110 Z" fill="none" stroke="var(--color-primary-dark)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-
-          {/* Interactive Node: Lips */}
-          <g onClick={() => setActiveZone('labios')} style={{ cursor: 'pointer' }}>
-            <circle cx="100" cy="142" r="20" fill={activeZone === 'labios' ? 'var(--color-accent)' : 'white'} stroke="var(--color-primary-dark)" strokeWidth="3" />
-            <path d="M 88,142 Q 100,154 112,142" fill="none" stroke="var(--color-primary-dark)" strokeWidth="3" strokeLinecap="round" />
-          </g>
-
-          {/* Interactive Node: Tongue */}
-          <g onClick={() => setActiveZone('lengua')} style={{ cursor: 'pointer' }}>
-            <circle cx="100" cy="112" r="13" fill={activeZone === 'lengua' ? 'var(--color-pink)' : 'white'} stroke="var(--color-primary-dark)" strokeWidth="3" />
-            <circle cx="100" cy="112" r="4" fill="var(--color-primary-dark)" />
-          </g>
-
-          {/* Interactive Node: Jaw */}
-          <g onClick={() => setActiveZone('mandibula')} style={{ cursor: 'pointer' }}>
-            <circle cx="100" cy="176" r="12" fill={activeZone === 'mandibula' ? 'var(--color-secondary)' : 'white'} stroke="var(--color-primary-dark)" strokeWidth="3" />
-            <path d="M 88,176 L 112,176" fill="none" stroke="var(--color-primary-dark)" strokeWidth="2.5" strokeLinecap="round" />
-          </g>
-        </svg>
-      </div>
-
-      <div style={{ textAlign: 'center', marginTop: '24px' }}>
-        <h4 style={{ fontSize: '1.3rem', color: 'var(--color-primary-dark)', fontWeight: 800, marginBottom: '8px' }}>
-          {zones[activeZone].title}
-        </h4>
-        <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '16px' }}>
-          {zones[activeZone].desc}
-        </p>
-
-        <div style={{
-          whiteSpace: 'pre-line',
-          fontSize: '0.9rem',
-          background: '#F7FAFC',
-          padding: '16px',
-          borderRadius: '16px',
-          border: '2px dashed var(--color-primary-dark)',
-          color: 'var(--color-primary-dark)',
-          fontWeight: 700,
-          textAlign: 'left'
-        }}>
-          {zones[activeZone].exercise}
-        </div>
-      </div>
-
-      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px' }}>
-        {Object.keys(zones).map((key) => (
-          <button
-            key={key}
-            onClick={() => setActiveZone(key)}
-            style={{
-              padding: '10px 20px',
-              borderRadius: '30px',
-              border: '2px solid var(--color-primary-dark)',
-              fontWeight: 800,
-              cursor: 'pointer',
-              textTransform: 'capitalize',
-              fontSize: '0.9rem',
-              transition: 'all 0.2s ease',
-              background: activeZone === key ? zones[key].color : 'white',
-              boxShadow: activeZone === key ? '2px 2px 0px var(--color-primary-dark)' : 'none'
-            }}
-          >
-            {key}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -199,6 +76,23 @@ const AppleIcon = () => (
   </svg>
 );
 
+const KissIcon = ({ size = 26, color = "var(--color-primary-dark)" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 12c2.5-3 5.5-4 8-1 2.5-3 5.5-2 8 1-2.5 3-5.5 4-8 1-2.5 3-5.5 2-8-1z"/>
+    <path d="M4 12c4 2 8 4 16 0"/>
+  </svg>
+);
+
+const TongueIcon = ({ size = 26, color = "var(--color-primary-dark)" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="9" cy="9" r="1" fill={color}/>
+    <circle cx="15" cy="9" r="1" fill={color}/>
+    <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+    <path d="M10 16v2a2 2 0 0 0 4 0v-2" fill="#FF85A1" stroke={color} strokeWidth="1.5"/>
+  </svg>
+);
+
 const BenefitShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -258,134 +152,238 @@ const BenefitShowcase = () => {
   const activeBenefit = benefits[activeIndex];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px', alignItems: 'stretch' }}>
-      {/* Left List Tabs */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-        {benefits.map((b, idx) => {
-          const isActive = activeIndex === idx;
-          return (
-            <motion.div
-              key={b.id}
-              onClick={() => setActiveIndex(idx)}
-              whileHover={{ x: 6 }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                padding: '18px 24px',
-                borderRadius: '20px',
-                background: isActive ? b.color : 'white',
-                border: '3px solid var(--color-primary-dark)',
-                boxShadow: isActive ? '6px 6px 0px var(--color-primary-dark)' : '2px 2px 0px rgba(0,0,0,0.06)',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <span style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--color-primary-dark)', width: '28px' }}>
-                {b.num}
-              </span>
-              <div style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '50%',
-                background: 'white',
-                border: '2px solid var(--color-primary-dark)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}>
-                {b.icon}
-              </div>
-              <div style={{ flex: 1 }}>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-primary-dark)', margin: 0 }}>
-                  {b.title}
-                </h4>
-                <span style={{ fontSize: '0.85rem', color: 'var(--color-primary-dark)', opacity: 0.8, fontWeight: 600 }}>
-                  {b.tagline}
+    <>
+      {/* Desktop Grid Layout */}
+      <div className="orofacial-benefits-desktop" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px', alignItems: 'stretch' }}>
+        {/* Left List Tabs */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {benefits.map((b, idx) => {
+            const isActive = activeIndex === idx;
+            return (
+              <motion.div
+                key={b.id}
+                onClick={() => setActiveIndex(idx)}
+                whileHover={{ x: isActive ? 6 : 4 }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '16px',
+                  padding: '16px 20px',
+                  borderRadius: '20px',
+                  background: isActive ? 'var(--color-primary-dark)' : 'rgba(255, 255, 255, 0.72)',
+                  backdropFilter: 'blur(10px)',
+                  border: isActive ? '3px solid var(--color-primary-dark)' : '2px solid rgba(13, 44, 93, 0.12)',
+                  boxShadow: isActive ? '6px 6px 0px var(--color-accent)' : 'none',
+                  transform: isActive ? 'translateX(6px)' : 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1.5)'
+                }}
+              >
+                <span style={{
+                  fontSize: '0.95rem',
+                  fontWeight: 900,
+                  color: 'var(--color-primary-dark)',
+                  background: isActive ? b.color : 'rgba(13, 44, 93, 0.08)',
+                  padding: '4px 10px',
+                  borderRadius: '10px',
+                  border: isActive ? '1.5px solid var(--color-primary-dark)' : 'none',
+                  flexShrink: 0
+                }}>
+                  {b.num}
                 </span>
+                <div style={{
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  background: 'white',
+                  border: isActive ? '2px solid white' : '1.5px solid rgba(13, 44, 93, 0.14)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  boxShadow: isActive ? '0 2px 8px rgba(0,0,0,0.18)' : 'none'
+                }}>
+                  {b.icon}
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h4 style={{
+                    fontSize: '1.05rem',
+                    fontWeight: 800,
+                    color: isActive ? 'white' : 'var(--color-primary-dark)',
+                    margin: 0,
+                    lineHeight: 1.25
+                  }}>
+                    {b.title}
+                  </h4>
+                  <span style={{
+                    fontSize: '0.82rem',
+                    color: isActive ? 'rgba(255, 255, 255, 0.85)' : 'var(--color-text-muted)',
+                    fontWeight: 600
+                  }}>
+                    {b.tagline}
+                  </span>
+                </div>
+                <div style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%',
+                  background: isActive ? 'rgba(255, 255, 255, 0.16)' : 'transparent',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <ChevronRight size={18} color={isActive ? 'white' : 'rgba(13, 44, 93, 0.3)'} />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Right Active Spotlight Panel */}
+        <motion.div
+          key={activeBenefit.id}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            background: 'white',
+            borderRadius: '32px',
+            padding: '40px 36px',
+            border: '4px solid var(--color-primary-dark)',
+            boxShadow: '10px 10px 0px var(--color-accent)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
+          }}
+        >
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: activeBenefit.color,
+                border: '3px solid var(--color-primary-dark)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                {activeBenefit.icon}
               </div>
-            </motion.div>
-          );
-        })}
+              <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--color-primary-dark)', opacity: 0.2 }}>
+                {activeBenefit.num}
+              </span>
+            </div>
+
+            <h3 style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--color-primary-dark)', marginBottom: '14px', lineHeight: 1.2 }}>
+              {activeBenefit.title}
+            </h3>
+
+            <p style={{ fontSize: '1.12rem', color: 'var(--color-primary-dark)', lineHeight: 1.6, marginBottom: '28px', opacity: 0.9 }}>
+              {activeBenefit.desc}
+            </p>
+
+            <div style={{ marginBottom: '24px' }}>
+              <h5 style={{ fontSize: '0.88rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--color-accent)', marginBottom: '12px' }}>
+                Impactos Directos:
+              </h5>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                {activeBenefit.impacts.map((imp, idx) => (
+                  <span
+                    key={idx}
+                    style={{
+                      background: '#FAF9DC',
+                      border: '2px solid var(--color-primary-dark)',
+                      padding: '8px 16px',
+                      borderRadius: '30px',
+                      fontWeight: 800,
+                      fontSize: '0.88rem',
+                      color: 'var(--color-primary-dark)'
+                    }}
+                  >
+                    ✓ {imp}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+
+        </motion.div>
       </div>
 
-      {/* Right Active Spotlight Panel */}
-      <motion.div
-        key={activeBenefit.id}
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          background: 'white',
-          borderRadius: '32px',
-          padding: '40px 36px',
-          border: '4px solid var(--color-primary-dark)',
-          boxShadow: '10px 10px 0px var(--color-accent)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between'
-        }}
-      >
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-            <div style={{
-              width: '64px',
-              height: '64px',
-              borderRadius: '50%',
-              background: activeBenefit.color,
-              border: '3px solid var(--color-primary-dark)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              {activeBenefit.icon}
-            </div>
-            <span style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--color-primary-dark)', opacity: 0.2 }}>
-              {activeBenefit.num}
-            </span>
-          </div>
-
-          <h3 style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--color-primary-dark)', marginBottom: '14px', lineHeight: 1.2 }}>
-            {activeBenefit.title}
-          </h3>
-
-          <p style={{ fontSize: '1.12rem', color: 'var(--color-primary-dark)', lineHeight: 1.6, marginBottom: '28px', opacity: 0.9 }}>
-            {activeBenefit.desc}
-          </p>
-
-          <div style={{ marginBottom: '24px' }}>
-            <h5 style={{ fontSize: '0.88rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--color-accent)', marginBottom: '12px' }}>
-              Impactos Directos:
-            </h5>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-              {activeBenefit.impacts.map((imp, idx) => (
-                <span
-                  key={idx}
-                  style={{
-                    background: '#FAF9DC',
-                    border: '2px solid var(--color-primary-dark)',
-                    padding: '8px 16px',
-                    borderRadius: '30px',
-                    fontWeight: 800,
-                    fontSize: '0.88rem',
-                    color: 'var(--color-primary-dark)'
-                  }}
-                >
-                  ✓ {imp}
+      {/* Mobile Swipeable Carousel */}
+      <div className="orofacial-benefits-carousel">
+        {benefits.map((b) => (
+          <div
+            key={b.id}
+            className="orofacial-benefit-card"
+            style={{
+              boxShadow: `6px 6px 0px ${b.color}`,
+              background: 'white'
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                <div style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '50%',
+                  background: b.color,
+                  border: '2.5px solid var(--color-primary-dark)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  {b.icon}
+                </div>
+                <span style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--color-primary-dark)', opacity: 0.2 }}>
+                  {b.num}
                 </span>
-              ))}
-            </div>
-          </div>
-        </div>
+              </div>
 
-        <div style={{ paddingTop: '20px', borderTop: '2px dashed var(--color-primary-dark)' }}>
-          <p style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-primary-dark)', margin: 0 }}>
-            ¿Tu hijo presenta un desafío similar? Diseñamos un plan terapéutico a su medida.
-          </p>
-        </div>
-      </motion.div>
-    </div>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--color-primary-dark)', marginBottom: '8px', lineHeight: 1.2 }}>
+                {b.title}
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--color-accent)', fontWeight: 800, marginBottom: '14px' }}>
+                {b.tagline}
+              </p>
+
+              <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '20px' }}>
+                {b.desc}
+              </p>
+
+              <div style={{ marginBottom: '14px' }}>
+                <h5 style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--color-primary-dark)', marginBottom: '10px' }}>
+                  Impactos Directos:
+                </h5>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {b.impacts.map((imp, idx) => (
+                    <span
+                      key={idx}
+                      style={{
+                        background: '#FAF9DC',
+                        border: '2px solid var(--color-primary-dark)',
+                        padding: '6px 12px',
+                        borderRadius: '20px',
+                        fontWeight: 800,
+                        fontSize: '0.8rem',
+                        color: 'var(--color-primary-dark)'
+                      }}
+                    >
+                      ✓ {imp}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -395,41 +393,34 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
       title: "Besitos al aire",
       instruction: "Lanza besos al aire con movimientos labiales pronunciados",
       desc: "Fortalece el sellado de los labios y mejora el tono de los músculos orbiculares.",
-      color: "#FFE4E8"
+      color: "#FFE4E8",
+      icon: <KissIcon size={26} />
     },
     {
       title: "Carita de pez",
       instruction: "Frunce los labios y aspira las mejillas hacia adentro",
       desc: "Ejercita los buccinadores y la fuerza de agarre oral para facilitar la masticación.",
-      color: "#FFF3D6"
+      color: "#FFF3D6",
+      icon: <Fish size={26} color="var(--color-primary-dark)" />
     },
     {
       title: "Soplo con pajilla",
       instruction: "Sopla con una pajilla sobre un vaso de agua",
       desc: "Favorece el control del soplo, la capacidad pulmonar y el sellado de los labios.",
-      color: "#E0F7FA"
+      color: "#E0F7FA",
+      icon: <GlassWater size={26} color="var(--color-primary-dark)" />
     },
     {
       title: "Lengua de lado a lado",
       instruction: "Lleva la lengua de una comisura a la otra",
       desc: "Desarrolla la agilidad y precisión de la punta lingual para la correcta articulación.",
-      color: "#E8F5E9"
+      color: "#E8F5E9",
+      icon: <TongueIcon size={26} />
     }
   ];
 
   return (
     <div className="service-detail-page" style={{ background: '#FAF9F5' }}>
-      <nav className="navbar" style={{ position: 'sticky', top: 0, zIndex: 100, background: 'white', borderBottom: '2px solid var(--color-primary-dark)' }}>
-        <div className="container nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px' }}>
-          <button onClick={onBack} className="btn-back" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 800, color: 'var(--color-primary-dark)', background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '1rem' }}>
-            <ArrowLeft size={20} /> Volver al Inicio
-          </button>
-          <div className="nav-logo">
-            <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ height: '45px', margin: '0 auto' }} />
-          </div>
-        </div>
-      </nav>
-
       {/* Hero */}
       <section className="service-hero with-grid" style={{ position: 'relative', overflow: 'hidden', padding: '75px 0 60px', borderBottom: '3px solid var(--color-primary-dark)', background: '#ECE4F9' }}>
         {/* Decoraciones de fondo */}
@@ -504,22 +495,22 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
               <div style={{ background: '#FAF9DC', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
                 <Speech size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Habla</h4>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Mejora del habla</h4>
                 <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Articulación correcta de fonemas complejos.</p>
               </div>
               <div style={{ background: '#E8F5E9', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
-                <Smile size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Masticación</h4>
+                <Utensils size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Promueve masticación</h4>
                 <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Fuerza y movilidad de músculos maseteros.</p>
               </div>
               <div style={{ background: '#FFE4E8', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
-                <Activity size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Deglución</h4>
+                <CupSoda size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Facilita deglución</h4>
                 <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Prevención de deglución atípica y babeo.</p>
               </div>
               <div style={{ background: '#E0F7FA', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
                 <Wind size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Respiración</h4>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Fomenta respiración</h4>
                 <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Fomento del patrón respiratorio nasal.</p>
               </div>
             </div>
@@ -530,7 +521,7 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
 
 
       {/* 5 Beneficios Principales (Interactive Spotlight Layout) */}
-      <section style={{ padding: '80px 0', background: '#FFFDF5' }}>
+      <section className="bg-yellow with-grid" style={{ padding: '80px 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <div className="badge-modern" style={{ background: 'var(--color-accent)', color: 'white', padding: '6px 16px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '12px' }}>
@@ -549,7 +540,7 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
       </section>
 
       {/* Guía de Ejercicios en Casa */}
-      <section style={{ padding: '80px 0', background: '#FFF' }}>
+      <section className="bg-blue with-grid" style={{ padding: '80px 0' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <div className="badge-modern" style={{ background: 'var(--color-pink)', color: 'var(--color-primary-dark)', padding: '6px 16px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '12px' }}>
@@ -581,7 +572,7 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
               >
                 <div>
                   <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'white', border: '2px solid var(--color-primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
-                    <Smile size={26} color="var(--color-primary-dark)" />
+                    {ex.icon}
                   </div>
                   <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '10px', color: 'var(--color-primary-dark)' }}>
                     {ex.title}
@@ -609,35 +600,6 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
         </div>
       </section>
 
-      {/* Interactive Muscle Map Section */}
-      <section style={{ padding: '80px 0', background: '#FAF9F5' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '40px', alignItems: 'center' }}>
-            <MuscleMap />
-
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <div className="badge-modern" style={{ background: 'var(--color-secondary)', color: 'var(--color-primary-dark)', padding: '6px 16px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '14px' }}>
-                PRÁCTICA INTERACTIVA
-              </div>
-              <h2 style={{ fontSize: '2.6rem', marginBottom: '18px', color: 'var(--color-primary-dark)', fontWeight: 800, lineHeight: 1.2 }}>
-                Explora las Zonas Musculares
-              </h2>
-              <p style={{ fontSize: '1.05rem', marginBottom: '20px', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
-                Haz clic sobre los diferentes nodos del mapa facial (Lengua, Labios o Mandíbula) para descubrir la zona anatómica objetivo y el ejercicio específico diseñado por nuestras terapeutas.
-              </p>
-
-              <div style={{ background: 'white', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '5px 5px 0px var(--color-primary-dark)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '8px', fontSize: '1.1rem' }}>
-                  <CheckCircle2 size={24} color="var(--color-green)" /> Sesiones Lúdicas y Personalizadas
-                </div>
-                <p style={{ fontSize: '0.95rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.5 }}>
-                  Adaptamos la intensidad de los praxias orofaciales según la edad y condición neuromuscular de cada niño para garantizar avances consistentes y motivadores.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* FAQs */}
       <section style={{ padding: '80px 0', background: '#FFF' }}>

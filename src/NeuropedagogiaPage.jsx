@@ -195,17 +195,6 @@ const FAQItem = ({ question, answer }) => {
 const NeuropedagogiaPage = ({ onBack, onBook, onNavigateService }) => {
   return (
     <div className="service-detail-page">
-      <nav className="navbar" style={{ position: 'sticky', top: 0 }}>
-        <div className="container nav-container">
-          <button onClick={onBack} className="btn-back" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 800, color: 'var(--color-primary-dark)' }}>
-            <ArrowLeft size={20} /> Volver al Inicio
-          </button>
-          <div className="nav-logo">
-            <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ margin: '0 auto' }} />
-          </div>
-        </div>
-      </nav>
-
       {/* Hero */}
       <section className="service-hero bg-blue with-grid" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Floating background Lightbulb (Right side, large) */}
@@ -278,17 +267,17 @@ const NeuropedagogiaPage = ({ onBack, onBook, onNavigateService }) => {
         <div className="container">
           <div className="interactive-container-grid">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>De la Neurociencia a la Práctica Escolar</h2>
+              <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', lineHeight: 1.2 }}>La unión de dos ciencias:<br/> Las Ciencias Pedagógicas y las Neurociencias</h2>
               <p style={{ fontSize: '1.05rem', marginBottom: '15px', color: 'var(--color-text-muted)' }}>
-                Cada cerebro está cableado de manera única. La neuropedagogía une la pedagogía con la neurociencia para diagnosticar cómo procesa la información tu hijo: ¿Tiene más afinidad visual? ¿Su lóbulo temporal asimila mejor el ritmo auditivo?
+                Cada cerebro está conectado de una única manera, a través de la Neuropedagogía podemos precisar cómo son los procesos que realiza el niño al aprender, enriquecerlos y entender sus problemáticas de aprendizaje.
               </p>
               <p style={{ fontSize: '1.05rem', color: 'var(--color-text-muted)' }}>
-                En lugar de forzar al niño a adaptarse a una única metodología escolar rígida, adaptamos las materias de manera multisensorial. Esto reduce la fatiga mental y activa los centros cerebrales del placer de aprender.
+                En lugar de forzar al niño a adaptarse a una única metodología escolar rígida, adaptamos las materias de manera multisensorial. Esto reduce la fatiga mental y activa los centros cerebrales necesarios para aprender.
               </p>
             </motion.div>
             
             <div style={{ position: 'relative', width: '100%', borderRadius: '40px', overflow: 'hidden', border: '5px solid var(--color-primary-dark)', boxShadow: '8px 8px 0px var(--color-secondary)' }}>
-              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=85" alt="Neuropedagogía niños" style={{ width: '100%', height: '350px', objectFit: 'cover' }} />
+              <img src="/neuropedagogia-ar.jpg" alt="Niño aprendiendo con realidad aumentada y dinosaurios" style={{ width: '100%', height: '350px', objectFit: 'cover' }} />
             </div>
           </div>
         </div>
@@ -298,16 +287,20 @@ const NeuropedagogiaPage = ({ onBack, onBook, onNavigateService }) => {
       <section className="service-interactive-section">
         <div className="container">
           <div className="interactive-container-grid">
-            <SynapseMap />
+            <div style={{ position: 'relative', width: '100%', borderRadius: '40px', overflow: 'hidden', border: '5px solid var(--color-primary-dark)', boxShadow: '8px 8px 0px var(--color-secondary)', backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+              <img src="/dimensiones-percepcion.jpg" alt="Dimensiones de la percepción y el aprendizaje cerebral" style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
+            </div>
             
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <div className="badge-modern" style={{ background: 'var(--color-pink)' }}>NEUROPLASTICIDAD</div>
-              <h2 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>Conexiones Sinápticas y Estímulos</h2>
+              <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', lineHeight: 1.2 }}>Neuropedagogía y el Proceso Natural de Aprendizaje Cerebral</h2>
               <p style={{ fontSize: '1.05rem', marginBottom: '15px' }}>
-                Cuando combinamos canales de aprendizaje (por ejemplo, escuchar música filtrada y dibujar), generamos nuevas ramificaciones nerviosas y fortalecemos la memoria a largo plazo.
+                En Neuropedagogía se mantiene y estimula el proceso natural de aprendizaje que posee el cerebro. Valiéndose además de procesos de enseñanza-aprendizaje acordes a este proceso natural.
               </p>
-              <p style={{ fontSize: '1.05rem', color: 'var(--color-primary-dark)', fontWeight: 700 }}>
-                Prueba en el gráfico interactivo: selecciona un estímulo didáctico y observa cómo se iluminan diferentes partes del circuito neuronal del cerebro de tu hijo.
+              <p style={{ fontSize: '1.05rem', marginBottom: '15px' }}>
+                El proceso de aprendizaje involucra todo el cuerpo y el cerebro actúa como la estación central receptora de estímulo que es.
+              </p>
+              <p style={{ fontSize: '1.05rem' }}>
+                Estos procesos naturales de aprendizaje del cerebro los resumiremos como: La Percepción, la Experiencia, la Organización de redes y la Integración Funcional.
               </p>
             </motion.div>
           </div>
@@ -317,27 +310,63 @@ const NeuropedagogiaPage = ({ onBack, onBook, onNavigateService }) => {
       {/* Pillars */}
       <section className="service-content-section" style={{ background: '#FAF9DC' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '3rem' }}>Pilares de nuestra intervención</h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>Optimizando las funciones ejecutivas del cerebro infantil.</p>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <div className="badge-modern" style={{ background: 'var(--color-secondary)', color: 'var(--color-primary-dark)', marginBottom: '14px', display: 'inline-block' }}>
+              METODOLOGÍA CIENTÍFICA
+            </div>
+            <h2 style={{ fontSize: '3rem', marginBottom: '12px' }}>Pilares de nuestra intervención</h2>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', maxWidth: '650px', margin: '0 auto' }}>
+              Optimizando las funciones ejecutivas y la capacidad de aprendizaje del cerebro infantil.
+            </p>
           </div>
           
-          <div className="benefits-grid-premium">
+          <div className="pillars-grid-3">
             {[
-              { icon: <Eye />, title: "Perfil de Canales de Entrada", desc: "Identificamos con precisión el perfil receptivo de tu hijo (Visual, Auditivo, Kinestésico) para optimizar el estudio.", color: "var(--color-accent)" },
-              { icon: <Lightbulb />, title: "Estrategias de Aprendizaje Acelerado", desc: "Diseñamos mapas dinámicos y técnicas que facilitan guardar información con menor esfuerzo.", color: "var(--color-pink)" },
-              { icon: <Activity />, title: "Entrenamiento en Funciones Ejecutivas", desc: "Fortalecemos la planificación, la memoria de trabajo y el autocontrol del estudiante.", color: "var(--color-green)" },
-              { icon: <Zap />, title: "Neuroestimulación Sensorial", desc: "Activamos canales subcorticales del oído y el equilibrio para mejorar la capacidad de alerta en clase.", color: "var(--color-primary)" }
+              { 
+                num: "Pilar 01", 
+                icon: <Lightbulb size={28} />, 
+                title: "Aprendizaje Acelerado", 
+                desc: "Diseñamos mapas mentales dinámicos y técnicas avanzadas que facilitan guardar información con menor esfuerzo.", 
+                color: "var(--color-pink)",
+                tag: "💡 Memoria y Retención"
+              },
+              { 
+                num: "Pilar 02", 
+                icon: <Activity size={28} />, 
+                title: "Funciones Ejecutivas", 
+                desc: "Fortalecemos la planificación, la autoregulación, la memoria de trabajo y el autocontrol para la autonomía escolar.", 
+                color: "var(--color-green)",
+                tag: "🧠 Autogestión y Foco"
+              },
+              { 
+                num: "Pilar 03", 
+                icon: <Zap size={28} />, 
+                title: "Neuroestimulación Sensorial", 
+                desc: "Activamos canales subcorticales del oído y el equilibrio para optimizar la capacidad de alerta en clase.", 
+                color: "var(--color-primary)",
+                tag: "⚡ Alerta y Estímulo"
+              }
             ].map((b, i) => (
-              <div key={i} className="benefit-card-premium">
-                <div className="benefit-icon-wrapper" style={{ background: b.color }}>
-                  {b.icon}
+              <motion.div 
+                key={i} 
+                className="pillar-card-3"
+                whileHover={{ y: -8 }}
+                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              >
+                <div className="pillar-card-header" style={{ background: b.color }}>
+                  <div className="pillar-icon-box">
+                    {b.icon}
+                  </div>
+                  <span className="pillar-badge">{b.num}</span>
                 </div>
-                <div className="benefit-content">
-                  <h3>{b.title}</h3>
-                  <p>{b.desc}</p>
+                <div className="pillar-card-body">
+                  <div>
+                    <h3>{b.title}</h3>
+                    <p>{b.desc}</p>
+                  </div>
+
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -352,7 +381,7 @@ const NeuropedagogiaPage = ({ onBack, onBook, onNavigateService }) => {
           
           <FAQItem 
             question="¿Qué diferencia hay entre Pedagogía y Neuropedagogía?" 
-            answer="La pedagogía tradicional se enfoca en métodos de enseñanza estándar para grupos. La neuropedagogía analiza primero el cerebro individual del niño, sus limitaciones funcionales y fortalezas de memoria para diseñar una enseñanza a medida basada en ciencia cognitiva." 
+            answer="La pedagogía tradicional se enfoca en métodos de enseñanza estándar para grupos. La neuropedagogía analiza primero el cerebro individual del niño, sus limitaciones funcionales y fortalezas de memoria para diseñar una enseñanza a medida basada en las dos ciencias."
           />
           <FAQItem 
             question="¿Es útil para niños con TDAH o autismo?" 

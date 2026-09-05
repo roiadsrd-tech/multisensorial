@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars, no-empty */
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, BrainCircuit, HeartHandshake, ArrowRight, Menu, X, Headphones, Puzzle, Speech, ChevronDown, Volume2, VolumeX, BookOpen, RectangleGoggles, Waves, Users, Smile, Baby, Flower, HandHeart, Star, Instagram, Youtube, MapPin, Phone, MessageCircleHeart, Video, CheckCircle, Smartphone, Calendar, Clock, Award, ShieldCheck, Play, Car, ExternalLink } from 'lucide-react';
+import { Sparkles, BrainCircuit, HeartHandshake, ArrowRight, ArrowLeft, Menu, X, Headphones, Puzzle, Speech, ChevronDown, Volume2, VolumeX, BookOpen, RectangleGoggles, Waves, Users, Smile, Baby, Flower, HandHeart, Star, Instagram, Youtube, MapPin, Phone, MessageCircleHeart, Video, CheckCircle, Smartphone, Calendar, Clock, Award, ShieldCheck, Play, Car, ExternalLink } from 'lucide-react';
 import './App.css';
 import TomatisPage from './TomatisPage';
 import HomeschoolingPage from './HomeschoolingPage';
@@ -101,7 +101,7 @@ const services = [
   {
     icon: <RectangleGoggles size={28} />,
     title: "Pruebas Atencionales en Realidad Virtual",
-    description: "Evaluación objetiva y estandarizada de la atención mediante Realidad Virtual."
+    description: "Evaluación objetiva de la atención en entorno de Realidad Virtual."
   },
   {
     icon: <Speech size={28} />,
@@ -136,7 +136,7 @@ function ServiceCard({ title, description, icon, colorClass, index, onClick, isH
     <motion.div variants={fadeUp} style={{ position: 'relative', height: '100%' }}>
       <motion.div
         className={`service-card-modern ${colorClass} ${isClickable ? 'clickable-card' : ''}`}
-        whileHover={isClickable ? { y: -16, scale: 1.03, rotate: index % 2 === 0 ? 1 : -1 } : { y: -12, rotate: index % 2 === 0 ? 1 : -1 }}
+        whileHover={isClickable ? { y: -8, scale: 1.02 } : { y: -5 }}
         transition={{ type: "spring", stiffness: 300, damping: 15 }}
         style={{
           position: 'relative',
@@ -144,7 +144,7 @@ function ServiceCard({ title, description, icon, colorClass, index, onClick, isH
           cursor: isClickable ? 'pointer' : 'default',
           overflow: 'hidden',
           border: '3px solid var(--color-primary-dark)',
-          boxShadow: '6px 6px 0px var(--color-primary-dark)',
+          boxShadow: '5px 5px 0px var(--color-primary-dark)',
           height: '100%'
         }}
         onClick={onClick}
@@ -159,9 +159,9 @@ function ServiceCard({ title, description, icon, colorClass, index, onClick, isH
             <span className="card-learn-more" style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '4px',
-              marginTop: '12px',
-              fontSize: '0.8rem',
+              gap: '6px',
+              marginTop: '10px',
+              fontSize: '0.82rem',
               fontWeight: 800,
               textTransform: 'uppercase',
               color: 'var(--color-primary-dark)',
@@ -225,18 +225,18 @@ function App() {
   }, [isMobileMenuOpen]);
 
   const servicePagesList = [
-    { id: 'todos', label: 'Ver todos los servicios' },
-    { id: 'tomatis', label: 'Método Tomatis®', icon: <Headphones size={18} /> },
-    { id: 'psicologia', label: 'Psicología Clínica', icon: <HeartHandshake size={18} /> },
-    { id: 'neuropedagogia', label: 'Neuropedagogía', icon: <BrainCircuit size={18} /> },
-    { id: 'psicopedagogia', label: 'Psicopedagogía', icon: <Puzzle size={18} /> },
-    { id: 'neurofeedback', label: 'Neurofeedback', icon: <Waves size={18} /> },
-    { id: 'evaluacion-aula-virtual', label: 'Pruebas Atencionales VR', icon: <RectangleGoggles size={18} /> },
-    { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres', icon: <Speech size={18} /> },
-    { id: 'homeschooling', label: 'Homeschooling Presencial', icon: <BookOpen size={18} /> },
-    { id: 'terapia-orofacial', label: 'Terapia Orofacial', icon: <Smile size={18} /> },
-    { id: 'fisioterapia', label: 'Fisioterapia', icon: <Baby size={18} /> },
-    { id: 'terapia-conductual', label: 'Terapia Conductual', icon: <Users size={18} /> }
+    { id: 'todos', label: 'Ver todos los servicios', color: 'var(--color-secondary)' },
+    { id: 'tomatis', label: 'Método Tomatis®', icon: <Headphones size={18} />, color: 'var(--color-secondary)' },
+    { id: 'psicologia', label: 'Psicología Clínica', icon: <HeartHandshake size={18} />, color: 'var(--color-accent)' },
+    { id: 'neuropedagogia', label: 'Neuropedagogía', icon: <BrainCircuit size={18} />, color: 'var(--color-primary)' },
+    { id: 'psicopedagogia', label: 'Psicopedagogía', icon: <Puzzle size={18} />, color: 'var(--color-pink)' },
+    { id: 'neurofeedback', label: 'Neurofeedback', icon: <Waves size={18} />, color: 'var(--color-green)' },
+    { id: 'evaluacion-aula-virtual', label: 'Pruebas Atencionales VR', icon: <RectangleGoggles size={18} />, color: '#8CA6D1' },
+    { id: 'acompanamiento-madres', label: 'Acompañamiento a Madres', icon: <Speech size={18} />, color: '#FFA68A' },
+    { id: 'homeschooling', label: 'Homeschooling Presencial', icon: <BookOpen size={18} />, color: '#FFE1A8' },
+    { id: 'terapia-orofacial', label: 'Terapia Orofacial', icon: <Smile size={18} />, color: '#E0C3FC' },
+    { id: 'fisioterapia', label: 'Fisioterapia', icon: <Baby size={18} />, color: '#B2F2BB' },
+    { id: 'terapia-conductual', label: 'Terapia Conductual', icon: <Users size={18} />, color: '#FFC9C9' }
   ];
 
   useEffect(() => {
@@ -264,16 +264,19 @@ function App() {
   useEffect(() => {
     if (isBookingModalOpen) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
       setShouldLoadIframe(true);
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       // Give the closing animation a tiny delay before resetting the content
       setTimeout(() => {
         setIsBookingComplete(false);
       }, 300);
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [isBookingModalOpen]);
 
@@ -314,172 +317,10 @@ function App() {
     return () => window.removeEventListener('message', handleIframeMessage);
   }, []);
 
-  if (currentPage === 'propietarios') {
-    return <PropietariosPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }}
-    />;
-  }
-
   const handleNavigateService = (id) => {
     setCurrentPage(id);
     window.scrollTo(0, 0);
   };
-
-  if (currentPage === 'tomatis') {
-    return <TomatisPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'homeschooling') {
-    return <HomeschoolingPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'psicologia') {
-    return <PsicologiaPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'neuropedagogia') {
-    return <NeuropedagogiaPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'psicopedagogia') {
-    return <PsicopedagogiaPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'neurofeedback') {
-    return <NeurofeedbackPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'evaluacion-aula-virtual') {
-    return <EvaluacionAulaVirtualPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'acompanamiento-madres') {
-    return <AcompanamientoMadresPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'terapia-orofacial') {
-    return <TerapiaOrofacialPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'fisioterapia') {
-    return <FisioterapiaPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'terapia-conductual') {
-    return <TerapiaConductualPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onBook={() => {
-        setIsBookingModalOpen(true);
-      }}
-      onNavigateService={handleNavigateService}
-    />;
-  }
-
-  if (currentPage === 'tomatis-en-ruta') {
-    return <TomatisEnRutaPage 
-      onBack={() => {
-        setCurrentPage('home');
-        window.scrollTo(0, 0);
-      }} 
-      onNavigateService={handleNavigateService}
-    />;
-  }
 
   return (
     <div className="app">
@@ -527,11 +368,52 @@ function App() {
       </div>
 
         <div className="container nav-container">
-          <div className="nav-logo">
-                                                                                                                                                <img src="/multilogo2 (1).png" className="nav-logo-img" alt="Multisensorial Logo" />
-          </div>
+          {currentPage === 'home' ? (
+            <div className="nav-logo" onClick={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} style={{ cursor: 'pointer' }}>
+              <img src="/multilogo2 (1).png" className="nav-logo-img" alt="Multisensorial Logo" />
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                setCurrentPage('home');
+                window.scrollTo(0, 0);
+              }}
+              className="btn-back"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontWeight: 800,
+                color: 'var(--color-primary-dark)',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1.05rem',
+                padding: '8px 0',
+                transition: 'transform 0.2s'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'translateX(-4px)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'translateX(0)'}
+            >
+              <ArrowLeft size={22} /> Volver al Inicio
+            </button>
+          )}
           <div className="nav-links">
-            <a href="#metodo" className="nav-link" onClick={() => setCurrentPage('home')}>Método</a>
+            <a 
+              href="#metodo" 
+              className="nav-link" 
+              onClick={(e) => {
+                if (currentPage !== 'home') {
+                  e.preventDefault();
+                  setCurrentPage('home');
+                  setTimeout(() => {
+                    document.getElementById('metodo')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 150);
+                }
+              }}
+            >
+              Método
+            </a>
             
             <div 
               className="nav-dropdown-container" 
@@ -593,12 +475,17 @@ function App() {
                           marginBottom: s.id === 'todos' ? '8px' : '0'
                         }}
                         onMouseOver={(e) => {
-                          e.currentTarget.style.background = s.id === 'todos' ? 'var(--color-primary-dark)' : 'var(--color-bg)';
-                          if(s.id === 'todos') e.currentTarget.style.color = 'white';
+                          if (s.id === 'todos') {
+                            e.currentTarget.style.background = 'var(--color-primary-dark)';
+                            e.currentTarget.style.color = 'white';
+                          } else {
+                            e.currentTarget.style.background = s.color || 'var(--color-bg)';
+                            e.currentTarget.style.color = 'var(--color-primary-dark)';
+                          }
                         }}
                         onMouseOut={(e) => {
                           e.currentTarget.style.background = s.id === 'todos' ? 'var(--color-secondary)' : 'transparent';
-                          if(s.id === 'todos') e.currentTarget.style.color = 'var(--color-primary-dark)';
+                          e.currentTarget.style.color = 'var(--color-primary-dark)';
                         }}
                       >
                         {s.icon}
@@ -650,6 +537,33 @@ function App() {
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               >
                 <div className="mobile-menu-links">
+                  {currentPage !== 'home' && (
+                    <button
+                      className="mobile-menu-link"
+                      onClick={() => {
+                        setCurrentPage('home');
+                        setIsMobileMenuOpen(false);
+                        window.scrollTo(0, 0);
+                      }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        fontWeight: 800,
+                        color: 'var(--color-accent)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: '0 0 10px 0',
+                        fontSize: '1.1rem',
+                        borderBottom: '1px dashed rgba(13, 44, 93, 0.15)',
+                        width: '100%',
+                        textAlign: 'left'
+                      }}
+                    >
+                      <ArrowLeft size={20} /> Volver al Inicio
+                    </button>
+                  )}
                   <a href="#metodo" className="mobile-menu-link" onClick={() => { setCurrentPage('home'); setIsMobileMenuOpen(false); }}>Método</a>
                   
                   <div style={{ width: '100%' }}>
@@ -738,7 +652,9 @@ function App() {
         </AnimatePresence>
       </nav>
 
-      {/* Hero Section */}
+      {currentPage === 'home' && (
+        <>
+          {/* Hero Section */}
       <section className="hero bg-cream with-grid" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Decor */}
         <div className="dec-star-4 orange" style={{ top: '15%', left: '5%', opacity: 1, transform: 'scale(1.5)' }}></div>
@@ -854,14 +770,14 @@ function App() {
               <motion.p variants={fadeUp} className="hide-mobile">
                 El oído no solo nos ayuda a escuchar, también activa el cerebro, y con el Método Tomatis trabajamos la escucha de tu hijo mediante una estimulación especial que fortalece su oído y le ayuda a entender, concentrarse y aprender mejor.
               </motion.p>
-              <motion.div variants={fadeUp} style={{ marginTop: '30px' }}>
+              <motion.div variants={fadeUp} style={{ marginTop: '24px' }}>
                 <button 
                   onClick={() => {
                     setCurrentPage('tomatis');
                     window.scrollTo(0, 0);
                   }} 
                   className="btn-primary" 
-                  style={{ border: 'none', cursor: 'pointer', textDecoration: 'none' }}
+                  style={{ border: 'none', cursor: 'pointer', textDecoration: 'none', padding: '14px 28px', fontSize: '1rem' }}
                 >
                   Aprender más del Método Tomatis <ArrowRight size={20} />
                 </button>
@@ -873,9 +789,9 @@ function App() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
-              style={{ width: '100%', maxWidth: '500px', marginLeft: 'auto' }}
+              style={{ width: '100%', maxWidth: '440px', marginLeft: 'auto' }}
             >
-              <div style={{ position: 'relative', width: '100%', aspectRatio: '851 / 1024', borderRadius: '40px', border: '8px solid var(--color-accent)', overflow: 'hidden', cursor: 'pointer' }}
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 5', borderRadius: '32px', border: '7px solid var(--color-accent)', overflow: 'hidden', cursor: 'pointer', boxShadow: '8px 8px 0px var(--color-primary-dark)' }}
                 onClick={() => setIsTomatisMuted(m => !m)}>
                 <video
                   ref={tomatisVideoRef}
@@ -1022,13 +938,13 @@ function App() {
         <div className="dec-wiggle" style={{ top: '20%', right: '15%', opacity: 1, zIndex: 1, position: 'absolute' }}></div>
         <div className="container services-container" style={{ position: 'relative', zIndex: 2 }}>
           <motion.div
-            style={{ textAlign: 'center', marginBottom: '60px' }}
+            style={{ textAlign: 'center', marginBottom: '36px' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 style={{ fontSize: '3.5rem', marginBottom: '16px' }}>Nuestros Servicios</h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>Todo lo que tu hijo necesita, bajo un mismo techo.</p>
+            <h2 style={{ fontSize: '3rem', marginBottom: '10px' }}>Nuestros Servicios</h2>
+            <p style={{ fontSize: '1.05rem', color: 'var(--color-text-muted)' }}>Todo lo que tu hijo necesita, bajo un mismo techo.</p>
           </motion.div>
 
           <motion.div
@@ -1582,6 +1498,109 @@ function App() {
 
       {/* Footer */}
       <Footer onOpenBooking={() => setIsBookingModalOpen(true)} />
+        </>
+      )}
+
+      {currentPage === 'propietarios' && (
+        <PropietariosPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+        />
+      )}
+
+      {currentPage === 'tomatis' && (
+        <TomatisPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'homeschooling' && (
+        <HomeschoolingPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'psicologia' && (
+        <PsicologiaPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'neuropedagogia' && (
+        <NeuropedagogiaPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'psicopedagogia' && (
+        <PsicopedagogiaPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'neurofeedback' && (
+        <NeurofeedbackPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'evaluacion-aula-virtual' && (
+        <EvaluacionAulaVirtualPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'acompanamiento-madres' && (
+        <AcompanamientoMadresPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'terapia-orofacial' && (
+        <TerapiaOrofacialPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'fisioterapia' && (
+        <FisioterapiaPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'terapia-conductual' && (
+        <TerapiaConductualPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onBook={() => setIsBookingModalOpen(true)}
+          onNavigateService={handleNavigateService}
+        />
+      )}
+
+      {currentPage === 'tomatis-en-ruta' && (
+        <TomatisEnRutaPage 
+          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          onNavigateService={handleNavigateService}
+        />
+      )}
       <motion.div
         className="booking-modal-overlay"
         aria-hidden={!isBookingModalOpen}
@@ -1604,7 +1623,8 @@ function App() {
           zIndex: 9999,
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '20px'
+          padding: '20px',
+          overscrollBehavior: 'contain'
         }}
       >
         <motion.div
@@ -1625,6 +1645,7 @@ function App() {
             maxWidth: '850px',
             maxHeight: '90vh',
             overflowY: 'auto',
+            overscrollBehavior: 'contain',
             WebkitOverflowScrolling: 'touch', // Enable native momentum scrolling on iOS
             position: 'relative',
             padding: '25px 0 0 0'

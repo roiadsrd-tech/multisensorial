@@ -77,17 +77,6 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
 
   return (
     <div className="service-detail-page" style={{ background: '#FAF9F5' }}>
-      <nav className="navbar" style={{ position: 'sticky', top: 0, zIndex: 100, background: 'white', borderBottom: '2px solid var(--color-primary-dark)' }}>
-        <div className="container nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px' }}>
-          <button onClick={onBack} className="btn-back" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 800, color: 'var(--color-primary-dark)', background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '1rem' }}>
-            <ArrowLeft size={20} /> Volver al Inicio
-          </button>
-          <div className="nav-logo">
-            <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" style={{ height: '45px', margin: '0 auto' }} />
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Header - Multisensorial Brand Blue Style */}
       <section className="hero bg-blue with-grid" style={{ position: 'relative', padding: '75px 0 65px', overflow: 'hidden' }}>
         {/* Decor elements */}

@@ -122,18 +122,6 @@ const TomatisVisual = () => {
 const TomatisPage = ({ onBack, onBook, onNavigateService }) => {
   return (
     <div className="tomatis-page bg-cream">
-      {/* Mini Nav */}
-      <nav className="navbar" style={{ position: 'sticky', top: 0 }}>
-        <div className="container nav-container">
-          <button onClick={onBack} className="btn-back" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 800, color: 'var(--color-primary-dark)' }}>
-            <ArrowLeft size={20} /> Volver al Inicio
-          </button>
-          <div className="nav-logo">
-            <img src="/multilogo2 (1).png" alt="Logo" className="nav-logo-img" />
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Detail */}
       <section className="tomatis-hero bg-blue with-grid" style={{ padding: '120px 0 80px', position: 'relative', overflow: 'hidden' }}>
         {/* Floating background Headphones (Right side, large) */}
