@@ -539,8 +539,8 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             <div>
               <p className="eyebrow">UBICACIONES CONFIRMADAS · BÁVARO</p>
               <h2 id="locations-title">2 lugares clave para tu familia</h2>
-              <p style={{ marginTop: '10px', fontSize: '1.05rem', color: 'rgba(23,37,65,0.85)' }}>
-                El sábado 18 iniciamos con el taller para padres, y del 19 al 31 se desarrolla la terapia intensiva.
+              <p style={{ marginTop: '6px', fontSize: '0.95rem', color: 'rgba(23,37,65,0.85)' }}>
+                Taller para padres el 18 de octubre y terapia intensiva del 19 al 31.
               </p>
             </div>
           </div>
