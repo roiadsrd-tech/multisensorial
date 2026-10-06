@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star, Volume2, VolumeX } from 'lucide-react';
+import { Star } from 'lucide-react';
 import './JornadaEstePage.css';
 
 const miniTestimonialQuotes = [
@@ -15,14 +15,15 @@ const miniTestimonialQuotes = [
   "“Eso que ustedes hacen es demasiado maravilloso.”"
 ];
 
-const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Punta%20Cana%2C%20en%20Peque%C3%B1ines%20Paso%20a%20Paso.%20Quisiera%20orientaci%C3%B3n%20para%20mi%20hijo%20y%20conocer%20fechas%2C%20horarios%20y%20disponibilidad.";
-const MAP_SEARCH_PUNTA_CANA = "https://www.google.com/maps/search/?api=1&query=Centro%20de%20Educaci%C3%B3n%20Infantil%20Peque%C3%B1ines%20Paso%20a%20Paso%2C%20Residencial%20Rijo%2C%20detr%C3%A1s%20de%20los%20paneles%20solares%20de%20CEPM.%20B%C3%A1varo%2C%20Punta%20Cana.";
-const COORDS_PUNTA_CANA = [18.5565510, -68.3691611];
+const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Punta%20Cana.%20Quisiera%20informaci%C3%B3n%20sobre%20el%20taller%20del%2018%20de%20octubre%20en%20Spotcast%20Caf%C3%A9%20y%20el%20intensivo%20del%2019%20al%2031%20en%20Peque%C3%B1ines%20Paso%20a%20Paso.";
+const MAP_SEARCH_PEQUENINES = "https://www.google.com/maps/search/?api=1&query=Centro%20de%20Educaci%C3%B3n%20Infantil%20Peque%C3%B1ines%20Paso%20a%20Paso%2C%20Residencial%20Rijo%2C%20detr%C3%A1s%20de%20los%20paneles%20solares%20de%20CEPM.%20B%C3%A1varo%2C%20Punta%20Cana.";
+const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spotcast+Cafe+Plaza+Boulevard+Center+Avenida+Estados+Unidos+Bavaro+Punta+Cana";
+const COORDS_PEQUENINES = [18.5565510, -68.3691611];
+const COORDS_SPOTCAST = [18.66278, -68.42921];
 
 export default function PuntaCanaPage({ onNavigateHome }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showFixedCta, setShowFixedCta] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const mapRef = useRef(null);
   const leafletMapInstance = useRef(null);
 
@@ -66,7 +67,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         zoomControl: false,
         attributionControl: false,
         dragging: !window.L.Browser.mobile
-      }).setView(COORDS_PUNTA_CANA, 12);
+      });
 
       window.L.control.zoom({ position: 'bottomright' }).addTo(map);
       window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -75,22 +76,49 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         attribution: '&copy; OpenStreetMap'
       }).addTo(map);
 
-      const marker = window.L.marker(COORDS_PUNTA_CANA, {
-        title: 'Pequeñines Paso a Paso - Bávaro, Punta Cana',
+      // Marker 1: Spotcast Café (#1 Workshop)
+      const markerSpotcast = window.L.marker(COORDS_SPOTCAST, {
+        title: '#1 Workshop · Spotcast Café',
         icon: window.L.divIcon({
-          className: 'locality-marker map-marker-selected',
-          html: '<span class="map-logo"><img src="/assets/pequenines-logo.png" alt="Sede" style="height:28px;object-fit:contain;" /></span>',
-          iconSize: [142, 46],
-          iconAnchor: [71, 23]
+          className: 'compact-map-pin-wrap',
+          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.png" alt="Spotcast" /></div><span class="pin-label">Workshop</span></div>',
+          iconSize: [160, 48],
+          iconAnchor: [80, 48]
         })
-      }).addTo(map).bindTooltip('Sede: Pequeñines Paso a Paso', {
-        permanent: true,
-        direction: 'top',
-        offset: [0, -27],
-        className: 'locality-label'
-      });
+      }).addTo(map);
 
-      marker.on('click', () => map.flyTo(COORDS_PUNTA_CANA, 13, { duration: 0.85 }));
+      markerSpotcast.bindPopup(
+        '<strong>#1 Spotcast Café</strong><br><span style="font-size:12px;color:#c2531a;font-weight:700;">Workshop para Padres (Sáb 18 Oct)</span><br><span style="font-size:12px;">Plaza Boulevard Center, Av. Estados Unidos</span>',
+        { offset: [0, -32] }
+      );
+
+      // Marker 2: Pequeñines Paso a Paso (#2 Jornada Terapéutica)
+      const markerPequenines = window.L.marker(COORDS_PEQUENINES, {
+        title: '#2 Jornada Terapéutica · Pequeñines Paso a Paso',
+        icon: window.L.divIcon({
+          className: 'compact-map-pin-wrap',
+          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.png" alt="Pequeñines" /></div><span class="pin-label">Jornada Terapéutica</span></div>',
+          iconSize: [210, 48],
+          iconAnchor: [105, 48]
+        })
+      }).addTo(map);
+
+      markerPequenines.bindPopup(
+        '<strong>#2 Pequeñines Paso a Paso</strong><br><span style="font-size:12px;color:#1e40af;font-weight:700;">2º Paso · Terapia Intensiva (19 al 31 Oct)</span><br><span style="font-size:12px;">Residencial Rijo · CEPM, Bávaro</span>',
+        { offset: [0, -32] }
+      );
+
+      const bounds = window.L.latLngBounds([COORDS_SPOTCAST, COORDS_PEQUENINES]);
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
+
+      markerSpotcast.on('click', () => {
+        markerSpotcast.openPopup();
+        map.flyTo(COORDS_SPOTCAST, 13, { duration: 0.6 });
+      });
+      markerPequenines.on('click', () => {
+        markerPequenines.openPopup();
+        map.flyTo(COORDS_PEQUENINES, 13, { duration: 0.6 });
+      });
 
       leafletMapInstance.current = map;
     };
@@ -117,8 +145,9 @@ export default function PuntaCanaPage({ onNavigateHome }) {
   }, []);
 
   const handleCenterMap = () => {
-    if (leafletMapInstance.current) {
-      leafletMapInstance.current.flyTo(COORDS_PUNTA_CANA, 13, { duration: 0.85 });
+    if (leafletMapInstance.current && window.L) {
+      const bounds = window.L.latLngBounds([COORDS_SPOTCAST, COORDS_PEQUENINES]);
+      leafletMapInstance.current.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
     }
   };
 
@@ -130,57 +159,17 @@ export default function PuntaCanaPage({ onNavigateHome }) {
     <div className="compact-page" data-city="Punta Cana">
       <a className="skip-link" href="#contenido">Ir al contenido</a>
 
-      {/* HEADER */}
-      <header className="header">
-        <a 
-          className="brand" 
-          href="#inicio" 
-          aria-label="Centro Multisensorial inicio"
-          onClick={(e) => {
-            if (onNavigateHome) {
-              e.preventDefault();
-              onNavigateHome();
-            }
-          }}
-        >
-          <img src="/assets/logo.png" alt="Multisensorial RD" width="260" height="48" />
-        </a>
-
-        <nav aria-label="Navegación principal">
-          <a className="nav-link" href="#programa">La jornada</a>
-          <a className="nav-link" href="#sede">Sede</a>
-          <a className="nav-link" href="#preguntas">Preguntas</a>
-          {onNavigateHome && (
-            <button 
-              onClick={onNavigateHome}
-              className="text-link"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-              Portada Principal ↗
-            </button>
-          )}
-          <a 
-            className="button button-small" 
-            href={WA_PUNTA_CANA} 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            Quiero orientación
-          </a>
-        </nav>
-      </header>
-
       <main id="contenido">
         {/* HERO */}
         <section className="hero compact-hero" id="inicio" aria-labelledby="hero-title">
           <div className="hero-grid section-wrap">
             <div className="hero-copy">
-              <span className="hero-kicker-badge">PUNTA CANA · MÉTODO TOMATIS® OFICIAL</span>
+              <p className="eyebrow">SANTO DOMINGO TRASLADA SU MÉTODO EXCLUSIVO</p>
               <h1 id="hero-title">
                 ¡Por fin en <span className="text-brand-gradient">Punta Cana</span>! <span className="text-brand-highlight">Terapia intensiva</span> para niños con condición.
               </h1>
               <p className="hero-description">
-                Estimulación neuroauditiva clínica en Bávaro para niños de 2 a 18 años con autismo, TDAH o retraso del habla. Sin medicamentos y con evaluación previa individual.
+                El tratamiento neurosensorial de la capital que transforma la conducta y el desarrollo infantil, instalado por 13 días en Punta Cana.
               </p>
               <div className="hero-actions">
                 <a className="button hero-cta-button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
@@ -195,22 +184,10 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   src="/0929-copy.mp4"
                   autoPlay
                   loop
-                  muted={isMuted}
+                  muted
                   playsInline
-                  onClick={() => setIsMuted(prev => !prev)}
                   title="Jornada Tomatis Punta Cana"
                 />
-                <button
-                  type="button"
-                  className="video-sound-toggle"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsMuted(prev => !prev);
-                  }}
-                  aria-label={isMuted ? "Activar audio" : "Silenciar video"}
-                >
-                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                </button>
               </div>
             </figure>
           </div>
@@ -310,46 +287,111 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             <div className="program-heading">
               <p className="eyebrow">PROGRAMA INTENSIVO · PUNTA CANA</p>
               <h2 id="program-title">
-                13 días para avanzar.<br />
-                <span><mark className="text-highlight highlight-blue" data-highlight>Paso a paso.</mark></span>
+                13 días continuos.<br />
+                <span><mark className="text-highlight highlight-blue" data-highlight>Así funciona.</mark></span>
               </h2>
-              <p>Estimulación auditiva con música modificada, juego guiado y acompañamiento familiar.</p>
             </div>
 
-            <div className="program-stats" aria-label="Duración del programa">
-              <div><strong>13</strong><span>días seguidos</span></div>
-              <div><strong>2</strong><span>horas diarias</span></div>
-              <div><strong>26</strong><span>horas de estímulo</span></div>
-            </div>
-
-            <ol className="program-steps">
-              <li data-scroll-rail>
-                <span>01</span>
-                <div><h3>Evaluación individual</h3><p>Perfil de escucha y metas de tu hijo.</p></div>
-              </li>
-              <li data-scroll-rail>
-                <span>02</span>
-                <div><h3>Sesiones Tomatis®</h3><p>Música procesada con auriculares de conducción ósea.</p></div>
-              </li>
-              <li data-scroll-rail>
-                <span>03</span>
-                <div><h3>Plan para el hogar</h3><p>Informe detallado y pautas para la familia.</p></div>
-              </li>
-            </ol>
-
-            <div className="program-conditions">
-              <p><strong>Modalidad:</strong> Turno diario fijo de 2 horas. Un familiar lo acompaña cada día.</p>
-            </div>
-
-            <div className="compact-team">
-              <div className="compact-team-faces">
-                <img src="/assets/mery.webp" alt="Mery Torrealba" width="400" height="480" loading="lazy" />
-                <img src="/assets/carlos.webp" alt="Carlos Eduardo Pérez" width="400" height="480" loading="lazy" />
+            <div className="program-visual-flow">
+              <div className="program-visual-step">
+                <div className="step-media">
+                  <img src="/assets/families/photo-04.webp" alt="Evaluación de escucha y perfil del niño" loading="lazy" />
+                </div>
+                <div className="step-info">
+                  <div className="step-badge">
+                    <span className="step-pill">01 · EVALUACIÓN</span>
+                  </div>
+                  <h3>Perfil de escucha inicial</h3>
+                  <p>Medimos cómo procesa los sonidos y fijamos objetivos claros con la familia.</p>
+                </div>
               </div>
-              <div>
-                <strong>Mery Torrealba y Carlos Eduardo Pérez</strong>
-                <p>Consultores certificados Tomatis® Nivel 4</p>
-                <a className="directory-link" href="https://www.tomatis.com/es/profesional/republica-dominicana/" target="_blank" rel="noopener noreferrer">
+
+              <div className="program-visual-step">
+                <div className="step-media">
+                  <img src="/assets/families/photo-01.webp" alt="Sesión de estimulación con auriculares Tomatis" loading="lazy" />
+                </div>
+                <div className="step-info">
+                  <div className="step-badge">
+                    <span className="step-pill">02 · ESTIMULACIÓN</span>
+                  </div>
+                  <h3>2h diarias de música filtrada</h3>
+                  <p>Auriculares de conducción ósea mientras juega, dibuja y se divierte.</p>
+                </div>
+              </div>
+
+              <div className="program-visual-step">
+                <div className="step-media">
+                  <img src="/assets/families/photo-03.webp" alt="Plan y seguimiento en el hogar" loading="lazy" />
+                </div>
+                <div className="step-info">
+                  <div className="step-badge">
+                    <span className="step-pill">03 · SEGUIMIENTO</span>
+                  </div>
+                  <h3>Evolución y pautas para casa</h3>
+                  <p>Entrega de informe y herramientas prácticas para mantener los avances.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* SPECIALISTS SECTION */}
+            <div className="program-specialists">
+              <div className="program-specialists-intro">
+                <p className="eyebrow">CONSULTORES CERTIFICADOS</p>
+                <h3>Especialistas a cargo de la jornada</h3>
+                <p>Atención directa por profesionales certificados en el Método Tomatis® Nivel 4.</p>
+              </div>
+
+              <div className="program-specialists-grid">
+                {/* Mery Torrealba */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#FFD6DF' }}>
+                    <img
+                      src="/mery_torrealba_new.webp"
+                      alt="Mery Torrealba"
+                      className="specialist-arch-img specialist-img-mery"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Mery Torrealba</h4>
+                    <span className="specialist-card-pill" style={{ background: '#FFD6DF' }}>
+                      Psicopedagogía & Tomatis® Nivel 4
+                    </span>
+                    <p className="specialist-card-desc">
+                      Especialista en desarrollo neurosensorial e intervención infantil.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Carlos Eduardo Pérez */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#D0EEFF' }}>
+                    <img
+                      src="/carlos_perez_new.webp"
+                      alt="Carlos Eduardo Pérez"
+                      className="specialist-arch-img specialist-img-eduardo"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Carlos Eduardo Pérez</h4>
+                    <span className="specialist-card-pill" style={{ background: '#D0EEFF' }}>
+                      Psicología & Tomatis® Nivel 4
+                    </span>
+                    <p className="specialist-card-desc">
+                      Psicólogo clínico enfocado en neurodesarrollo y estimulación audiosensorial.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="program-specialists-verify">
+                <a
+                  className="directory-link"
+                  href="https://www.tomatis.com/es/profesional/republica-dominicana/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Verificar acreditación oficial en Tomatis.com ↗
                 </a>
               </div>
@@ -410,27 +452,51 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         <section className="locations section-wrap" id="sede" aria-labelledby="locations-title">
           <div className="locations-heading">
             <div>
-              <p className="eyebrow">UBICACIÓN CONFIRMADA</p>
-              <h2 id="locations-title">Sede Bávaro, Punta Cana</h2>
+              <p className="eyebrow">UBICACIONES CONFIRMADAS · BÁVARO</p>
+              <h2 id="locations-title">2 lugares clave para tu familia</h2>
+              <p style={{ marginTop: '10px', fontSize: '1.05rem', color: 'rgba(23,37,65,0.85)' }}>
+                El sábado 18 iniciamos con el taller para padres, y del 19 al 31 se desarrolla la terapia intensiva.
+              </p>
             </div>
           </div>
 
-          <div className="venue-overview">
-            <article className="venue-card" style={{ gridColumn: '1 / -1', maxWidth: '780px', margin: '0 auto', width: '100%' }}>
-              <p className="venue-type">Sede Oficial de la Jornada</p>
-              <h3 className="venue-wordmark">
-                <img src="/assets/pequenines-logo.png" alt="Pequeñines Paso a Paso" width="1774" height="887" loading="lazy" decoding="async" />
-              </h3>
-              <address>
-                <strong>Centro de Educación Infantil Pequeñines Paso a Paso</strong>
-                <span>Residencial Rijo · Detrás de los paneles solares de CEPM, Bávaro.</span>
-              </address>
-              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '16px' }}>
-                <a className="button venue-cta" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-                  Apartar cupo en esta sede
+          <div className="dual-venues-grid">
+            {/* SEDE 1: WORKSHOP */}
+            <article className="venue-card venue-card-workshop">
+              <div className="venue-photo-wrap venue-photo-spotcast">
+                <img 
+                  src="/assets/spotcast-square.png" 
+                  alt="Spotcast Café" 
+                  className="venue-photo" 
+                  loading="lazy"
+                />
+                <span className="venue-seq-badge venue-seq-orange">#1 · Workshop</span>
+              </div>
+              <div className="venue-card-body">
+                <h3>Spotcast Café</h3>
+                <p className="venue-detail">Sáb 18 Oct · Plaza Boulevard Center, Bávaro</p>
+                <a className="venue-map-link" href={MAP_SEARCH_SPOTCAST} target="_blank" rel="noopener noreferrer">
+                  Ver en GPS ↗
                 </a>
-                <a className="venue-map-link" href={MAP_SEARCH_PUNTA_CANA} target="_blank" rel="noopener noreferrer" style={{ alignSelf: 'center' }}>
-                  Abrir en Google Maps ↗
+              </div>
+            </article>
+
+            {/* SEDE 2: JORNADA TERAPÉUTICA */}
+            <article className="venue-card venue-card-intensive">
+              <div className="venue-photo-wrap venue-photo-pequenines">
+                <img 
+                  src="/assets/pequenines-logo.png" 
+                  alt="Pequeñines Paso a Paso" 
+                  className="venue-photo" 
+                  loading="lazy"
+                />
+                <span className="venue-seq-badge venue-seq-blue">#2 · Jornada Terapéutica</span>
+              </div>
+              <div className="venue-card-body">
+                <h3>Pequeñines Paso a Paso</h3>
+                <p className="venue-detail">19 al 31 Oct · Residencial Rijo, CEPM, Bávaro</p>
+                <a className="venue-map-link" href={MAP_SEARCH_PEQUENINES} target="_blank" rel="noopener noreferrer">
+                  Ver en GPS ↗
                 </a>
               </div>
             </article>
