@@ -209,7 +209,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                 ¡Por fin en <span className="text-brand-gradient">Punta Cana</span>! <span className="text-brand-highlight">Terapia intensiva</span> para niños con condición.
               </h1>
               <p className="hero-description">
-                El tratamiento neurosensorial de la capital que transforma la conducta y el desarrollo infantil, instalado por 13 días en Punta Cana.
+                El método neurosensorial de la capital, por 13 días en Punta Cana.
               </p>
               <div className="hero-actions">
                 <a className="button hero-cta-button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">

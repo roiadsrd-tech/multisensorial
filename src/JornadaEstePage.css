@@ -254,11 +254,15 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
  .compact-page .hero,
  .compact-hero,
  [data-city] .hero{min-height:0!important;height:auto!important;display:block!important;padding-top:0!important;padding-bottom:0!important;margin-top:0!important}
- .compact-page .hero-grid{grid-template-columns:1fr;padding-top:64px!important;padding-bottom:28px!important;gap:22px}
- .compact-page .hero h1{font-size:clamp(38px,9.5vw,48px);font-weight:900;line-height:1.05;letter-spacing:-.035em;color:var(--ink);margin-top:0!important}
+ .compact-page .hero-grid{display:flex!important;flex-direction:column!important;padding-top:40px!important;padding-bottom:28px!important;gap:16px!important}
+ .compact-page .hero-copy{display:contents!important}
+ .compact-page .eyebrow{order:1!important;margin-bottom:8px!important}
+ .compact-page .hero h1{order:2!important;font-size:clamp(38px,9.5vw,48px);font-weight:900;line-height:1.05;letter-spacing:-.035em;color:var(--ink);margin-top:0!important;margin-bottom:12px!important}
+ .compact-page .hero-visual{order:3!important;width:100%;margin-top:4px!important;margin-bottom:8px!important}
+ .compact-page .hero-description{order:4!important;font-size:16px;font-weight:700;max-width:100%;margin-top:0!important;margin-bottom:8px!important;line-height:1.45;color:#172541ee}
+ .compact-page .hero-actions{order:5!important;margin-top:8px!important}
  .hero-kicker-badge{font-size:11px;padding:6px 14px;margin-bottom:12px}
- .compact-page .hero-description{font-size:15px;font-weight:700;max-width:100%;margin-top:12px;line-height:1.5;color:#172541ee}
- .compact-page .hero-actions{margin-top:16px}.compact-page .hero-actions .button{justify-content:center;font-size:16px;min-height:50px;padding:12px 20px;border-radius:100px;border:0;box-shadow:0 5px 0 var(--blue)}
+ .compact-page .hero-actions .button{justify-content:center;font-size:16px;min-height:50px;padding:12px 20px;border-radius:100px;border:0;box-shadow:0 5px 0 var(--blue)}
  .compact-page .photo-crop{position:relative;border:3.5px solid var(--blue);border-radius:20px;overflow:hidden;background:#000;box-shadow:5px 5px 0px var(--yellow)}
  .compact-page .photo-crop img,
  .compact-page .photo-crop video{aspect-ratio:16/9;object-fit:cover;object-position:center;width:100%;max-height:230px;display:block}
