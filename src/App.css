@@ -1837,8 +1837,8 @@
 
   .hero-header h1,
   .hero-text h1 {
-    font-size: clamp(2.45rem, 7.5vw, 2.75rem) !important;
-    line-height: 1.1 !important;
+    font-size: clamp(2.85rem, 8.5vw, 3.35rem) !important;
+    line-height: 1.06 !important;
     margin-bottom: 15px;
   }
 
@@ -1982,7 +1982,8 @@
 
   .hero-text h1,
   .hero-header h1 {
-    font-size: clamp(2.25rem, 7vw, 2.5rem) !important;
+    font-size: clamp(2.75rem, 8vw, 3.1rem) !important;
+    line-height: 1.06 !important;
   }
 
   .location-intro-text {
