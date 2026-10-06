@@ -13,7 +13,7 @@
 }
 
 .service-hero {
-  padding: 120px 0 80px;
+  padding: 80px 0 50px;
   position: relative;
   overflow: hidden;
   border-bottom: 3px dashed var(--color-primary-dark);
@@ -2226,6 +2226,1663 @@
   }
   .orofacial-benefits-desktop {
     display: grid !important;
+  }
+}
+
+/* Solicitar Form Section with Background Photo Collage */
+.solicitar-form-section {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+  background: #f4efe6;
+  border-top: 3px dashed var(--color-primary-dark);
+}
+
+.form-collage-backdrop {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-collage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  width: 108%;
+  height: 108%;
+  opacity: 0.85;
+  transform: rotate(-1.5deg) scale(1.04);
+}
+
+.collage-photo-card {
+  background: #ffffff;
+  padding: 8px 8px 24px 8px;
+  border-radius: 16px;
+  border: 2.5px solid var(--color-primary-dark);
+  box-shadow: 4px 5px 0px rgba(28, 78, 130, 0.25);
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.card-tilt-1 { transform: rotate(-3deg); }
+.card-tilt-2 { transform: rotate(2.5deg); }
+.card-tilt-3 { transform: rotate(-1.5deg); }
+.card-tilt-4 { transform: rotate(3.5deg); }
+.card-tilt-5 { transform: rotate(-2deg); }
+
+.collage-photo-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(28, 78, 130, 0.15);
+}
+
+.collage-photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.collage-city-tag {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(28, 78, 130, 0.92);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-collage-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(250, 249, 245, 0.84) 20%,
+    rgba(250, 249, 245, 0.55) 55%,
+    rgba(28, 78, 130, 0.25) 100%
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .form-collage-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .collage-photo-card {
+    height: 170px;
+  }
+}
+
+@media (max-width: 600px) {
+  .solicitar-form-section {
+    padding: 60px 0;
+  }
+  .form-collage-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .collage-photo-card {
+    height: 135px;
+    padding: 5px 5px 18px 5px;
+    border-radius: 12px;
+  }
+  .collage-city-tag {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+    bottom: 4px;
+    left: 4px;
+  }
+}
+
+/* Minimalist City Gallery (Tomatis en Ruta) */
+.city-gallery-section {
+  padding: 60px 0 90px;
+  background-color: var(--color-bg);
+}
+
+.city-gallery-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-bottom: 28px;
+  line-height: 1.15;
+}
+
+.city-gallery-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.city-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: calc(var(--nav-height) + 24px);
+}
+
+.city-nav-btn {
+  width: 100%;
+  text-align: left;
+  padding: 16px 22px;
+  border-radius: 18px;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: #ffffff;
+  color: var(--color-primary-dark);
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  display: block;
+}
+
+.city-nav-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--btn-brand-color, var(--color-accent));
+  background: var(--btn-brand-light, #ffffff);
+}
+
+.city-nav-btn.active {
+  background: var(--btn-brand-color, var(--color-accent));
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  transform: translate(-3px, -3px);
+}
+
+.city-content-panel {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 3.5px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  padding: 32px;
+}
+
+/* City Hero Header with Place Photo */
+.city-hero-header {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.city-hero-cover {
+  width: 100%;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+  background: #f1f5f9;
+}
+
+.city-hero-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.city-hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.city-hero-name {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.city-content-desc {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-primary-dark);
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Photo & Video Grid */
+.city-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.city-photo-item {
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f1f5f9;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.city-photo-item:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px var(--color-primary-dark);
+}
+
+.city-photo-item img,
+.city-photo-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.city-photo-item:hover img {
+  transform: scale(1.04);
+}
+
+.city-video-item {
+  background: #000000;
+}
+
+@media (max-width: 860px) {
+  .city-gallery-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .city-nav-list {
+    flex-direction: row;
+    overflow-x: auto;
+    position: static;
+    padding-bottom: 10px;
+    gap: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .city-nav-btn {
+    white-space: nowrap;
+    width: auto;
+    padding: 12px 20px;
+    flex-shrink: 0;
+  }
+
+  .city-content-panel {
+    padding: 24px 18px;
+  }
+
+  .city-hero-cover {
+    height: 180px;
+  }
+  
+  .city-photos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+}
+
+/* ==========================================================================
+   REVAMPED SERVICE PAGES: TERAPIA CONDUCTUAL, MADRES, PSICOLOGÍA CLÍNICA
+   ========================================================================== */
+
+/* 1. Comparison Grid (Conventional vs Multisensorial Parent-Centered) */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 40px 0;
+}
+
+.comparison-card {
+  background: white;
+  border-radius: 28px;
+  padding: 36px 32px;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.comparison-card.conventional {
+  background: #FFF5F5;
+  border-color: #A32D2D;
+  box-shadow: 8px 8px 0px #A32D2D;
+}
+
+.comparison-card.multisensorial {
+  background: #F4F8FF;
+  border-color: var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-secondary);
+}
+
+.comparison-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  width: fit-content;
+  border: 2px solid currentColor;
+}
+
+.comparison-card.conventional .comparison-badge {
+  background: #FFE0E0;
+  color: #901B1B;
+}
+
+.comparison-card.multisensorial .comparison-badge {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-primary-dark);
+}
+
+.comparison-card h3 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+  color: var(--color-primary-dark);
+}
+
+.comparison-card.conventional h3 {
+  color: #901B1B;
+}
+
+.comparison-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.comparison-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.comparison-list li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.comparison-result-box {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: 2px dashed currentColor;
+}
+
+.comparison-card.conventional .comparison-result-box {
+  background: rgba(144, 27, 27, 0.08);
+  color: #901B1B;
+}
+
+.comparison-card.multisensorial .comparison-result-box {
+  background: rgba(35, 71, 239, 0.08);
+  color: var(--color-primary);
+}
+
+/* 2. Program 6 Sessions Roadmap Grid */
+.sessions-roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.session-card {
+  background: white;
+  border-radius: 24px;
+  padding: 30px 24px;
+  border: 3.5px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.session-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 10px 0px var(--color-accent);
+}
+
+.session-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.session-num-badge {
+  font-size: 0.85rem;
+  font-weight: 900;
+  padding: 4px 14px;
+  border-radius: 14px;
+  background: var(--color-secondary);
+  color: var(--color-primary-dark);
+  border: 2px solid var(--color-primary-dark);
+}
+
+.session-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-primary-dark);
+}
+
+.session-card h3 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.session-card p {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.session-takeaway {
+  margin-top: auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #FFFBEB;
+  border: 1.5px solid #F59E0B;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #B45309;
+}
+
+/* 3. High Impact Family System Banner */
+.family-system-banner {
+  background: linear-gradient(135deg, #FFEFEA 0%, #FFF8E6 100%);
+  border: 4px solid var(--color-primary-dark);
+  border-radius: 32px;
+  padding: 44px;
+  box-shadow: 10px 10px 0px var(--color-accent);
+  margin: 50px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 36px;
+  align-items: center;
+}
+
+.family-system-banner-text h3 {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.family-system-banner-text p {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 4. Acompañamiento a Madres: 4 Ejes Clínicos */
+.madres-axes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin: 40px 0;
+}
+
+.madres-axis-card {
+  background: white;
+  border-radius: 28px;
+  padding: 36px;
+  border: 3.5px solid var(--color-primary-dark);
+  box-shadow: 7px 7px 0px var(--color-primary-dark);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.madres-axis-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 8px 10px 0px var(--color-secondary);
+}
+
+.madres-axis-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 2.5px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+}
+
+.madres-axis-card h3 {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.madres-axis-card p {
+  font-size: 0.98rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.madres-axis-bullets {
+  list-style: none;
+  padding: 0;
+  margin: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.madres-axis-bullets li {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 5. Lived Experience Therapist Spotlight */
+.lived-experience-card {
+  background: white;
+  border-radius: 32px;
+  padding: 44px;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 10px 10px 0px var(--color-accent);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 36px;
+  align-items: center;
+  margin: 50px 0;
+}
+
+.lived-experience-badge-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.lived-experience-icon-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  border: 4px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+}
+
+.lived-experience-card h3 {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+
+.lived-experience-card p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.lived-experience-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lived-tag {
+  background: #F3F4F6;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+/* 6. Psicología Clínica: Dual-Track Tab Switcher */
+/* 6. Psicología Clínica: Dual-Track Segmented Switcher (Multisensorial Brand Native) */
+.psico-sticky-switcher-container {
+  position: sticky;
+  top: calc(var(--nav-height) + 10px);
+  left: 0;
+  right: 0;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  padding: 6px 16px;
+  pointer-events: none;
+  margin-bottom: -48px;
+}
+
+.psico-sticky-switcher-container .psico-track-selector {
+  pointer-events: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 3px 3px 0px var(--color-primary-dark);
+}
+
+.psico-track-selector {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 3px;
+  border-radius: 9999px;
+  border: 2px solid var(--color-primary-dark);
+  box-shadow: 2px 2px 0px var(--color-primary-dark);
+  gap: 4px;
+  position: relative;
+}
+
+.psico-track-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-family: var(--font-body);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease;
+}
+
+.psico-track-btn:not(.active) {
+  opacity: 0.65;
+}
+
+.psico-track-btn:hover:not(.active) {
+  opacity: 1;
+}
+
+.psico-track-highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1.5px solid var(--color-primary-dark);
+  z-index: 1;
+}
+
+.psico-track-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary-dark);
+}
+
+.psico-track-btn.active .psico-track-content {
+  color: var(--color-primary-dark);
+  font-weight: 900;
+}
+
+/* 7. Temporal Cognition Visualizer (Pasado, Presente, Futuro) */
+.temporal-cognition-container {
+  background: white;
+  border-radius: 32px;
+  padding: 40px;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  margin: 40px 0;
+}
+
+.temporal-zones-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.temporal-zone-card {
+  border-radius: 22px;
+  padding: 26px 20px;
+  border: 3px solid var(--color-primary-dark);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  transition: transform 0.25s ease;
+}
+
+.temporal-zone-card:hover {
+  transform: translateY(-3px);
+}
+
+.temporal-zone-card.past {
+  background: #FFF3E0;
+  box-shadow: 4px 4px 0px #E65100;
+}
+
+.temporal-zone-card.present {
+  background: #E8F5E9;
+  box-shadow: 6px 6px 0px #2E7D32;
+  border-width: 3.5px;
+}
+
+.temporal-zone-card.future {
+  background: #E3F2FD;
+  box-shadow: 4px 4px 0px #1565C0;
+}
+
+.temporal-zone-badge {
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--color-primary-dark);
+  margin: 0 auto 12px;
+  display: inline-block;
+  background: white;
+}
+
+.temporal-zone-card h4 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: var(--color-primary-dark);
+}
+
+.temporal-risk-tag {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #C2410C;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.temporal-zone-card.present .temporal-risk-tag {
+  color: #15803D;
+}
+
+.temporal-zone-card p {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* 8. Standardized Tests Showcase */
+.tests-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.test-item-card {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 5px 5px 0px var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+}
+
+.test-item-card h4 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+}
+
+.test-item-card p {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin: 0 0 12px 0;
+}
+
+.test-tag-pill {
+  margin-top: auto;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: #F3F4F6;
+  padding: 4px 10px;
+  border-radius: 8px;
+  width: fit-content;
+  color: var(--color-primary-dark);
+  border: 1.5px solid var(--color-primary-dark);
+}
+
+/* Responsive Overrides */
+@media (max-width: 992px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+  .sessions-roadmap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .madres-axes-grid {
+    grid-template-columns: 1fr;
+  }
+  .lived-experience-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .lived-experience-badge-col {
+    margin: 0 auto;
+  }
+  .lived-experience-highlights {
+    justify-content: center;
+  }
+  .temporal-zones-grid {
+    grid-template-columns: 1fr;
+  }
+  .tests-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .psico-sticky-switcher-container {
+    top: calc(var(--nav-height) + 38px);
+    padding: 4px 8px;
+  }
+  .psico-track-selector {
+    width: auto;
+    max-width: 275px;
+    padding: 2.5px;
+    border-width: 1.5px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12), 2px 2px 0px var(--color-primary-dark);
+  }
+  .psico-track-btn {
+    padding: 4px 9px;
+    font-size: 0.70rem;
+    letter-spacing: 0.2px;
+  }
+  .psico-track-content {
+    gap: 4px;
+  }
+  .psico-track-content svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sessions-roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+  .family-system-banner {
+    grid-template-columns: 1fr;
+    padding: 28px 20px;
+    text-align: center;
+  }
+  .psico-sticky-switcher-container {
+    top: calc(var(--nav-height) + 38px);
+    padding: 4px 6px;
+  }
+  .psico-track-selector {
+    width: auto;
+    max-width: 255px;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 2px;
+    border-width: 1.5px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12), 2px 2px 0px var(--color-primary-dark);
+  }
+  .psico-track-btn {
+    flex: 1;
+    padding: 4px 7px;
+    font-size: 0.66rem;
+    letter-spacing: 0.1px;
+  }
+  .psico-track-content {
+    gap: 4px;
+  }
+  .psico-track-content svg {
+    width: 12px;
+    height: 12px;
+  }
+  .tests-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .comparison-card {
+    padding: 24px 18px;
+  }
+  .madres-axis-card {
+    padding: 26px 20px;
+  }
+  .lived-experience-card {
+    padding: 28px 20px;
+  }
+  .temporal-cognition-container {
+    padding: 26px 18px;
+  }
+}
+
+/* =========================================================
+   NEO-BRUTALIST BRAND ELEVATION STYLES (MATCHING MAIN PAGE)
+   ========================================================= */
+
+.brand-hero-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 993px) {
+  .brand-hero-split.reverse-split {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+  .brand-hero-split.reverse-split > *:first-child {
+    order: 2;
+  }
+  .brand-hero-split.reverse-split > *:last-child {
+    order: 1;
+  }
+}
+
+@media (max-width: 992px) {
+  .brand-hero-split {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 30px;
+  }
+}
+
+.brand-hero-photo-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.brand-hero-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 10px 10px 0px var(--color-primary-dark);
+  background: white;
+  transition: all 0.25s ease;
+}
+
+.brand-hero-photo-frame:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 13px 13px 0px var(--color-primary-dark);
+}
+
+.brand-hero-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.brand-hero-tape {
+  position: absolute;
+  top: -14px;
+  left: 30%;
+  transform: translateX(-50%) rotate(-4deg);
+  background: rgba(253, 208, 114, 0.95);
+  border: 2px dashed var(--color-primary-dark);
+  color: var(--color-primary-dark);
+  font-weight: 900;
+  font-size: 0.75rem;
+  padding: 4px 18px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  z-index: 10;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.brand-floating-sticker {
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  background: var(--color-secondary);
+  color: var(--color-primary-dark);
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+  padding: 10px 16px;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  transform: rotate(3deg);
+}
+
+/* Polaroid Scrapbook Gallery */
+.polaroid-gallery-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin: 40px 0 20px;
+}
+
+@media (max-width: 860px) {
+  .polaroid-gallery-row {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 30px auto;
+  }
+}
+
+.brand-polaroid {
+  background: white;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 20px;
+  padding: 14px 14px 18px 14px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.brand-polaroid:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 8px 8px 0px var(--color-accent);
+}
+
+.polaroid-img-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--color-primary-dark);
+  background: var(--color-bg);
+}
+
+.polaroid-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-caption {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.polaroid-desc {
+  font-size: 0.85rem;
+  color: var(--color-primary-dark);
+  opacity: 0.85;
+  margin-top: 4px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* Modern Therapist Spotlight with Real Photo */
+.therapist-spotlight-container {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 40px;
+  align-items: center;
+  background: #FFF;
+  border: 4px solid var(--color-primary-dark);
+  box-shadow: 10px 10px 0px var(--color-pink);
+  border-radius: 36px;
+  padding: 35px;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .therapist-spotlight-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 28px 20px;
+  }
+}
+
+.therapist-photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 310px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 5px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-secondary);
+  background: var(--color-primary-light);
+}
+
+.therapist-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* Visual Session Cards on Brand */
+.session-card-vibrant {
+  border: 3px solid var(--color-primary-dark);
+  border-radius: 22px;
+  padding: 22px;
+  position: relative;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-card-vibrant:hover {
+  transform: translateY(-5px);
+}
+
+.session-card-vibrant.color-blue {
+  background: var(--color-primary-light);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+}
+.session-card-vibrant.color-yellow {
+  background: var(--color-secondary);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+}
+.session-card-vibrant.color-pink {
+  background: var(--color-pink);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+}
+.session-card-vibrant.color-green {
+  background: #C7F9CC;
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+}
+.session-card-vibrant.color-orange {
+  background: #FFE3D1;
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+}
+.session-card-vibrant.color-purple {
+  background: #E8D7FF;
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+}
+
+.session-card-num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--color-primary-dark);
+  color: white;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+}
+
+/* Punchy Stat Row */
+.punchy-stat-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.punchy-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 2px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+/* ==========================================================================
+   Creative Consultation Journey (Asymmetric Storytelling Track)
+   ========================================================================== */
+.consultation-journey-section {
+  padding: 90px 0;
+  background-color: #FAF9DC;
+  border-bottom: 3px dashed var(--color-primary-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.consultation-journey-header {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 50px;
+}
+
+.journey-top-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 2px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+  margin-bottom: 18px;
+}
+
+.journey-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* Connecting spine line */
+.journey-timeline::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  bottom: 80px;
+  left: 35px;
+  width: 4px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--color-primary-dark) 0px,
+    var(--color-primary-dark) 10px,
+    transparent 10px,
+    transparent 18px
+  );
+  z-index: 1;
+}
+
+.journey-step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.journey-step-number-stamp {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  border: 3.5px solid var(--color-primary-dark);
+  box-shadow: 5px 5px 0px var(--color-primary-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  transition: transform 0.25s ease;
+}
+
+.journey-step-row:hover .journey-step-number-stamp {
+  transform: scale(1.06) rotate(0deg) !important;
+}
+
+/* Step 1: Dialogue & Empathy Block */
+.journey-dialogue-block {
+  flex: 1;
+  background: white;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 28px;
+  padding: 32px 34px;
+  position: relative;
+}
+
+.journey-block-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-primary-dark);
+  background: rgba(166, 223, 253, 0.45);
+  border: 1.5px solid var(--color-primary-dark);
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+.journey-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.journey-mini-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  background: #F4F8FF;
+  border: 1.5px solid var(--color-primary-dark);
+  border-radius: 50px;
+  padding: 5px 14px;
+}
+
+/* Step 2: Clinical Assessment & Toolkit Showcase */
+.journey-toolkit-block {
+  flex: 1;
+  background: #FFFDF0;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 28px;
+  padding: 32px 34px;
+}
+
+.journey-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.journey-tool-chip {
+  background: white;
+  border: 2px solid var(--color-primary-dark);
+  box-shadow: 3px 3px 0px var(--color-primary-dark);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.journey-tool-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--color-primary-dark);
+}
+
+.journey-tool-chip strong {
+  font-size: 0.88rem;
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.journey-tool-chip span {
+  font-size: 0.76rem;
+  color: var(--color-primary-dark);
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+/* Step 3: Action Dossier & Embedded CTA */
+.journey-dossier-block {
+  flex: 1;
+  background: #EDFAF4;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 7px 7px 0px var(--color-primary-dark);
+  border-radius: 28px;
+  padding: 34px 36px;
+  position: relative;
+}
+
+.journey-deliverables-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0 26px;
+}
+
+.journey-deliverable-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1.45;
+}
+
+.journey-deliverable-icon {
+  background: var(--color-green);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border: 1.5px solid var(--color-primary-dark);
+}
+
+.journey-action-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 2px dashed rgba(35, 71, 239, 0.25);
+}
+
+@media (max-width: 768px) {
+  .journey-timeline::before {
+    left: 25px;
+  }
+  .journey-step-row {
+    gap: 16px;
+  }
+  .journey-step-number-stamp {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+    border-radius: 16px;
+  }
+  .journey-dialogue-block,
+  .journey-toolkit-block,
+  .journey-dossier-block {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+  .journey-action-footer {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   Terapia Orofacial Redesign (Anti-Slop, Bento & Asymmetric Gym)
+   ========================================================================== */
+
+/* Bento Cluster for ¿En qué consiste? */
+.orofacial-bento-cluster {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+}
+
+.orofacial-bento-wide {
+  grid-column: 1 / -1;
+  background: #E8F5E9;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 26px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.orofacial-bento-tall {
+  background: #FFE4E8;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 26px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.orofacial-bento-compact {
+  background: #E0F7FA;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 6px 6px 0px var(--color-primary-dark);
+  border-radius: 26px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 900px) {
+  .orofacial-bento-cluster {
+    grid-template-columns: 1fr;
+  }
+  .orofacial-bento-wide {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Asymmetric Exercise Play Gym (Tablero Lúdico) */
+.orofacial-gym-container {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.gym-hero-card {
+  background: #FFE4E8;
+  border: 3.5px solid var(--color-primary-dark);
+  box-shadow: 8px 8px 0px var(--color-primary-dark);
+  border-radius: 32px;
+  padding: 38px 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.gym-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gym-tile-strip {
+  background: white;
+  border: 3px solid var(--color-primary-dark);
+  box-shadow: 5px 5px 0px var(--color-primary-dark);
+  border-radius: 22px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gym-tile-strip:hover {
+  transform: translateX(4px);
+  box-shadow: 7px 7px 0px var(--color-primary-dark);
+}
+
+.gym-tile-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  border: 2px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .orofacial-gym-container {
+    grid-template-columns: 1fr;
   }
 }
 

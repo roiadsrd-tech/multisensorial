@@ -16,6 +16,8 @@ import TerapiaOrofacialPage from './TerapiaOrofacialPage';
 import FisioterapiaPage from './FisioterapiaPage';
 import TerapiaConductualPage from './TerapiaConductualPage';
 import TomatisEnRutaPage from './TomatisEnRutaPage';
+import PuntaCanaPage from './PuntaCanaPage';
+import HigueyPage from './HigueyPage';
 import Footer from './Footer';
 
 const fadeUp = {
@@ -70,6 +72,25 @@ const mediaAppearances = [
     url: "https://www.youtube.com/watch?v=ZKI_bcbkVI0&t=3s",
     thumbnail: "https://img.youtube.com/vi/ZKI_bcbkVI0/maxresdefault.jpg"
   },
+  {
+    title: "Entrevista a Sr. Carlos Pérez y Sra. Mery Torrealba En Así es Raúl Grisanty",
+    speakers: "Así es Raúl Grisanty | Carlos Pérez y Mery Torrealba",
+    url: "https://www.youtube.com/watch?v=1HIYwVGQikY",
+    thumbnail: "/entrevista-raul-grisanty.webp"
+  }
+];
+
+const miniTestimonialQuotes = [
+  "“Es la mejor decisión que hemos hecho como familia.”",
+  "“Mi hijo ha avanzado muchísimo.”",
+  "“Acabo de recibir la palabra más deseada: «mamá».”",
+  "“Ya se sabe las vocales, sabe diferenciarlas.”",
+  "“El niño decía nada. Ya dice mamá y papá, mami y papi.”",
+  "“Ya me entiende cuando yo le hablo.”",
+  "“Le digo ven y viene, le digo pásame eso y me lo pasa.”",
+  "“Yo pude ver múchisimos cambios en Samuel.”",
+  "“Pude ver resultados con el método en tan solo 15 días, ya dejó de hacer los sonidos y correr de lado a lado.”",
+  "“Eso que ustedes hacen es demasiado maravilloso.”"
 ];
 
 const services = [
@@ -178,18 +199,112 @@ function ServiceCard({ title, description, icon, colorClass, index, onClick, isH
 }
 
 
+const collagePhotos = [
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg", city: "Bonao" },
+  { src: "/instagram/la vega/WhatsApp Image 2026-07-20 at 12.14.02.jpeg", city: "La Vega" },
+  { src: "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38.jpeg", city: "Santiago" },
+  { src: "/instagram/sfm/WhatsApp Image 2026-07-20 at 12.14.15.jpeg", city: "San Francisco" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (1).jpeg", city: "Bonao" },
+  { src: "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38 (1).jpeg", city: "Santiago" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (2).jpeg", city: "Bonao" },
+  { src: "/instagram/la vega/lavega.png", city: "La Vega" },
+  { src: "/instagram/sfm/sanfranmac.png", city: "San Francisco" },
+  { src: "/instagram/bonao/bonao.jpeg", city: "Bonao" },
+  { src: "/instagram/santiago/santiago.jpg", city: "Santiago" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (3).jpeg", city: "Bonao" },
+  { src: "/instagram/la vega/WhatsApp Image 2026-07-20 at 12.14.02.jpeg", city: "La Vega" },
+  { src: "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38.jpeg", city: "Santiago" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg", city: "Bonao" },
+  { src: "/instagram/sfm/WhatsApp Image 2026-07-20 at 12.14.15.jpeg", city: "San Francisco" },
+];
+
+const heroVideoWall = [
+  { id: 'vw-1', src: '/videowall_86298.mp4?v=35' },
+  { id: 'vw-2', src: '/videowall_240.mp4?v=35' },
+  { id: 'vw-3', src: '/videowall_319.mp4?v=35', className: 'pos-top' },
+  { id: 'vw-4', src: '/videowall_orofacial.mp4?v=35', className: 'pos-orofacial' },
+  { id: 'vw-5', src: '/videowall_whatsapp.mp4?v=35' },
+  { id: 'vw-6', src: '/videowall_team.mp4?v=35', className: 'pos-team' },
+];
+
 function App() {
   const whatsappUrl = "https://wa.me/18093065040"; // Phone based on search data
   const [isMuted, setIsMuted] = useState(true);
   const [isTomatisMuted, setIsTomatisMuted] = useState(true);
   const [tomatisPlaying, setTomatisPlaying] = useState(false);
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const isBookingModalOpen = false;
+  const setIsBookingModalOpen = (open) => {
+    if (open) window.open("https://wa.me/18093065040", "_blank");
+  };
   const [isBookingComplete, setIsBookingComplete] = useState(false);
   const [isCalendarLoading, setIsCalendarLoading] = useState(true);
   const [shouldLoadIframe, setShouldLoadIframe] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      if (path === '/higuey') {
+        return 'higuey';
+      }
+      if (
+        path === '/jornada-este' ||
+        path === '/jornada' ||
+        path === '/jornadas' ||
+        path === '/jornada-tomatis' ||
+        path === '/este' ||
+        path === '/jornada-higuey-puntacana' ||
+        path === '/jornada-puntacana' ||
+        path === '/puntacana' ||
+        path === '/punta-cana'
+      ) {
+        return 'punta-cana';
+      }
+    }
+    return 'home';
+  });
+  const [tomatisRutaCity, setTomatisRutaCity] = useState('bonao');
   const [showProvincialPopup, setShowProvincialPopup] = useState(false);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (typeof window !== 'undefined') {
+        const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+        if (path === '/higuey') {
+          setCurrentPage('higuey');
+        } else if (
+          path === '/jornada-este' ||
+          path === '/jornada' ||
+          path === '/jornadas' ||
+          path === '/jornada-tomatis' ||
+          path === '/este' ||
+          path === '/jornada-higuey-puntacana' ||
+          path === '/jornada-puntacana' ||
+          path === '/puntacana' ||
+          path === '/punta-cana'
+        ) {
+          setCurrentPage('punta-cana');
+        } else if (path === '' || path === '/') {
+          setCurrentPage('home');
+        }
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateToPage = (pageName, pathSlug = null) => {
+    setCurrentPage(pageName);
+    if (typeof window !== 'undefined') {
+      if (pageName === 'punta-cana' || pageName === 'jornada-este') {
+        window.history.pushState({}, '', pathSlug || '/punta-cana');
+      } else if (pageName === 'higuey') {
+        window.history.pushState({}, '', pathSlug || '/higuey');
+      } else if (pageName === 'home') {
+        window.history.pushState({}, '', '/');
+      }
+      window.scrollTo(0, 0);
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -212,6 +327,7 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [activeFamilyIdx, setActiveFamilyIdx] = useState(null);
   const tomatisVideoRef = useRef(null);
 
   // Lock body scroll when mobile menu is open
@@ -324,48 +440,48 @@ function App() {
 
   return (
     <div className="app">
-      {/* Navbar */}
-      <nav className="navbar">
-        {/* Promotional Banner */}
-        <div 
-          onClick={() => {
-          setCurrentPage('homeschooling');
-          window.scrollTo(0, 0);
-        }}
-        style={{
-          background: 'var(--color-accent)',
-          color: 'white',
-          padding: '4px 10px',
-          textAlign: 'center',
-          fontWeight: 700,
-          fontSize: '0.8rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px',
-          width: '100%',
-          cursor: 'pointer'
-        }}
-      >
-        <Star size={14} fill="white" className="hide-mobile" />
-        <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span>¡Inscripciones abiertas para Homeschooling!</span>
-          <span className="hide-mobile-inline"> Reserva tu cupo ahora.</span>
-        </span>
-        <span style={{ 
-          display: 'inline-flex', 
-          alignItems: 'center', 
-          background: 'rgba(255,255,255,0.2)', 
-          padding: '2px 10px', 
-          borderRadius: '100px', 
-          fontSize: '0.75rem',
-          gap: '4px',
-          marginLeft: '4px',
-          whiteSpace: 'nowrap'
-        }}>
-          Ver Más <ArrowRight size={12} />
-        </span>
-      </div>
+      {/* Navbar (Only rendered when not on dedicated Jornada Este landing page) */}
+      {currentPage !== 'jornada-este' && currentPage !== 'punta-cana' && currentPage !== 'higuey' && (
+        <nav className="navbar">
+          {/* Promotional Banner */}
+          <div 
+            onClick={() => {
+              navigateToPage('punta-cana');
+            }}
+            style={{
+              background: 'linear-gradient(90deg, #FF8651 0%, #2347EF 100%)',
+              color: 'white',
+              padding: '6px 12px',
+              textAlign: 'center',
+              fontWeight: 800,
+              fontSize: '0.82rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              width: '100%',
+              cursor: 'pointer'
+            }}
+          >
+            <Sparkles size={14} fill="white" className="hide-mobile" />
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span>📍 <strong>Jornada Tomatis en Punta Cana</strong>: 13 días intensivos.</span>
+              <span className="hide-mobile-inline"> Cupos limitados a 6 niños.</span>
+            </span>
+            <span style={{ 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              background: 'rgba(255,255,255,0.25)', 
+              padding: '2px 10px', 
+              borderRadius: '100px', 
+              fontSize: '0.75rem',
+              gap: '4px',
+              marginLeft: '4px',
+              whiteSpace: 'nowrap'
+            }}>
+              Ver Jornada Punta Cana <ArrowRight size={12} />
+            </span>
+          </div>
 
         <div className="container nav-container">
           {currentPage === 'home' ? (
@@ -496,6 +612,24 @@ function App() {
                 )}
               </AnimatePresence>
             </div>
+
+            <button 
+              onClick={() => navigateToPage('punta-cana')}
+              className="btn-primary" 
+              style={{ 
+                padding: '8px 16px', 
+                fontSize: '0.85rem', 
+                background: 'var(--color-accent)', 
+                color: '#ffffff',
+                border: 'none', 
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <Sparkles size={14} /> JORNADA PUNTA CANA '26
+            </button>
 
             <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}>
               Agendar Cita
@@ -635,13 +769,37 @@ function App() {
                   <a href="#testimonios" className="mobile-menu-link" onClick={() => setIsMobileMenuOpen(false)}>Testimonios</a>
                   <a href="#contacto" className="mobile-menu-link" onClick={() => setIsMobileMenuOpen(false)}>Contacto</a>
                   
+                  <button
+                    className="mobile-menu-link"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      navigateToPage('punta-cana');
+                    }}
+                    style={{
+                      background: 'var(--color-accent)',
+                      color: '#ffffff',
+                      border: 'none',
+                      borderRadius: '12px',
+                      padding: '12px 16px',
+                      fontWeight: 900,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      cursor: 'pointer',
+                      boxShadow: '3px 3px 0px var(--color-border)',
+                      marginTop: '8px'
+                    }}
+                  >
+                    <Sparkles size={18} /> Jornada Punta Cana
+                  </button>
+
                   <button 
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       setIsBookingModalOpen(true);
                     }} 
                     className="btn-primary" 
-                    style={{ width: '100%', marginTop: '20px', padding: '15px', border: 'none' }}
+                    style={{ width: '100%', marginTop: '14px', padding: '15px', border: 'none' }}
                   >
                     Agendar Cita
                   </button>
@@ -651,16 +809,15 @@ function App() {
           )}
         </AnimatePresence>
       </nav>
+      )}
 
       {currentPage === 'home' && (
         <>
           {/* Hero Section */}
       <section className="hero bg-cream with-grid" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Decor */}
-        <div className="dec-star-4 orange" style={{ top: '15%', left: '5%', opacity: 1, transform: 'scale(1.5)' }}></div>
         <div className="dec-circle" style={{ top: '-50px', right: '-50px', width: '300px', height: '300px', background: 'var(--color-secondary)', opacity: 1 }}></div>
-                        <div className="dec-wiggle hide-mobile" style={{ top: '65%', left: '30%', opacity: 1 }}></div>
-                        <div className="dec-star-4 yellow" style={{ bottom: '28%', right: '12%', opacity: 1, transform: 'scale(1.2)' }}></div>
+        <div className="dec-star-4 yellow" style={{ bottom: '28%', right: '12%', opacity: 1, transform: 'scale(1.2)' }}></div>
         <div className="dec-wiggle hide-mobile" style={{ top: '25%', right: '35%', opacity: 1 }}></div>
 
         <div className="container hero-content">
@@ -706,7 +863,7 @@ function App() {
             variants={staggerContainer}
             style={{ position: 'relative', zIndex: 2 }}
           >
-            <motion.p variants={fadeUp} className="hero-subtitle-desktop hide-mobile" style={{ marginTop: '-80px' }}>
+            <motion.p variants={fadeUp} className="hero-subtitle-desktop hide-mobile">
               A través de estímulos multisensoriales, herramientas como el Método Tomatis y muchísimo amor, ayudamos a que tu pequeño gane confianza, mejore su atención y disfrute aprender.
             </motion.p>
             <motion.p variants={fadeUp} className="hero-subtitle-mobile">
@@ -723,23 +880,69 @@ function App() {
           </motion.div>
         </div>
 
-        {/* Media Presence Section - Static Grid */}
-        <div className="hero-media-static">
-
-          <div className="container">
-            <div className="media-static-label">PRESENCIA EN MEDIOS:</div>
-            <div className="media-logos-grid">
-              <img src="/logosasseenin/azulpodcast.webp" alt="Azul Podcast" />
-              <img src="/logosasseenin/colorvision.webp" alt="Color Visión" />
-              <img src="/logosasseenin/estonoesradio.webp" alt="Esto No Es Radio" />
-              <img src="/logosasseenin/lamirada.webp" alt="La Mirada" />
-              <img src="/logosasseenin/rnn.webp" alt="RNN" />
-            </div>
+        {/* Minimal Testimonials Marquee */}
+        <div className="hero-quotes-marquee">
+          <div className="hero-quotes-track">
+            {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
+              <div key={idx} className="hero-quote-item">
+                <div className="hero-quote-stars">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} fill="#F59E0B" color="#F59E0B" />
+                  ))}
+                </div>
+                <span className="hero-quote-text">{quote}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Pure Seamless Video Wall - Directly Below Hero (No cards, full section coverage) */}
+      <section className="hero-seamless-videowall">
+        <div className="hero-videowall-grid">
+          {heroVideoWall.map((vid) => (
+            <div key={vid.id} className="hero-videowall-cell">
+              <video
+                src={vid.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={`hero-videowall-video ${vid.className || ''}`}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
 
+      {/* Media Presence Section - Below the videos */}
+      <section className="hero-media-static bg-blue">
+        <div className="container">
+          <div className="media-static-label">PRESENCIA EN MEDIOS:</div>
+          <div className="media-logos-grid">
+            <div className="media-logo-item">
+              <img src="/logosasseenin/azulpodcast.webp" alt="Azul Podcast" />
+              <span className="media-logo-name">Azul Podcast</span>
+            </div>
+            <div className="media-logo-item">
+              <img src="/logosasseenin/colorvision.webp" alt="Color Visión" />
+              <span className="media-logo-name">Color Visión</span>
+            </div>
+            <div className="media-logo-item">
+              <img src="/logosasseenin/estonoesradio.webp" alt="Esto No Es Radio" />
+              <span className="media-logo-name">Esto No Es Radio</span>
+            </div>
+            <div className="media-logo-item">
+              <img src="/logosasseenin/lamirada.webp" alt="La Mirada" />
+              <span className="media-logo-name">La Mirada</span>
+            </div>
+            <div className="media-logo-item">
+              <img src="/logosasseenin/rnn.webp" alt="RNN" />
+              <span className="media-logo-name">RNN</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Split Info Section: Why Tomatis */}
       <section id="metodo" className="split-info bg-blue" style={{ position: 'relative', overflow: 'hidden' }}>
@@ -754,7 +957,7 @@ function App() {
           <Headphones size={250} />
         </div>
 
-        <div className="dec-wiggle" style={{ top: '50px', left: '45%', opacity: 1 }}></div>
+        <div className="dec-wiggle" style={{ top: '20px', left: '8%', opacity: 0.8 }}></div>
         <div className="dec-star-4 orange" style={{ bottom: '10%', right: '5%', opacity: 1, transform: 'scale(1.3)' }}></div>
         <div className="dec-circle" style={{ top: '40%', right: '-100px', width: '200px', height: '200px', background: 'var(--color-secondary)', opacity: 1 }}></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -770,6 +973,33 @@ function App() {
               <motion.p variants={fadeUp} className="hide-mobile">
                 El oído no solo nos ayuda a escuchar, también activa el cerebro, y con el Método Tomatis trabajamos la escucha de tu hijo mediante una estimulación especial que fortalece su oído y le ayuda a entender, concentrarse y aprender mejor.
               </motion.p>
+
+              <motion.div
+                className="split-info-cards"
+                variants={staggerContainer}
+              >
+                <motion.div className="info-card-vertical" variants={fadeUp}>
+                  <div className="info-icon"><BrainCircuit size={32} /></div>
+                  <div className="info-content">
+                    <h3>Mejora la atención y concentración</h3>
+                  </div>
+                </motion.div>
+
+                <motion.div className="info-card-vertical" variants={fadeUp}>
+                  <div className="info-icon"><Speech size={32} /></div>
+                  <div className="info-content">
+                    <h3>Fomenta el lenguaje y la comunicación</h3>
+                  </div>
+                </motion.div>
+
+                <motion.div className="info-card-vertical" variants={fadeUp}>
+                  <div className="info-icon"><HeartHandshake size={32} /></div>
+                  <div className="info-content">
+                    <h3>Favorece la regulación emocional</h3>
+                  </div>
+                </motion.div>
+              </motion.div>
+
               <motion.div variants={fadeUp} style={{ marginTop: '24px' }}>
                 <button 
                   onClick={() => {
@@ -835,35 +1065,6 @@ function App() {
             </motion.div>
           </div>
 
-          <motion.div
-            className="split-info-cards"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={staggerContainer}
-          >
-            <motion.div className="info-card-vertical" variants={fadeUp}>
-              <div className="info-icon"><BrainCircuit size={32} /></div>
-              <div className="info-content">
-                <h3>Mejora la atención y concentración</h3>
-              </div>
-            </motion.div>
-
-            <motion.div className="info-card-vertical" variants={fadeUp}>
-              <div className="info-icon"><Speech size={32} /></div>
-              <div className="info-content">
-                <h3>Fomenta el lenguaje y la comunicación</h3>
-              </div>
-            </motion.div>
-
-            <motion.div className="info-card-vertical" variants={fadeUp}>
-              <div className="info-icon"><HeartHandshake size={32} /></div>
-              <div className="info-content">
-                <h3>Favorece la regulación emocional</h3>
-              </div>
-            </motion.div>
-          </motion.div>
-
           {/* Integrated Certification Authority Bar */}
           <motion.a
             href="https://www.tomatis.com/es/profesional/republica-dominicana/"
@@ -921,6 +1122,21 @@ function App() {
               </span>
             </div>
             <div className="cert-bar-badge-right">
+              <div className="cert-bar-screenshot-mini" title="Verificación oficial en Tomatis.com">
+                <div className="cert-mini-browser-bar">
+                  <div className="cert-mini-dots">
+                    <span className="cert-mini-dot cert-mini-dot-red" />
+                    <span className="cert-mini-dot cert-mini-dot-yellow" />
+                    <span className="cert-mini-dot cert-mini-dot-green" />
+                  </div>
+                  <span className="cert-mini-domain">tomatis.com</span>
+                </div>
+                <img 
+                  src="/oficialscreenshot.png" 
+                  alt="Verificación oficial en Tomatis.com" 
+                  className="cert-mini-screenshot-img" 
+                />
+              </div>
               <span className="cert-badge-premium">Nivel 4</span>
             </div>
           </motion.a>
@@ -1005,13 +1221,28 @@ function App() {
 
       {/* Tomatis en Ruta Section */}
       <section className="tomatis-ruta with-grid">
+        {/* Background Photo Collage of Visits with Purple Overlay */}
+        <div className="form-collage-backdrop" aria-hidden="true">
+          <div className="form-collage-grid">
+            {collagePhotos.map((photo, i) => (
+              <div key={i} className={`collage-photo-card card-tilt-${(i % 5) + 1}`}>
+                <div className="collage-photo-inner">
+                  <img src={photo.src} alt={photo.city} loading="lazy" />
+                  <span className="collage-city-tag">📍 {photo.city}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="tomatis-ruta-collage-overlay" />
+        </div>
+
         {/* Fun Background Decor */}
-        <div style={{ position: 'absolute', top: '15%', right: '5%', opacity: 0.05, transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', top: '15%', right: '5%', opacity: 0.05, transform: 'rotate(15deg)', pointerEvents: 'none', zIndex: 3 }}>
           <MapPin size={400} />
         </div>
-        <div className="dec-circle" style={{ top: '-30px', right: '10%', width: '90px', height: '90px', background: 'var(--color-pink)', opacity: 0.3 }}></div>
-        <div className="dec-wiggle" style={{ top: '30px', left: '5%', opacity: 0.8 }}></div>
-        <div className="dec-wiggle" style={{ bottom: '10%', right: '10%', opacity: 0.6 }}></div>
+        <div className="dec-circle" style={{ top: '-30px', right: '10%', width: '90px', height: '90px', background: 'var(--color-pink)', opacity: 0.3, zIndex: 3 }}></div>
+        <div className="dec-wiggle" style={{ top: '30px', left: '5%', opacity: 0.8, zIndex: 3 }}></div>
+        <div className="dec-wiggle" style={{ bottom: '10%', right: '10%', opacity: 0.6, zIndex: 3 }}></div>
 
         <div className="container">
           <div className="ruta-layout">
@@ -1036,18 +1267,18 @@ function App() {
                 <div className="city-chip">¡Y más!</div>
               </div>
 
-              <div style={{ marginTop: '28px', display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <div className="ruta-actions">
                 <button
                   onClick={() => { setCurrentPage('tomatis-en-ruta'); window.scrollTo(0, 0); }}
                   className="btn-primary"
-                  style={{ cursor: 'pointer', fontSize: '1rem', padding: '14px 26px', border: 'none', borderRadius: '24px', fontWeight: 800 }}
+                  style={{ cursor: 'pointer', fontSize: '0.92rem', padding: '13px 22px', border: 'none', borderRadius: '24px', fontWeight: 800, whiteSpace: 'nowrap' }}
                 >
                   Ver fotos de visitas
                 </button>
                 <button
                   onClick={() => { setCurrentPage('propietarios'); window.scrollTo(0, 0); }}
                   className="btn-outline"
-                  style={{ cursor: 'pointer', fontSize: '0.85rem', padding: '12px 18px', letterSpacing: '0.5px' }}
+                  style={{ cursor: 'pointer', fontSize: '0.85rem', padding: '11px 18px', letterSpacing: '0.5px', whiteSpace: 'nowrap' }}
                 >
                   ¿Eres propietario de un centro?
                 </button>
@@ -1060,7 +1291,9 @@ function App() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
+              style={{ position: 'relative' }}
             >
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '250px', height: '250px', background: '#C084FC', filter: 'blur(80px)', borderRadius: '50%', zIndex: -1, opacity: 0.5, pointerEvents: 'none' }}></div>
               <div className="stylized-map-wrapper">
                 <div className="map-image-container">
                   <img src="/branding/mapa_rd.webp" alt="Mapa República Dominicana" className="dr-real-map" />
@@ -1152,61 +1385,79 @@ function App() {
             <p className="team-subtitle-mobile" style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>Una familia que pone el corazón en cada terapia, con amor real y trato cercano.</p>
           </motion.div>
 
-          <div className="team-layout">
+          <div className="family-showcase">
             <motion.div
-              className="team-grid vertical"
+              className="family-members-row"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={staggerContainer}
             >
-              <motion.div className="team-card" variants={fadeUp}>
-                <div className="team-image-container" style={{ background: 'var(--color-secondary)' }}>
-                  <img src="/carlos_perez_diaz_new.webp" alt="Carlos Pérez Díaz" className="team-image" />
+              {/* Member 1: Carlos Pérez Díaz */}
+              <motion.div
+                className={`family-member ${activeFamilyIdx === 0 ? 'active' : ''}`}
+                variants={fadeUp}
+                onClick={() => setActiveFamilyIdx(activeFamilyIdx === 0 ? null : 0)}
+              >
+                <div className="family-portrait-stage" style={{ background: '#FFE6A3' }}>
+                  <img src="/carlos_perez_diaz_new.webp" alt="Carlos Pérez Díaz" className="family-portrait-img family-img-diaz" />
+                  <div className="family-hover-drawer" style={{ background: '#FFE6A3' }}>
+                    <p className="family-hover-desc">
+                      Licenciado en educación y especialista en neuropedagogía. Enfocado en optimizar el aprendizaje desde una perspectiva neurocognitiva integral.
+                    </p>
+                  </div>
                 </div>
-                <div className="team-info">
-                  <h3>Carlos Pérez Díaz</h3>
-                  <span className="team-role">Especialista en Neuropedagogía</span>
-                  <p className="team-desc-desktop">Licenciado en educación y especialista en neuropedagogía. Enfocado en optimizar el proceso de aprendizaje desde una perspectiva neurocognitiva.</p>
-                  <p className="team-desc-mobile">Especialista en neuropedagogía y aprendizaje.</p>
-                </div>
-              </motion.div>
-
-              <motion.div className="team-card" variants={fadeUp}>
-                <div className="team-image-container" style={{ background: '#73C6F7' }}>
-                  <img src="/carlos_perez_new.webp" alt="Carlos Eduardo Pérez" className="team-image" />
-                </div>
-                <div className="team-info">
-                  <h3>Carlos Eduardo Pérez</h3>
-                  <span className="team-role">Psicólogo Clínico / Consultor Tomatis® / Terapeuta en Neurofeedback</span>
-                  <p className="team-desc-desktop">Psicólogo clínico, Consultor Tomatis® y Terapeuta en Neurofeedback. Especializado en la evaluación e intervención del neurodesarrollo mediante la estimulación audiosensorial y el entrenamiento cerebral.</p>
-                  <p className="team-desc-mobile">Psicólogo clínico, Consultor Tomatis® y Terapeuta en Neurofeedback.</p>
+                <div className="family-member-info">
+                  <h3 className="family-member-name">Carlos Pérez Díaz</h3>
+                  <span className="family-member-role-pill" style={{ background: '#FFE6A3' }}>
+                    Neuropedagogía
+                  </span>
                 </div>
               </motion.div>
 
-              <motion.div className="team-card" variants={fadeUp}>
-                <div className="team-image-container" style={{ background: 'var(--color-pink)' }}>
-                  <img src="/mery_torrealba_new.webp" alt="Mery Torrealba" className="team-image" />
+              {/* Member 2: Carlos Eduardo Pérez */}
+              <motion.div
+                className={`family-member ${activeFamilyIdx === 1 ? 'active' : ''}`}
+                variants={fadeUp}
+                onClick={() => setActiveFamilyIdx(activeFamilyIdx === 1 ? null : 1)}
+              >
+                <div className="family-portrait-stage" style={{ background: '#D0EEFF' }}>
+                  <img src="/carlos_perez_new.webp" alt="Carlos Eduardo Pérez" className="family-portrait-img family-img-eduardo" />
+                  <div className="family-hover-drawer" style={{ background: '#D0EEFF' }}>
+                    <p className="family-hover-desc">
+                      Psicólogo clínico, Consultor Tomatis® y Terapeuta en Neurofeedback. Especializado en neurodesarrollo y estimulación audiosensorial.
+                    </p>
+                  </div>
                 </div>
-                <div className="team-info">
-                  <h3>Mery Torrealba</h3>
-                  <span className="team-role">Lic. en Psicopedagogía / Consultor Tomatis® / Terapeuta en Neurofeedback</span>
-                  <p className="team-desc-desktop">Licenciada en Psicopedagogía, Consultor Tomatis® y Terapeuta en Neurofeedback. Experta en evaluación psicopedagógica y entrenamiento neurosensorial para el desarrollo integral infantil.</p>
-                  <p className="team-desc-mobile">Lic. en Psicopedagogía, Consultor Tomatis® y Terapeuta en Neurofeedback.</p>
+                <div className="family-member-info">
+                  <h3 className="family-member-name">Carlos Eduardo Pérez</h3>
+                  <span className="family-member-role-pill" style={{ background: '#D0EEFF' }}>
+                    Psicología & Tomatis®
+                  </span>
                 </div>
               </motion.div>
-            </motion.div>
 
-            <motion.div
-              className="team-video-wrapper"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
-            >
-              <div className="team-video-clipper">
-                <video src="/reviews/fam.mp4" autoPlay loop muted playsInline preload="metadata" className="team-video-element"></video>
-              </div>
+              {/* Member 3: Mery Torrealba */}
+              <motion.div
+                className={`family-member ${activeFamilyIdx === 2 ? 'active' : ''}`}
+                variants={fadeUp}
+                onClick={() => setActiveFamilyIdx(activeFamilyIdx === 2 ? null : 2)}
+              >
+                <div className="family-portrait-stage" style={{ background: '#FFD6DF' }}>
+                  <img src="/mery_torrealba_new.webp" alt="Mery Torrealba" className="family-portrait-img family-img-mery" />
+                  <div className="family-hover-drawer" style={{ background: '#FFD6DF' }}>
+                    <p className="family-hover-desc">
+                      Licenciada en Psicopedagogía, Consultor Tomatis® y Terapeuta en Neurofeedback. Experta en desarrollo neurosensorial e intervención infantil.
+                    </p>
+                  </div>
+                </div>
+                <div className="family-member-info">
+                  <h3 className="family-member-name">Mery Torrealba</h3>
+                  <span className="family-member-role-pill" style={{ background: '#FFD6DF' }}>
+                    Psicopedagogía & Tomatis®
+                  </span>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -1274,7 +1525,7 @@ function App() {
                   <Star size={16} fill="var(--color-secondary)" color="var(--color-secondary)" />
                   <Star size={16} fill="var(--color-secondary)" color="var(--color-secondary)" />
                 </div>
-                <p>¡Yeiry recibe la palabra más deseada!</p>
+                <p>Acabo de recibir la palabra más deseada "mamá".</p>
               </div>
             </motion.div>
 
@@ -1368,9 +1619,10 @@ function App() {
       </section>
 
       {/* Media & Press Section */}
-      <section className="media-section bg-cream" style={{ position: 'relative', overflow: 'hidden' }}>
+      <section className="media-section with-paper-image" style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#FFFFFF' }}>
         <div className="dec-circle" style={{ top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'var(--color-primary-light)', opacity: 0.5 }}></div>
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          {/* Centered Section Header */}
           <motion.div
             className="section-header-centered"
             initial="hidden"
@@ -1381,47 +1633,120 @@ function App() {
             <div className="cert-tag-minimal" style={{ margin: '0 auto 16px' }}>
               <Video size={14} color="var(--color-accent)" /> <span>Presencia en Medios</span>
             </div>
-            <h2 style={{ fontSize: '3rem', marginBottom: '16px' }}>Entrevistas y <span style={{ color: 'var(--color-accent)' }}>Apariciones</span></h2>
-            <p style={{ maxWidth: '600px', margin: '0 auto 40px', fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>
-              Compartiendo nuestra experiencia en distintos medios de comunicación.
+            <h2 style={{ fontSize: '3rem', marginBottom: '16px' }}>
+              Entrevistas y <span style={{ color: 'var(--color-accent)' }}>Apariciones</span>
+            </h2>
+            <p style={{ maxWidth: '620px', margin: '0 auto 48px', fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>
+              Compartiendo nuestra experiencia clínica en distintos medios y programas sobre neurodesarrollo y abordajes actuales.
             </p>
           </motion.div>
 
-          <motion.div
-            className="media-grid"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {mediaAppearances.map((media, idx) => (
+          {/* Bento Media Showcase */}
+          <div className="media-bento-container">
+            {/* Left Column: Vertical 9:16 Reel Card */}
+            <div className="media-bento-reel-col">
               <motion.a
-                key={idx}
-                href={media.url}
+                href="https://www.instagram.com/reel/CgfJ_WovZS8/?utm_source=ig_web_button_share_sheet&stkn=MzRlODBiNWFlZA=="
                 target="_blank"
                 rel="noreferrer"
-                className="media-card-modern"
+                className="media-card-modern media-card-reel"
                 variants={fadeUp}
               >
-                <div className="media-thumb-wrapper">
-                  <img src={media.thumbnail} alt={media.title} className="media-thumbnail" />
+                <div className="media-reel-thumb-wrapper">
+                  <video
+                    src="/mery-raul-grisanty.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="media-reel-video"
+                  />
                   <div className="media-play-overlay">
                     <div className="play-icon-circle">
                       <Play fill="white" size={24} />
                     </div>
                   </div>
-                  <div className="media-source-tag">YouTube</div>
+                  <div className="media-source-tag media-reel-badge-tag">
+                    275K Vistas
+                  </div>
                 </div>
                 <div className="media-content-modern">
-                  <h3 className="media-card-title">{media.title}</h3>
-                  <p className="media-card-speakers">{media.speakers}</p>
+                  <span className="media-reel-channel">
+                    Así es Raúl Grisanty · TV
+                  </span>
+                  <h3 className="media-card-title">Mery Torrealba: Señales de alerta temprana</h3>
+                  <p className="media-card-speakers">Entrevista en TV Nacional</p>
                   <div className="media-card-footer">
-                    <span className="watch-now-text">Ver video <ArrowRight size={14} /></span>
+                    <span className="watch-now-text">
+                      Ver Reel en Instagram <ArrowRight size={14} />
+                    </span>
                   </div>
                 </div>
               </motion.a>
-            ))}
-          </motion.div>
+            </div>
+
+            {/* Right Column: 4 YouTube Cards in 2x2 grid */}
+            <div className="media-bento-yt-col">
+              {mediaAppearances.slice(0, 4).map((media, idx) => (
+                <motion.a
+                  key={idx}
+                  href={media.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="media-card-modern"
+                  variants={fadeUp}
+                >
+                  <div className="media-thumb-wrapper">
+                    <img src={media.thumbnail} alt={media.title} className="media-thumbnail" />
+                    <div className="media-play-overlay">
+                      <div className="play-icon-circle">
+                        <Play fill="white" size={24} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="media-content-modern">
+                    <h3 className="media-card-title">{media.title}</h3>
+                    <p className="media-card-speakers">{media.speakers}</p>
+                    <div className="media-card-footer">
+                      <span className="watch-now-text">Ver video <ArrowRight size={14} /></span>
+                    </div>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Row: Remaining YouTube Cards */}
+          {mediaAppearances.length > 4 && (
+            <div className="media-bottom-row">
+              {mediaAppearances.slice(4).map((media, idx) => (
+                <motion.a
+                  key={idx + 4}
+                  href={media.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="media-card-modern"
+                  variants={fadeUp}
+                >
+                  <div className="media-thumb-wrapper">
+                    <img src={media.thumbnail} alt={media.title} className="media-thumbnail" />
+                    <div className="media-play-overlay">
+                      <div className="play-icon-circle">
+                        <Play fill="white" size={24} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="media-content-modern">
+                    <h3 className="media-card-title">{media.title}</h3>
+                    <p className="media-card-speakers">{media.speakers}</p>
+                    <div className="media-card-footer">
+                      <span className="watch-now-text">Ver video <ArrowRight size={14} /></span>
+                    </div>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -1430,7 +1755,7 @@ function App() {
         <div className="cta-bg-logo-left">
           <img src="/branding/logopng.webp" alt="" style={{ width: '100%', height: 'auto', mixBlendMode: 'multiply' }} />
         </div>
-        <div className="dec-circle cta-circle-decor" style={{ top: '-100px', left: '-50px', width: '300px', height: '300px' }}></div>
+        <div className="dec-circle cta-circle-decor" style={{ top: '-100px', left: '-50px', width: '300px', height: '300px', background: 'var(--color-secondary)' }}></div>
         <div className="dec-star-4 orange" style={{ top: '30%', right: '10%' }}></div>
         <div className="dec-wiggle" style={{ bottom: '20%', left: '20%' }}></div>
 
@@ -1451,7 +1776,7 @@ function App() {
 
             <div className="cta-media">
               <motion.div className="cta-image-wrapper" variants={fadeUp}>
-                <img src="/cta_image.webp" alt="Terapia Multisensorial" className="cta-img" />
+                <img src="/cta_image.jpg" alt="Terapia Multisensorial" className="cta-img" />
               </motion.div>
             </div>
 
@@ -1599,6 +1924,19 @@ function App() {
         <TomatisEnRutaPage 
           onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
           onNavigateService={handleNavigateService}
+          initialCity={tomatisRutaCity}
+        />
+      )}
+
+      {(currentPage === 'jornada-este' || currentPage === 'punta-cana') && (
+        <PuntaCanaPage 
+          onNavigateHome={() => navigateToPage('home')}
+        />
+      )}
+
+      {currentPage === 'higuey' && (
+        <HigueyPage 
+          onNavigateHome={() => navigateToPage('home')}
         />
       )}
       <motion.div

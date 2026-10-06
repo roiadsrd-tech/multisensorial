@@ -473,45 +473,87 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
         </div>
       </section>
 
-      {/* Qué es la Terapia Orofacial */}
-      <section style={{ padding: '80px 0', background: '#FFF' }}>
+      {/* Qué es la Terapia Orofacial - Bento Layout */}
+      <section style={{ padding: '90px 0', background: '#FFF', borderBottom: '3px dashed var(--color-primary-dark)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'center' }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <div className="badge-modern" style={{ background: 'var(--color-pink)', color: 'var(--color-primary-dark)', padding: '6px 16px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '14px' }}>
-                ¿EN QUÉ CONSISTE?
+                METODOLOGÍA CLÍNICA
               </div>
-              <h2 style={{ fontSize: '2.6rem', marginBottom: '18px', color: 'var(--color-primary-dark)', fontWeight: 800, lineHeight: 1.2 }}>
-                El tratamiento enfocado en mejorar las funciones orales
+              <h2 style={{ fontSize: '2.8rem', marginBottom: '18px', color: 'var(--color-primary-dark)', fontWeight: 900, lineHeight: 1.18 }}>
+                Mucho más que pronunciación: tono, deglución y respiración
               </h2>
-              <p style={{ fontSize: '1.1rem', marginBottom: '16px', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '1.1rem', marginBottom: '16px', color: 'var(--color-primary-dark)', opacity: 0.9, lineHeight: 1.6 }}>
                 La terapia orofacial es un conjunto especializado de ejercicios y técnicas dirigidas a tonificar y coordinar los músculos de la cara y la cavidad oral.
               </p>
-              <p style={{ fontSize: '1.05rem', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '1.02rem', color: 'var(--color-primary-dark)', opacity: 0.85, lineHeight: 1.6 }}>
                 A través de dinámicas lúdicas y adaptadas a la edad de cada niño, facilitamos una comunicación limpia, una articulación precisa de fonemas y un patrón de masticación y deglución seguro.
               </p>
+              <div style={{ marginTop: '24px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <span className="punchy-stat-pill">
+                  <ShieldCheck size={16} /> Rigor Terapéutico
+                </span>
+                <span className="punchy-stat-pill" style={{ background: '#FAF9DC' }}>
+                  <Sparkles size={16} /> 100% Lúdico
+                </span>
+              </div>
             </motion.div>
             
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-              <div style={{ background: '#FAF9DC', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
-                <Speech size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Mejora del habla</h4>
-                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Articulación correcta de fonemas complejos.</p>
+            {/* Bento Cluster */}
+            <div className="orofacial-bento-cluster">
+              {/* Wide Bento Card: Habla y Articulación */}
+              <div className="orofacial-bento-wide">
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', fontWeight: 900, textTransform: 'uppercase', color: 'var(--color-primary-dark)', background: 'white', padding: '4px 10px', borderRadius: '8px', border: '1.5px solid var(--color-primary-dark)', marginBottom: '10px' }}>
+                    <Speech size={14} /> Articulación y Habla
+                  </div>
+                  <h4 style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--color-primary-dark)', marginBottom: '8px' }}>
+                    Articulación limpia de fonemas complejos
+                  </h4>
+                  <p style={{ fontSize: '0.92rem', color: 'var(--color-primary-dark)', opacity: 0.88, margin: 0, lineHeight: 1.5 }}>
+                    Mayor agilidad lingual y labial para que tu hijo hable con soltura y seguridad en cualquier entorno social o escolar.
+                  </p>
+                </div>
+                <div style={{ width: '64px', height: '64px', borderRadius: '20px', background: 'white', border: '2.5px solid var(--color-primary-dark)', boxShadow: '3px 3px 0px var(--color-primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <Speech size={32} color="var(--color-primary-dark)" />
+                </div>
               </div>
-              <div style={{ background: '#E8F5E9', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
-                <Utensils size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Promueve masticación</h4>
-                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Fuerza y movilidad de músculos maseteros.</p>
+
+              {/* Tall Bento Card: Masticación y Deglución */}
+              <div className="orofacial-bento-tall">
+                <div>
+                  <div style={{ width: '50px', height: '50px', borderRadius: '16px', background: 'white', border: '2px solid var(--color-primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+                    <Utensils size={26} color="var(--color-primary-dark)" />
+                  </div>
+                  <span style={{ fontSize: '0.76rem', fontWeight: 900, textTransform: 'uppercase', color: 'var(--color-primary-dark)', opacity: 0.8, display: 'block', marginBottom: '4px' }}>
+                    Nutrición y Deglución
+                  </span>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--color-primary-dark)', marginBottom: '8px', lineHeight: 1.25 }}>
+                    Masticación sólida y deglución sin atragantamientos
+                  </h4>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--color-primary-dark)', opacity: 0.85, lineHeight: 1.5, margin: 0 }}>
+                    Fortalecimiento de músculos maseteros para evitar la deglución atípica, el babeo y el rechazo de texturas.
+                  </p>
+                </div>
               </div>
-              <div style={{ background: '#FFE4E8', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
-                <CupSoda size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Facilita deglución</h4>
-                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Prevención de deglución atípica y babeo.</p>
-              </div>
-              <div style={{ background: '#E0F7FA', padding: '24px', borderRadius: '24px', border: '3px solid var(--color-primary-dark)', boxShadow: '4px 4px 0px var(--color-primary-dark)' }}>
-                <Wind size={36} color="var(--color-primary-dark)" style={{ marginBottom: '12px' }} />
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '4px' }}>Fomenta respiración</h4>
-                <p style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>Fomento del patrón respiratorio nasal.</p>
+
+              {/* Compact Bento Card: Respiración Nasal */}
+              <div className="orofacial-bento-compact">
+                <div>
+                  <div style={{ width: '50px', height: '50px', borderRadius: '16px', background: 'white', border: '2px solid var(--color-primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+                    <Wind size={26} color="var(--color-primary-dark)" />
+                  </div>
+                  <span style={{ fontSize: '0.76rem', fontWeight: 900, textTransform: 'uppercase', color: 'var(--color-primary-dark)', opacity: 0.8, display: 'block', marginBottom: '4px' }}>
+                    Postura y Vías Aéreas
+                  </span>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--color-primary-dark)', marginBottom: '8px', lineHeight: 1.25 }}>
+                    Fomento activo del patrón respiratorio nasal
+                  </h4>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--color-primary-dark)', opacity: 0.85, lineHeight: 1.5, margin: 0 }}>
+                    Evita la respiración bucal que altera la morfología del paladar, previene el cansancio diurno y mejora el sueño profundo.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -521,16 +563,16 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
 
 
       {/* 5 Beneficios Principales (Interactive Spotlight Layout) */}
-      <section className="bg-yellow with-grid" style={{ padding: '80px 0' }}>
+      <section className="bg-yellow with-grid" style={{ padding: '90px 0', borderBottom: '3px dashed var(--color-primary-dark)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <div className="badge-modern" style={{ background: 'var(--color-accent)', color: 'white', padding: '6px 16px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '12px' }}>
               IMPACTO REAL EN EL NIÑO
             </div>
-            <h2 style={{ fontSize: '2.8rem', color: 'var(--color-primary-dark)', fontWeight: 900 }}>
+            <h2 style={{ fontSize: '2.9rem', color: 'var(--color-primary-dark)', fontWeight: 900 }}>
               Beneficios Principales
             </h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', maxWidth: '600px', margin: '8px auto 0' }}>
+            <p style={{ fontSize: '1.15rem', color: 'var(--color-primary-dark)', opacity: 0.9, maxWidth: '640px', margin: '8px auto 0' }}>
               Haz clic en cada beneficio para descubrir cómo transforma el día a día de tu hijo.
             </p>
           </div>
@@ -539,63 +581,140 @@ const TerapiaOrofacialPage = ({ onBack, onBook, onNavigateService }) => {
         </div>
       </section>
 
-      {/* Guía de Ejercicios en Casa */}
-      <section className="bg-blue with-grid" style={{ padding: '80px 0' }}>
+      {/* Guía de Ejercicios en Casa - Asymmetric Play Gym */}
+      <section className="bg-blue with-grid" style={{ padding: '90px 0', borderBottom: '3px dashed var(--color-primary-dark)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '50px' }}>
             <div className="badge-modern" style={{ background: 'var(--color-pink)', color: 'var(--color-primary-dark)', padding: '6px 16px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '12px' }}>
-              ACTIVIDADES PRÁCTICAS
+              GIMNASIO LÚDICO EN EL HOGAR
             </div>
-            <h2 style={{ fontSize: '2.8rem', color: 'var(--color-primary-dark)', fontWeight: 900 }}>
+            <h2 style={{ fontSize: '3rem', color: 'var(--color-primary-dark)', fontWeight: 900 }}>
               Guía de Ejercicios en Casa
             </h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)' }}>
-              Cuatro ejercicios orofaciales sencillos para hacer con los pequeños. ¡A divertirse jugando!
+            <p style={{ fontSize: '1.15rem', color: 'var(--color-primary-dark)', opacity: 0.9 }}>
+              Cuatro dinámicas orofaciales sencillas y divertidas para practicar en familia jugando.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
-            {homeExercises.map((ex, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -6, scale: 1.02 }}
-                style={{
-                  background: ex.color,
-                  padding: '28px',
-                  borderRadius: '24px',
-                  border: '3px solid var(--color-primary-dark)',
-                  boxShadow: '6px 6px 0px var(--color-primary-dark)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <div>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'white', border: '2px solid var(--color-primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
-                    {ex.icon}
+          {/* Asymmetric Gym Layout (NO identical adjacent cards!) */}
+          <div className="orofacial-gym-container">
+            {/* Featured Hero Card: Besitos al aire */}
+            <div className="gym-hero-card">
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+                  <div style={{ width: '64px', height: '64px', borderRadius: '20px', background: 'white', border: '3px solid var(--color-primary-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <KissIcon size={34} />
                   </div>
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '10px', color: 'var(--color-primary-dark)' }}>
-                    {ex.title}
-                  </h3>
-                  <div style={{
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    padding: '12px 14px',
-                    borderRadius: '14px',
-                    border: '2px dashed var(--color-primary-dark)',
-                    fontWeight: 800,
-                    fontSize: '0.92rem',
-                    color: 'var(--color-primary-dark)',
-                    marginBottom: '14px',
-                    lineHeight: 1.4
-                  }}>
-                    "{ex.instruction}"
+                  <span style={{ background: 'var(--color-accent)', color: 'white', padding: '6px 14px', borderRadius: '30px', fontWeight: 900, fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.6px', border: '2px solid var(--color-primary-dark)' }}>
+                    ★ Ejercicio Estrella
+                  </span>
+                </div>
+
+                <h3 style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--color-primary-dark)', marginBottom: '10px' }}>
+                  Besitos al aire
+                </h3>
+
+                <p style={{ fontSize: '1.05rem', color: 'var(--color-primary-dark)', lineHeight: 1.6, opacity: 0.9, marginBottom: '20px' }}>
+                  Fortalece el sellado de los labios y mejora el tono de los músculos orbiculares, clave para no derramar líquidos y articular sonidos labiales con claridad.
+                </p>
+
+                <div style={{
+                  background: 'white',
+                  padding: '16px 20px',
+                  borderRadius: '18px',
+                  border: '2.5px dashed var(--color-primary-dark)',
+                  marginBottom: '22px'
+                }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 900, textTransform: 'uppercase', color: 'var(--color-accent)', display: 'block', marginBottom: '4px' }}>
+                    Instrucción para papá o mamá:
+                  </span>
+                  <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--color-primary-dark)' }}>
+                    "Lanza besos exagerados y sonoros hacia el aire haciendo ruido con los labios"
                   </div>
                 </div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-primary-dark)', opacity: 0.9, lineHeight: 1.5, margin: 0 }}>
-                  {ex.desc}
-                </p>
-              </motion.div>
-            ))}
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', paddingTop: '16px', borderTop: '2px dashed rgba(35, 71, 239, 0.2)' }}>
+                <span style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--color-primary-dark)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Activity size={16} /> Rutina: 3 series de 10 segundos
+                </span>
+                <span style={{ background: '#FAF9DC', border: '1.5px solid var(--color-primary-dark)', borderRadius: '20px', padding: '4px 12px', fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-primary-dark)' }}>
+                  Objetivo: Tono Labial
+                </span>
+              </div>
+            </div>
+
+            {/* Trio of Asymmetric Gym Cards */}
+            <div className="gym-cards-stack">
+              {/* Tile 1: Carita de pez */}
+              <div className="gym-tile-strip" style={{ background: '#FFF3D6' }}>
+                <div className="gym-tile-icon-box" style={{ background: 'white' }}>
+                  <Fish size={28} color="var(--color-primary-dark)" />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-primary-dark)', margin: 0 }}>
+                      Carita de pez
+                    </h4>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--color-primary-dark)', opacity: 0.75 }}>
+                      Masticación
+                    </span>
+                  </div>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--color-primary-dark)', opacity: 0.88, margin: '0 0 6px 0', lineHeight: 1.45 }}>
+                    Frunce los labios y aspira las mejillas hacia adentro para ejercitar buccinadores.
+                  </p>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-accent)' }}>
+                    Pauta: Mantener 5 segundos x 5 repeticiones
+                  </span>
+                </div>
+              </div>
+
+              {/* Tile 2: Soplo con pajilla */}
+              <div className="gym-tile-strip" style={{ background: '#E0F7FA' }}>
+                <div className="gym-tile-icon-box" style={{ background: 'white' }}>
+                  <GlassWater size={28} color="var(--color-primary-dark)" />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-primary-dark)', margin: 0 }}>
+                      Soplo con pajilla
+                    </h4>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--color-primary-dark)', opacity: 0.75 }}>
+                      Control de Aire
+                    </span>
+                  </div>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--color-primary-dark)', opacity: 0.88, margin: '0 0 6px 0', lineHeight: 1.45 }}>
+                    Sopla con una pajilla sobre agua haciendo burbujas continuas sin tragar.
+                  </p>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-accent)' }}>
+                    Pauta: Soplo suave y prolongado
+                  </span>
+                </div>
+              </div>
+
+              {/* Tile 3: Lengua de lado a lado */}
+              <div className="gym-tile-strip" style={{ background: '#E8F5E9' }}>
+                <div className="gym-tile-icon-box" style={{ background: 'white' }}>
+                  <TongueIcon size={28} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                    <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-primary-dark)', margin: 0 }}>
+                      Lengua de lado a lado
+                    </h4>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--color-primary-dark)', opacity: 0.75 }}>
+                      Agilidad Lingual
+                    </span>
+                  </div>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--color-primary-dark)', opacity: 0.88, margin: '0 0 6px 0', lineHeight: 1.45 }}>
+                    Toca las comisuras de la boca alternando izquierda y derecha con precisión.
+                  </p>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--color-accent)' }}>
+                    Pauta: 10 toques suaves a cada lado
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

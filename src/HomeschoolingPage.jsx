@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, BookOpen, Star, CheckCircle, Award, ShieldCheck, HelpCircle, ChevronDown, ChevronUp, FileCheck, Landmark, Library, ClipboardCheck, Scan, GraduationCap, Zap, Sparkles, ChevronLeft, ChevronRight, Video, PenTool, MessageCircle } from 'lucide-react';
+import { ArrowLeft, BookOpen, Star, CheckCircle, Award, ShieldCheck, HelpCircle, ChevronDown, ChevronUp, FileCheck, Landmark, Library, ClipboardCheck, Scan, GraduationCap, Zap, Sparkles, ChevronLeft, ChevronRight, Video, PenTool, MessageCircle, Trophy } from 'lucide-react';
 import ServiceFooterExtras from './ServiceFooterExtras';
 import Footer from './Footer';
 
@@ -805,77 +805,163 @@ const HomeschoolingPage = ({ onBack, onBook, onNavigateService }) => {
         </div>
       </section>
 
-      {/* Proof Video Section (Adapted for Vertical) */}
-      <section className="bg-cream with-grid" style={{ padding: isMobile ? '60px 0' : '120px 0', overflow: 'hidden' }}>
+      {/* Proof Video Section - Culminación, Premiación y Alianza AMA Academy */}
+      <section className="bg-cream with-grid" style={{ padding: isMobile ? '60px 0' : '110px 0', overflow: 'hidden' }}>
         <div className="container">
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center', gap: isMobile ? '30px' : '80px', flexWrap: 'wrap' }}>
-
-            {/* Mobile: Badge + Title above video */}
-            {isMobile && (
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <div className="badge-modern" style={{ background: 'var(--color-pink-light)', color: 'var(--color-primary-dark)', marginBottom: '16px', display: 'inline-block' }}>CLASE EN ACCIÓN</div>
-                <h2 style={{ fontSize: '2.2rem', color: 'var(--color-primary-dark)', lineHeight: 1.1, margin: 0 }}>Culminación de 1er Grado</h2>
-              </motion.div>
-            )}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: isMobile ? 'column' : 'row', 
+            alignItems: 'center', 
+            gap: isMobile ? '36px' : '70px' 
+          }}>
             
-            {/* Left: Vertical Video */}
+            {/* Left: Vertical Video Frame */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              style={{ flex: '1 1 300px', display: 'flex', justifyContent: 'center', width: '100%' }}
+              style={{ flex: isMobile ? '1 1 100%' : '0 0 360px', display: 'flex', justifyContent: 'center', width: '100%' }}
             >
               <div style={{ 
                 width: '100%', 
-                maxWidth: '340px', 
+                maxWidth: isMobile ? '320px' : '360px', 
                 borderRadius: '32px', 
                 overflow: 'hidden', 
-                border: '8px solid white', 
-                boxShadow: isMobile ? '8px 8px 0px var(--color-primary-dark)' : '15px 15px 0px var(--color-primary-dark)',
-                background: 'black',
+                border: '6px solid var(--color-primary-dark)', 
+                boxShadow: isMobile ? '8px 8px 0px var(--color-accent)' : '14px 14px 0px var(--color-accent)',
+                background: '#050714',
                 position: 'relative',
                 aspectRatio: '9/16'
               }}>
                 <video 
-                  src="/Video-240.mp4" 
                   controls 
                   playsInline 
                   preload="metadata"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                >
+                  <source src="/Video-35.mp4" type="video/mp4" />
+                  <source src="/Video-35 (1).mp4" type="video/mp4" />
+                  Tu navegador no soporta la reproducción de video.
+                </video>
               </div>
             </motion.div>
 
-            {/* Right: Text & Context (desktop only) */}
-            {!isMobile && (
-              <motion.div 
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                style={{ flex: '1 1 400px', width: '100%' }}
-              >
-                <div className="badge-modern" style={{ background: 'var(--color-pink-light)', color: 'var(--color-primary-dark)', marginBottom: '20px' }}>CLASE EN ACCIÓN</div>
-                <h2 style={{ fontSize: '3.5rem', color: 'var(--color-primary-dark)', marginBottom: '32px', lineHeight: 1.1 }}>Culminación de 1er Grado</h2>
-                
-                <div style={{ background: 'white', padding: '40px', borderRadius: '24px', border: '3px solid var(--color-primary-light)', boxShadow: '8px 8px 0px var(--color-primary-light)' }}>
-                  <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
-                    {[...Array(5)].map((_, i) => <Star key={i} size={24} fill="var(--color-secondary)" color="var(--color-secondary)" />)}
-                  </div>
-                  <p style={{ fontWeight: 800, fontSize: '1.4rem', color: 'var(--color-primary-dark)', marginBottom: '12px' }}>"Resultados tangibles desde casa."</p>
-                  <p style={{ fontSize: '1.05rem', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
-                    Nuestros estudiantes demuestran un progreso excepcional en sus habilidades sociales, comunicativas y académicas, interactuando en un ambiente guiado y seguro.
-                  </p>
+            {/* Right: Content - Direct, streamlined, with official partner logos */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              style={{ flex: '1 1 450px', width: '100%' }}
+            >
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center', marginBottom: '18px' }}>
+                <div style={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  gap: '12px', 
+                  background: 'white', 
+                  padding: '6px 16px', 
+                  borderRadius: '100px', 
+                  border: '2px solid var(--color-primary-dark)', 
+                  boxShadow: '3px 3px 0px var(--color-primary-dark)'
+                }}>
+                  <img 
+                    src="/logo.webp" 
+                    alt="Centro Multisensorial" 
+                    style={{ height: '32px', width: 'auto', objectFit: 'contain' }} 
+                  />
+                  <span style={{ fontSize: '0.9rem', fontWeight: 900, color: 'var(--color-primary-dark)', opacity: 0.35 }}>✕</span>
+                  <img 
+                    src="/amalogo.png" 
+                    alt="AMA Academy" 
+                    style={{ height: '22px', width: 'auto', objectFit: 'contain', filter: 'brightness(0)' }} 
+                  />
                 </div>
-              </motion.div>
-            )}
+                <span className="badge-modern" style={{ background: 'var(--color-secondary)', color: 'var(--color-primary-dark)', margin: 0 }}>
+                  LOGRO REALIZADO
+                </span>
+              </div>
+
+              <h2 style={{ 
+                fontSize: isMobile ? '2.1rem' : '3rem', 
+                color: 'var(--color-primary-dark)', 
+                marginBottom: '16px', 
+                lineHeight: 1.15,
+                fontWeight: 900
+              }}>
+                Culminación de Año Escolar y Entrega de Premios
+              </h2>
+
+              <p style={{ 
+                fontSize: isMobile ? '1.05rem' : '1.18rem', 
+                color: 'var(--color-text-muted)', 
+                lineHeight: 1.5,
+                marginBottom: '24px' 
+              }}>
+                Celebración presencial de fin de ciclo reconociendo el esfuerzo, disciplina y crecimiento de cada estudiante junto a sus familias.
+              </p>
+
+              {/* Direct streamlined highlights with varied rhythm - no repetitive cards */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ 
+                    background: 'var(--color-secondary)', 
+                    border: '2px solid var(--color-primary-dark)', 
+                    borderRadius: '50%', 
+                    width: '38px', 
+                    height: '38px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <Trophy size={18} color="var(--color-primary-dark)" />
+                  </div>
+                  <span style={{ fontSize: isMobile ? '1rem' : '1.08rem', color: 'var(--color-primary-dark)', fontWeight: 800 }}>
+                    Premiaciones al mérito, constancia y logros académicos
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ 
+                    background: 'var(--color-accent)', 
+                    border: '2px solid var(--color-primary-dark)', 
+                    borderRadius: '50%', 
+                    width: '38px', 
+                    height: '38px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <Award size={18} color="white" />
+                  </div>
+                  <span style={{ fontSize: isMobile ? '1rem' : '1.08rem', color: 'var(--color-primary-dark)', fontWeight: 800 }}>
+                    Entrega de diplomas con validez y currículo estadounidense
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ 
+                    background: 'var(--color-pink)', 
+                    border: '2px solid var(--color-primary-dark)', 
+                    borderRadius: '50%', 
+                    width: '38px', 
+                    height: '38px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <Sparkles size={18} color="var(--color-primary-dark)" />
+                  </div>
+                  <span style={{ fontSize: isMobile ? '1rem' : '1.08rem', color: 'var(--color-primary-dark)', fontWeight: 800 }}>
+                    Comunidad presencial y celebración con padres y alumnos
+                  </span>
+                </div>
+              </div>
+            </motion.div>
 
           </div>
         </div>

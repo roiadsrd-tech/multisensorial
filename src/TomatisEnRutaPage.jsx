@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, MapPin, CheckCircle2, Phone, User, MessageSquare, Send, Sparkles, Award, Heart, Play, Navigation } from 'lucide-react';
+import { ArrowLeft, MapPin, CheckCircle2, Phone, User, MessageSquare, Send, Sparkles, Award, Heart, Play, Navigation, ArrowRight, Camera } from 'lucide-react';
 import ServiceFooterExtras from './ServiceFooterExtras';
 import Footer from './Footer';
 import './ServicesPages.css';
@@ -12,11 +12,15 @@ const fadeUp = {
 
 const cityData = {
   bonao: {
+    id: "bonao",
     name: "Bonao",
-    badge: "Monseñor Nouel",
-    desc: "En Bonao realizamos una jornada intensiva donde acercamos la estimulación neurosensorial del Método Tomatis® a decenas de niños. Gracias a nuestros equipos portátiles de conducción ósea y aérea, evaluamos la atención, la comunicación y el procesamiento auditivo en la villa de las hortensias, brindando orientación directa a las familias.",
-    cover: "/instagram/bonao/bonao.jpeg",
-    objectPosition: "center 75%",
+    province: "Provincia Monseñor Nouel",
+    tag: "Monseñor Nouel",
+    color: "var(--color-accent)", // #FF8651 Coral Orange
+    colorLight: "#FFF1EC",
+    headerImage: "/instagram/bonao/bonao.jpeg",
+    headerAlt: "Monumento y letras icónicas de Bonao",
+    desc: "Jornada intensiva donde acercamos la estimulación neurosensorial del Método Tomatis® a decenas de niños, evaluando atención, comunicación y procesamiento auditivo con orientación personalizada.",
     images: [
       "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg",
       "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (1).jpeg",
@@ -26,40 +30,80 @@ const cityData = {
     video: "/instagram/bonao/WhatsApp Video 2026-07-20 at 12.14.13.mp4"
   },
   lavega: {
+    id: "lavega",
     name: "La Vega",
-    badge: "Provincia La Vega",
-    desc: "Nuestra llegada a la culta y olímpica ciudad de La Vega permitió a las familias locales experimentar de primera mano la tecnología de modulación sonora del Método Tomatis®. Realizamos pruebas de escucha personalizadas para identificar retos de procesamiento auditivo y potenciar la concentración y el habla.",
-    cover: "/instagram/la vega/lavega.png",
-    objectPosition: "center 15%",
+    province: "Provincia de La Vega",
+    tag: "El Valle Real",
+    color: "var(--color-secondary)", // #FDD072 Sunny Yellow
+    colorLight: "#FFFBEA",
+    headerImage: "/instagram/la vega/lavega.png",
+    headerAlt: "Monumento de entrada a La Vega",
+    desc: "Evaluaciones y pruebas de escucha sonora con modulación acústica, ayudando a las familias a identificar retos de procesamiento auditivo y potenciar el lenguaje y la atención.",
     images: [
       "/instagram/la vega/WhatsApp Image 2026-07-20 at 12.14.02.jpeg"
-    ]
+    ],
+    video: null
   },
   santiago: {
-    name: "Santiago de los Caballeros",
-    badge: "Ciudad Corazón",
-    desc: "En el corazón del Cibao, Santiago fue sede de jornadas completas de neuroestimulación Tomatis®. Trabajamos de la mano con familias santiagueras para estimular la plasticidad cerebral, mejorando la integración sensorial, la autorregulación emocional y el aprendizaje infantil.",
-    cover: "/instagram/santiago/santiago.jpg",
-    objectPosition: "center 15%",
+    id: "santiago",
+    name: "Santiago",
+    province: "Santiago de los Caballeros",
+    tag: "Ciudad Corazón",
+    color: "var(--color-primary)", // #A6DFFD Sky Blue
+    colorLight: "#EDF8FF",
+    headerImage: "/instagram/santiago/santiago.jpg",
+    headerAlt: "Monumento a los Héroes de la Restauración en Santiago",
+    desc: "Sesiones de neuroestimulación con familias locales enfocadas en la plasticidad cerebral, integración sensorial y autorregulación para el desarrollo infantil.",
     images: [
       "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38 (1).jpeg",
       "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38.jpeg"
-    ]
+    ],
+    video: null
   },
   sfm: {
+    id: "sfm",
     name: "San Francisco de Macorís",
-    badge: "Duarte",
-    desc: "San Francisco de Macorís nos recibió en una jornada dedicada a la salud neurosensorial infantil. Adaptamos nuestros dispositivos de escucha activa Tomatis® para realizar valoraciones completas, ayudando a los niños de la provincia Duarte a fortalecer su lenguaje, enfoque académico y confianza.",
-    cover: "/instagram/sfm/sanfranmac.png",
-    objectPosition: "center 75%",
+    province: "Provincia Duarte",
+    tag: "Provincia Duarte",
+    color: "var(--color-pink)", // #FFB7D5 Bubblegum Pink
+    colorLight: "#FFF0F7",
+    headerImage: "/instagram/sfm/sanfranmac.png",
+    headerAlt: "Monumento de bienvenida a San Francisco de Macorís",
+    desc: "Valoraciones integrales con tecnología de escucha activa Tomatis®, acompañando a niños y padres en el fortalecimiento del habla, la concentración escolar y la confianza.",
     images: [
       "/instagram/sfm/WhatsApp Image 2026-07-20 at 12.14.15.jpeg"
-    ]
+    ],
+    video: null
   }
 };
 
-const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
-  const [selectedCity, setSelectedCity] = useState('bonao');
+const collagePhotos = [
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg", city: "Bonao" },
+  { src: "/instagram/la vega/WhatsApp Image 2026-07-20 at 12.14.02.jpeg", city: "La Vega" },
+  { src: "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38.jpeg", city: "Santiago" },
+  { src: "/instagram/sfm/WhatsApp Image 2026-07-20 at 12.14.15.jpeg", city: "San Francisco" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (1).jpeg", city: "Bonao" },
+  { src: "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38 (1).jpeg", city: "Santiago" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (2).jpeg", city: "Bonao" },
+  { src: "/instagram/la vega/lavega.png", city: "La Vega" },
+  { src: "/instagram/sfm/sanfranmac.png", city: "San Francisco" },
+  { src: "/instagram/bonao/bonao.jpeg", city: "Bonao" },
+  { src: "/instagram/santiago/santiago.jpg", city: "Santiago" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.02 (3).jpeg", city: "Bonao" },
+  { src: "/instagram/la vega/WhatsApp Image 2026-07-20 at 12.14.02.jpeg", city: "La Vega" },
+  { src: "/instagram/santiago/WhatsApp Image 2026-07-20 at 12.16.38.jpeg", city: "Santiago" },
+  { src: "/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg", city: "Bonao" },
+  { src: "/instagram/sfm/WhatsApp Image 2026-07-20 at 12.14.15.jpeg", city: "San Francisco" },
+];
+
+const TomatisEnRutaPage = ({ onBack, onNavigateService, initialCity = 'bonao' }) => {
+  const [selectedCity, setSelectedCity] = useState(initialCity || 'bonao');
+
+  useEffect(() => {
+    if (initialCity && cityData[initialCity]) {
+      setSelectedCity(initialCity);
+    }
+  }, [initialCity]);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     parentName: '',
@@ -78,7 +122,7 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
   return (
     <div className="service-detail-page" style={{ background: '#FAF9F5' }}>
       {/* Hero Header - Multisensorial Brand Blue Style */}
-      <section className="hero bg-blue with-grid" style={{ position: 'relative', padding: '75px 0 65px', overflow: 'hidden' }}>
+      <section className="service-hero bg-blue with-grid" style={{ position: 'relative', padding: '60px 0 55px', overflow: 'hidden' }}>
         {/* Decor elements */}
         <div className="dec-star-4 orange" style={{ top: '15%', left: '4%', transform: 'scale(1.3)' }}></div>
         <div className="dec-wiggle hide-mobile" style={{ top: '25%', right: '45%' }}></div>
@@ -194,199 +238,115 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
       </section>
 
       {/* Visited Cities Gallery */}
-      <section id="galeria-visitas" style={{ padding: '75px 0', background: 'var(--color-bg)' }}>
+      <section id="galeria-visitas" className="city-gallery-section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <div className="badge-modern" style={{ background: 'var(--color-secondary)', color: 'var(--color-primary-dark)', border: '2px solid var(--color-primary-dark)', padding: '6px 16px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '12px' }}>
-              GALERÍA DE VISITAS
+          <h2 className="city-gallery-title">
+            Ciudades visitadas
+          </h2>
+
+          <div className="city-gallery-layout">
+            {/* Left: On-brand Multisensorial Buttons */}
+            <div className="city-nav-list">
+              {Object.values(cityData).map((city) => {
+                const isSelected = selectedCity === city.id;
+                return (
+                  <button
+                    key={city.id}
+                    onClick={() => setSelectedCity(city.id)}
+                    className={`city-nav-btn ${isSelected ? 'active' : ''}`}
+                    style={{
+                      '--btn-brand-color': city.color,
+                      '--btn-brand-light': city.colorLight
+                    }}
+                  >
+                    <span>{city.name}</span>
+                  </button>
+                );
+              })}
             </div>
-            <h2 style={{ fontSize: '2.8rem', color: 'var(--color-primary-dark)', fontWeight: 900 }}>
-              Ciudades donde hemos llevado el bienestar
-            </h2>
-            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', maxWidth: '650px', margin: '8px auto 0' }}>
-              Haz clic en cada ciudad para ver las fotos reales de nuestras intervenciones y talleres.
-            </p>
-          </div>
 
-          {/* City Selection Chips */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '40px' }}>
-            {[
-              { id: 'bonao', label: 'Bonao' },
-              { id: 'lavega', label: 'La Vega' },
-              { id: 'santiago', label: 'Santiago' },
-              { id: 'sfm', label: 'San Francisco de Macorís' }
-            ].map((city) => (
-              <button
-                key={city.id}
-                onClick={() => setSelectedCity(city.id)}
-                style={{
-                  padding: '12px 24px',
-                  borderRadius: '30px',
-                  border: '3px solid var(--color-primary-dark)',
-                  fontWeight: 800,
-                  fontSize: '1rem',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  background: selectedCity === city.id ? 'var(--color-accent)' : 'white',
-                  color: selectedCity === city.id ? 'white' : 'var(--color-primary-dark)',
-                  boxShadow: selectedCity === city.id ? '4px 4px 0px var(--color-primary-dark)' : '2px 2px 0px var(--color-primary-dark)'
-                }}
-              >
-                {city.label}
-              </button>
-            ))}
-          </div>
-
-          {/* City Content Showcase */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedCity}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              style={{
-                background: 'white',
-                borderRadius: '32px',
-                padding: '40px',
-                border: '3px solid var(--color-primary-dark)',
-                boxShadow: '8px 8px 0px var(--color-primary-dark)'
-              }}
-            >
-              {/* City Cover Hero Banner (Image as background) */}
-              <div style={{
-                borderRadius: '24px',
-                overflow: 'hidden',
-                border: '3.5px solid var(--color-primary-dark)',
-                boxShadow: '6px 6px 0px var(--color-primary-dark)',
-                position: 'relative',
-                minHeight: '280px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                padding: '36px 32px',
-                marginBottom: '32px',
-                backgroundImage: `linear-gradient(to top, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.4) 60%, rgba(0, 0, 0, 0.15) 100%), url("${encodeURI(activeCity.cover)}")`,
-                backgroundSize: 'cover',
-                backgroundPosition: activeCity.objectPosition || 'center center'
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  top: '20px',
-                  right: '20px',
-                  background: 'var(--color-secondary)',
-                  padding: '8px 18px',
-                  borderRadius: '20px',
-                  border: '2px solid var(--color-primary-dark)',
-                  fontWeight: 900,
-                  fontSize: '0.85rem',
-                  color: 'var(--color-primary-dark)',
-                  boxShadow: '2px 2px 0px var(--color-primary-dark)'
-                }}>
-                  ✓ Visita Realizada
-                </div>
-
-                <div>
-                  <div style={{
-                    display: 'inline-block',
-                    background: 'var(--color-accent)',
-                    color: 'white',
-                    padding: '4px 14px',
-                    borderRadius: '14px',
-                    fontSize: '0.8rem',
-                    fontWeight: 800,
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                    marginBottom: '10px',
-                    border: '2px solid var(--color-primary-dark)'
-                  }}>
-                    {activeCity.badge}
-                  </div>
-                  <h3 style={{
-                    fontSize: '2.8rem',
-                    fontWeight: 900,
-                    color: 'white',
-                    margin: 0,
-                    lineHeight: 1.1,
-                    textShadow: '0 2px 10px rgba(0,0,0,0.5)'
-                  }}>
-                    {activeCity.name}
-                  </h3>
-                </div>
-              </div>
-
-              <p style={{ fontSize: '1.1rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '32px' }}>
-                {activeCity.desc}
-              </p>
-
-              {/* Photo Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: activeCity.video ? '36px' : '0' }}>
-                {activeCity.images.map((imgSrc, idx) => {
-                  const isPortraitCity = selectedCity === 'lavega' || selectedCity === 'sfm';
-                  return (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ y: -4, boxShadow: '0 12px 28px rgba(0,0,0,0.14)' }}
-                      transition={{ duration: 0.2 }}
-                      style={{
-                        borderRadius: '14px',
-                        overflow: 'hidden',
-                        border: '1px solid #E2E8F0',
-                        boxShadow: '0 4px 14px rgba(0,0,0,0.07)',
-                        height: isPortraitCity ? 'auto' : '260px',
-                        maxHeight: isPortraitCity ? '550px' : 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        background: '#FFF'
-                      }}
-                    >
+            {/* Right: Selected City Content with Place Photo Header */}
+            <div className="city-content-panel">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedCity}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {/* Header with photo of the place */}
+                  <div className="city-hero-header">
+                    <div className="city-hero-cover">
                       <img
-                        src={imgSrc}
-                        alt={`Visita ${activeCity.name} ${idx + 1}`}
-                        style={{
-                          width: '100%',
-                          height: isPortraitCity ? 'auto' : '100%',
-                          maxHeight: isPortraitCity ? '550px' : '100%',
-                          objectFit: isPortraitCity ? 'contain' : 'cover',
-                          display: 'block'
-                        }}
+                        src={activeCity.headerImage}
+                        alt={activeCity.headerAlt || `Vista de ${activeCity.name}`}
+                        className="city-hero-cover-img"
                       />
-                    </motion.div>
-                  );
-                })}
-              </div>
+                    </div>
 
-              {/* Video if available */}
-              {activeCity.video && (
-                <div style={{ marginTop: '32px' }}>
-                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Play size={20} fill="var(--color-accent)" color="var(--color-accent)" /> Video de la jornada en {activeCity.name}
-                  </h4>
-                  <div style={{ borderRadius: '18px', overflow: 'hidden', border: '1px solid #E2E8F0', boxShadow: '0 8px 25px rgba(0,0,0,0.12)', background: 'black' }}>
-                    <video
-                      src={activeCity.video}
-                      controls
-                      playsInline
-                      style={{ width: '100%', maxHeight: '440px', objectFit: 'cover', display: 'block' }}
-                    />
+                    <div className="city-hero-info">
+                      <h3 className="city-hero-name">{activeCity.name}</h3>
+                      <p className="city-content-desc">{activeCity.desc}</p>
+                    </div>
                   </div>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+
+                  {/* Photo & Video Grid (Video matches same uniform photo size) */}
+                  <div className="city-photos-grid">
+                    {activeCity.images.map((imgSrc, idx) => (
+                      <div key={idx} className="city-photo-item">
+                        <img
+                          src={imgSrc}
+                          alt={`${activeCity.name} foto ${idx + 1}`}
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+
+                    {activeCity.video && (
+                      <div className="city-photo-item city-video-item">
+                        <video
+                          src={activeCity.video}
+                          controls
+                          playsInline
+                          preload="metadata"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Demand Funnel Form */}
-      <section id="solicitar-form" style={{ padding: '80px 0', background: '#FFF' }}>
-        <div className="container" style={{ maxWidth: '800px' }}>
+      <section id="solicitar-form" className="solicitar-form-section">
+        {/* Background Photo Collage of Visits */}
+        <div className="form-collage-backdrop" aria-hidden="true">
+          <div className="form-collage-grid">
+            {collagePhotos.map((photo, i) => (
+              <div key={i} className={`collage-photo-card card-tilt-${(i % 5) + 1}`}>
+                <div className="collage-photo-inner">
+                  <img src={photo.src} alt={photo.city} loading="lazy" />
+                  <span className="collage-city-tag">📍 {photo.city}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="form-collage-overlay" />
+        </div>
+
+        <div className="container" style={{ maxWidth: '800px', position: 'relative', zIndex: 10 }}>
           <div style={{
-            background: '#FAF9DC',
+            background: 'var(--color-primary-light)',
             borderRadius: '36px',
             padding: '44px',
             border: '4px solid var(--color-primary-dark)',
-            boxShadow: '10px 10px 0px var(--color-primary-dark)'
+            boxShadow: '12px 12px 0px var(--color-primary-dark)',
+            position: 'relative',
+            zIndex: 10
           }}>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
               <div className="badge-modern" style={{ background: 'var(--color-accent)', color: 'white', padding: '6px 18px', borderRadius: '20px', fontWeight: 800, fontSize: '0.85rem', display: 'inline-block', marginBottom: '12px' }}>
@@ -441,7 +401,8 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
                         border: '3px solid var(--color-primary-dark)',
                         fontSize: '1rem',
                         fontWeight: 600,
-                        outline: 'none'
+                        outline: 'none',
+                        background: 'white'
                       }}
                     />
                   </div>
@@ -503,7 +464,8 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
                         border: '3px solid var(--color-primary-dark)',
                         fontSize: '1rem',
                         fontWeight: 600,
-                        outline: 'none'
+                        outline: 'none',
+                        background: 'white'
                       }}
                     />
                   </div>
@@ -528,7 +490,8 @@ const TomatisEnRutaPage = ({ onBack, onNavigateService }) => {
                         fontSize: '1rem',
                         fontWeight: 600,
                         outline: 'none',
-                        resize: 'none'
+                        resize: 'none',
+                        background: 'white'
                       }}
                     />
                   </div>

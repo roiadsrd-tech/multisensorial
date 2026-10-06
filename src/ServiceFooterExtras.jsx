@@ -1,6 +1,6 @@
-import React from 'react';
-import { Star, ArrowLeft, Video, ExternalLink, ArrowRight, Play, MessageCircleHeart, Puzzle, BrainCircuit, Users, Headphones, BookOpen, RectangleGoggles, HeartHandshake, Smile, Speech, Waves } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { Star, ArrowLeft, Video, ExternalLink, ArrowRight, Play, MessageCircleHeart, Puzzle, BrainCircuit, Users, Headphones, BookOpen, RectangleGoggles, HeartHandshake, Smile, Speech, Waves, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -82,7 +82,17 @@ const serviceData = {
       { id: 'psicopedagogia', label: 'Psicopedagogía' }
     ],
     media: [
-      { title: "\"La Mirada\" | 'Adolescencia' de Netflix: lo que los padres deben entender", url: "https://www.youtube.com/watch?v=yDlEPuyxBFs", source: "YouTube Video" }
+      { 
+        title: "\"Así es Raúl Grisanty\" | Señales de alerta e importancia de abordajes actuales", 
+        url: "https://www.instagram.com/reel/CgfJ_WovZS8/?utm_source=ig_web_button_share_sheet&stkn=MzRlODBiNWFlZA==", 
+        videoSrc: "/mery-raul-grisanty.mp4", 
+        source: "Instagram Reel",
+        badge: "🔥 +275K Vistas",
+        speakers: "Mery Torrealba en TV",
+        description: "Cuando vemos este tipo de \"señales\", es importante iniciar los abordajes actuales porque se pueden evitar muchas cosas, la idea es no perder funcionalidad."
+      },
+      { title: "\"La Mirada\" | 'Adolescencia' de Netflix: lo que los padres deben entender", url: "https://www.youtube.com/watch?v=yDlEPuyxBFs", source: "YouTube Video" },
+      { title: "Entrevista a Sr. Carlos Pérez y Sra. Mery Torrealba En Así es Raúl Grisanty", url: "https://www.youtube.com/watch?v=1HIYwVGQikY", source: "Así es Raúl Grisanty" }
     ]
   },
   neuropedagogia: {
@@ -244,7 +254,7 @@ const ServiceFooterExtras = ({ serviceId, onBack, onNavigateService }) => {
                   <Star size={16} fill="var(--color-secondary)" color="var(--color-secondary)" />
                   <Star size={16} fill="var(--color-secondary)" color="var(--color-secondary)" />
                 </div>
-                <p>¡Yeiry recibe la palabra más deseada!</p>
+                <p>Acabo de recibir la palabra más deseada "mamá".</p>
               </div>
             </motion.div>
 
@@ -308,6 +318,7 @@ const ServiceFooterExtras = ({ serviceId, onBack, onNavigateService }) => {
               margin: '0 auto'
             }}>
               {data.media.map((med, idx) => {
+                const isLocalVideo = !!med.videoSrc;
                 const videoId = getYoutubeId(med.url);
                 const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
 
@@ -327,13 +338,68 @@ const ServiceFooterExtras = ({ serviceId, onBack, onNavigateService }) => {
                       padding: '20px 25px',
                       boxShadow: '6px 6px 0px var(--color-primary-dark)',
                       textDecoration: 'none',
-                      transition: 'transform 0.2s',
+                      transition: 'transform 0.2s, box-shadow 0.2s',
                       flexWrap: 'wrap'
                     }}
-                    onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
-                    onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-3px)';
+                      e.currentTarget.style.boxShadow = isLocalVideo ? '8px 8px 0px var(--color-accent)' : '8px 8px 0px var(--color-primary-dark)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '6px 6px 0px var(--color-primary-dark)';
+                    }}
                   >
-                    {thumbnailUrl ? (
+                    {isLocalVideo ? (
+                      <div style={{ 
+                        width: '280px', 
+                        height: '160px', 
+                        borderRadius: '16px', 
+                        overflow: 'hidden', 
+                        position: 'relative',
+                        flexShrink: 0,
+                        border: '2px solid var(--color-primary-dark)',
+                        background: '#0a0d18'
+                      }}>
+                        <video 
+                          src={`${med.videoSrc}#t=1.0`} 
+                          preload="metadata"
+                          muted
+                          playsInline
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          top: '10px',
+                          left: '10px',
+                          background: 'rgba(0,0,0,0.7)',
+                          color: '#FFD700',
+                          fontSize: '0.72rem',
+                          fontWeight: 900,
+                          padding: '3px 8px',
+                          borderRadius: '999px',
+                          border: '1px solid rgba(255,255,255,0.2)'
+                        }}>
+                          {med.badge || '🔥 275K Vistas'}
+                        </div>
+                        <div style={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          background: 'rgba(255,255,255,0.95)',
+                          width: '50px',
+                          height: '50px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'var(--color-primary-dark)'
+                        }}>
+                          <Play size={24} fill="currentColor" style={{ marginLeft: '4px' }}/>
+                        </div>
+                      </div>
+                    ) : thumbnailUrl ? (
                       <div style={{ 
                         width: '280px', 
                         height: '160px', 
@@ -392,20 +458,36 @@ const ServiceFooterExtras = ({ serviceId, onBack, onNavigateService }) => {
                       }}>
                         {med.title}
                       </h4>
+                      {isLocalVideo && med.description && (
+                        <p style={{
+                          fontSize: '0.88rem',
+                          color: 'var(--color-primary-dark)',
+                          background: 'rgba(35, 71, 239, 0.05)',
+                          borderLeft: '3px solid var(--color-accent)',
+                          padding: '8px 12px',
+                          borderRadius: '0 8px 8px 0',
+                          margin: '0 0 10px 0',
+                          lineHeight: 1.45,
+                          fontWeight: 600
+                        }}>
+                          "{med.description}"
+                        </p>
+                      )}
                       <span style={{
                         display: 'inline-block',
-                        background: 'var(--color-bg)',
+                        background: isLocalVideo ? 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' : 'var(--color-bg)',
+                        color: isLocalVideo ? 'white' : 'var(--color-text)',
+                        border: isLocalVideo ? '1.5px solid var(--color-primary-dark)' : 'none',
                         padding: '6px 14px',
                         borderRadius: '100px',
                         fontSize: '0.9rem',
-                        color: 'var(--color-text)',
                         fontWeight: 700
                       }}>
                         {med.source}
                       </span>
                     </div>
                     <div style={{ padding: '0 15px' }}>
-                      <ExternalLink size={28} style={{ color: 'var(--color-primary-dark)' }} />
+                      <ExternalLink size={28} style={{ color: isLocalVideo ? 'var(--color-accent)' : 'var(--color-primary-dark)' }} />
                     </div>
                   </a>
                 );
@@ -535,7 +617,6 @@ const ServiceFooterExtras = ({ serviceId, onBack, onNavigateService }) => {
 
         </div>
       </section>
-
     </div>
   );
 };
