@@ -22,13 +22,13 @@ const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spo
 const COORDS_PEQUENINES = [18.5565510, -68.3691611];
 const COORDS_SPOTCAST = [18.66278, -68.42921];
 
-const heroVideoWall = [
-  { id: 'vw-1', src: '/videowall_86298.mp4?v=35' },
-  { id: 'vw-2', src: '/videowall_240.mp4?v=35' },
-  { id: 'vw-3', src: '/videowall_319.mp4?v=35', className: 'pos-top' },
-  { id: 'vw-4', src: '/videowall_orofacial.mp4?v=35', className: 'pos-orofacial' },
-  { id: 'vw-5', src: '/videowall_whatsapp.mp4?v=35' },
-  { id: 'vw-6', src: '/videowall_team.mp4?v=35', className: 'pos-team' },
+const heroPhotoWall = [
+  { id: 'pw-1', src: '/assets/families/photo-01.webp', alt: 'Sesión de estimulación Tomatis' },
+  { id: 'pw-2', src: '/assets/families/photo-06.webp', alt: 'Progreso y sonrisa en familia' },
+  { id: 'pw-3', src: '/assets/families/photo-04.webp', alt: 'Actividad de escucha y concentración' },
+  { id: 'pw-4', src: '/assets/families/photo-08.webp', alt: 'Desarrollo infantil guiado' },
+  { id: 'pw-5', src: '/assets/families/photo-07.webp', alt: 'Interacción lúdica en sesión' },
+  { id: 'pw-6', src: '/assets/families/photo-11.webp', alt: 'Acompañamiento cercano familiar' },
 ];
 
 export default function PuntaCanaPage({ onNavigateHome }) {
@@ -261,18 +261,17 @@ export default function PuntaCanaPage({ onNavigateHome }) {
           </div>
         </section>
 
-        {/* Pure Seamless Video Wall - Directly Below Hero */}
-        <section className="hero-seamless-videowall">
+        {/* Pure Seamless Photo Wall - Directly Below Hero */}
+        <section className="hero-seamless-videowall" aria-label="Momentos reales en familia">
           <div className="hero-videowall-grid">
-            {heroVideoWall.map((vid) => (
-              <div key={vid.id} className="hero-videowall-cell">
-                <video
-                  src={vid.src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className={`hero-videowall-video ${vid.className || ''}`}
+            {heroPhotoWall.map((item) => (
+              <div key={item.id} className="hero-videowall-cell">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="hero-videowall-img"
                 />
               </div>
             ))}
