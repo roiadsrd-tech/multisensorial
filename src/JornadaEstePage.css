@@ -527,3 +527,84 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
     font-size: 0.88rem;
   }
 }
+
+/* Pure Seamless Video Wall - Directly Below Hero */
+.hero-seamless-videowall {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--yellow);
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+  line-height: 0;
+  border-top: 3.5px solid var(--ink);
+  border-bottom: 3.5px solid var(--ink);
+}
+
+.hero-videowall-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  background: var(--yellow);
+}
+
+.hero-videowall-cell {
+  position: relative;
+  width: 100%;
+  height: 235px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: var(--yellow);
+}
+
+.hero-videowall-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.hero-videowall-video.pos-top {
+  object-position: center 18%;
+}
+
+.hero-videowall-video.pos-orofacial {
+  object-position: center 30%;
+}
+
+.hero-videowall-video.pos-team {
+  object-position: center 28%;
+}
+
+@media (max-width: 900px) {
+  .hero-videowall-grid {
+    grid-template-columns: repeat(6, minmax(130px, 1fr));
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hero-videowall-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .hero-videowall-cell {
+    height: 180px;
+    min-width: 130px;
+  }
+  .hero-videowall-video.pos-top {
+    object-position: center 15%;
+  }
+  .hero-videowall-video.pos-orofacial {
+    object-position: center 26%;
+  }
+  .hero-videowall-video.pos-team {
+    object-position: center 28%;
+  }
+}
+

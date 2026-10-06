@@ -22,6 +22,15 @@ const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spo
 const COORDS_PEQUENINES = [18.5565510, -68.3691611];
 const COORDS_SPOTCAST = [18.66278, -68.42921];
 
+const heroVideoWall = [
+  { id: 'vw-1', src: '/videowall_86298.mp4?v=35' },
+  { id: 'vw-2', src: '/videowall_240.mp4?v=35' },
+  { id: 'vw-3', src: '/videowall_319.mp4?v=35', className: 'pos-top' },
+  { id: 'vw-4', src: '/videowall_orofacial.mp4?v=35', className: 'pos-orofacial' },
+  { id: 'vw-5', src: '/videowall_whatsapp.mp4?v=35' },
+  { id: 'vw-6', src: '/videowall_team.mp4?v=35', className: 'pos-team' },
+];
+
 export default function PuntaCanaPage({ onNavigateHome }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showFixedCta, setShowFixedCta] = useState(false);
@@ -233,6 +242,40 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                 />
               </div>
             </figure>
+          </div>
+
+          {/* Minimal Testimonials Marquee */}
+          <div className="hero-quotes-marquee">
+            <div className="hero-quotes-track">
+              {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
+                <div key={idx} className="hero-quote-item">
+                  <div className="hero-quote-stars">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={14} fill="#F59E0B" color="#F59E0B" />
+                    ))}
+                  </div>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Pure Seamless Video Wall - Directly Below Hero */}
+        <section className="hero-seamless-videowall">
+          <div className="hero-videowall-grid">
+            {heroVideoWall.map((vid) => (
+              <div key={vid.id} className="hero-videowall-cell">
+                <video
+                  src={vid.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className={`hero-videowall-video ${vid.className || ''}`}
+                />
+              </div>
+            ))}
           </div>
         </section>
 
