@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Star } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
 
 const miniTestimonialQuotes = [
@@ -159,6 +160,45 @@ export default function PuntaCanaPage({ onNavigateHome }) {
     <div className="compact-page" data-city="Punta Cana">
       <a className="skip-link" href="#contenido">Ir al contenido</a>
 
+      {/* HEADER */}
+      <header className="header">
+        <a 
+          className="brand" 
+          href="#inicio" 
+          aria-label="Centro Multisensorial inicio"
+          onClick={(e) => {
+            if (onNavigateHome) {
+              e.preventDefault();
+              onNavigateHome();
+            }
+          }}
+        >
+          <img src="/assets/logo.png" alt="Multisensorial RD" width="260" height="48" />
+        </a>
+
+        <nav aria-label="Navegación principal">
+          <a className="nav-link" href="#programa">La jornada</a>
+          {onNavigateHome && (
+            <button 
+              onClick={onNavigateHome}
+              className="text-link"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            >
+              Portada Principal ↗
+            </button>
+          )}
+          <a 
+            className="button button-small" 
+            href={WA_PUNTA_CANA} 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <WhatsAppIcon size={17} color="#000000" />
+            <span>Quiero orientación</span>
+          </a>
+        </nav>
+      </header>
+
       <main id="contenido">
         {/* HERO */}
         <section className="hero compact-hero" id="inicio" aria-labelledby="hero-title">
@@ -173,7 +213,8 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               </p>
               <div className="hero-actions">
                 <a className="button hero-cta-button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-                  Consultar cupos por WhatsApp →
+                  <WhatsAppIcon size={20} color="#000000" />
+                  <span>Consultar cupos por WhatsApp →</span>
                 </a>
               </div>
             </div>
@@ -614,7 +655,8 @@ export default function PuntaCanaPage({ onNavigateHome }) {
           </h2>
           <p>Escríbenos para recibir orientación personalizada y verificar cupos en Bávaro.</p>
           <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-            Hablar por WhatsApp con un especialista
+            <WhatsAppIcon size={20} color="#000000" />
+            <span>Hablar por WhatsApp con un especialista</span>
           </a>
           <a className="compact-phone" href="tel:+18093065040">
             +1 (809) 306-5040
@@ -626,7 +668,8 @@ export default function PuntaCanaPage({ onNavigateHome }) {
       {showFixedCta && (
         <div className="fixed-cta">
           <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-            Consultar cupos por WhatsApp →
+            <WhatsAppIcon size={20} color="#000000" />
+            <span>Consultar cupos por WhatsApp →</span>
           </a>
         </div>
       )}

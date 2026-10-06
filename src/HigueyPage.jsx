@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
 
 const WA_HIGUEY = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Hig%C3%BCey.%20Quisiera%20orientaci%C3%B3n%20para%20mi%20hijo%20y%20conocer%20fechas%2C%20sede%2C%20horarios%20y%20qu%C3%A9%20incluye%20el%20programa.";
@@ -171,7 +172,8 @@ export default function HigueyPage({ onNavigateHome }) {
             target="_blank" 
             rel="noopener noreferrer"
           >
-            Quiero orientación
+            <WhatsAppIcon size={17} color="#000000" />
+            <span>Quiero orientación</span>
           </a>
         </nav>
       </header>
@@ -191,7 +193,8 @@ export default function HigueyPage({ onNavigateHome }) {
               </p>
               <div className="hero-actions">
                 <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
-                  Quiero orientación <span aria-hidden="true">↗</span>
+                  <WhatsAppIcon size={20} color="#000000" />
+                  <span>Quiero orientación <span aria-hidden="true">↗</span></span>
                 </a>
               </div>
               <p className="hero-note">Niños y jóvenes de 2–18 años · Según valoración profesional.</p>
@@ -676,7 +679,8 @@ export default function HigueyPage({ onNavigateHome }) {
       {/* FIXED BOTTOM CTA */}
       <div className="fixed-cta">
         <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
-          Quiero orientación
+          <WhatsAppIcon size={20} color="#000000" />
+          <span>Quiero orientación</span>
         </a>
       </div>
 
