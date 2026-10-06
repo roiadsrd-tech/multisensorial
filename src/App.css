@@ -108,15 +108,15 @@
 
 @media (max-width: 768px) {
   .top-promo-banner {
-    padding: 3px 6px;
-    font-size: 0.68rem;
-    gap: 4px;
-    line-height: 1.2;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    gap: 6px;
+    line-height: 1.35;
   }
   .top-promo-btn {
-    padding: 1px 6px;
-    font-size: 0.64rem;
-    margin-left: 2px;
+    padding: 2px 8px;
+    font-size: 0.73rem;
+    margin-left: 3px;
   }
 }
 
@@ -1837,16 +1837,16 @@
 
   .hero-header h1,
   .hero-text h1 {
-    font-size: clamp(1.85rem, 6.2vw, 2.25rem) !important;
-    line-height: 1.15 !important;
-    margin-bottom: 14px;
+    font-size: clamp(2.45rem, 7.5vw, 2.75rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 15px;
   }
 
   .hero-subtitle-mobile {
     display: block !important;
     margin: 0 auto 20px;
-    font-size: 1.05rem;
-    line-height: 1.48;
+    font-size: 1.15rem;
+    line-height: 1.5;
     color: var(--color-text-muted);
     max-width: 95%;
   }
@@ -1980,8 +1980,9 @@
     margin-top: 5px;
   }
 
-  .hero-text h1 {
-    font-size: 1.85rem !important;
+  .hero-text h1,
+  .hero-header h1 {
+    font-size: clamp(2.25rem, 7vw, 2.5rem) !important;
   }
 
   .location-intro-text {
