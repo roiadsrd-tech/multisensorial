@@ -82,7 +82,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         title: '#1 Workshop · Spotcast Café',
         icon: window.L.divIcon({
           className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.png" alt="Spotcast" /></div><span class="pin-label">Workshop</span></div>',
+          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.webp" alt="Spotcast" /></div><span class="pin-label">Workshop</span></div>',
           iconSize: [160, 48],
           iconAnchor: [80, 48]
         })
@@ -98,7 +98,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         title: '#2 Jornada Terapéutica · Pequeñines Paso a Paso',
         icon: window.L.divIcon({
           className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.png" alt="Pequeñines" /></div><span class="pin-label">Jornada Terapéutica</span></div>',
+          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.webp" alt="Pequeñines" /></div><span class="pin-label">Jornada Terapéutica</span></div>',
           iconSize: [210, 48],
           iconAnchor: [105, 48]
         })
@@ -173,7 +173,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             }
           }}
         >
-          <img src="/assets/logo.png" alt="Multisensorial RD" width="260" height="48" />
+          <img src="/assets/logo.webp" alt="Multisensorial RD" width="260" height="48" fetchPriority="high" />
         </a>
 
         <nav aria-label="Navegación principal">
@@ -223,10 +223,12 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               <div className="photo-crop">
                 <video
                   src="/0929-copy.mp4"
+                  poster="/0929-poster.jpg"
                   autoPlay
                   loop
                   muted
                   playsInline
+                  preload="metadata"
                   title="Jornada Tomatis Punta Cana"
                 />
               </div>
@@ -506,7 +508,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             <article className="venue-card venue-card-workshop">
               <div className="venue-photo-wrap venue-photo-spotcast">
                 <img 
-                  src="/assets/spotcast-square.png" 
+                  src="/assets/spotcast-square.webp" 
                   alt="Spotcast Café" 
                   className="venue-photo" 
                   loading="lazy"
@@ -526,7 +528,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             <article className="venue-card venue-card-intensive">
               <div className="venue-photo-wrap venue-photo-pequenines">
                 <img 
-                  src="/assets/pequenines-logo.png" 
+                  src="/assets/pequenines-logo.webp" 
                   alt="Pequeñines Paso a Paso" 
                   className="venue-photo" 
                   loading="lazy"
@@ -687,7 +689,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             }
           }}
         >
-          <img src="/assets/logo.png" alt="Multisensorial RD" width="230" height="42" loading="lazy" />
+          <img src="/assets/logo.webp" alt="Multisensorial RD" width="230" height="42" loading="lazy" />
         </a>
         <a href="tel:+18093065040">+1 (809) 306-5040</a>
         <a 

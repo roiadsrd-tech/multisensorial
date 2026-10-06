@@ -255,7 +255,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
  .compact-hero,
  [data-city] .hero{min-height:0!important;height:auto!important;display:block!important;padding-top:0!important;padding-bottom:0!important;margin-top:0!important}
  .compact-page .hero-grid{grid-template-columns:1fr;padding-top:64px!important;padding-bottom:28px!important;gap:22px}
- .compact-page .hero h1{font-size:clamp(30px,8vw,40px);font-weight:900;line-height:1.1;letter-spacing:-.035em;color:var(--ink);margin-top:0!important}
+ .compact-page .hero h1{font-size:clamp(38px,9.5vw,48px);font-weight:900;line-height:1.05;letter-spacing:-.035em;color:var(--ink);margin-top:0!important}
  .hero-kicker-badge{font-size:11px;padding:6px 14px;margin-bottom:12px}
  .compact-page .hero-description{font-size:15px;font-weight:700;max-width:100%;margin-top:12px;line-height:1.5;color:#172541ee}
  .compact-page .hero-actions{margin-top:16px}.compact-page .hero-actions .button{justify-content:center;font-size:16px;min-height:50px;padding:12px 20px;border-radius:100px;border:0;box-shadow:0 5px 0 var(--blue)}
@@ -263,7 +263,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
  .compact-page .photo-crop img,
  .compact-page .photo-crop video{aspect-ratio:16/9;object-fit:cover;object-position:center;width:100%;max-height:230px;display:block}
  .compact-page .photo-crop .video-sound-toggle{bottom:10px;right:10px;width:38px;height:38px}
- .compact-page .hero:before{width:430px;height:430px;top:590px;right:-140px;display:block!important}
+ .compact-page .hero:before{width:430px;height:430px;top:80px;right:-140px;display:block!important}
  .compact-page .hero-visual figcaption{font-size:12px;margin-top:10px}
  .compact-page .hero-status{display:block;font-size:13px;line-height:1.5;padding-block:12px}
  .compact-page .hero-status>span{display:none}
