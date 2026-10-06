@@ -73,7 +73,7 @@ export default function HigueyPage({ onNavigateHome }) {
         title: 'Jornada en Higüey',
         icon: window.L.divIcon({
           className: 'locality-marker map-marker-selected',
-          html: '<span class="map-logo"><img src="/assets/logo.png" alt="" /></span>',
+          html: '<span class="map-logo"><img src="/assets/logo.webp" alt="" /></span>',
           iconSize: [142, 46],
           iconAnchor: [71, 23]
         })
@@ -152,7 +152,7 @@ export default function HigueyPage({ onNavigateHome }) {
             }
           }}
         >
-          <img src="/assets/logo.png" alt="Multisensorial RD" width="260" height="48" />
+          <img src="/assets/logo.webp" alt="Multisensorial RD" width="260" height="48" />
         </a>
 
         <nav aria-label="Navegación principal">
@@ -697,7 +697,7 @@ export default function HigueyPage({ onNavigateHome }) {
             }
           }}
         >
-          <img src="/assets/logo.png" alt="Multisensorial RD" width="230" height="42" loading="lazy" />
+          <img src="/assets/logo.webp" alt="Multisensorial RD" width="230" height="42" loading="lazy" />
         </a>
         <a href="tel:+18093065040">+1 (809) 306-5040</a>
         <a 

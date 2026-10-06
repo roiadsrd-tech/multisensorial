@@ -1,23 +1,24 @@
 /* eslint-disable no-unused-vars, no-empty */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, BrainCircuit, HeartHandshake, ArrowRight, ArrowLeft, Menu, X, Headphones, Puzzle, Speech, ChevronDown, Volume2, VolumeX, BookOpen, RectangleGoggles, Waves, Users, Smile, Baby, Flower, HandHeart, Star, Instagram, Youtube, MapPin, Phone, MessageCircleHeart, Video, CheckCircle, Smartphone, Calendar, Clock, Award, ShieldCheck, Play, Car, ExternalLink } from 'lucide-react';
 import './App.css';
-import TomatisPage from './TomatisPage';
-import HomeschoolingPage from './HomeschoolingPage';
-import PropietariosPage from './PropietariosPage';
-import PsicologiaPage from './PsicologiaPage';
-import NeuropedagogiaPage from './NeuropedagogiaPage';
-import PsicopedagogiaPage from './PsicopedagogiaPage';
-import NeurofeedbackPage from './NeurofeedbackPage';
-import EvaluacionAulaVirtualPage from './EvaluacionAulaVirtualPage';
-import AcompanamientoMadresPage from './AcompanamientoMadresPage';
-import TerapiaOrofacialPage from './TerapiaOrofacialPage';
-import FisioterapiaPage from './FisioterapiaPage';
-import TerapiaConductualPage from './TerapiaConductualPage';
-import TomatisEnRutaPage from './TomatisEnRutaPage';
-import PuntaCanaPage from './PuntaCanaPage';
-import HigueyPage from './HigueyPage';
+
+const TomatisPage = lazy(() => import('./TomatisPage'));
+const HomeschoolingPage = lazy(() => import('./HomeschoolingPage'));
+const PropietariosPage = lazy(() => import('./PropietariosPage'));
+const PsicologiaPage = lazy(() => import('./PsicologiaPage'));
+const NeuropedagogiaPage = lazy(() => import('./NeuropedagogiaPage'));
+const PsicopedagogiaPage = lazy(() => import('./PsicopedagogiaPage'));
+const NeurofeedbackPage = lazy(() => import('./NeurofeedbackPage'));
+const EvaluacionAulaVirtualPage = lazy(() => import('./EvaluacionAulaVirtualPage'));
+const AcompanamientoMadresPage = lazy(() => import('./AcompanamientoMadresPage'));
+const TerapiaOrofacialPage = lazy(() => import('./TerapiaOrofacialPage'));
+const FisioterapiaPage = lazy(() => import('./FisioterapiaPage'));
+const TerapiaConductualPage = lazy(() => import('./TerapiaConductualPage'));
+const TomatisEnRutaPage = lazy(() => import('./TomatisEnRutaPage'));
+const PuntaCanaPage = lazy(() => import('./PuntaCanaPage'));
+const HigueyPage = lazy(() => import('./HigueyPage'));
 import Footer from './Footer';
 
 const fadeUp = {
@@ -1780,119 +1781,121 @@ function App() {
         </>
       )}
 
-      {currentPage === 'propietarios' && (
-        <PropietariosPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-        />
-      )}
+      <Suspense fallback={null}>
+        {currentPage === 'propietarios' && (
+          <PropietariosPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+          />
+        )}
 
-      {currentPage === 'tomatis' && (
-        <TomatisPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'tomatis' && (
+          <TomatisPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'homeschooling' && (
-        <HomeschoolingPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'homeschooling' && (
+          <HomeschoolingPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'psicologia' && (
-        <PsicologiaPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'psicologia' && (
+          <PsicologiaPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'neuropedagogia' && (
-        <NeuropedagogiaPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'neuropedagogia' && (
+          <NeuropedagogiaPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'psicopedagogia' && (
-        <PsicopedagogiaPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'psicopedagogia' && (
+          <PsicopedagogiaPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'neurofeedback' && (
-        <NeurofeedbackPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'neurofeedback' && (
+          <NeurofeedbackPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'evaluacion-aula-virtual' && (
-        <EvaluacionAulaVirtualPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'evaluacion-aula-virtual' && (
+          <EvaluacionAulaVirtualPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'acompanamiento-madres' && (
-        <AcompanamientoMadresPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'acompanamiento-madres' && (
+          <AcompanamientoMadresPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'terapia-orofacial' && (
-        <TerapiaOrofacialPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'terapia-orofacial' && (
+          <TerapiaOrofacialPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'fisioterapia' && (
-        <FisioterapiaPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'fisioterapia' && (
+          <FisioterapiaPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'terapia-conductual' && (
-        <TerapiaConductualPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onBook={() => setIsBookingModalOpen(true)}
-          onNavigateService={handleNavigateService}
-        />
-      )}
+        {currentPage === 'terapia-conductual' && (
+          <TerapiaConductualPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onBook={() => setIsBookingModalOpen(true)}
+            onNavigateService={handleNavigateService}
+          />
+        )}
 
-      {currentPage === 'tomatis-en-ruta' && (
-        <TomatisEnRutaPage 
-          onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
-          onNavigateService={handleNavigateService}
-          initialCity={tomatisRutaCity}
-        />
-      )}
+        {currentPage === 'tomatis-en-ruta' && (
+          <TomatisEnRutaPage 
+            onBack={() => { setCurrentPage('home'); window.scrollTo(0, 0); }} 
+            onNavigateService={handleNavigateService}
+            initialCity={tomatisRutaCity}
+          />
+        )}
 
-      {(currentPage === 'jornada-este' || currentPage === 'punta-cana') && (
-        <PuntaCanaPage 
-          onNavigateHome={() => navigateToPage('home')}
-        />
-      )}
+        {(currentPage === 'jornada-este' || currentPage === 'punta-cana') && (
+          <PuntaCanaPage 
+            onNavigateHome={() => navigateToPage('home')}
+          />
+        )}
 
-      {currentPage === 'higuey' && (
-        <HigueyPage 
-          onNavigateHome={() => navigateToPage('home')}
-        />
-      )}
+        {currentPage === 'higuey' && (
+          <HigueyPage 
+            onNavigateHome={() => navigateToPage('home')}
+          />
+        )}
+      </Suspense>
       <motion.div
         className="booking-modal-overlay"
         aria-hidden={!isBookingModalOpen}
