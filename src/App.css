@@ -74,6 +74,52 @@
   align-items: stretch;
 }
 
+.top-promo-banner {
+  background: #FF8651;
+  color: #ffffff;
+  padding: 7px 14px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.top-promo-banner:hover {
+  background: #f57338;
+}
+
+.top-promo-btn {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  gap: 4px;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .top-promo-banner {
+    padding: 3px 6px;
+    font-size: 0.68rem;
+    gap: 4px;
+    line-height: 1.2;
+  }
+  .top-promo-btn {
+    padding: 1px 6px;
+    font-size: 0.64rem;
+    margin-left: 2px;
+  }
+}
+
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -1789,17 +1835,18 @@
     display: none !important;
   }
 
-  .hero-header h1 {
-    font-size: 2.8rem; /* Smaller title */
-    line-height: 1.1;
-    margin-bottom: 15px;
+  .hero-header h1,
+  .hero-text h1 {
+    font-size: clamp(1.85rem, 6.2vw, 2.25rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 14px;
   }
 
   .hero-subtitle-mobile {
     display: block !important;
     margin: 0 auto 20px;
-    font-size: 1.25rem; /* Larger subtitle */
-    line-height: 1.5;
+    font-size: 1.05rem;
+    line-height: 1.48;
     color: var(--color-text-muted);
     max-width: 95%;
   }
@@ -1934,7 +1981,7 @@
   }
 
   .hero-text h1 {
-    font-size: 3rem;
+    font-size: 1.85rem !important;
   }
 
   .location-intro-text {
@@ -2719,9 +2766,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 42px;
+  gap: 32px clamp(48px, 6vw, 84px);
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -2780,7 +2827,7 @@
   .media-logos-grid {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px 22px;
+    gap: 28px 40px;
   }
 
   .media-logo-item {

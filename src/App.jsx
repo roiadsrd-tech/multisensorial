@@ -448,37 +448,14 @@ function App() {
             onClick={() => {
               navigateToPage('punta-cana');
             }}
-            style={{
-              background: '#2347EF',
-              color: 'white',
-              padding: '7px 12px',
-              textAlign: 'center',
-              fontWeight: 800,
-              fontSize: '0.82rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              width: '100%',
-              cursor: 'pointer'
-            }}
+            className="top-promo-banner"
           >
             <Sparkles size={14} fill="white" className="hide-mobile" />
             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span>📍 <strong>Jornada Tomatis en Punta Cana</strong>: 13 días intensivos.</span>
               <span className="hide-mobile-inline"> Cupos limitados a 6 niños.</span>
             </span>
-            <span style={{ 
-              display: 'inline-flex', 
-              alignItems: 'center', 
-              background: 'rgba(255,255,255,0.25)', 
-              padding: '2px 10px', 
-              borderRadius: '100px', 
-              fontSize: '0.75rem',
-              gap: '4px',
-              marginLeft: '4px',
-              whiteSpace: 'nowrap'
-            }}>
+            <span className="top-promo-btn">
               Ver Jornada Punta Cana <ArrowRight size={12} />
             </span>
           </div>
