@@ -449,9 +449,9 @@ function App() {
               navigateToPage('punta-cana');
             }}
             style={{
-              background: 'linear-gradient(90deg, #FF8651 0%, #2347EF 100%)',
+              background: '#2347EF',
               color: 'white',
-              padding: '6px 12px',
+              padding: '7px 12px',
               textAlign: 'center',
               fontWeight: 800,
               fontSize: '0.82rem',
@@ -612,24 +612,6 @@ function App() {
                 )}
               </AnimatePresence>
             </div>
-
-            <button 
-              onClick={() => navigateToPage('punta-cana')}
-              className="btn-primary" 
-              style={{ 
-                padding: '8px 16px', 
-                fontSize: '0.85rem', 
-                background: 'var(--color-accent)', 
-                color: '#ffffff',
-                border: 'none', 
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              <Sparkles size={14} /> JORNADA PUNTA CANA '26
-            </button>
 
             <button onClick={() => setIsBookingModalOpen(true)} className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}>
               Agendar Cita
@@ -922,23 +904,18 @@ function App() {
           <div className="media-logos-grid">
             <div className="media-logo-item">
               <img src="/logosasseenin/azulpodcast.webp" alt="Azul Podcast" />
-              <span className="media-logo-name">Azul Podcast</span>
             </div>
             <div className="media-logo-item">
               <img src="/logosasseenin/colorvision.webp" alt="Color Visión" />
-              <span className="media-logo-name">Color Visión</span>
             </div>
             <div className="media-logo-item">
               <img src="/logosasseenin/estonoesradio.webp" alt="Esto No Es Radio" />
-              <span className="media-logo-name">Esto No Es Radio</span>
             </div>
             <div className="media-logo-item">
               <img src="/logosasseenin/lamirada.webp" alt="La Mirada" />
-              <span className="media-logo-name">La Mirada</span>
             </div>
             <div className="media-logo-item">
               <img src="/logosasseenin/rnn.webp" alt="RNN" />
-              <span className="media-logo-name">RNN</span>
             </div>
           </div>
         </div>
