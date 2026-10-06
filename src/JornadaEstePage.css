@@ -142,18 +142,18 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .text-highlight{color:inherit;background:transparent;position:relative;isolation:isolate;display:inline;white-space:normal;padding-inline:.04em;margin-inline:-.04em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .text-highlight:before{content:'';position:absolute;inset:50% -.03em .02em;z-index:-1;background:var(--yellow);border-radius:3px;transform:scaleX(var(--highlight-progress,1));transform-origin:left center;transition:transform 650ms var(--flow-ease)}
 .highlight-blue:before{background:#ffffff35}
-.compact-page .program{padding-block:64px 50px;overflow:hidden}
-.compact-page .program-heading{max-width:760px;margin-bottom:34px}
-.program-visual-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-block:20px 48px}
-.program-visual-step{display:flex;flex-direction:column;gap:18px}
-.step-media{position:relative;border-radius:20px;overflow:hidden;background:rgba(0,0,0,0.18);box-shadow:0 8px 24px rgba(0,0,0,0.18);border:1.5px solid rgba(255,255,255,0.12)}
-.step-media img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .4s ease}
+.compact-page .program{padding-block:52px 42px;overflow:hidden}
+.compact-page .program-heading{max-width:760px;margin-bottom:26px}
+.program-visual-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-block:16px 36px}
+.program-visual-step{display:flex;flex-direction:column;gap:12px}
+.step-media{position:relative;border-radius:14px;overflow:hidden;background:rgba(0,0,0,0.18);box-shadow:none;border:1px solid rgba(255,255,255,0.12)}
+.step-media img{width:100%;aspect-ratio:16/9;max-height:150px;object-fit:cover;display:block;transition:transform .4s ease}
 .program-visual-step:hover .step-media img{transform:scale(1.03)}
-.step-info{display:flex;flex-direction:column;gap:10px;text-align:left}
+.step-info{display:flex;flex-direction:column;gap:6px;text-align:left}
 .step-badge{display:flex;align-items:center;margin-bottom:2px}
-.step-pill{display:inline-block;background:var(--yellow);color:var(--ink);font-weight:900;font-size:11.5px;letter-spacing:.08em;padding:5px 12px;border-radius:100px;box-shadow:0 2px 6px rgba(0,0,0,0.15)}
-.program-visual-step h3{color:var(--cream);font-size:22px;font-weight:800;line-height:1.25;letter-spacing:-.02em;margin:0}
-.program-visual-step p{color:rgba(250,249,220,0.92);font-size:16px;line-height:1.55;margin:0}
+.step-pill{display:inline-block;background:var(--yellow);color:var(--ink);font-weight:900;font-size:10.5px;letter-spacing:.06em;padding:4px 10px;border-radius:100px;box-shadow:0 2px 6px rgba(0,0,0,0.15)}
+.program-visual-step h3{color:var(--cream);font-size:18px;font-weight:800;line-height:1.25;letter-spacing:-.02em;margin:0}
+.program-visual-step p{color:rgba(250,249,220,0.9);font-size:14px;line-height:1.45;margin:0}
 
 /* SPECIALISTS SECTION */
 .program-specialists{margin-top:48px;padding-top:42px;border-top:1px solid rgba(250,249,220,0.25);text-align:center}
@@ -288,15 +288,17 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
  .compact-outcome .eyebrow{margin:0 0 14px;max-width:none;font-size:12px}
  .compact-outcome>p:not(.eyebrow){font-size:clamp(23px,6.1vw,30px);line-height:1.55}
  .compact-outcome>span{display:block;font-size:14px;line-height:1.5;margin-top:15px;max-width:none}
- .compact-page .program{padding-block:48px 36px}
- .program-visual-flow{grid-template-columns:1fr;gap:36px;margin-block:22px 38px}
- .program-visual-step{display:flex;flex-direction:column;gap:16px}
- .step-media{margin-bottom:0;border-radius:18px}
- .step-media img{aspect-ratio:16/10;width:100%;height:auto;max-height:230px}
- .step-info{gap:10px}
- .step-pill{font-size:11px;padding:4px 12px}
- .program-visual-step h3{font-size:22px;line-height:1.22;color:#FFFFFF}
- .program-visual-step p{font-size:16px;line-height:1.52;color:rgba(250,249,220,0.92)}
+ .compact-page .program{padding-block:36px 30px}
+ .program-visual-flow{display:flex!important;flex-direction:column!important;gap:0!important;margin-block:14px 24px!important}
+ .program-visual-step{display:grid!important;grid-template-columns:68px 1fr!important;gap:14px!important;align-items:center!important;padding:12px 0!important;border-bottom:1px solid rgba(250,249,220,0.12)!important;background:transparent!important}
+ .program-visual-step:last-child{border-bottom:none!important}
+ .step-media{width:68px!important;height:68px!important;border-radius:12px!important;overflow:hidden!important;flex-shrink:0!important;border:1px solid rgba(255,255,255,0.14)!important;box-shadow:none!important;margin:0!important}
+ .step-media img{width:100%!important;height:100%!important;aspect-ratio:1/1!important;object-fit:cover!important;max-height:none!important}
+ .step-info{display:flex!important;flex-direction:column!important;gap:3px!important;text-align:left!important}
+ .step-badge{margin-bottom:2px!important}
+ .step-pill{font-size:9.5px!important;padding:2px 8px!important;letter-spacing:.04em!important;box-shadow:none!important;font-weight:900!important}
+ .program-visual-step h3{font-size:15.5px!important;line-height:1.2!important;color:#FFFFFF!important;margin:0!important;font-weight:800!important}
+ .program-visual-step p{font-size:12.5px!important;line-height:1.35!important;color:rgba(250,249,220,0.85)!important;margin:0!important}
  .program-specialists{margin-top:38px;padding-top:30px}
  .program-specialists-intro{margin-bottom:28px}
  .program-specialists-intro h3{font-size:23px;line-height:1.22}
