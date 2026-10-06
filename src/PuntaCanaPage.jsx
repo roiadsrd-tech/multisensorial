@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star } from 'lucide-react';
+import { Star, Volume2, VolumeX } from 'lucide-react';
 import './JornadaEstePage.css';
 
 const miniTestimonialQuotes = [
@@ -22,6 +22,7 @@ const COORDS_PUNTA_CANA = [18.5565510, -68.3691611];
 export default function PuntaCanaPage({ onNavigateHome }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showFixedCta, setShowFixedCta] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const mapRef = useRef(null);
   const leafletMapInstance = useRef(null);
 
@@ -190,13 +191,26 @@ export default function PuntaCanaPage({ onNavigateHome }) {
 
             <figure className="hero-visual">
               <div className="photo-crop">
-                <img 
-                  src="/assets/family-playing.webp" 
-                  alt="Padre e hijo jugando y conectando" 
-                  width="1536" 
-                  height="1024" 
-                  fetchPriority="high" 
+                <video
+                  src="/0929-copy.mp4"
+                  autoPlay
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  onClick={() => setIsMuted(prev => !prev)}
+                  title="Jornada Tomatis Punta Cana"
                 />
+                <button
+                  type="button"
+                  className="video-sound-toggle"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsMuted(prev => !prev);
+                  }}
+                  aria-label={isMuted ? "Activar audio" : "Silenciar video"}
+                >
+                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                </button>
               </div>
             </figure>
           </div>
