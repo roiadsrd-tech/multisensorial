@@ -95,6 +95,9 @@ const miniTestimonialQuotes = [
   "“Eso que ustedes hacen es demasiado maravilloso.”"
 ];
 
+const quotesRow1 = miniTestimonialQuotes.filter((_, i) => i % 2 === 0);
+const quotesRow2 = miniTestimonialQuotes.filter((_, i) => i % 2 !== 0);
+
 const services = [
   {
     icon: <HeartHandshake size={28} />,
@@ -855,16 +858,31 @@ function App() {
           </motion.div>
         </div>
 
-        {/* Minimal Testimonials Marquee */}
-        <div className="hero-quotes-marquee">
-          <div className="hero-quotes-track">
+        {/* Minimal Testimonials Marquee - Desktop 1 row, Mobile 2 rows */}
+        <div className="hero-quotes-marquee" aria-label="Opiniones de familias">
+          {/* Desktop Single Row */}
+          <div className="hero-quotes-track hero-quotes-track-desktop">
             {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
-              <div key={idx} className="hero-quote-item">
-                <div className="hero-quote-stars">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} fill="#F59E0B" color="#F59E0B" />
-                  ))}
-                </div>
+              <div key={`d-${idx}`} className="hero-quote-item">
+                <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                <span className="hero-quote-text">{quote}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Two Rows */}
+          <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+            {[...quotesRow1, ...quotesRow1].map((quote, idx) => (
+              <div key={`m1-${idx}`} className="hero-quote-item">
+                <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                <span className="hero-quote-text">{quote}</span>
+              </div>
+            ))}
+          </div>
+          <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+            {[...quotesRow2, ...quotesRow2].map((quote, idx) => (
+              <div key={`m2-${idx}`} className="hero-quote-item">
+                <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
                 <span className="hero-quote-text">{quote}</span>
               </div>
             ))}

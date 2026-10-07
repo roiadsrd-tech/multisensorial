@@ -2851,27 +2851,56 @@
 }
 
 /* Minimalist Testimonials Marquee in Hero */
+/* Minimalist Testimonials Marquee in Hero (Desktop: 1 row, Mobile: 2 rows) */
 .hero-quotes-marquee {
   position: relative;
   width: 100%;
   overflow: hidden;
   margin-top: auto;
   margin-bottom: 0;
-  padding: 40px 0 54px 0;
+  padding: 30px 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   z-index: 5;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .hero-quotes-track {
   display: flex;
-  gap: 24px;
+  gap: 14px;
   width: max-content;
   will-change: transform;
-  animation: marqueeQuotes 110s linear infinite;
 }
 
-.hero-quotes-track:hover {
+/* Desktop: 1 single row */
+.hero-quotes-track-desktop {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+  animation: marqueeQuotes 85s linear infinite;
+}
+
+/* Mobile: hidden on desktop */
+.hero-quotes-track-mobile {
+  display: none;
+}
+
+.track-row-1 {
+  animation: marqueeQuotes 42s linear infinite;
+}
+
+.track-row-2 {
+  animation: marqueeQuotes 50s linear infinite;
+}
+
+.hero-quotes-track:hover,
+.hero-quotes-track-desktop:hover,
+.hero-quotes-track-mobile:hover {
   animation-play-state: paused;
 }
 
@@ -2885,19 +2914,21 @@
 }
 
 .hero-quote-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
   background: #ffffff;
   border: 1px solid rgba(35, 71, 239, 0.14);
-  border-radius: 16px;
-  padding: 14px 26px;
+  border-radius: 999px;
+  padding: 8px 18px;
   box-shadow: 0 4px 18px rgba(35, 71, 239, 0.06);
   flex-shrink: 0;
   user-select: none;
   white-space: nowrap;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .hero-quote-item:hover {
@@ -2908,35 +2939,78 @@
 .hero-quote-stars {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  color: #F59E0B;
+  font-size: 13px;
+  letter-spacing: 2px;
+  line-height: 1;
   flex-shrink: 0;
 }
 
 .hero-quote-text {
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--color-primary-dark);
   letter-spacing: -0.01em;
   margin: 0;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
   .hero-quotes-marquee {
-    margin-top: 40px;
-    margin-bottom: 25px;
-    padding: 10px 0 18px 0;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 10px 0 14px 0 !important;
   }
-  .hero-quotes-track {
-    gap: 18px;
-    animation-duration: 85s;
+  .hero-quotes-track-desktop {
+    display: none !important;
+  }
+  .hero-quotes-track-mobile {
+    display: flex !important;
+    gap: 8px !important;
+    width: max-content !important;
   }
   .hero-quote-item {
-    padding: 14px 20px;
-    gap: 6px;
-    border-radius: 14px;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    padding: 0 12px !important;
+    border-radius: 999px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(35, 71, 239, 0.14) !important;
+    box-shadow: 0 2px 8px rgba(35, 71, 239, 0.05) !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+  .hero-quote-stars {
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
   }
   .hero-quote-text {
-    font-size: 0.88rem;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: var(--color-primary-dark) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+    max-height: 100% !important;
+  }
+  .track-row-1 {
+    animation: marqueeQuotes 42s linear infinite !important;
+  }
+  .track-row-2 {
+    animation: marqueeQuotes 50s linear infinite !important;
   }
 }
 

@@ -452,8 +452,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .hero-trust-badge .dot-sep {
   opacity: 0.4;
 }
-/* Minimalist Testimonials Marquee in Hero (Same as main page) */
-/* Minimalist Testimonials Marquee in Hero (Same as main page - 2 Rows) */
+/* Minimalist Testimonials Marquee in Hero (Desktop: 1 row, Mobile: 2 rows) */
 .hero-quotes-marquee {
   position: relative;
   width: 100%;
@@ -467,6 +466,8 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   z-index: 5;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .hero-quotes-track {
@@ -476,15 +477,31 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   will-change: transform;
 }
 
+/* Desktop: 1 single row */
+.hero-quotes-track-desktop {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+  animation: marqueeQuotes 85s linear infinite;
+}
+
+/* Mobile: hidden on desktop */
+.hero-quotes-track-mobile {
+  display: none;
+}
+
 .track-row-1 {
-  animation: marqueeQuotes 65s linear infinite;
+  animation: marqueeQuotes 42s linear infinite;
 }
 
 .track-row-2 {
-  animation: marqueeQuotes 75s linear infinite;
+  animation: marqueeQuotes 50s linear infinite;
 }
 
-.hero-quotes-track:hover {
+.hero-quotes-track:hover,
+.hero-quotes-track-desktop:hover,
+.hero-quotes-track-mobile:hover {
   animation-play-state: paused;
 }
 
@@ -498,19 +515,21 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 }
 
 .hero-quote-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
   background: #ffffff;
   border: 1px solid rgba(35, 71, 239, 0.14);
-  border-radius: 16px;
-  padding: 12px 22px;
+  border-radius: 999px;
+  padding: 8px 18px;
   box-shadow: 0 4px 18px rgba(35, 71, 239, 0.06);
   flex-shrink: 0;
   user-select: none;
   white-space: nowrap;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .hero-quote-item:hover {
@@ -522,49 +541,77 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   display: inline-flex;
   align-items: center;
   color: #F59E0B;
-  font-size: 15px;
+  font-size: 13px;
   letter-spacing: 2px;
   line-height: 1;
   flex-shrink: 0;
 }
 
 .hero-quote-text {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.01em;
   margin: 0;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
   .hero-quotes-marquee {
-    padding: 10px 0 14px 0;
-    gap: 7px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 10px 0 14px 0 !important;
   }
-  .hero-quotes-track {
-    gap: 8px;
+  .hero-quotes-track-desktop {
+    display: none !important;
+  }
+  .hero-quotes-track-mobile {
+    display: flex !important;
+    gap: 8px !important;
+    width: max-content !important;
   }
   .hero-quote-item {
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 12px;
-    border-radius: 999px;
-    box-shadow: 0 2px 8px rgba(35, 71, 239, 0.05);
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    padding: 0 12px !important;
+    border-radius: 999px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(35, 71, 239, 0.14) !important;
+    box-shadow: 0 2px 8px rgba(35, 71, 239, 0.05) !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
   }
   .hero-quote-stars {
-    font-size: 10px;
-    letter-spacing: 1px;
+    font-size: 10px !important;
+    letter-spacing: 1px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
   }
   .hero-quote-text {
-    font-size: 0.74rem;
-    font-weight: 600;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: var(--ink) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+    max-height: 100% !important;
   }
   .track-row-1 {
-    animation-duration: 44s;
+    animation: marqueeQuotes 42s linear infinite !important;
   }
   .track-row-2 {
-    animation-duration: 50s;
+    animation: marqueeQuotes 50s linear infinite !important;
   }
 }
 
