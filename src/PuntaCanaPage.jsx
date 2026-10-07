@@ -16,6 +16,9 @@ const miniTestimonialQuotes = [
   "“Eso que ustedes hacen es demasiado maravilloso.”"
 ];
 
+const quotesRow1 = miniTestimonialQuotes.filter((_, i) => i % 2 === 0);
+const quotesRow2 = miniTestimonialQuotes.filter((_, i) => i % 2 !== 0);
+
 const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Punta%20Cana.%20Quisiera%20informaci%C3%B3n%20sobre%20el%20taller%20del%2018%20de%20octubre%20en%20Spotcast%20Caf%C3%A9%20y%20el%20intensivo%20del%2019%20al%2031%20en%20Peque%C3%B1ines%20Paso%20a%20Paso.";
 const MAP_SEARCH_PEQUENINES = "https://www.google.com/maps/search/?api=1&query=Centro%20de%20Educaci%C3%B3n%20Infantil%20Peque%C3%B1ines%20Paso%20a%20Paso%2C%20Residencial%20Rijo%2C%20detr%C3%A1s%20de%20los%20paneles%20solares%20de%20CEPM.%20B%C3%A1varo%2C%20Punta%20Cana.";
 const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spotcast+Cafe+Plaza+Boulevard+Center+Avenida+Estados+Unidos+Bavaro+Punta+Cana";
@@ -235,11 +238,30 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             </figure>
           </div>
 
-          {/* Minimal Testimonials Marquee */}
-          <div className="hero-quotes-marquee">
-            <div className="hero-quotes-track">
+          {/* Minimal Testimonials Marquee - Desktop 1 row, Mobile 2 rows */}
+          <div className="hero-quotes-marquee" aria-label="Opiniones de familias">
+            {/* Desktop Single Row */}
+            <div className="hero-quotes-track hero-quotes-track-desktop">
               {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
-                <div key={idx} className="hero-quote-item">
+                <div key={`d-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile Two Rows (strictly vertical / mobile only) */}
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+              {[...quotesRow1, ...quotesRow1, ...quotesRow1, ...quotesRow1].map((quote, idx) => (
+                <div key={`m1-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+              {[...quotesRow2, ...quotesRow2, ...quotesRow2, ...quotesRow2].map((quote, idx) => (
+                <div key={`m2-${idx}`} className="hero-quote-item">
                   <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
                   <span className="hero-quote-text">{quote}</span>
                 </div>
