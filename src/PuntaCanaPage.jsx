@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
 
@@ -19,21 +18,79 @@ const miniTestimonialQuotes = [
 const quotesRow1 = miniTestimonialQuotes.filter((_, i) => i % 2 === 0);
 const quotesRow2 = miniTestimonialQuotes.filter((_, i) => i % 2 !== 0);
 
-const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola%2C%20quisiera%20apartar%20un%20horario%20para%20la%20jornada%20intensiva%20en%20Punta%20Cana.";
+const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20la%20Jornada%20Punta%20Cana";
+const getWATandaLink = (tanda) => `https://wa.me/18093065040?text=${encodeURIComponent(`Hola, quiero apartar cupo en la tanda de ${tanda} para la Jornada Punta Cana.`)}`;
 const MAP_SEARCH_PEQUENINES = "https://www.google.com/maps/search/?api=1&query=Centro%20de%20Educaci%C3%B3n%20Infantil%20Peque%C3%B1ines%20Paso%20a%20Paso%2C%20Residencial%20Rijo%2C%20detr%C3%A1s%20de%20los%20paneles%20solares%20de%20CEPM.%20B%C3%A1varo%2C%20Punta%20Cana.";
-const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spotcast+Cafe+Plaza+Boulevard+Center+Avenida+Estados+Unidos+Bavaro+Punta+Cana";
 const COORDS_PEQUENINES = [18.5565510, -68.3691611];
-const COORDS_SPOTCAST = [18.66278, -68.42921];
+
+const cronogramaMilestones = [
+  {
+    num: "01",
+    date: "Sábado 17 de Octubre",
+    title: "Charla inicial",
+    tag: "Apertura"
+  },
+  {
+    num: "02",
+    date: "Domingo 18 de Octubre",
+    title: "Evaluaciones diagnósticas",
+    tag: "Calibración"
+  },
+  {
+    num: "03",
+    date: "Lunes 19 de Octubre",
+    title: "Inicio terapia intensiva",
+    tag: "13 Días"
+  },
+  {
+    num: "04",
+    date: "Viernes 31 de Octubre",
+    title: "Cierre y entrega de informe",
+    tag: "Resultados"
+  }
+];
+
+const tandasCalendar = [
+  {
+    id: "tanda-1",
+    time: "8:00 AM – 10:00 AM",
+    emoji: "🌅",
+    label: "Tanda Matutina 1",
+    spots: "Solo 5 cupos",
+    status: "Cupos limitados"
+  },
+  {
+    id: "tanda-2",
+    time: "10:00 AM – 12:00 PM",
+    emoji: "☀️",
+    label: "Tanda Matutina 2",
+    spots: "Solo 5 cupos",
+    status: "Cupos limitados"
+  },
+  {
+    id: "tanda-3",
+    time: "2:00 PM – 4:00 PM",
+    emoji: "🌤️",
+    label: "Tanda Vespertina 1",
+    spots: "Solo 5 cupos",
+    status: "Cupos limitados"
+  },
+  {
+    id: "tanda-4",
+    time: "4:00 PM – 6:00 PM",
+    emoji: "🌆",
+    label: "Tanda Vespertina 2",
+    spots: "Solo 5 cupos",
+    status: "Cupos limitados"
+  }
+];
 
 export default function PuntaCanaPage({ onNavigateHome }) {
-  const [activeFaq, setActiveFaq] = useState(1);
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [selectedTanda, setSelectedTanda] = useState("tanda-1");
   const [showFixedCta, setShowFixedCta] = useState(false);
   const mapRef = useRef(null);
   const leafletMapInstance = useRef(null);
-
-  const toggleFaq = (id) => {
-    setActiveFaq(prev => (prev === id ? null : id));
-  };
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -79,53 +136,32 @@ export default function PuntaCanaPage({ onNavigateHome }) {
 
       window.L.control.zoom({ position: 'bottomright' }).addTo(map);
       window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        minZoom: 8,
+        minZoom: 9,
         maxZoom: 16,
         attribution: '&copy; OpenStreetMap'
       }).addTo(map);
 
-      // Marker 1: Spotcast Café (Charla inicial)
-      const markerSpotcast = window.L.marker(COORDS_SPOTCAST, {
-        title: 'Spotcast Café · Charla Inicial',
-        icon: window.L.divIcon({
-          className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.webp" alt="Spotcast" /></div><span class="pin-label">Charla Inicial</span></div>',
-          iconSize: [160, 48],
-          iconAnchor: [80, 48]
-        })
-      }).addTo(map);
-
-      markerSpotcast.bindPopup(
-        '<strong>Spotcast Café</strong><br><span style="font-size:12px;color:#c2531a;font-weight:700;">Charla Inicial Multidisciplinaria (Sáb 17 Oct)</span><br><span style="font-size:12px;">Plaza Boulevard Center, Bávaro</span>',
-        { offset: [0, -32] }
-      );
-
-      // Marker 2: Pequeñines Paso a Paso (Evaluaciones y Terapias)
+      // Marker: Pequeñines Paso a Paso
       const markerPequenines = window.L.marker(COORDS_PEQUENINES, {
-        title: 'Pequeñines Paso a Paso · Evaluaciones & Terapias',
+        title: 'Sede Oficial · Pequeñines Paso a Paso',
         icon: window.L.divIcon({
           className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.webp" alt="Pequeñines" /></div><span class="pin-label">Evaluaciones & Terapias</span></div>',
+          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">📍</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.webp" alt="Pequeñines" /></div><span class="pin-label">Sede de Terapias</span></div>',
           iconSize: [210, 48],
           iconAnchor: [105, 48]
         })
       }).addTo(map);
 
       markerPequenines.bindPopup(
-        '<strong>Pequeñines Paso a Paso</strong><br><span style="font-size:12px;color:#1e40af;font-weight:700;">Sede de Evaluaciones y Terapias (18 al 31 Oct)</span><br><span style="font-size:12px;">Residencial Rijo · CEPM, Bávaro</span>',
+        '<strong>Pequeñines Paso a Paso</strong><br><span style="font-size:12px;color:#1e40af;font-weight:700;">Sede Oficial de Evaluaciones y Terapias</span><br><span style="font-size:12px;">Residencial Rijo · CEPM, Bávaro</span>',
         { offset: [0, -32] }
-      );
+      ).openPopup();
 
-      const bounds = window.L.latLngBounds([COORDS_SPOTCAST, COORDS_PEQUENINES]);
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
+      map.setView(COORDS_PEQUENINES, 14);
 
-      markerSpotcast.on('click', () => {
-        markerSpotcast.openPopup();
-        map.flyTo(COORDS_SPOTCAST, 13, { duration: 0.6 });
-      });
       markerPequenines.on('click', () => {
         markerPequenines.openPopup();
-        map.flyTo(COORDS_PEQUENINES, 13, { duration: 0.6 });
+        map.flyTo(COORDS_PEQUENINES, 14, { duration: 0.6 });
       });
 
       leafletMapInstance.current = map;
@@ -153,22 +189,23 @@ export default function PuntaCanaPage({ onNavigateHome }) {
   }, []);
 
   const handleCenterMap = () => {
-    if (leafletMapInstance.current && window.L) {
-      const bounds = window.L.latLngBounds([COORDS_SPOTCAST, COORDS_PEQUENINES]);
-      leafletMapInstance.current.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+    if (leafletMapInstance.current) {
+      leafletMapInstance.current.flyTo(COORDS_PEQUENINES, 14, { duration: 0.6 });
     }
   };
 
-  return (
-    <div className="compact-page" data-city="Punta Cana">
-      <a className="skip-link" href="#contenido">Ir al contenido</a>
+  const toggleFaq = (index) => {
+    setActiveFaq(activeFaq === index ? null : index);
+  };
 
+  return (
+    <div className="landing-layout compact-page">
       {/* HEADER */}
-      <header className="header">
+      <header className="header" role="banner">
         <a 
           className="brand" 
           href="#inicio" 
-          aria-label="Centro Multisensorial inicio"
+          aria-label="Ir al inicio"
           onClick={(e) => {
             if (onNavigateHome) {
               e.preventDefault();
@@ -176,11 +213,19 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             }
           }}
         >
-          <img src="/assets/logo.webp" alt="Multisensorial RD" width="260" height="48" fetchPriority="high" />
+          <img 
+            src="/assets/logo.webp" 
+            alt="Centro Multisensorial RD" 
+            width="230" 
+            height="42" 
+            priority="true"
+          />
         </a>
 
         <nav aria-label="Navegación principal">
           <a className="nav-link" href="#cronograma">Cronograma</a>
+          <a className="nav-link" href="#inscripcion">Inscripción</a>
+          <a className="nav-link" href="#preguntas">Preguntas</a>
           {onNavigateHome && (
             <button 
               onClick={onNavigateHome}
@@ -238,30 +283,19 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             </figure>
           </div>
 
-          {/* Minimal Testimonials Marquee - Desktop 1 row, Mobile 2 rows */}
+          {/* Minimal Testimonials Marquee - 2 Rows */}
           <div className="hero-quotes-marquee" aria-label="Opiniones de familias">
-            {/* Desktop: 1 fila */}
-            <div className="hero-quotes-track hero-quotes-track-desktop">
-              {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
-                <div key={`d-${idx}`} className="hero-quote-item">
-                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
-                  <span className="hero-quote-text">{quote}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile: 2 filas */}
-            <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+            <div className="hero-quotes-track track-row-1">
               {[...quotesRow1, ...quotesRow1].map((quote, idx) => (
-                <div key={`m1-${idx}`} className="hero-quote-item">
+                <div key={`r1-${idx}`} className="hero-quote-item">
                   <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
                   <span className="hero-quote-text">{quote}</span>
                 </div>
               ))}
             </div>
-            <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+            <div className="hero-quotes-track track-row-2">
               {[...quotesRow2, ...quotesRow2].map((quote, idx) => (
-                <div key={`m2-${idx}`} className="hero-quote-item">
+                <div key={`r2-${idx}`} className="hero-quote-item">
                   <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
                   <span className="hero-quote-text">{quote}</span>
                 </div>
@@ -269,7 +303,6 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             </div>
           </div>
         </section>
-
 
         {/* MEDIA PRESENCE (Static Grid matching Main Page Hero) */}
         <section className="hero-media-static" aria-label="Presencia en medios">
@@ -326,229 +359,226 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         </section>
 
         {/* 2. ¿ES ESTA JORNADA PARA TU HIJO? */}
-        <section className="fit-section section-wrap" id="es-para-tu-hijo" aria-labelledby="fit-title">
-          <div className="section-heading fit-heading">
-            <p className="eyebrow">EVALUACIÓN TEMPRANA</p>
-            <h2 id="fit-title">
-              ¿Es esta jornada<br />
-              <span><mark className="text-highlight">para tu hijo?</mark></span>
-            </h2>
-            <p className="fit-lead">
-              Si notas alguna de estas señales en tu pequeño, este intensivo está diseñado para él:
-            </p>
-          </div>
-
-          <div className="signals-flow">
-            <div className="signal-item signal-speech">
-              <div className="signal-icon-badge" aria-hidden="true">🗣️</div>
-              <div className="signal-content">
-                <div className="signal-header-row">
-                  <h3 className="signal-title">Retraso en el habla</h3>
-                  <span className="signal-tag tag-speech">Lenguaje & Expresión</span>
-                </div>
-                <p className="signal-desc">No dice palabras claras o se frustra al intentar comunicarse.</p>
-              </div>
+        <section className="family-story" id="tu-hijo" aria-labelledby="family-title">
+          <div className="section-wrap">
+            <div className="section-heading">
+              <p className="eyebrow">2. ¿ES ESTA JORNADA PARA TU HIJO?</p>
+              <h2 id="family-title">
+                Si notas estas señales,<br />
+                <span><mark className="text-highlight" data-highlight>este intensivo es para él.</mark></span>
+              </h2>
+              <p>Identifica los retos del día a día antes de comenzar:</p>
             </div>
 
-            <div className="signal-item signal-attention highlight-box">
-              <div className="signal-icon-badge" aria-hidden="true">👂</div>
-              <div className="signal-content">
-                <div className="signal-header-row">
-                  <h3 className="signal-title">Falta de atención</h3>
-                  <span className="signal-tag tag-attention">Conexión Sensorial</span>
+            <ul className="moment-grid problem-grid brand-signals-grid">
+              <li className="moment-card">
+                <img src="/assets/family-understanding.webp" alt="Retraso en el habla" width="1536" height="1024" loading="lazy" />
+                <div className="moment-copy">
+                  <h3><span className="bullet">🗣️</span> Retraso en el habla</h3>
+                  <p>No dice palabras claras o se frustra al intentar comunicarse.</p>
                 </div>
-                <p className="signal-desc">Lo llamas por su nombre y parece ausente o desconectado.</p>
-              </div>
-            </div>
+              </li>
+              <li className="moment-card">
+                <img src="/assets/family-questions.webp" alt="Falta de atención" width="1536" height="1024" loading="lazy" />
+                <div className="moment-copy">
+                  <h3><span className="bullet">👂</span> Falta de atención</h3>
+                  <p>Lo llamas por su nombre y parece ausente o desconectado.</p>
+                </div>
+              </li>
+              <li className="moment-card">
+                <img src="/assets/family-sounds.webp" alt="Sensibilidad al ruido" width="1536" height="1024" loading="lazy" />
+                <div className="moment-copy">
+                  <h3><span className="bullet">🔊</span> Sensibilidad al ruido</h3>
+                  <p>Se tapa los oídos o colapsa con sonidos fuertes y bulla.</p>
+                </div>
+              </li>
+              <li className="moment-card">
+                <img src="/assets/families/photo-04.webp" alt="Sin avances" width="1536" height="1024" loading="lazy" />
+                <div className="moment-copy">
+                  <h3><span className="bullet">⏳</span> Sin avances</h3>
+                  <p>Lleva meses en terapias de siempre y no arranca.</p>
+                </div>
+              </li>
+            </ul>
 
-            <div className="signal-item signal-sound">
-              <div className="signal-icon-badge" aria-hidden="true">🔊</div>
-              <div className="signal-content">
-                <div className="signal-header-row">
-                  <h3 className="signal-title">Sensibilidad al ruido</h3>
-                  <span className="signal-tag tag-sound">Hipersensibilidad</span>
-                </div>
-                <p className="signal-desc">Se tapa los oídos o colapsa con sonidos fuertes y bulla.</p>
-              </div>
-            </div>
-
-            <div className="signal-item signal-progress accent-border">
-              <div className="signal-icon-badge" aria-hidden="true">⏳</div>
-              <div className="signal-content">
-                <div className="signal-header-row">
-                  <h3 className="signal-title">Sin avances</h3>
-                  <span className="signal-tag tag-progress">Estancamiento</span>
-                </div>
-                <p className="signal-desc">Lleva meses en terapias de siempre y no arranca.</p>
-              </div>
+            <div className="compact-outcome">
+              <p className="scroll-phrase">Un camino claro para entender y activar a tu hijo.</p>
+              <span>El Método Tomatis® reentrena cómo el cerebro procesa los sonidos para devolver calma, atención y lenguaje desde la raíz.</span>
             </div>
           </div>
         </section>
 
         {/* 3. CRONOGRAMA OFICIAL Y SEDES */}
-        <section className="cronograma-section section-wrap" id="cronograma" aria-labelledby="cronograma-title">
-          <div className="section-heading cronograma-heading">
-            <p className="eyebrow">FECHAS & UBICACIONES CONFIRMADAS</p>
-            <h2 id="cronograma-title">
-              Cronograma oficial<br />
-              <span><mark className="text-highlight highlight-blue">y sedes en Bávaro</mark></span>
-            </h2>
-            <p className="cronograma-lead">
-              Todo en tu propia localidad, sin viajar a Santo Domingo:
-            </p>
-          </div>
+        <section className="cronograma-official-section" id="cronograma" aria-labelledby="cronograma-title">
+          <div className="section-wrap">
+            <div className="section-heading">
+              <p className="eyebrow">3. CRONOGRAMA OFICIAL Y SEDES</p>
+              <h2 id="cronograma-title">
+                Todo en tu propia localidad,<br />
+                <span><mark className="text-highlight highlight-blue" data-highlight>sin viajar a Santo Domingo.</mark></span>
+              </h2>
+              <p>Etapas clave de la jornada intensiva en Punta Cana:</p>
+            </div>
 
-          {/* Timeline Milestones */}
-          <div className="timeline-flow" aria-label="Calendario de la jornada">
-            <div className="timeline-node">
-              <div className="timeline-dot"></div>
-              <div className="timeline-info">
-                <div className="timeline-date-chip">🗓️ Sábado 17 de Octubre</div>
-                <h4>Charla inicial multidisciplinaria</h4>
-                <p>Encuentro de orientación con el equipo en <strong>Spotcast Café</strong> (Plaza Boulevard Center).</p>
+            {/* Stepper Pipeline with Motion */}
+            <div className="stepper-pipeline-wrap">
+              <div className="stepper-pipeline-track">
+                {cronogramaMilestones.map((m, idx) => (
+                  <div key={m.num} className={`stepper-node stepper-node-${idx + 1}`}>
+                    <div className="stepper-marker">
+                      <span className="stepper-num">{m.num}</span>
+                      <span className="stepper-pulse-ring" aria-hidden="true"></span>
+                    </div>
+                    <div className="stepper-info">
+                      <span className="stepper-tag">{m.tag}</span>
+                      <strong className="stepper-date">{m.date}</strong>
+                      <p className="stepper-title">{m.title}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="timeline-node">
-              <div className="timeline-dot"></div>
-              <div className="timeline-info">
-                <div className="timeline-date-chip">🗓️ Domingo 18 de Octubre</div>
-                <h4>Evaluaciones diagnósticas individuales</h4>
-                <p>Diagnóstico sensorial individualizado para calibrar el protocolo exacto de cada niño.</p>
-              </div>
-            </div>
-
-            <div className="timeline-node timeline-active">
-              <div className="timeline-dot"></div>
-              <div className="timeline-info">
-                <div className="timeline-date-chip chip-highlight">🗓️ Lunes 19 de Octubre</div>
-                <h4>Inicio de la terapia intensiva</h4>
-                <p>2 horas diarias continuas de estimulación neurosensorial y actividades guiadas.</p>
-              </div>
-            </div>
-
-            <div className="timeline-node">
-              <div className="timeline-dot"></div>
-              <div className="timeline-info">
-                <div className="timeline-date-chip">🗓️ Viernes 31 de Octubre</div>
-                <h4>Cierre y entrega de informe formal</h4>
-                <p>Evaluación final evolutiva, balance de logros y entrega de informe formal para el hogar.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Sede Principal & Tandas Box + Mapa */}
-          <div className="venue-tandas-split">
-            <div className="venue-tandas-card">
-              <div className="venue-header-box">
-                <span className="venue-pin-badge">📍 SEDE DE EVALUACIONES Y TERAPIAS</span>
+            {/* Sede y Mapa */}
+            <div className="venue-map-block">
+              <div className="venue-info-card">
+                <span className="venue-pill-badge">📍 SEDE DE EVALUACIONES Y TERAPIAS</span>
                 <h3>Centro de Educación Infantil Pequeñines Paso a Paso</h3>
                 <p className="venue-address">
                   Residencial Rijo, detrás de los paneles solares de CEPM, Bávaro Punta Cana.
                 </p>
-                <div className="venue-actions">
-                  <a className="venue-gps-btn" href={MAP_SEARCH_PEQUENINES} target="_blank" rel="noopener noreferrer">
-                    Abrir en Google Maps ↗
+                <div className="venue-links">
+                  <a 
+                    className="button button-small" 
+                    href={MAP_SEARCH_PEQUENINES} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <span>Abrir en Google Maps / GPS ↗</span>
                   </a>
                 </div>
               </div>
 
-              <div className="tandas-block">
-                <div className="tandas-title-row">
-                  <h4>Tandas a elegir</h4>
-                  <span className="tandas-capacity-badge">Solo 5 niños por grupo</span>
+              <div className="locations-card venue-map-card">
+                <div className="locations-toolbar">
+                  <strong>Mapa · Pequeñines Paso a Paso (Bávaro)</strong>
+                  <button type="button" className="map-overview" onClick={handleCenterMap}>
+                    Centrar sede
+                  </button>
                 </div>
-
-                <div className="tandas-grid">
-                  <div className="tanda-pill">
-                    <span className="tanda-emoji">🌅</span>
-                    <div className="tanda-details">
-                      <strong>8:00 AM – 10:00 AM</strong>
-                      <small>Turno 1 · Mañana</small>
-                    </div>
-                  </div>
-                  <div className="tanda-pill">
-                    <span className="tanda-emoji">☀️</span>
-                    <div className="tanda-details">
-                      <strong>10:00 AM – 12:00 PM</strong>
-                      <small>Turno 2 · Media mañana</small>
-                    </div>
-                  </div>
-                  <div className="tanda-pill">
-                    <span className="tanda-emoji">🌤️</span>
-                    <div className="tanda-details">
-                      <strong>2:00 PM – 4:00 PM</strong>
-                      <small>Turno 3 · Tarde</small>
-                    </div>
-                  </div>
-                  <div className="tanda-pill">
-                    <span className="tanda-emoji">🌆</span>
-                    <div className="tanda-details">
-                      <strong>4:00 PM – 6:00 PM</strong>
-                      <small>Turno 4 · Atardecer</small>
-                    </div>
-                  </div>
-                </div>
+                <div 
+                  className="geographic-map" 
+                  ref={mapRef}
+                  id="locations-map" 
+                  aria-label="Mapa de Pequeñines Paso a Paso en Punta Cana"
+                />
               </div>
             </div>
 
-            <div className="venue-map-panel">
-              <div className="locations-toolbar">
-                <strong>Ubicación · Bávaro, Punta Cana</strong>
-                <button type="button" className="map-overview" onClick={handleCenterMap}>
-                  Centrar mapa
-                </button>
+            {/* UI de Calendario para Tandas a Elegir */}
+            <div className="calendar-planner-ui" aria-label="Calendario de tandas disponibles">
+              <div className="calendar-planner-header">
+                <div className="calendar-header-main">
+                  <span className="calendar-badge-icon">📅</span>
+                  <div>
+                    <h4>Tandas a elegir · Octubre 2026</h4>
+                    <p>13 días continuos · 2 horas diarias de estimulación</p>
+                  </div>
+                </div>
+                <span className="calendar-limit-pill">Solo 5 niños por grupo</span>
               </div>
-              <div 
-                className="geographic-map" 
-                ref={mapRef}
-                id="locations-map" 
-                aria-label="Mapa de sedes en Punta Cana"
-              />
+
+              {/* Days Strip View */}
+              <div className="calendar-dates-strip" aria-hidden="true">
+                <div className="calendar-day-tab"><span>Sáb</span><strong>17</strong><small>Charla</small></div>
+                <div className="calendar-day-tab"><span>Dom</span><strong>18</strong><small>Eval</small></div>
+                <div className="calendar-day-tab is-active"><span>Lun</span><strong>19</strong><small>Inicio</small></div>
+                <div className="calendar-day-tab"><span>Mar</span><strong>20</strong><small>Día 2</small></div>
+                <div className="calendar-day-tab"><span>Mié</span><strong>21</strong><small>Día 3</small></div>
+                <div className="calendar-day-tab"><span>...</span><strong>...</strong><small>Intensivo</small></div>
+                <div className="calendar-day-tab is-end"><span>Vie</span><strong>31</strong><small>Cierre</small></div>
+              </div>
+
+              {/* Time Slots Grid */}
+              <div className="calendar-slots-grid">
+                {tandasCalendar.map((slot) => {
+                  const isSelected = selectedTanda === slot.id;
+                  return (
+                    <div 
+                      key={slot.id} 
+                      className={`calendar-slot-card ${isSelected ? 'is-selected' : ''}`}
+                      onClick={() => setSelectedTanda(slot.id)}
+                    >
+                      <div className="slot-left">
+                        <span className="slot-emoji" aria-hidden="true">{slot.emoji}</span>
+                        <div>
+                          <strong className="slot-time">{slot.time}</strong>
+                          <span className="slot-label">{slot.label}</span>
+                        </div>
+                      </div>
+                      <div className="slot-right">
+                        <span className="slot-spots-badge">{slot.spots}</span>
+                        <a 
+                          className="slot-book-btn"
+                          href={getWATandaLink(`${slot.label} (${slot.time})`)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Apartar →
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="calendar-footer-note">
+                ⚡ <em>Importante: La calibración de equipos y el espacio solo permiten 5 niños por tanda. Se asignan por orden de reserva.</em>
+              </div>
             </div>
           </div>
         </section>
 
         {/* 4. ¿CÓMO ME INSCRIBO? (Paso a Paso) */}
-        <section className="steps-section section-wrap" id="inscripcion" aria-labelledby="steps-title">
-          <div className="section-heading steps-heading">
-            <p className="eyebrow">PASO A PASO</p>
-            <h2 id="steps-title">
-              ¿Cómo me inscribo?<br />
-              <span><mark className="text-highlight">Proceso fácil y transparente.</mark></span>
+        <section className="inscripcion-section section-wrap" id="inscripcion" aria-labelledby="inscripcion-title">
+          <div className="section-heading">
+            <p className="eyebrow">4. ¿CÓMO ME INSCRIBO?</p>
+            <h2 id="inscripcion-title">
+              Paso a paso.<br />
+              <span><mark className="text-highlight" data-highlight>Fácil y directo.</mark></span>
             </h2>
+            <p>Así aseguras la participación de tu hijo en la jornada:</p>
           </div>
 
-          <div className="steps-sequence">
-            <div className="step-card-num step-one">
-              <div className="step-num-bubble">1</div>
-              <div className="step-content">
+          <div className="steps-flow-container">
+            <div className="step-flow-row">
+              <div className="step-flow-number">01</div>
+              <div className="step-flow-text">
                 <h3>Solicita tu inscripción y apartado de horario por WhatsApp</h3>
-                <p className="step-note">
-                  <em>Es importante elegir tu tanda rápido porque los turnos se completan pronto.</em>
-                </p>
+                <p>Es importante elegir tu tanda rápido porque los turnos se completan pronto con solo 5 cupos por grupo.</p>
               </div>
             </div>
 
-            <div className="step-card-num step-two">
-              <div className="step-num-bubble">2</div>
-              <div className="step-content">
+            <div className="step-flow-row">
+              <div className="step-flow-number">02</div>
+              <div className="step-flow-text">
                 <h3>Recibe la información de pago y tu contrato personal</h3>
-                <p>Formaliza la reserva y asegura oficialmente el puesto de tu hijo en la jornada.</p>
+                <p>Te enviamos los datos oficiales para formalizar la reserva con total transparencia y seguridad.</p>
               </div>
             </div>
 
-            <div className="step-card-num step-three">
-              <div className="step-num-bubble">3</div>
-              <div className="step-content">
+            <div className="step-flow-row">
+              <div className="step-flow-number">03</div>
+              <div className="step-flow-text">
                 <h3>Asiste a la evaluación inicial y comienza el programa</h3>
-                <p>El equipo calibra la estimulación auditiva y comienza el plan intensivo de 13 días.</p>
+                <p>El domingo 18 realizamos la evaluación individual para calibrar el protocolo específico de tu pequeño.</p>
               </div>
             </div>
           </div>
 
-          <div className="steps-cta-wrap">
-            <a className="button steps-cta-btn" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+          <div className="steps-cta-center">
+            <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon size={20} color="#000000" />
               <span>Solicitar inscripción por WhatsApp →</span>
             </a>
@@ -556,121 +586,134 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         </section>
 
         {/* 5. PREGUNTAS FRECUENTES (Acordeón de 1 toque) */}
-        <section className="faqs-accordion-section section-wrap" id="preguntas" aria-labelledby="faqs-title">
-          <div className="section-heading faqs-heading">
-            <p className="eyebrow">PREGUNTAS FRECUENTES</p>
-            <h2 id="faqs-title">
-              Preguntas frecuentes.<br />
-              <span><mark className="text-highlight">Acordeón de 1 toque.</mark></span>
+        <section className="faqs section-wrap" id="preguntas" aria-labelledby="faq-title">
+          <div className="faq-intro">
+            <p className="eyebrow">5. PREGUNTAS FRECUENTES</p>
+            <h2 id="faq-title">
+              Acordeón de 1 toque.<br />
+              <span><mark className="text-highlight highlight-blue">Respuestas claras.</mark></span>
             </h2>
+            <p>Todo lo que necesitas saber antes de la jornada intensiva.</p>
           </div>
 
-          <div className="accordion-list">
-            <details 
-              className={`accordion-item ${activeFaq === 1 ? 'is-active' : ''}`}
-              open={activeFaq === 1}
-              onClick={(e) => {
-                e.preventDefault();
-                toggleFaq(1);
-              }}
-            >
-              <summary className="accordion-summary">
-                <span className="accordion-title">¿Qué es el Método Tomatis®?</span>
-                <span className="accordion-icon" aria-hidden="true">{activeFaq === 1 ? '−' : '+'}</span>
-              </summary>
-              <div className="accordion-body">
-                <p>
-                  Es un programa de estimulación auditiva y conducción ósea mediante auriculares especiales. Mientras el niño juega y realiza dinámicas lúdicas, el método estimula las conexiones del cerebro para despertar el lenguaje, mejorar la atención y regular las emociones desde la raíz.
-                </p>
-              </div>
-            </details>
+          <div className="faq-content">
+            <div className="faq-list">
+              {/* FAQ 1 */}
+              <details 
+                className={`faq-item ${activeFaq === 1 ? 'is-open' : ''}`}
+                open={activeFaq === 1}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(1);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">01</span>
+                  <span>¿Qué es el Método Tomatis®?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>
+                    Es un programa de estimulación auditiva y conducción ósea mediante auriculares especiales. Mientras el niño juega y realiza dinámicas lúdicas, el método estimula las conexiones del cerebro para despertar el lenguaje, mejorar la atención y regular las emociones desde la raíz.
+                  </p>
+                </div>
+              </details>
 
-            <details 
-              className={`accordion-item ${activeFaq === 2 ? 'is-active' : ''}`}
-              open={activeFaq === 2}
-              onClick={(e) => {
-                e.preventDefault();
-                toggleFaq(2);
-              }}
-            >
-              <summary className="accordion-summary">
-                <span className="accordion-title">¿Qué hace el niño durante las 2 horas de sesión?</span>
-                <span className="accordion-icon" aria-hidden="true">{activeFaq === 2 ? '−' : '+'}</span>
-              </summary>
-              <div className="accordion-body">
-                <p>
-                  Realiza actividades didácticas guiadas (pintura, rompecabezas, motricidad fina) en mesas y sobre alfombras de foam con los auriculares puestos.
-                </p>
-              </div>
-            </details>
+              {/* FAQ 2 */}
+              <details 
+                className={`faq-item ${activeFaq === 2 ? 'is-open' : ''}`}
+                open={activeFaq === 2}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(2);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">02</span>
+                  <span>¿Qué hace el niño durante las 2 horas de sesión?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>
+                    Realiza actividades didácticas guiadas (pintura, rompecabezas, motricidad fina) en mesas y sobre alfombras de foam con los auriculares puestos.
+                  </p>
+                </div>
+              </details>
 
-            <details 
-              className={`accordion-item ${activeFaq === 3 ? 'is-active' : ''}`}
-              open={activeFaq === 3}
-              onClick={(e) => {
-                e.preventDefault();
-                toggleFaq(3);
-              }}
-            >
-              <summary className="accordion-summary">
-                <span className="accordion-title">¿Debe quedarse un acompañante?</span>
-                <span className="accordion-icon" aria-hidden="true">{activeFaq === 3 ? '−' : '+'}</span>
-              </summary>
-              <div className="accordion-body">
-                <p>
-                  Sí, cada niño debe asistir diariamente acompañado por mamá, papá o un adulto responsable.
-                </p>
-              </div>
-            </details>
+              {/* FAQ 3 */}
+              <details 
+                className={`faq-item ${activeFaq === 3 ? 'is-open' : ''}`}
+                open={activeFaq === 3}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(3);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">03</span>
+                  <span>¿Debe quedarse un acompañante?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>
+                    Sí, cada niño debe asistir diariamente acompañado por mamá, papá o un adulto responsable.
+                  </p>
+                </div>
+              </details>
 
-            <details 
-              className={`accordion-item ${activeFaq === 4 ? 'is-active' : ''}`}
-              open={activeFaq === 4}
-              onClick={(e) => {
-                e.preventDefault();
-                toggleFaq(4);
-              }}
-            >
-              <summary className="accordion-summary">
-                <span className="accordion-title">¿Necesita un diagnóstico médico previo?</span>
-                <span className="accordion-icon" aria-hidden="true">{activeFaq === 4 ? '−' : '+'}</span>
-              </summary>
-              <div className="accordion-body">
-                <p>
-                  No. El domingo 18 de octubre realizamos la evaluación individual para calibrar el protocolo específico de tu pequeño.
-                </p>
-              </div>
-            </details>
+              {/* FAQ 4 */}
+              <details 
+                className={`faq-item ${activeFaq === 4 ? 'is-open' : ''}`}
+                open={activeFaq === 4}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(4);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">04</span>
+                  <span>¿Necesita un diagnóstico médico previo?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>
+                    No. El domingo 18 de octubre realizamos la evaluación individual para calibrar el protocolo específico de tu pequeño.
+                  </p>
+                </div>
+              </details>
+            </div>
           </div>
         </section>
 
         {/* 6. CIERRE CON URGENCIA */}
-        <section className="urgency-section section-wrap" id="cierre" aria-labelledby="urgency-title">
-          <div className="urgency-banner">
-            <span className="urgency-badge">⚠️ ÚNICA VISITA DEL AÑO</span>
-            <h2 id="urgency-title">Asegura el horario de tu hijo antes de que se llenen los cupos.</h2>
-            <p className="urgency-text">
-              Nuestra visita a Punta Cana es por única vez en el año. Por el espacio y la calibración de equipos, solo admitimos 5 niños por grupo.
-            </p>
-            <div className="urgency-cta-wrapper">
-              <a className="button urgency-cta-btn" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-                <WhatsAppIcon size={22} color="#000000" />
-                <span>Apartar horario por WhatsApp →</span>
-              </a>
-            </div>
-            <div className="urgency-contact-line">
-              <a href="tel:+18093065040" className="urgency-phone">+1 (809) 306-5040</a>
-              <span className="urgency-sep">|</span>
-              <span className="urgency-brand-name">Centro Multisensorial RD</span>
-            </div>
+        <section className="compact-contact urgency-contact section-wrap" id="cierre" aria-labelledby="cierre-title">
+          <p className="eyebrow">6. CIERRE CON URGENCIA</p>
+          <h2 id="cierre-title">
+            Asegura el horario de tu hijo<br />
+            <span><mark className="text-highlight">antes de que se llenen los cupos.</mark></span>
+          </h2>
+          <p className="urgency-subtext">
+            Nuestra visita a Punta Cana es por única vez en el año. Por el espacio y la calibración de equipos, solo admitimos 5 niños por grupo.
+          </p>
+
+          <a className="button urgency-main-btn" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+            <WhatsAppIcon size={22} color="#042f13" />
+            <span>Apartar horario por WhatsApp →</span>
+          </a>
+
+          <div className="direct-contact-bar">
+            <span>Contacto Directo:</span>
+            <a href="tel:+18093065040">+1 (809) 306-5040</a>
+            <span className="sep-dot">·</span>
+            <span>Centro Multisensorial RD</span>
           </div>
         </section>
       </main>
 
-      {/* FIXED BOTTOM CTA (Animates smoothly in and out on mobile) */}
+      {/* FIXED BOTTOM CTA FOR MOBILE (Botón verde flotante) */}
       <div className={`fixed-cta ${showFixedCta ? 'is-visible' : ''}`} aria-hidden={!showFixedCta}>
-        <a className="button mobile-green-cta" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-          <WhatsAppIcon size={20} color="#000000" />
+        <a className="button mobile-green-btn" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon size={20} color="#042f13" />
           <span>Apartar horario en WhatsApp</span>
         </a>
       </div>
