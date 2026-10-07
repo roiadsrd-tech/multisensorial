@@ -510,7 +510,10 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .hero-quote-stars {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  color: #F59E0B;
+  font-size: 15px;
+  letter-spacing: 2px;
+  line-height: 1;
   flex-shrink: 0;
 }
 
@@ -706,28 +709,61 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   object-position: center 28%;
 }
 
-@media (max-width: 900px) {
-  .hero-videowall-grid {
-    grid-template-columns: repeat(6, minmax(130px, 1fr));
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+/* Animated Floating / Fixed CTA */
+.fixed-cta {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 40;
+  opacity: 0;
+  transform: translateY(130%) scale(0.96);
+  pointer-events: none;
+  transition: transform 0.44s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  will-change: transform, opacity;
+}
+
+.fixed-cta.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+@media (max-width: 760px) {
+  .fixed-cta,
+  .compact-page .fixed-cta {
+    position: fixed !important;
+    inset: auto 0 0 !important;
+    padding: 12px 18px calc(14px + env(safe-area-inset-bottom)) !important;
+    background: rgba(250, 249, 220, 0.96) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-top: 1.5px solid rgba(23, 37, 65, 0.12) !important;
+    box-shadow: 0 -8px 26px rgba(23, 37, 65, 0.12) !important;
+    opacity: 0 !important;
+    transform: translateY(115%) !important;
+    pointer-events: none !important;
+    transition: transform 0.42s cubic-bezier(0.2, 0.9, 0.3, 1.1), opacity 0.32s ease !important;
+    will-change: transform, opacity !important;
+    z-index: 50 !important;
   }
-  .hero-videowall-grid::-webkit-scrollbar {
-    display: none;
+
+  .fixed-cta.is-visible,
+  .compact-page .fixed-cta.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
   }
-  .hero-videowall-cell {
-    height: 180px;
-    min-width: 130px;
-  }
-  .hero-videowall-video.pos-top {
-    object-position: center 15%;
-  }
-  .hero-videowall-video.pos-orofacial {
-    object-position: center 26%;
-  }
-  .hero-videowall-video.pos-team {
-    object-position: center 28%;
+
+  .fixed-cta .button,
+  .compact-page .fixed-cta .button {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 52px !important;
+    font-size: 16.5px !important;
+    box-shadow: 0 4px 0 var(--ink) !important;
+    padding: 12px 18px !important;
+    border-radius: 100px !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
   }
 }
 

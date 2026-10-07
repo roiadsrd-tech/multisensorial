@@ -22,15 +22,6 @@ const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spo
 const COORDS_PEQUENINES = [18.5565510, -68.3691611];
 const COORDS_SPOTCAST = [18.66278, -68.42921];
 
-const heroPhotoWall = [
-  { id: 'pw-1', src: '/assets/families/photo-01.webp', alt: 'Sesión de estimulación Tomatis' },
-  { id: 'pw-2', src: '/assets/families/photo-06.webp', alt: 'Progreso y sonrisa en familia' },
-  { id: 'pw-3', src: '/assets/families/photo-04.webp', alt: 'Actividad de escucha y concentración' },
-  { id: 'pw-4', src: '/assets/families/photo-08.webp', alt: 'Desarrollo infantil guiado' },
-  { id: 'pw-5', src: '/assets/families/photo-07.webp', alt: 'Interacción lúdica en sesión' },
-  { id: 'pw-6', src: '/assets/families/photo-11.webp', alt: 'Acompañamiento cercano familiar' },
-];
-
 export default function PuntaCanaPage({ onNavigateHome }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showFixedCta, setShowFixedCta] = useState(false);
@@ -232,12 +223,12 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               <div className="photo-crop">
                 <video
                   src="/0929-copy.mp4"
-                  poster="/0929-poster.jpg"
+                  poster="/0929-poster.webp"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   title="Jornada Tomatis Punta Cana"
                 />
               </div>
@@ -249,32 +240,11 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             <div className="hero-quotes-track">
               {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
                 <div key={idx} className="hero-quote-item">
-                  <div className="hero-quote-stars">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} fill="#F59E0B" color="#F59E0B" />
-                    ))}
-                  </div>
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
                   <span className="hero-quote-text">{quote}</span>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Pure Seamless Photo Wall - Directly Below Hero */}
-        <section className="hero-seamless-videowall" aria-label="Momentos reales en familia">
-          <div className="hero-videowall-grid">
-            {heroPhotoWall.map((item) => (
-              <div key={item.id} className="hero-videowall-cell">
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="hero-videowall-img"
-                />
-              </div>
-            ))}
           </div>
         </section>
 
@@ -717,15 +687,13 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         </section>
       </main>
 
-      {/* FIXED BOTTOM CTA (Only appears after scrolling past hero) */}
-      {showFixedCta && (
-        <div className="fixed-cta">
-          <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-            <WhatsAppIcon size={20} color="#000000" />
-            <span>Consultar cupos por WhatsApp →</span>
-          </a>
-        </div>
-      )}
+      {/* FIXED BOTTOM CTA (Animates smoothly in and out) */}
+      <div className={`fixed-cta ${showFixedCta ? 'is-visible' : ''}`} aria-hidden={!showFixedCta}>
+        <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon size={20} color="#000000" />
+          <span>Consultar cupos por WhatsApp →</span>
+        </a>
+      </div>
 
       {/* FOOTER */}
       <footer className="footer section-wrap">

@@ -20,6 +20,7 @@ const TomatisEnRutaPage = lazy(() => import('./TomatisEnRutaPage'));
 const PuntaCanaPage = lazy(() => import('./PuntaCanaPage'));
 const HigueyPage = lazy(() => import('./HigueyPage'));
 import Footer from './Footer';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -228,6 +229,8 @@ const heroVideoWall = [
   { id: 'vw-6', src: '/videowall_team.mp4?v=35', className: 'pos-team' },
 ];
 
+const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Punta%20Cana.%20Quisiera%20informaci%C3%B3n%20sobre%20el%20taller%20del%2018%20de%20octubre%20en%20Spotcast%20Caf%C3%A9%20y%20el%20intensivo%20del%2019%20al%2031%20en%20Peque%C3%B1ines%20Paso%20a%20Paso.";
+
 function App() {
   const whatsappUrl = "https://wa.me/18093065040"; // Phone based on search data
   const [isMuted, setIsMuted] = useState(true);
@@ -313,12 +316,11 @@ function App() {
     }, 2000);
 
     const popupTimer = setTimeout(() => {
-      const hasBeenShown = sessionStorage.getItem('provincial_popup_shown');
-      if (!hasBeenShown) {
+      const hasBeenDismissed = sessionStorage.getItem('puntacana_popup_dismissed');
+      if (!hasBeenDismissed) {
         setShowProvincialPopup(true);
-        sessionStorage.setItem('provincial_popup_shown', 'true');
       }
-    }, 10000);
+    }, 2500);
 
     return () => {
       clearTimeout(timer);
@@ -788,6 +790,19 @@ function App() {
             variants={staggerContainer}
             style={{ position: 'relative', zIndex: 2 }}
           >
+            <motion.div
+              variants={fadeUp}
+              onClick={() => navigateToPage('punta-cana')}
+              className="hero-puntacana-pill"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter') navigateToPage('punta-cana'); }}
+            >
+              <span className="pill-dot-pulse" />
+              <span className="pill-badge-city">PUNTA CANA</span>
+              <span className="pill-badge-copy">Jornada Tomatis® 18–31 Octubre · Cupos limitados</span>
+              <span className="pill-badge-cta">Ver detalles <ArrowRight size={13} /></span>
+            </motion.div>
             <motion.h1 variants={fadeUp} style={{ color: 'var(--color-text)' }}>
               Un espacio donde tu <span style={{ color: 'var(--color-accent)' }}>hijo</span> se siente seguro para aprender y crecer.
             </motion.h1>
@@ -894,6 +909,114 @@ function App() {
             </div>
             <div className="media-logo-item">
               <img src="/logosasseenin/rnn.webp" alt="RNN" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Punta Cana Spotlight Section */}
+      <section id="jornada-punta-cana" className="punta-cana-spotlight-section">
+        <div className="container">
+          <div className="pc-spotlight-inner">
+            <div className="pc-spotlight-copy">
+              <div className="pc-spotlight-badge">
+                <span className="pc-badge-dot" />
+                <span>EDICIÓN ESPECIAL · PUNTA CANA & BÁVARO</span>
+              </div>
+              <h2 className="pc-spotlight-title">
+                El Método Tomatis® llega a <span className="pc-highlight">Punta Cana</span>
+              </h2>
+              <p className="pc-spotlight-desc">
+                Por primera vez, trasladamos nuestra intervención clínica intensiva al Este. 13 días continuos de estimulación neurosensorial y talleres prácticos para familias en Bávaro, sin que tengas que viajar a Santo Domingo.
+              </p>
+
+              <div className="pc-highlights-list">
+                <div className="pc-highlight-item">
+                  <div className="pc-item-icon">🗓</div>
+                  <div className="pc-item-content">
+                    <div className="pc-item-label">18 al 31 de Octubre</div>
+                    <div className="pc-item-sub">Workshop para padres en Spotcast Café + 13 días intensivos en Pequeñines Paso a Paso.</div>
+                  </div>
+                </div>
+
+                <div className="pc-highlight-item">
+                  <div className="pc-item-icon">👥</div>
+                  <div className="pc-item-content">
+                    <div className="pc-item-label">Cupo Limitado: Solo 6 Niños</div>
+                    <div className="pc-item-sub">Atención 1 a 1 altamente personalizada para garantizar el máximo impacto neurosensorial.</div>
+                  </div>
+                </div>
+
+                <div className="pc-highlight-item">
+                  <div className="pc-item-icon">🧠</div>
+                  <div className="pc-item-content">
+                    <div className="pc-item-label">Resultados Comprobados</div>
+                    <div className="pc-item-sub">Avances clínicos visibles en lenguaje, atención sostenida, conducta y conexión familiar.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pc-spotlight-actions">
+                <button
+                  onClick={() => navigateToPage('punta-cana')}
+                  className="btn-primary pc-btn-main"
+                >
+                  Ver Programa de Punta Cana <ArrowRight size={18} />
+                </button>
+                <a
+                  href={WA_PUNTA_CANA}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline pc-btn-wa"
+                >
+                  <WhatsAppIcon size={18} color="currentColor" />
+                  <span>Consultar Cupos por WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="pc-spotlight-media">
+              <div 
+                className="pc-video-card"
+                onClick={() => navigateToPage('punta-cana')}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter') navigateToPage('punta-cana'); }}
+              >
+                <div className="pc-video-wrapper">
+                  <video
+                    src="/0929-copy.mp4"
+                    poster="/0929-poster.webp"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="pc-spotlight-video"
+                  />
+                  <div className="pc-video-overlay-tag">
+                    <span>📍 Bávaro · Punta Cana</span>
+                  </div>
+                  <div className="pc-video-prompt">
+                    <span>Ver programa y fechas completas →</span>
+                  </div>
+                </div>
+                <div className="pc-venues-strip">
+                  <div className="pc-venue-tag">
+                    <span className="venue-num">#1</span>
+                    <div>
+                      <strong>Spotcast Café</strong>
+                      <small>Sáb 18 Oct · Workshop</small>
+                    </div>
+                  </div>
+                  <div className="pc-venue-tag">
+                    <span className="venue-num">#2</span>
+                    <div>
+                      <strong>Pequeñines Paso a Paso</strong>
+                      <small>19 al 31 Oct · Terapia</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2031,80 +2154,55 @@ function App() {
             </motion.div>
           </motion.div>
 
-      {/* Floating Provincial Pop-Up */}
+      {/* Floating Punta Cana Pop-Up */}
       <AnimatePresence>
         {showProvincialPopup && currentPage === 'home' && (
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            initial={{ opacity: 0, y: 35, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.95 }}
-            transition={{ delay: 2, duration: 0.4 }}
-            style={{
-              position: 'fixed',
-              bottom: '24px',
-              left: '24px',
-              zIndex: 9999,
-              width: '320px',
-              background: 'white',
-              borderRadius: '16px',
-              padding: '16px',
-              border: '1px solid #E2E8F0',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '12px'
-            }}
+            exit={{ opacity: 0, y: 35, scale: 0.95 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="floating-puntacana-popup"
           >
             <button
-              onClick={() => setShowProvincialPopup(false)}
-              style={{
-                position: 'absolute',
-                top: '10px',
-                right: '10px',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: '#718096',
-                padding: '2px',
-                zIndex: 10
+              onClick={() => {
+                setShowProvincialPopup(false);
+                sessionStorage.setItem('puntacana_popup_dismissed', 'true');
               }}
+              className="floating-popup-close"
+              aria-label="Cerrar aviso"
             >
               <X size={16} />
             </button>
 
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-              <div style={{ width: '64px', height: '64px', borderRadius: '10px', overflow: 'hidden', flexShrink: 0, border: '1px solid #E2E8F0' }}>
-                <img src="/instagram/bonao/WhatsApp Image 2026-07-20 at 12.14.01.jpeg" alt="Visita" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div className="floating-popup-header">
+              <span className="floating-popup-badge">🌴 PUNTA CANA & BÁVARO</span>
+            </div>
+
+            <div className="floating-popup-body">
+              <div className="floating-popup-img-wrap">
+                <img 
+                  src="/assets/punta-cana-coast-v2.webp" 
+                  alt="Jornada Tomatis Punta Cana" 
+                  className="floating-popup-img" 
+                />
               </div>
-              <div style={{ paddingRight: '12px' }}>
-                <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: 'var(--color-primary-dark)', lineHeight: 1.25 }}>
-                  ¿No vives en Santo Domingo?
-                </h4>
-                <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', lineHeight: 1.3 }}>
-                  Llevamos el Método Tomatis® a tu provincia.
-                </p>
+              <div className="floating-popup-text">
+                <h4>¿Buscas la Jornada en Punta Cana?</h4>
+                <p>13 días intensivos del Método Tomatis® (18–31 Octubre). Solo 6 cupos disponibles.</p>
               </div>
             </div>
 
             <button
               onClick={() => {
-                setCurrentPage('tomatis-en-ruta');
-                window.scrollTo(0, 0);
+                setShowProvincialPopup(false);
+                sessionStorage.setItem('puntacana_popup_dismissed', 'true');
+                navigateToPage('punta-cana');
               }}
-              style={{
-                background: 'var(--color-accent)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '10px 14px',
-                fontWeight: 800,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                width: '100%',
-                textAlign: 'center'
-              }}
+              className="floating-popup-cta"
             >
-              Solicitar Visita
+              <span>Ver Jornada Punta Cana</span>
+              <ArrowRight size={14} />
             </button>
           </motion.div>
         )}
