@@ -250,7 +250,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 @media(max-width:1000px){.compact-page{--page-gutter:30px}.compact-page .hero-grid{gap:32px}.compact-page .hero h1{font-size:clamp(57px,6.5vw,76px)}}
 @media(max-width:760px){
  .compact-page{--page-gutter:22px}
- .compact-page .header{padding-top:14px!important;padding-bottom:14px!important;padding-inline:18px!important}.compact-page .brand{width:150px}.compact-page .brand img{height:32px;width:auto}
+ .compact-page .header{display:none!important}
  .compact-page .hero,
  .compact-hero,
  [data-city] .hero{min-height:0!important;height:auto!important;display:block!important;padding-top:0!important;padding-bottom:0!important;margin-top:0!important}
