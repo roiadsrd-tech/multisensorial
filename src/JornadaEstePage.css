@@ -798,3 +798,628 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   }
 }
 
+/* ==========================================================================
+   REDESIGNED SECTIONS (Punta Cana)
+   ========================================================================== */
+
+/* Section 2: ¿ES ESTA JORNADA PARA TU HIJO? */
+.fit-section {
+  padding-block: 54px 44px;
+}
+.fit-heading {
+  margin-bottom: 28px;
+}
+.fit-lead {
+  font-size: 1.05rem;
+  color: rgba(23, 37, 65, 0.85);
+  margin-top: 10px;
+  max-width: 640px;
+  line-height: 1.5;
+}
+
+.signals-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 860px;
+}
+
+.signal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(23, 37, 65, 0.08);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.signal-item.highlight-box {
+  background: rgba(35, 71, 239, 0.04);
+  border: 1px solid rgba(35, 71, 239, 0.18);
+  border-left: 4px solid var(--blue);
+}
+
+.signal-item.accent-border {
+  border-left: 4px solid #F59E0B;
+}
+
+.signal-icon-badge {
+  font-size: 24px;
+  line-height: 1;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.signal-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.signal-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.signal-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0;
+}
+
+.signal-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.tag-speech { background: #EFF6FF; color: #1D4ED8; }
+.tag-attention { background: #EDE9FE; color: #5B21B6; }
+.tag-sound { background: #ECFDF5; color: #047857; }
+.tag-progress { background: #FEF3C7; color: #B45309; }
+
+.signal-desc {
+  font-size: 0.95rem;
+  color: rgba(23, 37, 65, 0.85);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Section 3: CRONOGRAMA & SEDES */
+.cronograma-section {
+  padding-block: 54px 44px;
+}
+.cronograma-lead {
+  font-size: 1.05rem;
+  color: rgba(23, 37, 65, 0.85);
+  margin-top: 8px;
+}
+
+.timeline-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.timeline-node {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 18px;
+  border-top: 2px solid rgba(23, 37, 65, 0.12);
+}
+
+.timeline-node.timeline-active {
+  border-top-color: var(--blue);
+}
+
+.timeline-dot {
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid rgba(23, 37, 65, 0.3);
+}
+
+.timeline-node.timeline-active .timeline-dot {
+  background: var(--blue);
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(35, 71, 239, 0.2);
+}
+
+.timeline-date-chip {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: rgba(23, 37, 65, 0.75);
+  margin-bottom: 8px;
+}
+
+.timeline-date-chip.chip-highlight {
+  color: var(--blue);
+}
+
+.timeline-info h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.timeline-info p {
+  font-size: 0.86rem;
+  color: rgba(23, 37, 65, 0.75);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Venue & Tandas Split + Map */
+.venue-tandas-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.venue-tandas-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(23, 37, 65, 0.12);
+  border-radius: 20px;
+  padding: 26px;
+}
+
+.venue-header-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.venue-pin-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  text-transform: uppercase;
+}
+
+.venue-header-box h3 {
+  font-size: 1.28rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.venue-address {
+  font-size: 0.92rem;
+  color: rgba(23, 37, 65, 0.8);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.venue-gps-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.tandas-block {
+  border-top: 1px dashed rgba(23, 37, 65, 0.15);
+  padding-top: 18px;
+}
+
+.tandas-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.tandas-title-row h4 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0;
+}
+
+.tandas-capacity-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: #FEF3C7;
+  color: #B45309;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.tandas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.tanda-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #F8FAFC;
+  border: 1px solid rgba(23, 37, 65, 0.09);
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.tanda-emoji {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.tanda-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.tanda-details strong {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.tanda-details small {
+  font-size: 0.72rem;
+  color: rgba(23, 37, 65, 0.65);
+}
+
+.venue-map-panel {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid rgba(23, 37, 65, 0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 380px;
+}
+
+.venue-map-panel .locations-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: #F8FAFC;
+  border-bottom: 1px solid rgba(23, 37, 65, 0.08);
+  font-size: 0.85rem;
+}
+
+.venue-map-panel .geographic-map {
+  flex: 1;
+  min-height: 340px;
+  width: 100%;
+}
+
+/* Section 4: ¿CÓMO ME INSCRIBO? (Paso a Paso) */
+.steps-section {
+  padding-block: 54px 44px;
+}
+
+.steps-sequence {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.step-card-num {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(23, 37, 65, 0.1);
+  border-radius: 18px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step-card-num.step-one {
+  background: #F8FAFC;
+}
+
+.step-num-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.step-content h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 6px 0;
+  line-height: 1.35;
+}
+
+.step-content p {
+  font-size: 0.88rem;
+  color: rgba(23, 37, 65, 0.8);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.step-note {
+  color: #B45309 !important;
+  font-size: 0.84rem !important;
+}
+
+.steps-cta-wrap {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.steps-cta-btn {
+  font-size: 1.05rem;
+  padding: 14px 28px;
+}
+
+/* Section 5: PREGUNTAS FRECUENTES (Acordeón de 1 toque) */
+.faqs-accordion-section {
+  padding-block: 54px 44px;
+}
+
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 860px;
+  margin-top: 28px;
+}
+
+.accordion-item {
+  background: #ffffff;
+  border: 1px solid rgba(23, 37, 65, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accordion-item.is-active {
+  border-color: rgba(35, 71, 239, 0.4);
+  box-shadow: 0 4px 18px rgba(35, 71, 239, 0.05);
+}
+
+.accordion-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 800;
+  font-size: 1.02rem;
+  color: var(--ink);
+  list-style: none;
+}
+
+.accordion-summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-title {
+  flex: 1;
+}
+
+.accordion-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.accordion-body {
+  padding: 0 22px 20px 22px;
+  font-size: 0.94rem;
+  color: rgba(23, 37, 65, 0.85);
+  line-height: 1.55;
+}
+
+.accordion-body p {
+  margin: 0;
+}
+
+/* Section 6: CIERRE CON URGENCIA */
+.urgency-section {
+  padding-block: 44px 70px;
+}
+
+.urgency-banner {
+  background: linear-gradient(135deg, #0f1c3f 0%, #172541 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 48px 32px;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 16px 40px rgba(15, 28, 63, 0.25);
+}
+
+.urgency-badge {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  background: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 4px 14px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+.urgency-banner h2 {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+  max-width: 680px;
+}
+
+.urgency-text {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  max-width: 580px;
+  line-height: 1.5;
+}
+
+.urgency-cta-wrapper {
+  margin-top: 10px;
+}
+
+.urgency-cta-btn {
+  background: #25D366 !important;
+  color: #042f13 !important;
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  padding: 16px 32px !important;
+  border-radius: 100px !important;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.urgency-cta-btn:hover {
+  background: #22c35e !important;
+  transform: translateY(-2px);
+}
+
+.urgency-contact-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.urgency-phone {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.urgency-phone:hover {
+  text-decoration: underline;
+}
+
+.urgency-sep {
+  opacity: 0.4;
+}
+
+/* Mobile floating button specific green styling */
+.mobile-green-cta {
+  background: #25D366 !important;
+  color: #042f13 !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4) !important;
+}
+
+.mobile-green-cta:hover {
+  background: #22c35e !important;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 760px) {
+  .fit-section,
+  .cronograma-section,
+  .steps-section,
+  .faqs-accordion-section {
+    padding-block: 36px 28px;
+  }
+
+  .timeline-flow {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    border-left: 2px solid rgba(23, 37, 65, 0.12);
+    padding-left: 18px;
+  }
+
+  .timeline-node {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .timeline-dot {
+    top: 2px;
+    left: -25px;
+  }
+
+  .venue-tandas-split {
+    grid-template-columns: 1fr;
+  }
+
+  .tandas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .steps-sequence {
+    grid-template-columns: 1fr;
+  }
+
+  .urgency-banner {
+    padding: 32px 20px;
+  }
+
+  .urgency-banner h2 {
+    font-size: 1.55rem;
+  }
+
+  .urgency-text {
+    font-size: 0.95rem;
+  }
+
+  .urgency-cta-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem !important;
+    padding: 14px 20px !important;
+  }
+}
+
