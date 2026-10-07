@@ -279,47 +279,56 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         </section>
 
 
-        {/* MEDIA PRESENCE */}
-        <section className="media-presence" aria-label="Presencia en medios">
-          <div className="media-heading section-wrap">
-            <p>Visto en medios nacionales</p>
-          </div>
-          <div className="media-window">
-            <div className="media-track">
-              <div className="media-group">
-                <a className="media-logo logo-azulpodcast" href="https://www.youtube.com/watch?v=ZKI_bcbkVI0" target="_blank" rel="noopener noreferrer">
-                  <img src="/assets/media-azulpodcast.webp" alt="Azul Podcast" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-colorvision" href="https://www.youtube.com/watch?v=NSRzUZ-Tqhc" target="_blank" rel="noopener noreferrer">
-                  <img src="/assets/media-colorvision.webp" alt="Color Visión" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-estonoesradio" href="https://www.youtube.com/watch?v=NK1u6dsNqBo" target="_blank" rel="noopener noreferrer">
-                  <img src="/assets/media-estonoesradio.webp" alt="Esto No Es Radio" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-lamirada" href="https://www.youtube.com/watch?v=JiJXut5kviU" target="_blank" rel="noopener noreferrer">
-                  <img src="/assets/media-lamirada.webp" alt="La Mirada" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-rnn" href="https://www.centromultisensorial.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="/assets/media-rnn.webp" alt="RNN" width="160" height="90" loading="lazy" />
-                </a>
-              </div>
-              <div className="media-group" aria-hidden="true">
-                <span className="media-logo logo-azulpodcast">
-                  <img src="/assets/media-azulpodcast.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-colorvision">
-                  <img src="/assets/media-colorvision.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-estonoesradio">
-                  <img src="/assets/media-estonoesradio.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-lamirada">
-                  <img src="/assets/media-lamirada.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-rnn">
-                  <img src="/assets/media-rnn.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-              </div>
+        {/* MEDIA PRESENCE (Static Grid matching Main Page Hero) */}
+        <section className="hero-media-static" aria-label="Presencia en medios">
+          <div className="container">
+            <div className="media-static-label">PRESENCIA EN MEDIOS:</div>
+            <div className="media-logos-grid">
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=ZKI_bcbkVI0"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Azul Podcast"
+              >
+                <img src="/logosasseenin/azulpodcast.webp" alt="Azul Podcast" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=NSRzUZ-Tqhc"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Color Visión"
+              >
+                <img src="/logosasseenin/colorvision.webp" alt="Color Visión" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=NK1u6dsNqBo"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Esto No Es Radio"
+              >
+                <img src="/logosasseenin/estonoesradio.webp" alt="Esto No Es Radio" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=JiJXut5kviU"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="La Mirada"
+              >
+                <img src="/logosasseenin/lamirada.webp" alt="La Mirada" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=1HIYwVGQikY"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="RNN"
+              >
+                <img src="/logosasseenin/rnn.webp" alt="RNN" loading="lazy" />
+              </a>
             </div>
           </div>
         </section>
