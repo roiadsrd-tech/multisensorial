@@ -1099,34 +1099,26 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   margin-bottom: 24px;
 }
 
-.map-title-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 6px;
-}
-
 .map-section-header h2 {
-  font-size: clamp(2rem, 4.5vw, 2.6rem);
+  font-size: clamp(2.8rem, 6.2vw, 4.2rem);
   font-weight: 900;
   color: var(--ink);
-  letter-spacing: -0.035em;
-  line-height: 1.1;
-  margin: 0;
-}
-
-.map-heading-icon-badge {
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 6px 0 0 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--yellow);
-  color: var(--ink);
-  border: 2px solid var(--ink);
-  box-shadow: 0 3px 0 var(--ink);
+  gap: 14px;
+}
+
+.map-heading-inline-pin {
+  color: var(--blue);
   flex-shrink: 0;
+  stroke-width: 2.6px;
+  width: clamp(32px, 4.5vw, 44px);
+  height: clamp(32px, 4.5vw, 44px);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .pin-text-block {
@@ -1136,18 +1128,26 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   text-align: left;
 }
 
-.pin-date-sub {
-  font-size: 10px;
-  font-weight: 800;
-  opacity: 0.9;
-  letter-spacing: 0.01em;
+.pin-label {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
-.pin-spotcast .pin-date-sub {
-  color: rgba(23, 37, 65, 0.85);
+.pin-date-tag {
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-top: 2px;
 }
 
-.pin-pequenines .pin-date-sub {
+.pin-spotcast .pin-date-tag {
+  color: #172541;
+}
+
+.pin-pequenines .pin-date-tag {
   color: var(--yellow);
 }
 

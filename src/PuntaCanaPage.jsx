@@ -110,9 +110,9 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         title: '#1 Workshop · Spotcast Café',
         icon: window.L.divIcon({
           className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.webp" alt="Spotcast" /></div><div class="pin-text-block"><span class="pin-label">Workshop</span><span class="pin-date-sub">Sáb 17 Oct</span></div></div>',
-          iconSize: [180, 50],
-          iconAnchor: [90, 50]
+          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.webp" alt="Spotcast" /></div><div class="pin-text-block"><span class="pin-label">Workshop</span><span class="pin-date-tag">Sáb 17 Oct</span></div></div>',
+          iconSize: [195, 54],
+          iconAnchor: [97, 54]
         })
       }).addTo(map);
 
@@ -126,9 +126,9 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         title: '#2 Jornada Terapéutica · Pequeñines Paso a Paso',
         icon: window.L.divIcon({
           className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.webp" alt="Pequeñines" /></div><div class="pin-text-block"><span class="pin-label">Jornada Terapéutica</span><span class="pin-date-sub">19 - 31 Oct</span></div></div>',
-          iconSize: [225, 50],
-          iconAnchor: [112, 50]
+          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.webp" alt="Pequeñines" /></div><div class="pin-text-block"><span class="pin-label">Jornada Terapéutica</span><span class="pin-date-tag">19 al 31 Oct</span></div></div>',
+          iconSize: [240, 54],
+          iconAnchor: [120, 54]
         })
       }).addTo(map);
 
@@ -631,14 +631,10 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
           <div className="map-section-header">
             <p className="eyebrow">SEDES EN BÁVARO</p>
-            <div className="map-title-row">
-              <h2 id="map-heading">
-                ¿Dónde es?
-              </h2>
-              <span className="map-heading-icon-badge" aria-hidden="true">
-                <MapPin size={22} />
-              </span>
-            </div>
+            <h2 id="map-heading">
+              <span>¿Dónde es?</span>
+              <MapPin className="map-heading-inline-pin" size={38} aria-hidden="true" />
+            </h2>
           </div>
           <div className="simple-map-container">
             <div 
