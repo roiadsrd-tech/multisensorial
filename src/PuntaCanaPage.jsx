@@ -811,7 +811,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         <section className="compact-contact section-wrap" id="cuenta-regresiva" aria-labelledby="countdown-heading">
           <p className="eyebrow">CUENTA REGRESIVA · INICIO DE JORNADA</p>
           <div className="cta-headline-combo">
-            <span className="cta-callout-font">Sábado 17 de Octubre · Bávaro</span>
+            <span className="cta-callout-font">Solo 5 niños por tanda</span>
             <h2 id="countdown-heading">
               No volveremos a Punta Cana<br />
               <span>hasta el próximo año.</span>

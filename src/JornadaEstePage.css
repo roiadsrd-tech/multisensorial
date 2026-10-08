@@ -1233,11 +1233,11 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   font-family: 'Fredoka', cursive, sans-serif;
   font-size: clamp(1.4rem, 4vw, 2.2rem);
   font-weight: 700;
-  color: #000000;
-  background: var(--yellow);
+  color: #FFFFFF;
+  background: var(--blue);
   border: 2px solid var(--ink);
   box-shadow: 0 4px 0 var(--ink);
-  padding: 6px 22px;
+  padding: 6px 24px;
   border-radius: 999px;
   margin-bottom: 16px;
   letter-spacing: -0.01em;
