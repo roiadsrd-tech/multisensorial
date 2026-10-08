@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star } from 'lucide-react';
+import { Star, MessageSquare, ClipboardCheck, Headphones, FileText } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
 
@@ -420,8 +420,16 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   <span className="chrono-step-date">Sáb 17 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">Charla inicial</h3>
-                <p className="chrono-step-desc">Spotcast Café · Plaza Boulevard Center</p>
+                <h3 className="chrono-step-title">
+                  <span className="chrono-step-icon-wrap" aria-hidden="true">
+                    <MessageSquare size={15} />
+                  </span>
+                  <span>Charla inicial</span>
+                </h3>
+                <p className="chrono-step-desc">
+                  <img src="/assets/spotcast-square.webp" alt="Spotcast Café" className="chrono-venue-logo" loading="lazy" />
+                  <span>Spotcast Café · Plaza Boulevard Center</span>
+                </p>
               </div>
 
               <div className="chrono-linear-step">
@@ -430,8 +438,16 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   <span className="chrono-step-date">Dom 18 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">Evaluaciones diagnósticas</h3>
-                <p className="chrono-step-desc">Pequeñines Paso a Paso · Bávaro</p>
+                <h3 className="chrono-step-title">
+                  <span className="chrono-step-icon-wrap" aria-hidden="true">
+                    <ClipboardCheck size={15} />
+                  </span>
+                  <span>Evaluaciones diagnósticas</span>
+                </h3>
+                <p className="chrono-step-desc">
+                  <img src="/assets/pequenines-square.webp" alt="Pequeñines Paso a Paso" className="chrono-venue-logo" loading="lazy" />
+                  <span>Pequeñines Paso a Paso · Bávaro</span>
+                </p>
               </div>
 
               <div className="chrono-linear-step">
@@ -440,8 +456,16 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   <span className="chrono-step-date">19 al 31 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">Terapia intensiva</h3>
-                <p className="chrono-step-desc">2 horas diarias continuas de estimulación</p>
+                <h3 className="chrono-step-title">
+                  <span className="chrono-step-icon-wrap" aria-hidden="true">
+                    <Headphones size={15} />
+                  </span>
+                  <span>Terapia intensiva</span>
+                </h3>
+                <p className="chrono-step-desc">
+                  <img src="/assets/pequenines-square.webp" alt="Pequeñines" className="chrono-venue-logo" loading="lazy" />
+                  <span>Sede Pequeñines · 2h diarias</span>
+                </p>
               </div>
 
               <div className="chrono-linear-step">
@@ -450,8 +474,16 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   <span className="chrono-step-date">Vie 31 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">Cierre y entrega de informe</h3>
-                <p className="chrono-step-desc">Resultados de evolución y pautas para casa</p>
+                <h3 className="chrono-step-title">
+                  <span className="chrono-step-icon-wrap" aria-hidden="true">
+                    <FileText size={15} />
+                  </span>
+                  <span>Cierre y entrega de informe</span>
+                </h3>
+                <p className="chrono-step-desc">
+                  <img src="/assets/pequenines-square.webp" alt="Pequeñines" className="chrono-venue-logo" loading="lazy" />
+                  <span>Sede Pequeñines · Pautas para casa</span>
+                </p>
               </div>
             </div>
           </div>
