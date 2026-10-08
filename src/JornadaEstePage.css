@@ -1015,17 +1015,12 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   transform: translateY(-1px);
 }
 
-.chrono-line-track {
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.22);
-  margin-bottom: 18px;
+.chrono-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
   position: relative;
-  transition: background 0.2s ease;
-}
-
-.chrono-linear-step:hover .chrono-line-track {
-  background: var(--yellow);
 }
 
 .chrono-num-group {
@@ -1049,7 +1044,6 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   justify-content: space-between;
   align-items: flex-start;
   gap: 14px;
-  margin-top: 2px;
 }
 
 .chrono-step-main {
@@ -1058,16 +1052,16 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 }
 
 .chrono-step-title {
-  font-size: clamp(1.35rem, 1.9vw, 1.65rem);
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
   font-weight: 900;
   color: #ffffff;
   margin: 0 0 6px 0;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 .chrono-step-desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   line-height: 1.45;
   color: rgba(250, 249, 220, 0.88);
   margin: 0;
@@ -1077,13 +1071,22 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  object-fit: contain;
   border: none;
   outline: none;
-  background: #ffffff;
-  padding: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
   flex-shrink: 0;
+}
+
+.chrono-venue-logo-spotcast {
+  object-fit: cover;
+  background: #000000;
+  padding: 0;
+}
+
+.chrono-venue-logo-pequenines {
+  object-fit: contain;
+  background: #ffffff;
+  padding: 3px;
 }
 
 /* 3. SECCIÓN: MAPA SENCILLO Y LIMPIO (SIN BOTONERA NI INFORMACIÓN REDUNDANTE) */

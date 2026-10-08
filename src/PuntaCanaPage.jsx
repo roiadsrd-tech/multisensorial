@@ -447,13 +447,17 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   </div>
                   <span className="chrono-step-date">Sáb 17 Oct</span>
                 </div>
-                <div className="chrono-line-track"></div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
                     <h3 className="chrono-step-title">Charla inicial</h3>
                     <p className="chrono-step-desc">Spotcast Café · Plaza Boulevard Center</p>
                   </div>
-                  <img src="/assets/spotcast-square.webp" alt="Spotcast Café" className="chrono-venue-logo" loading="lazy" />
+                  <img
+                    src="/assets/spotcast-square.webp"
+                    alt="Spotcast Café"
+                    className="chrono-venue-logo chrono-venue-logo-spotcast"
+                    loading="lazy"
+                  />
                 </div>
               </div>
 
@@ -465,13 +469,17 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   </div>
                   <span className="chrono-step-date">Dom 18 Oct</span>
                 </div>
-                <div className="chrono-line-track"></div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
                     <h3 className="chrono-step-title">Evaluaciones diagnósticas</h3>
                     <p className="chrono-step-desc">Pequeñines Paso a Paso · Bávaro</p>
                   </div>
-                  <img src="/assets/pequenines-square.webp" alt="Pequeñines Paso a Paso" className="chrono-venue-logo" loading="lazy" />
+                  <img
+                    src="/assets/pequenines-square.webp"
+                    alt="Pequeñines Paso a Paso"
+                    className="chrono-venue-logo chrono-venue-logo-pequenines"
+                    loading="lazy"
+                  />
                 </div>
               </div>
 
@@ -483,13 +491,17 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   </div>
                   <span className="chrono-step-date">19 al 31 Oct</span>
                 </div>
-                <div className="chrono-line-track"></div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
                     <h3 className="chrono-step-title">Terapia intensiva</h3>
                     <p className="chrono-step-desc">Sede Pequeñines · 2h diarias continuas</p>
                   </div>
-                  <img src="/assets/pequenines-square.webp" alt="Pequeñines" className="chrono-venue-logo" loading="lazy" />
+                  <img
+                    src="/assets/pequenines-square.webp"
+                    alt="Pequeñines"
+                    className="chrono-venue-logo chrono-venue-logo-pequenines"
+                    loading="lazy"
+                  />
                 </div>
               </div>
 
@@ -501,13 +513,17 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                   </div>
                   <span className="chrono-step-date">Vie 31 Oct</span>
                 </div>
-                <div className="chrono-line-track"></div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
                     <h3 className="chrono-step-title">Cierre y entrega de informe</h3>
                     <p className="chrono-step-desc">Sede Pequeñines · Pautas para casa</p>
                   </div>
-                  <img src="/assets/pequenines-square.webp" alt="Pequeñines" className="chrono-venue-logo" loading="lazy" />
+                  <img
+                    src="/assets/pequenines-square.webp"
+                    alt="Pequeñines"
+                    className="chrono-venue-logo chrono-venue-logo-pequenines"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
