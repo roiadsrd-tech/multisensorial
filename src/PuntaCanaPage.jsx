@@ -192,8 +192,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
       <aside className="top-timer-banner" aria-label="Tiempo restante para la jornada en Punta Cana">
         <div className="top-timer-inner">
           <div className="top-timer-label">
-            <span className="top-timer-pulse-dot" aria-hidden="true" />
-            <span>Jornada Punta Cana:</span>
+            <span>Jornada Punta Cana inicia en:</span>
           </div>
 
           <div className="top-timer-countdown" role="timer" aria-live="polite">
