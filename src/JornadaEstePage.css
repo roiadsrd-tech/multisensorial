@@ -1118,10 +1118,10 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   width: 100%;
 }
 
-/* 4. SECCIÓN: TANDAS A ELEGIR (COMPACTA, FORMATO GRID, MENOS ESPACIO) */
+/* 4. SECCIÓN: TANDAS A ELEGIR (FONDO AMARILLO CTA, FORMATO GRID COMPACTO) */
 .section-tandas-brand {
   padding-block: 42px 48px;
-  background: var(--cream);
+  background: var(--yellow);
   border-top: 1px solid rgba(23, 37, 65, 0.08);
 }
 
