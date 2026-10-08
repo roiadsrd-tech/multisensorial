@@ -959,7 +959,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .chrono-linear-flow {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  gap: clamp(36px, 3.5vw, 56px);
   position: relative;
 }
 
@@ -1320,7 +1320,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 @media (max-width: 900px) {
   .chrono-linear-flow {
     grid-template-columns: 1fr 1fr;
-    gap: 30px 24px;
+    gap: 48px 36px;
   }
   .tandas-grid-large {
     grid-template-columns: repeat(2, 1fr);
@@ -1352,7 +1352,15 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   }
   .chrono-linear-flow {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 36px;
+  }
+  .chrono-linear-step {
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .chrono-linear-step:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
   }
   .chrono-big-num {
     font-size: 2.8rem;
