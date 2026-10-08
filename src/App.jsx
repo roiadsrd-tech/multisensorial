@@ -793,19 +793,7 @@ function App() {
             variants={staggerContainer}
             style={{ position: 'relative', zIndex: 2 }}
           >
-            <motion.div
-              variants={fadeUp}
-              onClick={() => navigateToPage('punta-cana')}
-              className="hero-puntacana-pill"
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => { if (e.key === 'Enter') navigateToPage('punta-cana'); }}
-            >
-              <span className="pill-dot-pulse" />
-              <span className="pill-badge-city">PUNTA CANA</span>
-              <span className="pill-badge-copy">Jornada Tomatis® 18–31 Octubre · Cupos limitados</span>
-              <span className="pill-badge-cta">Ver detalles <ArrowRight size={13} /></span>
-            </motion.div>
+
             <motion.h1 variants={fadeUp} style={{ color: 'var(--color-text)' }}>
               Un espacio donde tu <span style={{ color: 'var(--color-accent)' }}>hijo</span> se siente seguro para aprender y crecer.
             </motion.h1>
