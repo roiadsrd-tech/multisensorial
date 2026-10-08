@@ -1028,53 +1028,53 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   background: var(--yellow);
 }
 
-.chrono-step-title {
+.chrono-num-group {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.15rem;
+  gap: 10px;
+}
+
+.chrono-inline-icon {
+  color: var(--yellow);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.chrono-linear-step:hover .chrono-inline-icon {
+  transform: scale(1.12);
+}
+
+.chrono-step-title {
+  font-size: 1.18rem;
   font-weight: 800;
   color: #ffffff;
   margin: 0 0 8px 0;
   line-height: 1.25;
 }
 
-.chrono-step-icon-wrap {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--yellow);
-  flex-shrink: 0;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.chrono-linear-step:hover .chrono-step-icon-wrap {
-  background: var(--yellow);
-  color: var(--blue);
-}
-
-.chrono-step-desc {
+.chrono-venue-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.88rem;
-  line-height: 1.35;
-  color: rgba(250, 249, 220, 0.88);
-  margin: 0;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 .chrono-venue-logo {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  object-fit: cover;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  object-fit: contain;
   background: #ffffff;
+  padding: 3px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   flex-shrink: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.chrono-venue-text {
+  font-size: 0.88rem;
+  line-height: 1.35;
+  color: rgba(250, 249, 220, 0.88);
 }
 
 /* 3. SECCIÓN: MAPA SENCILLO Y LIMPIO (SIN BOTONERA NI INFORMACIÓN REDUNDANTE) */

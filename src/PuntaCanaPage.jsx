@@ -441,74 +441,66 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             <div className="chrono-linear-flow">
               <div className="chrono-linear-step">
                 <div className="chrono-top-bar">
-                  <span className="chrono-big-num">01</span>
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">01</span>
+                    <MessageSquare className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
                   <span className="chrono-step-date">Sáb 17 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">
-                  <span className="chrono-step-icon-wrap" aria-hidden="true">
-                    <MessageSquare size={15} />
-                  </span>
-                  <span>Charla inicial</span>
-                </h3>
-                <p className="chrono-step-desc">
+                <h3 className="chrono-step-title">Charla inicial</h3>
+                <div className="chrono-venue-row">
                   <img src="/assets/spotcast-square.webp" alt="Spotcast Café" className="chrono-venue-logo" loading="lazy" />
-                  <span>Spotcast Café · Plaza Boulevard Center</span>
-                </p>
+                  <span className="chrono-venue-text">Spotcast Café · Plaza Boulevard Center</span>
+                </div>
               </div>
 
               <div className="chrono-linear-step">
                 <div className="chrono-top-bar">
-                  <span className="chrono-big-num">02</span>
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">02</span>
+                    <ClipboardCheck className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
                   <span className="chrono-step-date">Dom 18 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">
-                  <span className="chrono-step-icon-wrap" aria-hidden="true">
-                    <ClipboardCheck size={15} />
-                  </span>
-                  <span>Evaluaciones diagnósticas</span>
-                </h3>
-                <p className="chrono-step-desc">
+                <h3 className="chrono-step-title">Evaluaciones diagnósticas</h3>
+                <div className="chrono-venue-row">
                   <img src="/assets/pequenines-square.webp" alt="Pequeñines Paso a Paso" className="chrono-venue-logo" loading="lazy" />
-                  <span>Pequeñines Paso a Paso · Bávaro</span>
-                </p>
+                  <span className="chrono-venue-text">Pequeñines Paso a Paso · Bávaro</span>
+                </div>
               </div>
 
               <div className="chrono-linear-step">
                 <div className="chrono-top-bar">
-                  <span className="chrono-big-num">03</span>
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">03</span>
+                    <Headphones className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
                   <span className="chrono-step-date">19 al 31 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">
-                  <span className="chrono-step-icon-wrap" aria-hidden="true">
-                    <Headphones size={15} />
-                  </span>
-                  <span>Terapia intensiva</span>
-                </h3>
-                <p className="chrono-step-desc">
+                <h3 className="chrono-step-title">Terapia intensiva</h3>
+                <div className="chrono-venue-row">
                   <img src="/assets/pequenines-square.webp" alt="Pequeñines" className="chrono-venue-logo" loading="lazy" />
-                  <span>Sede Pequeñines · 2h diarias</span>
-                </p>
+                  <span className="chrono-venue-text">Sede Pequeñines · 2h diarias continuas</span>
+                </div>
               </div>
 
               <div className="chrono-linear-step">
                 <div className="chrono-top-bar">
-                  <span className="chrono-big-num">04</span>
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">04</span>
+                    <FileText className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
                   <span className="chrono-step-date">Vie 31 Oct</span>
                 </div>
                 <div className="chrono-line-track"></div>
-                <h3 className="chrono-step-title">
-                  <span className="chrono-step-icon-wrap" aria-hidden="true">
-                    <FileText size={15} />
-                  </span>
-                  <span>Cierre y entrega de informe</span>
-                </h3>
-                <p className="chrono-step-desc">
+                <h3 className="chrono-step-title">Cierre y entrega de informe</h3>
+                <div className="chrono-venue-row">
                   <img src="/assets/pequenines-square.webp" alt="Pequeñines" className="chrono-venue-logo" loading="lazy" />
-                  <span>Sede Pequeñines · Pautas para casa</span>
-                </p>
+                  <span className="chrono-venue-text">Sede Pequeñines · Pautas para casa</span>
+                </div>
               </div>
             </div>
           </div>
