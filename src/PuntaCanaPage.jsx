@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star, MessageSquare, ClipboardCheck, Headphones, FileText } from 'lucide-react';
+import { Star, MessageSquare, ClipboardCheck, Headphones, FileText, MapPin } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
 
@@ -110,9 +110,9 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         title: '#1 Workshop · Spotcast Café',
         icon: window.L.divIcon({
           className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.webp" alt="Spotcast" /></div><span class="pin-label">Workshop</span></div>',
-          iconSize: [160, 48],
-          iconAnchor: [80, 48]
+          html: '<div class="pin-badge pin-spotcast"><span class="pin-order-num">#1</span><div class="pin-logo-wrap"><img src="/assets/spotcast-square.webp" alt="Spotcast" /></div><div class="pin-text-block"><span class="pin-label">Workshop</span><span class="pin-date-sub">Sáb 17 Oct</span></div></div>',
+          iconSize: [180, 50],
+          iconAnchor: [90, 50]
         })
       }).addTo(map);
 
@@ -126,9 +126,9 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         title: '#2 Jornada Terapéutica · Pequeñines Paso a Paso',
         icon: window.L.divIcon({
           className: 'compact-map-pin-wrap',
-          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.webp" alt="Pequeñines" /></div><span class="pin-label">Jornada Terapéutica</span></div>',
-          iconSize: [210, 48],
-          iconAnchor: [105, 48]
+          html: '<div class="pin-badge pin-pequenines"><span class="pin-order-num">#2</span><div class="pin-logo-wrap"><img src="/assets/pequenines-square.webp" alt="Pequeñines" /></div><div class="pin-text-block"><span class="pin-label">Jornada Terapéutica</span><span class="pin-date-sub">19 - 31 Oct</span></div></div>',
+          iconSize: [225, 50],
+          iconAnchor: [112, 50]
         })
       }).addTo(map);
 
@@ -631,9 +631,14 @@ export default function PuntaCanaPage({ onNavigateHome }) {
         <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
           <div className="map-section-header">
             <p className="eyebrow">SEDES EN BÁVARO</p>
-            <h2 id="map-heading">
-              1. Spotcast Café · 2. Pequeñines Paso a Paso
-            </h2>
+            <div className="map-title-row">
+              <h2 id="map-heading">
+                ¿Dónde es?
+              </h2>
+              <span className="map-heading-icon-badge" aria-hidden="true">
+                <MapPin size={22} />
+              </span>
+            </div>
           </div>
           <div className="simple-map-container">
             <div 
