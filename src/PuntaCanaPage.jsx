@@ -325,106 +325,214 @@ export default function PuntaCanaPage({ onNavigateHome }) {
           </div>
         </section>
 
-        {/* PROBLEM / EVERYDAY CHALLENGES */}
-        <section className="family-story" id="tu-familia" aria-labelledby="family-title">
+        {/* ¿ES ESTA JORNADA PARA TU HIJO? */}
+        <section className="family-story section-signals" id="tu-familia" aria-labelledby="family-title">
           <div className="section-wrap">
             <div className="section-heading">
-              <p className="eyebrow">EL DÍA A DÍA</p>
+              <p className="eyebrow">PERFIL DE LA JORNADA</p>
               <h2 id="family-title">
-                ¿Te resulta<br />
-                <span><mark className="text-highlight" data-highlight>familiar?</mark></span>
+                ¿Es esta jornada<br />
+                <span><mark className="text-highlight" data-highlight>para tu hijo?</mark></span>
               </h2>
+              <p className="section-subtitle">
+                Si notas alguna de estas señales en tu pequeño, este intensivo es para él:
+              </p>
             </div>
 
-            <ul className="moment-grid problem-grid">
-              <li className="moment-card">
-                <img src="/assets/family-understanding.webp" alt="Dificultad para comunicarse" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3>Adivinar lo que necesita</h3>
-                  <p>Te toma de la mano pero cuesta saber si tiene hambre, dolor o frustración.</p>
+            <div className="signals-list-clean">
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-understanding.webp" 
+                  alt="Retraso en el habla" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Retraso en el habla</h3>
+                  <p>No dice palabras claras o se frustra al intentar comunicarse.</p>
                 </div>
-              </li>
-              <li className="moment-card">
-                <img src="/assets/family-sounds.webp" alt="Sensibilidad a ruidos o estímulos" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3>Sensibilidad a estímulos</h3>
-                  <p>Los ruidos fuertes o lugares nuevos le abruman e interrumpen las salidas.</p>
-                </div>
-              </li>
-              <li className="moment-card">
-                <img src="/assets/family-questions.webp" alt="Búsqueda de orientación clara" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3>Dudas sobre qué sigue</h3>
-                  <p>Múltiples consultas previas, pero sin un plan práctico para hacer en casa.</p>
-                </div>
-              </li>
-            </ul>
+              </div>
 
-            <div className="compact-outcome">
-              <p className="scroll-phrase">Un camino claro para entender a tu hijo.</p>
-              <span>El Método Tomatis® reentrena cómo el cerebro procesa los sonidos para devolver calma, atención y conexión.</span>
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/families/photo-04.webp" 
+                  alt="Falta de atención" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Falta de atención</h3>
+                  <p>Lo llamas por su nombre y parece ausente o no responde.</p>
+                </div>
+              </div>
+
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-sounds.webp" 
+                  alt="Sensibilidad al ruido" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Sensibilidad al ruido</h3>
+                  <p>Se tapa los oídos o colapsa con la bulla y sonidos fuertes.</p>
+                </div>
+              </div>
+
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-questions.webp" 
+                  alt="Sin avances" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Sin avances</h3>
+                  <p>Lleva meses en terapias de siempre y no arranca.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="signals-cta-action">
+              <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Apartar horario por WhatsApp</span>
+              </a>
             </div>
           </div>
         </section>
 
-        {/* PROGRAM STRUCTURE */}
-        <section className="program" id="programa" aria-labelledby="program-title">
-          <div className="section-wrap program-inner">
-            <div className="program-heading">
-              <p className="eyebrow">PROGRAMA INTENSIVO · PUNTA CANA</p>
-              <h2 id="program-title">
-                13 días continuos.<br />
-                <span><mark className="text-highlight highlight-blue" data-highlight>Así funciona.</mark></span>
+        {/* CRONOGRAMA PASO A PASO */}
+        <section className="cronograma-section" id="cronograma" aria-labelledby="cronograma-title">
+          <div className="section-wrap">
+            <div className="cronograma-heading">
+              <p className="eyebrow">CRONOGRAMA CONFIRMADO · BÁVARO</p>
+              <h2 id="cronograma-title">
+                Paso a paso cronológico.<br />
+                <span><mark className="text-highlight highlight-blue" data-highlight>Fechas de la jornada.</mark></span>
               </h2>
             </div>
 
-            <div className="program-visual-flow">
-              <div className="program-visual-step">
-                <div className="step-media">
-                  <img src="/assets/families/photo-04.webp" alt="Evaluación de escucha y perfil del niño" loading="lazy" />
+            <div className="chrono-linear-flow">
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <span className="chrono-big-num">01</span>
+                  <span className="chrono-step-date">Sáb 17 Oct</span>
                 </div>
-                <div className="step-info">
-                  <div className="step-badge">
-                    <span className="step-pill">01 · EVALUACIÓN</span>
-                  </div>
-                  <h3>Perfil de escucha inicial</h3>
-                  <p>Medimos cómo procesa los sonidos y fijamos objetivos claros con la familia.</p>
-                </div>
+                <div className="chrono-line-track"></div>
+                <h3 className="chrono-step-title">Charla inicial</h3>
+                <p className="chrono-step-desc">Spotcast Café · Plaza Boulevard Center</p>
               </div>
 
-              <div className="program-visual-step">
-                <div className="step-media">
-                  <img src="/assets/families/photo-01.webp" alt="Sesión de estimulación con auriculares Tomatis" loading="lazy" />
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <span className="chrono-big-num">02</span>
+                  <span className="chrono-step-date">Dom 18 Oct</span>
                 </div>
-                <div className="step-info">
-                  <div className="step-badge">
-                    <span className="step-pill">02 · ESTIMULACIÓN</span>
-                  </div>
-                  <h3>2h diarias de música filtrada</h3>
-                  <p>Auriculares de conducción ósea mientras juega, dibuja y se divierte.</p>
-                </div>
+                <div className="chrono-line-track"></div>
+                <h3 className="chrono-step-title">Evaluaciones diagnósticas</h3>
+                <p className="chrono-step-desc">Pequeñines Paso a Paso · Bávaro</p>
               </div>
 
-              <div className="program-visual-step">
-                <div className="step-media">
-                  <img src="/assets/families/photo-03.webp" alt="Plan y seguimiento en el hogar" loading="lazy" />
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <span className="chrono-big-num">03</span>
+                  <span className="chrono-step-date">19 al 31 Oct</span>
                 </div>
-                <div className="step-info">
-                  <div className="step-badge">
-                    <span className="step-pill">03 · SEGUIMIENTO</span>
-                  </div>
-                  <h3>Evolución y pautas para casa</h3>
-                  <p>Entrega de informe y herramientas prácticas para mantener los avances.</p>
+                <div className="chrono-line-track"></div>
+                <h3 className="chrono-step-title">Terapia intensiva</h3>
+                <p className="chrono-step-desc">2 horas diarias continuas de estimulación</p>
+              </div>
+
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <span className="chrono-big-num">04</span>
+                  <span className="chrono-step-date">Vie 31 Oct</span>
                 </div>
+                <div className="chrono-line-track"></div>
+                <h3 className="chrono-step-title">Cierre y entrega de informe</h3>
+                <p className="chrono-step-desc">Resultados de evolución y pautas para casa</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEDES EN BÁVARO - MAPA LIMPIO */}
+        <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
+          <div className="map-section-header">
+            <p className="eyebrow">SEDES EN BÁVARO</p>
+            <h2 id="map-heading">
+              1. Spotcast Café · 2. Pequeñines Paso a Paso
+            </h2>
+          </div>
+          <div className="simple-map-container">
+            <div 
+              className="geographic-map" 
+              ref={mapRef}
+              id="locations-map" 
+              aria-label="Mapa de Punta Cana"
+            ></div>
+          </div>
+        </section>
+
+        {/* TANDAS A ELEGIR */}
+        <section className="section-tandas-brand" id="tandas" aria-labelledby="tandas-title">
+          <div className="section-wrap">
+            <div className="tandas-brand-header">
+              <p className="eyebrow">HORARIOS DISPONIBLES</p>
+              <h2 id="tandas-title">
+                Tandas a elegir
+              </h2>
+              <div>
+                <span className="tandas-badge-pill">Solo 5 niños por grupo</span>
               </div>
             </div>
 
-            {/* SPECIALISTS SECTION */}
-            <div className="program-specialists">
+            <div className="tandas-grid-large">
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Matutina 1</span>
+                <span className="tanda-time-display">8:00 AM – 10:00 AM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Matutina 2</span>
+                <span className="tanda-time-display">10:00 AM – 12:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Vespertina 1</span>
+                <span className="tanda-time-display">2:00 PM – 4:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Vespertina 2</span>
+                <span className="tanda-time-display">4:00 PM – 6:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+            </div>
+
+            <div className="tandas-action-wrap">
+              <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={20} color="#000000" />
+                <span>Apartar horario por WhatsApp</span>
+              </a>
+              <p className="tandas-action-note">
+                Los cupos por tanda se completan rápido por orden de inscripción.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SPECIALISTS SECTION */}
+        <section className="program program-specialists-large" id="especialistas" aria-labelledby="specialists-title">
+          <div className="section-wrap program-inner">
+            <div className="program-specialists" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
               <div className="program-specialists-intro">
                 <p className="eyebrow">CONSULTORES CERTIFICADOS</p>
-                <h3>Especialistas a cargo de la jornada</h3>
-                <p>Atención directa por profesionales certificados en el Método Tomatis® Nivel 4.</p>
+                <h3 id="specialists-title">Especialistas a cargo de la jornada</h3>
               </div>
 
               <div className="program-specialists-grid">
@@ -443,9 +551,6 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                     <span className="specialist-card-pill" style={{ background: '#FFD6DF' }}>
                       Psicopedagogía & Tomatis® Nivel 4
                     </span>
-                    <p className="specialist-card-desc">
-                      Especialista en desarrollo neurosensorial e intervención infantil.
-                    </p>
                   </div>
                 </div>
 
@@ -464,9 +569,6 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                     <span className="specialist-card-pill" style={{ background: '#D0EEFF' }}>
                       Psicología & Tomatis® Nivel 4
                     </span>
-                    <p className="specialist-card-desc">
-                      Psicólogo clínico enfocado en neurodesarrollo y estimulación audiosensorial.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -534,78 +636,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
           </div>
         </section>
 
-        {/* VENUE & LOCATION */}
-        <section className="locations section-wrap" id="sede" aria-labelledby="locations-title">
-          <div className="locations-heading">
-            <div>
-              <p className="eyebrow">UBICACIONES CONFIRMADAS · BÁVARO</p>
-              <h2 id="locations-title">2 lugares clave para tu familia</h2>
-              <p style={{ marginTop: '6px', fontSize: '0.95rem', color: 'rgba(23,37,65,0.85)' }}>
-                Taller para padres el 18 de octubre y terapia intensiva del 19 al 31.
-              </p>
-            </div>
-          </div>
-
-          <div className="dual-venues-grid">
-            {/* SEDE 1: WORKSHOP */}
-            <article className="venue-card venue-card-workshop">
-              <div className="venue-photo-wrap venue-photo-spotcast">
-                <img 
-                  src="/assets/spotcast-square.webp" 
-                  alt="Spotcast Café" 
-                  className="venue-photo" 
-                  loading="lazy"
-                />
-                <span className="venue-seq-badge venue-seq-orange">#1 · Workshop</span>
-              </div>
-              <div className="venue-card-body">
-                <h3>Spotcast Café</h3>
-                <p className="venue-detail">Sáb 18 Oct · Plaza Boulevard Center, Bávaro</p>
-                <a className="venue-map-link" href={MAP_SEARCH_SPOTCAST} target="_blank" rel="noopener noreferrer">
-                  Ver en GPS ↗
-                </a>
-              </div>
-            </article>
-
-            {/* SEDE 2: JORNADA TERAPÉUTICA */}
-            <article className="venue-card venue-card-intensive">
-              <div className="venue-photo-wrap venue-photo-pequenines">
-                <img 
-                  src="/assets/pequenines-logo.webp" 
-                  alt="Pequeñines Paso a Paso" 
-                  className="venue-photo" 
-                  loading="lazy"
-                />
-                <span className="venue-seq-badge venue-seq-blue">#2 · Jornada Terapéutica</span>
-              </div>
-              <div className="venue-card-body">
-                <h3>Pequeñines Paso a Paso</h3>
-                <p className="venue-detail">19 al 31 Oct · Residencial Rijo, CEPM, Bávaro</p>
-                <a className="venue-map-link" href={MAP_SEARCH_PEQUENINES} target="_blank" rel="noopener noreferrer">
-                  Ver en GPS ↗
-                </a>
-              </div>
-            </article>
-          </div>
-
-          <div className="locations-card" style={{ marginTop: '24px' }}>
-            <div className="locations-toolbar">
-              <strong>Mapa · Bávaro, Punta Cana</strong>
-              <button type="button" className="map-overview" onClick={handleCenterMap}>
-                Centrar mapa
-              </button>
-            </div>
-            <div 
-              className="geographic-map" 
-              ref={mapRef}
-              id="locations-map" 
-              aria-label="Mapa de Punta Cana"
-            >
-            </div>
-          </div>
-        </section>
-
-        {/* FAQS */}
+        {/* PREGUNTAS FRECUENTES */}
         <section className="faqs section-wrap" id="preguntas" aria-labelledby="faq-title">
           <div className="faq-intro">
             <p className="eyebrow">PREGUNTAS FRECUENTES</p>
@@ -623,11 +654,24 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">01</span>
-                  <span>¿Para qué edades está recomendado?</span>
+                  <span>¿Cómo me inscribo y aparto horario?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>Para niños y jóvenes de <strong>2 a 18 años</strong>. En la evaluación inicial se analiza su perfil sensorial para confirmar que califica.</p>
+                  <ol className="faq-steps-list">
+                    <li>
+                      <strong>1. Escríbenos por WhatsApp</strong> solicitando tu inscripción y el horario deseado <em>(los cupos por tanda se completan rápido)</em>.
+                    </li>
+                    <li>
+                      <strong>2. Recibirás los datos</strong> para realizar el pago de reserva y tu contrato personal.
+                    </li>
+                    <li>
+                      <strong>3. Te confirmamos el cupo</strong> para la evaluación del domingo 18.
+                    </li>
+                  </ol>
+                  <a className="faq-inline-cta" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+                    Solicitar inscripción por WhatsApp →
+                  </a>
                 </div>
               </details>
 
@@ -641,11 +685,11 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">02</span>
-                  <span>¿Qué hace el niño en cada sesión?</span>
+                  <span>¿Qué es el Método Tomatis®?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>Lleva auriculares especiales Tomatis® de conducción ósea mientras escucha música modificada y participa en actividades lúdicas guiadas.</p>
+                  <p>Es una tecnología de estimulación auditiva y conducción por el hueso del cráneo mediante audífonos especiales. Mientras el niño juega, estimula las vías neuronales para activar el habla, la atención y la autorregulación emocional.</p>
                 </div>
               </details>
 
@@ -659,11 +703,11 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">03</span>
-                  <span>¿Cuál es el formato de asistencia?</span>
+                  <span>¿Qué hace el niño durante las 2 horas de terapia?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p><strong>13 días continuos, 2 horas al día</strong> en un turno fijo asignado, acompañados siempre por un adulto.</p>
+                  <p>Realiza actividades lúdicas guiadas (rompecabezas, pintura, motricidad fina) sobre alfombras de foam o mesas de trabajo con los audífonos puestos.</p>
                 </div>
               </details>
 
@@ -677,34 +721,54 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">04</span>
-                  <span>¿Cómo aparto un cupo en Bávaro?</span>
+                  <span>¿Debe quedarse un acompañante?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>Los cupos están limitados a 6 niños para garantizar máxima dedicación. Escríbenos por WhatsApp para reservar.</p>
-                  <a href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-                    Consultar cupos disponibles →
-                  </a>
+                  <p>Sí, cada niño debe asistir diariamente acompañado por mamá, papá o un tutor.</p>
+                </div>
+              </details>
+
+              <details 
+                className={`faq-item ${activeFaq === 5 ? 'is-open' : ''}`}
+                open={activeFaq === 5}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(5);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">05</span>
+                  <span>¿Necesita un diagnóstico médico previo?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>No. El domingo 18 de octubre realizamos la evaluación previa para calibrar el protocolo específico de tu pequeño.</p>
                 </div>
               </details>
             </div>
           </div>
         </section>
 
-        {/* FINAL CONTACT CTA */}
+        {/* FINAL CONTACT CTA - CUPOS LIMITADOS EN BÁVARO */}
         <section className="compact-contact section-wrap">
-          <p className="eyebrow">CONTACTO DIRECTO</p>
-          <h2>
-            ¿Quieres saber si la jornada<br />
-            <span><mark className="text-highlight">es para tu hijo?</mark></span>
-          </h2>
-          <p>Escríbenos para recibir orientación personalizada y verificar cupos en Bávaro.</p>
+          <p className="eyebrow">CUPOS LIMITADOS EN BÁVARO</p>
+          <div className="cta-headline-combo">
+            <span className="cta-callout-font">Solo 5 niños por tanda</span>
+            <h2>
+              No volveremos a Punta Cana<br />
+              <span>hasta el próximo año.</span>
+            </h2>
+          </div>
+          <p>
+            Los cupos por grupo son estrictamente limitados para garantizar máxima calma y atención individualizada.
+          </p>
           <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
             <WhatsAppIcon size={20} color="#000000" />
-            <span>Hablar por WhatsApp con un especialista</span>
+            <span>Apartar horario por WhatsApp</span>
           </a>
           <a className="compact-phone" href="tel:+18093065040">
-            +1 (809) 306-5040
+            📞 +1 (809) 306-5040 | Centro Multisensorial RD
           </a>
         </section>
       </main>

@@ -759,20 +759,25 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
     padding: 0 16px;
   }
   .compact-page .media-static-label {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     font-size: 0.68rem;
   }
   .compact-page .media-logos-grid {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 22px 30px;
+    gap: 12px 24px;
   }
   .compact-page .media-logo-item img {
-    height: 38px;
+    height: 48px;
   }
-  .compact-page .media-logo-item:nth-child(1) img,
+  .compact-page .media-logo-item:nth-child(1) img {
+    height: 106px;
+  }
   .compact-page .media-logo-item:nth-child(3) img {
-    height: 68px;
+    height: 110px;
+  }
+  .compact-page .media-logo-item:nth-child(5) img {
+    height: 42px;
   }
 }
 
@@ -843,6 +848,431 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
     padding: 12px 18px !important;
     border-radius: 100px !important;
     transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+}
+
+/* ==========================================================================
+   PUNTA CANA REDESIGN (ITERACIÓN FINAL SEGÚN AUDIO):
+   SEÑALES CON FOTOS, CRONOGRAMA MINIMALISTA, MAPA LIMPIO, TANDAS BRANDING, CTA
+   ========================================================================== */
+
+/* 1. SECCIÓN: ¿ES ESTA JORNADA PARA TU HIJO? */
+.section-signals {
+  padding-block: 76px;
+  background: var(--cream);
+}
+
+.section-signals .section-heading {
+  margin-bottom: 34px;
+}
+
+.section-signals .section-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.signals-list-clean {
+  display: flex;
+  flex-direction: column;
+  max-width: 860px;
+  margin-bottom: 34px;
+}
+
+.signal-row-item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(23, 37, 65, 0.12) !important;
+  padding: 18px 4px !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.signal-row-item:first-child {
+  border-top: 1px solid rgba(23, 37, 65, 0.12) !important;
+}
+
+.signal-thumb {
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(23, 37, 65, 0.08);
+}
+
+.signal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.signal-content h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+.signal-content p {
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: rgba(23, 37, 65, 0.82);
+  margin: 0;
+}
+
+.signals-cta-action {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 14px;
+}
+
+/* 2. SECCIÓN: CRONOGRAMA MINIMALISTA CON NÚMEROS GRANDES Y FONDO AZUL */
+.cronograma-section {
+  padding-block: 90px;
+  background: var(--blue);
+  color: var(--cream);
+}
+
+.cronograma-heading {
+  margin-bottom: 50px;
+}
+
+.cronograma-section .cronograma-heading .eyebrow {
+  color: var(--yellow);
+}
+
+.cronograma-section .cronograma-heading h2 {
+  color: #ffffff;
+}
+
+.cronograma-section .text-highlight {
+  color: var(--yellow) !important;
+  background: transparent !important;
+}
+
+.chrono-linear-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  position: relative;
+}
+
+.chrono-linear-step {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.25s ease;
+}
+
+.chrono-linear-step:hover {
+  transform: translateY(-4px);
+}
+
+.chrono-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.chrono-big-num {
+  font-family: 'Jost', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--yellow);
+  letter-spacing: -2px;
+}
+
+.chrono-step-date {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  background: #FF5500;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.chrono-linear-step:hover .chrono-step-date {
+  background: #FF6E26;
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.chrono-line-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.22);
+  margin-bottom: 18px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.chrono-linear-step:hover .chrono-line-track {
+  background: var(--yellow);
+}
+
+.chrono-step-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+.chrono-step-desc {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: rgba(250, 249, 220, 0.85);
+  margin: 0;
+}
+
+/* 3. SECCIÓN: MAPA SENCILLO Y LIMPIO (SIN BOTONERA NI INFORMACIÓN REDUNDANTE) */
+.section-map-wrap {
+  padding-block: 40px 70px;
+  background: #ffffff;
+}
+
+.map-section-header {
+  margin-bottom: 24px;
+}
+
+.map-section-header h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-top: 6px;
+}
+
+.simple-map-container {
+  border-radius: 22px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  box-shadow: 0 6px 0 var(--ink);
+}
+
+.simple-map-container .geographic-map {
+  height: 420px;
+  width: 100%;
+}
+
+/* 4. SECCIÓN: TANDAS A ELEGIR (FONDO BRAND CREAM, LETRAS GRANDES, SIN EMOJIS NI CALENDARIO) */
+.section-tandas-brand {
+  padding-block: 76px;
+  background: var(--cream);
+  border-top: 1px solid rgba(23, 37, 65, 0.08);
+}
+
+.tandas-brand-header {
+  margin-bottom: 36px;
+}
+
+.tandas-badge-pill {
+  display: inline-block;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--blue);
+  background: rgba(35, 71, 239, 0.1);
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-top: 12px;
+}
+
+.tandas-grid-large {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.tanda-card-large {
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  padding: 22px 18px;
+  box-shadow: 0 4px 0 var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tanda-card-large:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 var(--ink);
+}
+
+.tanda-tag-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(23, 37, 65, 0.65);
+}
+
+.tanda-time-display {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.tanda-capacity-tag {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--blue);
+  background: rgba(35, 71, 239, 0.08);
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+.tandas-action-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.tandas-action-wrap .button {
+  font-size: 18px;
+  padding: 16px 36px;
+  min-height: 58px;
+}
+
+.tandas-action-note {
+  font-size: 0.88rem;
+  color: rgba(23, 37, 65, 0.7);
+  text-align: center;
+  margin: 0;
+}
+
+/* 5. ESPECIALISTAS: MÁS GRANDES Y SIMPLES */
+.program-specialists-large .program-specialists-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 420px));
+  justify-content: center;
+  gap: 36px;
+}
+
+.program-specialists-large .specialist-card-name {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--ink);
+  margin: 12px 0 6px 0;
+}
+
+.program-specialists-large .specialist-card-pill {
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 6px 14px;
+}
+
+/* 6. FINAL CTA: RESALTAR "SOLO 5 NIÑOS POR TANDA" EN FONT DISTINTIVO */
+.cta-headline-combo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cta-callout-font {
+  display: inline-block;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: #000000;
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  box-shadow: 0 4px 0 var(--ink);
+  padding: 6px 22px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+  transform: rotate(-1.5deg);
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 900px) {
+  .chrono-linear-flow {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 24px;
+  }
+  .tandas-grid-large {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .section-signals,
+  .cronograma-section,
+  .section-tandas-brand {
+    padding-block: 52px;
+  }
+  .signal-row-item {
+    gap: 16px;
+    padding: 16px 0 !important;
+  }
+  .signal-thumb {
+    width: 62px;
+    height: 62px;
+    border-radius: 12px;
+  }
+  .signal-content h3 {
+    font-size: 1.15rem;
+  }
+  .signal-content p {
+    font-size: 0.92rem;
+  }
+  .chrono-linear-flow {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .chrono-big-num {
+    font-size: 2.8rem;
+  }
+  .tandas-grid-large {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .simple-map-container .geographic-map {
+    height: 320px;
+  }
+  .program-specialists-large .program-specialists-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .program-specialists-large .specialist-arch-stage {
+    height: clamp(150px, 44vw, 210px);
+    border-radius: clamp(75px, 22vw, 105px) clamp(75px, 22vw, 105px) 16px 16px;
+  }
+  .program-specialists-large .specialist-card-name {
+    font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+    margin: 8px 0 4px 0;
+  }
+  .program-specialists-large .specialist-card-pill {
+    font-size: clamp(0.62rem, 2.3vw, 0.78rem);
+    padding: 4px 8px;
+    line-height: 1.25;
+    white-space: normal;
+    text-align: center;
   }
 }
 

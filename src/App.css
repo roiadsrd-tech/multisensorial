@@ -2822,7 +2822,7 @@
   }
 
   .media-static-label {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     font-size: 0.68rem;
   }
 
@@ -2831,8 +2831,9 @@
     grid-template-columns: repeat(6, 1fr) !important;
     justify-items: center !important;
     align-items: center !important;
-    gap: 18px 10px !important;
-    max-width: 360px !important;
+    gap: 8px 10px !important;
+    max-width: 380px !important;
+    width: 100% !important;
     margin: 0 auto !important;
   }
 
@@ -2866,17 +2867,27 @@
   }
 
   .media-logo-item img {
-    height: 36px !important;
+    height: 48px !important;
     max-width: 100% !important;
     object-fit: contain !important;
   }
 
+  /* Azul Podcast: compensar padding transparente y destacar */
   .media-logo-item:nth-child(1) img {
-    height: 52px !important;
+    height: 106px !important;
+    max-width: 112% !important;
   }
 
+  /* Esto No Es Radio: compensar padding transparente y destacar */
   .media-logo-item:nth-child(3) img {
-    height: 54px !important;
+    height: 110px !important;
+    max-width: 115% !important;
+  }
+
+  /* RNN: equilibrar proporción panorámica */
+  .media-logo-item:nth-child(5) img {
+    height: 42px !important;
+    max-width: 125% !important;
   }
 
   .media-logo-name {
