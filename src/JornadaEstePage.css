@@ -1244,6 +1244,70 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   transform: rotate(-1.5deg);
 }
 
+/* 7. COUNTDOWN TIMER EN VIVO */
+.countdown-display {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 16px);
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  box-shadow: 0 5px 0 var(--ink);
+  padding: 16px clamp(16px, 3.5vw, 32px);
+  margin: 18px auto 14px auto;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: clamp(48px, 12vw, 72px);
+}
+
+.countdown-number {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: clamp(2.2rem, 5.8vw, 3.4rem);
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+  font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(23, 37, 65, 0.7);
+  margin-top: 4px;
+}
+
+.countdown-separator {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  font-weight: 700;
+  color: #FF5500;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.countdown-note {
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin: 10px auto 22px auto;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.button-countdown-action {
+  box-shadow: 0 4px 0 var(--ink);
+  font-size: 1.05rem;
+  min-height: 56px;
+  padding: 14px 32px;
+}
+
 /* RESPONSIVE BREAKPOINTS */
 @media (max-width: 900px) {
   .chrono-linear-flow {

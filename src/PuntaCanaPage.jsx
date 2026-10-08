@@ -25,11 +25,36 @@ const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spo
 const COORDS_PEQUENINES = [18.5565510, -68.3691611];
 const COORDS_SPOTCAST = [18.66278, -68.42921];
 
+const JORNADA_TARGET_DATE = new Date('2026-10-17T09:00:00-04:00').getTime();
+
+function getJornadaTimeLeft() {
+  const diff = JORNADA_TARGET_DATE - Date.now();
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / 1000 / 60) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
+
+const padTwo = (val) => String(val).padStart(2, '0');
+
 export default function PuntaCanaPage({ onNavigateHome }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showFixedCta, setShowFixedCta] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(getJornadaTimeLeft);
   const mapRef = useRef(null);
   const leafletMapInstance = useRef(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getJornadaTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -782,23 +807,49 @@ export default function PuntaCanaPage({ onNavigateHome }) {
           </div>
         </section>
 
-        {/* FINAL CONTACT CTA - CUPOS LIMITADOS EN BÁVARO */}
-        <section className="compact-contact section-wrap">
-          <p className="eyebrow">CUPOS LIMITADOS EN BÁVARO</p>
+        {/* COUNTDOWN & FINAL CONTACT CTA */}
+        <section className="compact-contact section-wrap" id="cuenta-regresiva" aria-labelledby="countdown-heading">
+          <p className="eyebrow">CUENTA REGRESIVA · INICIO DE JORNADA</p>
           <div className="cta-headline-combo">
-            <span className="cta-callout-font">Solo 5 niños por tanda</span>
-            <h2>
+            <span className="cta-callout-font">Sábado 17 de Octubre · Bávaro</span>
+            <h2 id="countdown-heading">
               No volveremos a Punta Cana<br />
               <span>hasta el próximo año.</span>
             </h2>
           </div>
-          <p>
-            Los cupos por grupo son estrictamente limitados para garantizar máxima calma y atención individualizada.
+
+          {/* TIMER EN VIVO */}
+          <div className="countdown-display" role="timer" aria-live="polite" aria-label="Tiempo restante para el inicio de la jornada">
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.days)}</span>
+              <span className="countdown-label">Días</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.hours)}</span>
+              <span className="countdown-label">Horas</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.minutes)}</span>
+              <span className="countdown-label">Min</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.seconds)}</span>
+              <span className="countdown-label">Seg</span>
+            </div>
+          </div>
+
+          <p className="countdown-note">
+            Los cupos por grupo son estrictamente limitados a <strong>5 niños por tanda</strong> para garantizar máxima calma y estimulación personalizada.
           </p>
-          <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+
+          <a className="button button-countdown-action" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
             <WhatsAppIcon size={20} color="#000000" />
-            <span>Apartar horario por WhatsApp</span>
+            <span>Apartar cupo por WhatsApp antes de que inicie</span>
           </a>
+
           <a className="compact-phone" href="tel:+18093065040">
             📞 +1 (809) 306-5040 | Centro Multisensorial RD
           </a>
