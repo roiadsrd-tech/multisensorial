@@ -530,6 +530,67 @@ export default function PuntaCanaPage({ onNavigateHome }) {
           </div>
         </section>
 
+        {/* SPECIALISTS SECTION */}
+        <section className="program program-specialists-large" id="especialistas" aria-labelledby="specialists-title">
+          <div className="section-wrap program-inner">
+            <div className="program-specialists" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
+              <div className="program-specialists-intro">
+                <p className="eyebrow">CONSULTORES CERTIFICADOS</p>
+                <h3 id="specialists-title">Especialistas a cargo de la jornada</h3>
+              </div>
+
+              <div className="program-specialists-grid">
+                {/* Mery Torrealba */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#FFD6DF' }}>
+                    <img
+                      src="/mery_torrealba_new.webp"
+                      alt="Mery Torrealba"
+                      className="specialist-arch-img specialist-img-mery"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Mery Torrealba</h4>
+                    <span className="specialist-card-pill" style={{ background: '#FFD6DF' }}>
+                      Psicopedagogía & Tomatis® Nivel 4
+                    </span>
+                  </div>
+                </div>
+
+                {/* Carlos Eduardo Pérez */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#D0EEFF' }}>
+                    <img
+                      src="/carlos_perez_new.webp"
+                      alt="Carlos Eduardo Pérez"
+                      className="specialist-arch-img specialist-img-eduardo"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Carlos Eduardo Pérez</h4>
+                    <span className="specialist-card-pill" style={{ background: '#D0EEFF' }}>
+                      Psicología & Tomatis® Nivel 4
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="program-specialists-verify">
+                <a
+                  className="directory-link"
+                  href="https://www.tomatis.com/es/profesional/republica-dominicana/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Verificar acreditación oficial en Tomatis.com ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SEDES EN BÁVARO - MAPA LIMPIO */}
         <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
           <div className="map-section-header">
@@ -595,67 +656,6 @@ export default function PuntaCanaPage({ onNavigateHome }) {
               <p className="tandas-action-note">
                 Los cupos por tanda se completan rápido por orden de inscripción.
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* SPECIALISTS SECTION */}
-        <section className="program program-specialists-large" id="especialistas" aria-labelledby="specialists-title">
-          <div className="section-wrap program-inner">
-            <div className="program-specialists" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
-              <div className="program-specialists-intro">
-                <p className="eyebrow">CONSULTORES CERTIFICADOS</p>
-                <h3 id="specialists-title">Especialistas a cargo de la jornada</h3>
-              </div>
-
-              <div className="program-specialists-grid">
-                {/* Mery Torrealba */}
-                <div className="program-specialist-card">
-                  <div className="specialist-arch-stage" style={{ background: '#FFD6DF' }}>
-                    <img
-                      src="/mery_torrealba_new.webp"
-                      alt="Mery Torrealba"
-                      className="specialist-arch-img specialist-img-mery"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="specialist-card-info">
-                    <h4 className="specialist-card-name">Mery Torrealba</h4>
-                    <span className="specialist-card-pill" style={{ background: '#FFD6DF' }}>
-                      Psicopedagogía & Tomatis® Nivel 4
-                    </span>
-                  </div>
-                </div>
-
-                {/* Carlos Eduardo Pérez */}
-                <div className="program-specialist-card">
-                  <div className="specialist-arch-stage" style={{ background: '#D0EEFF' }}>
-                    <img
-                      src="/carlos_perez_new.webp"
-                      alt="Carlos Eduardo Pérez"
-                      className="specialist-arch-img specialist-img-eduardo"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="specialist-card-info">
-                    <h4 className="specialist-card-name">Carlos Eduardo Pérez</h4>
-                    <span className="specialist-card-pill" style={{ background: '#D0EEFF' }}>
-                      Psicología & Tomatis® Nivel 4
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="program-specialists-verify">
-                <a
-                  className="directory-link"
-                  href="https://www.tomatis.com/es/profesional/republica-dominicana/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Verificar acreditación oficial en Tomatis.com ↗
-                </a>
-              </div>
             </div>
           </div>
         </section>
