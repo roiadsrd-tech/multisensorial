@@ -188,12 +188,10 @@ export default function PuntaCanaPage({ onNavigateHome }) {
     <div className="compact-page" data-city="Punta Cana">
       <a className="skip-link" href="#contenido">Ir al contenido</a>
 
-      {/* TOP COUNTDOWN BANNER */}
+      {/* TOP COUNTDOWN BANNER (SINGLE LINE) */}
       <aside className="top-timer-banner" aria-label="Tiempo restante para la jornada en Punta Cana">
         <div className="top-timer-inner">
-          <div className="top-timer-label">
-            <span>Jornada Punta Cana inicia en:</span>
-          </div>
+          <span className="top-timer-label">Inicia en:</span>
 
           <div className="top-timer-countdown" role="timer" aria-live="polite">
             <span className="top-timer-unit">
@@ -218,9 +216,9 @@ export default function PuntaCanaPage({ onNavigateHome }) {
             href={WA_PUNTA_CANA} 
             target="_blank" 
             rel="noopener noreferrer"
-            aria-label="Consultar cupos disponibles en WhatsApp"
+            aria-label="Reservar cupo en WhatsApp"
           >
-            <span>Reservar cupo</span>
+            <span>Reservar</span>
             <span aria-hidden="true">→</span>
           </a>
         </div>

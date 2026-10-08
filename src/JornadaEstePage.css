@@ -1406,9 +1406,9 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   }
 }
 
-/* TOP TIMER BANNER (FIJO, NARANJA, MÁS GRANDE Y DE MARCA) */
+/* TOP TIMER BANNER (FIJO, NARANJA, UNA SOLA LÍNEA SIN LINE BREAK) */
 .compact-page {
-  padding-top: 50px;
+  padding-top: 52px;
 }
 
 .top-timer-banner {
@@ -1417,87 +1417,96 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   left: 0;
   right: 0;
   width: 100%;
+  height: 50px;
+  box-sizing: border-box;
   z-index: 1000;
   background: var(--orange);
   color: var(--ink);
   border-bottom: 2px solid var(--ink);
-  padding: 10px 16px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
   font-family: Nunito, sans-serif;
-  line-height: 1.2;
   box-shadow: 0 4px 12px rgba(23, 37, 65, 0.12);
 }
 
 .top-timer-inner {
+  width: 100%;
   max-width: var(--max);
   margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
+  flex-wrap: nowrap !important;
+  white-space: nowrap;
 }
 
 .top-timer-label {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
   font-size: 15px;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .top-timer-countdown {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: var(--cream);
   border: 1.5px solid var(--ink);
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 999px;
   font-variant-numeric: tabular-nums;
   box-shadow: 0 2px 0 var(--ink);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .top-timer-unit {
   display: inline-flex;
   align-items: baseline;
-  gap: 2px;
+  gap: 1.5px;
 }
 
 .top-timer-unit strong {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 900;
   color: var(--blue);
 }
 
 .top-timer-unit small {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   color: var(--ink);
   text-transform: lowercase;
 }
 
 .top-timer-sep {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
-  color: rgba(23, 37, 65, 0.45);
+  color: rgba(23, 37, 65, 0.4);
 }
 
 .top-timer-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: var(--yellow);
   color: var(--ink);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 900;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 999px;
   border: 1.5px solid var(--ink);
   box-shadow: 0 2px 0 var(--ink);
   text-decoration: none;
   transition: transform 0.15s ease, background 0.15s ease;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .top-timer-btn:hover {
@@ -1505,50 +1514,62 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   transform: translateY(-1px);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 600px) {
   .compact-page {
-    padding-top: 48px;
+    padding-top: 46px;
   }
   .top-timer-banner {
-    padding: 8px 10px;
+    height: 44px;
+    padding: 0 8px;
   }
   .top-timer-inner {
-    gap: 8px;
-    justify-content: center;
+    gap: 6px;
   }
   .top-timer-label {
-    font-size: 13px;
+    font-size: 12px;
   }
   .top-timer-countdown {
-    padding: 3px 8px;
-    gap: 4px;
+    padding: 3px 7px;
+    gap: 3px;
+    border-width: 1px;
+    box-shadow: 0 1.5px 0 var(--ink);
   }
   .top-timer-unit strong {
-    font-size: 14px;
+    font-size: 12.5px;
   }
   .top-timer-unit small {
-    font-size: 11px;
+    font-size: 9.5px;
   }
   .top-timer-sep {
-    font-size: 11px;
+    font-size: 10px;
   }
   .top-timer-btn {
-    font-size: 12px;
-    padding: 4px 10px;
+    font-size: 11px;
+    padding: 3.5px 8px;
+    border-width: 1px;
+    box-shadow: 0 1.5px 0 var(--ink);
   }
 }
 
-@media (max-width: 480px) {
-  .compact-page {
-    padding-top: 76px;
+@media (max-width: 360px) {
+  .top-timer-inner {
+    gap: 4px;
   }
   .top-timer-label {
-    font-size: 12px;
+    font-size: 11px;
   }
   .top-timer-countdown {
-    padding: 2px 7px;
+    padding: 2px 5px;
+    gap: 2px;
   }
   .top-timer-unit strong {
-    font-size: 13px;
+    font-size: 11.5px;
+  }
+  .top-timer-unit small {
+    font-size: 8.5px;
+  }
+  .top-timer-btn {
+    font-size: 10px;
+    padding: 2px 6px;
   }
 }
