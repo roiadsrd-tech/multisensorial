@@ -485,8 +485,8 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                 </div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
-                    <h3 className="chrono-step-title">Charla inicial</h3>
-                    <p className="chrono-step-desc">Spotcast Café · Plaza Boulevard Center</p>
+                    <h3 className="chrono-step-title">Workshop inicial</h3>
+                    <p className="chrono-step-desc">Spotcast Café · Equipo multidisciplinario</p>
                   </div>
                   <img
                     src="/assets/spotcast-square.webp"
@@ -624,6 +624,148 @@ export default function PuntaCanaPage({ onNavigateHome }) {
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* WORKSHOP PRESENCIAL: EQUIPO MULTIDISCIPLINARIO Y TEMAS */}
+        <section className="section-workshop section-wrap" id="workshop" aria-labelledby="workshop-title">
+          <div className="workshop-header">
+            <div className="workshop-tag-row">
+              <span className="workshop-badge-venue">📍 Spotcast Café · Plaza Boulevard Center, Bávaro</span>
+              <span className="workshop-badge-date">Sábado 17 de Octubre</span>
+            </div>
+            <h2 id="workshop-title">
+              Workshop presencial:<br />
+              <span className="text-brand-gradient">Equipo multidisciplinario y temas</span>
+            </h2>
+            <p className="workshop-intro">
+              5 enfoques especializados reunidos en una sola jornada para comprender y acompañar el desarrollo neurológico, sensorial, biomédico y educativo de tu hijo.
+            </p>
+          </div>
+
+          <div className="workshop-grid-layout">
+            {/* 1. Multisensorial RD (Apertura) */}
+            <article className="workshop-feature-card">
+              <div className="workshop-card-tag">
+                <span className="workshop-order-pill">01</span>
+                <span className="workshop-area-label">Apertura · Método Tomatis® & Neurodesarrollo</span>
+              </div>
+              <div className="workshop-feature-content">
+                <div className="workshop-feature-info">
+                  <div className="workshop-entity-heading">
+                    <span className="workshop-institution">Centro Multisensorial RD</span>
+                    <span className="workshop-speakers-sub">
+                      Mery Torrealba & Carlos Eduardo Pérez · Consultores Tomatis® Nivel 4
+                    </span>
+                  </div>
+                  <h3 className="workshop-theme-title">Método Tomatis® e intervención temprana</h3>
+                  <p className="workshop-theme-desc">
+                    Cómo la estimulación neurosensorial temprana y la calibración auditiva personalizada activan el lenguaje, la atención y la autorregulación en niños con rezago o neurodivergencia.
+                  </p>
+                </div>
+                <div className="workshop-feature-logo-wrap">
+                  <img src="/assets/logo.webp" alt="Centro Multisensorial RD" className="workshop-logo-ms" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            {/* 2. Sensorialmente (Terapia Ocupacional) */}
+            <article className="workshop-card workshop-card-sensorial">
+              <div className="workshop-card-top">
+                <span className="workshop-order-pill">02</span>
+                <span className="workshop-tag-pill pill-blue">Terapia Ocupacional</span>
+              </div>
+              <div className="workshop-card-brand">
+                <img 
+                  src="/assets/sensorialmente-logo.png" 
+                  alt="Sensorialmente - Centro de Terapia Ocupacional" 
+                  className="workshop-brand-logo logo-sensorialmente" 
+                  loading="lazy" 
+                />
+              </div>
+              <div className="workshop-card-body">
+                <h3 className="workshop-theme-title">
+                  Intervención en Terapia Ocupacional y Desorden Sensorial
+                </h3>
+                <p className="workshop-theme-desc">
+                  Manejo del desorden en el procesamiento sensorial (TPS) con planes terapéuticos a distancia diseñados para implementar con acompañamiento directo desde el hogar.
+                </p>
+              </div>
+            </article>
+
+            {/* 3 & 4. Bloque Médico (Dra. Solanyi Herrera & Dra. Idelsa Polanco) */}
+            <article className="workshop-card workshop-card-medical">
+              <div className="workshop-card-top">
+                <span className="workshop-order-pill">03 & 04</span>
+                <span className="workshop-tag-pill pill-orange">Medicina Especializada</span>
+              </div>
+              
+              <div className="workshop-medical-speakers">
+                <div className="medical-speaker-subcard">
+                  <div className="medical-doctor-badge">
+                    <strong>Dra. Solanyi Herrera</strong>
+                    <span className="doctor-specialty">Medicina Biomédica</span>
+                  </div>
+                  <h4 className="medical-theme-title">Abordaje Biomédico</h4>
+                  <p className="medical-theme-desc">
+                    Factores metabólicos, oxidativos y nutricionales que inciden directamente en la conducta, la atención y el neurodesarrollo infantil.
+                  </p>
+                </div>
+
+                <div className="medical-divider" aria-hidden="true" />
+
+                <div className="medical-speaker-subcard">
+                  <div className="medical-doctor-badge">
+                    <strong>Dra. Idelsa Polanco</strong>
+                    <span className="doctor-specialty">Gastroenterología Infantil</span>
+                  </div>
+                  <h4 className="medical-theme-title">Abordaje Gastrointestinal en TDAH y Autismo</h4>
+                  <p className="medical-theme-desc">
+                    El eje intestino-cerebro: disbiosis, inflamación digestiva y su repercusión directa en la función neurológica, la comunicación y la conducta del niño.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            {/* 5. Ama Academy (Homeschooling por proyectos) */}
+            <article className="workshop-card workshop-card-ama">
+              <div className="workshop-card-top">
+                <span className="workshop-order-pill">05</span>
+                <span className="workshop-tag-pill pill-yellow">Educación & Homeschooling</span>
+              </div>
+              <div className="workshop-card-brand">
+                <img 
+                  src="/assets/ama-academy-logo.png" 
+                  alt="Ama Academy" 
+                  className="workshop-brand-logo logo-ama" 
+                  loading="lazy" 
+                />
+              </div>
+              <div className="workshop-card-body">
+                <h3 className="workshop-theme-title">
+                  Homeschooling por proyectos para niños con alguna condición
+                </h3>
+                <p className="workshop-theme-desc">
+                  Modelos educativos en casa adaptados y basados en proyectos, potenciando las fortalezas únicas del niño sin la rigidez de sistemas tradicionales.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div className="workshop-banner-footer">
+            <div className="workshop-footer-copy">
+              <strong>Cupos limitados para el Workshop presencial</strong>
+              <p>Espacio diseñado para familias, terapeutas y educadores en Bávaro y Punta Cana.</p>
+            </div>
+            <a 
+              className="button button-workshop-reserve" 
+              href={WA_PUNTA_CANA} 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon size={19} color="#000000" />
+              <span>Apartar cupo en el Workshop →</span>
+            </a>
           </div>
         </section>
 
