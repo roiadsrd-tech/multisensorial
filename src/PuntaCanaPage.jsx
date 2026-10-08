@@ -188,6 +188,45 @@ export default function PuntaCanaPage({ onNavigateHome }) {
     <div className="compact-page" data-city="Punta Cana">
       <a className="skip-link" href="#contenido">Ir al contenido</a>
 
+      {/* TOP COUNTDOWN BANNER */}
+      <aside className="top-timer-banner" aria-label="Tiempo restante para la jornada en Punta Cana">
+        <div className="top-timer-inner">
+          <div className="top-timer-label">
+            <span className="top-timer-pulse-dot" aria-hidden="true" />
+            <span>Jornada Punta Cana:</span>
+          </div>
+
+          <div className="top-timer-countdown" role="timer" aria-live="polite">
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.days)}</strong><small>d</small>
+            </span>
+            <span className="top-timer-sep" aria-hidden="true">:</span>
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.hours)}</strong><small>h</small>
+            </span>
+            <span className="top-timer-sep" aria-hidden="true">:</span>
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.minutes)}</strong><small>m</small>
+            </span>
+            <span className="top-timer-sep" aria-hidden="true">:</span>
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.seconds)}</strong><small>s</small>
+            </span>
+          </div>
+
+          <a 
+            className="top-timer-btn" 
+            href={WA_PUNTA_CANA} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Consultar cupos disponibles en WhatsApp"
+          >
+            <span>Reservar cupo</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </aside>
+
       {/* HEADER */}
       <header className="header">
         <a 
