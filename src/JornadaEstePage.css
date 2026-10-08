@@ -1176,7 +1176,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .program-specialists-large .specialist-card-name {
   font-size: 1.55rem;
   font-weight: 900;
-  color: var(--ink);
+  color: #FFFFFF;
   margin: 12px 0 6px 0;
 }
 
