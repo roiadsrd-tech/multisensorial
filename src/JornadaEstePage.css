@@ -267,7 +267,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
  .compact-page .photo-crop img,
  .compact-page .photo-crop video{aspect-ratio:16/9;object-fit:cover;object-position:center;width:100%;max-height:230px;display:block}
  .compact-page .photo-crop .video-sound-toggle{bottom:10px;right:10px;width:38px;height:38px}
- .compact-page .hero:before{width:450px;height:450px;top:430px;right:-140px;display:block!important}
+ .compact-page .hero:before{width:450px;height:450px;top:430px;right:-140px;background:var(--blue)!important;display:block!important}
  .compact-page .hero-visual figcaption{font-size:12px;margin-top:10px}
  .compact-page .hero-status{display:block;font-size:13px;line-height:1.5;padding-block:12px}
  .compact-page .hero-status>span{display:none}

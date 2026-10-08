@@ -19,7 +19,7 @@ const miniTestimonialQuotes = [
 const quotesRow1 = miniTestimonialQuotes.filter((_, i) => i % 2 === 0);
 const quotesRow2 = miniTestimonialQuotes.filter((_, i) => i % 2 !== 0);
 
-const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Punta%20Cana.%20Quisiera%20informaci%C3%B3n%20sobre%20el%20taller%20del%2018%20de%20octubre%20en%20Spotcast%20Caf%C3%A9%20y%20el%20intensivo%20del%2019%20al%2031%20en%20Peque%C3%B1ines%20Paso%20a%20Paso.";
+const WA_PUNTA_CANA = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Punta%20Cana.%20Quisiera%20informaci%C3%B3n%20sobre%20el%20taller%20del%2017%20de%20octubre%20en%20Spotcast%20Caf%C3%A9%20y%20el%20intensivo%20del%2019%20al%2031%20en%20Peque%C3%B1ines%20Paso%20a%20Paso.";
 const MAP_SEARCH_PEQUENINES = "https://www.google.com/maps/search/?api=1&query=Centro%20de%20Educaci%C3%B3n%20Infantil%20Peque%C3%B1ines%20Paso%20a%20Paso%2C%20Residencial%20Rijo%2C%20detr%C3%A1s%20de%20los%20paneles%20solares%20de%20CEPM.%20B%C3%A1varo%2C%20Punta%20Cana.";
 const MAP_SEARCH_SPOTCAST = "https://www.google.com/maps/search/?api=1&query=Spotcast+Cafe+Plaza+Boulevard+Center+Avenida+Estados+Unidos+Bavaro+Punta+Cana";
 const COORDS_PEQUENINES = [18.5565510, -68.3691611];
@@ -117,7 +117,7 @@ export default function PuntaCanaPage({ onNavigateHome }) {
       }).addTo(map);
 
       markerSpotcast.bindPopup(
-        '<strong>#1 Spotcast Café</strong><br><span style="font-size:12px;color:#c2531a;font-weight:700;">Workshop para Padres (Sáb 18 Oct)</span><br><span style="font-size:12px;">Plaza Boulevard Center, Av. Estados Unidos</span>',
+        '<strong>#1 Spotcast Café</strong><br><span style="font-size:12px;color:#c2531a;font-weight:700;">Workshop para Padres (Sáb 17 Oct)</span><br><span style="font-size:12px;">Plaza Boulevard Center, Av. Estados Unidos</span>',
         { offset: [0, -32] }
       );
 
