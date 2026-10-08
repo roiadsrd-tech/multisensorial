@@ -104,7 +104,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .compact-hero,
 [data-city] .hero{min-height:0!important;height:auto!important;display:block!important;padding-top:0!important;padding-bottom:0!important;margin-top:0!important;justify-content:flex-start!important}
 .compact-page .hero-grid{grid-template-columns:1.15fr 1fr;gap:40px;padding-top:72px!important;padding-bottom:44px!important}
-.compact-page .hero:before{content:'';position:absolute;width:680px;height:680px;border-radius:50%;background:var(--blue);right:-160px;top:-20px;z-index:-1;display:block!important;pointer-events:none}
+.compact-page .hero:before{content:'';position:absolute;width:680px;height:680px;border-radius:50%;background:var(--yellow);right:-160px;top:-20px;z-index:-1;display:block!important;pointer-events:none}
 .compact-page .hero h1{font-size:clamp(46px,5.2vw,68px);font-weight:900;line-height:1.06;letter-spacing:-.045em;max-width:680px;color:var(--ink);margin-top:0!important}
 .compact-page .hero .eyebrow{display:inline-block;color:var(--ink);background:var(--yellow);padding:5px 12px;border-radius:999px;font-weight:900;letter-spacing:.05em;margin-bottom:14px;white-space:nowrap;font-size:clamp(9px, 2.8vw, 13px)}
 .text-brand-gradient{color:var(--blue);position:relative;display:inline}
@@ -267,7 +267,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
  .compact-page .photo-crop img,
  .compact-page .photo-crop video{aspect-ratio:16/9;object-fit:cover;object-position:center;width:100%;max-height:230px;display:block}
  .compact-page .photo-crop .video-sound-toggle{bottom:10px;right:10px;width:38px;height:38px}
- .compact-page .hero:before{width:450px;height:450px;top:430px;right:-140px;background:var(--blue)!important;display:block!important}
+ .compact-page .hero:before{width:450px;height:450px;top:430px;right:-140px;background:var(--yellow)!important;display:block!important}
  .compact-page .hero-visual figcaption{font-size:12px;margin-top:10px}
  .compact-page .hero-status{display:block;font-size:13px;line-height:1.5;padding-block:12px}
  .compact-page .hero-status>span{display:none}
