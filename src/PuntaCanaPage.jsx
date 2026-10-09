@@ -42,7 +42,45 @@ function getJornadaTimeLeft() {
 
 const padTwo = (val) => String(val).padStart(2, '0');
 
-export default function PuntaCanaPage({ onNavigateHome }) {
+const workshopTopics = [
+  {
+    num: '01',
+    entity: 'Multisensorial RD®',
+    topic: 'Método Tomatis e intervención temprana',
+    logo: '/branding/logopng.webp',
+    logoClass: 'logo-multisensorial',
+  },
+  {
+    num: '02',
+    entity: 'Sensorialmente®',
+    topic: 'Terapia Ocupacional y desorden en el procesamiento sensorial (planes a distancia)',
+    logo: '/assets/sensorialmente-brand.png',
+    logoClass: 'logo-sensorialmente',
+  },
+  {
+    num: '03',
+    entity: 'Dra. Solanyi Herrera',
+    topic: 'Abordaje Biomédico integral',
+    logo: null,
+    logoClass: '',
+  },
+  {
+    num: '04',
+    entity: 'Dra. Idelsa Polanco',
+    topic: 'Abordaje gastrointestinal del niño con TDAH y autismo',
+    logo: null,
+    logoClass: '',
+  },
+  {
+    num: '05',
+    entity: 'Ama Academy®',
+    topic: 'Homeschooling por proyectos para niños con alguna condición',
+    logo: '/assets/ama-academy-brand.png',
+    logoClass: 'logo-ama',
+  },
+];
+
+export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showFixedCta, setShowFixedCta] = useState(false);
   const [timeLeft, setTimeLeft] = useState(getJornadaTimeLeft);
@@ -627,145 +665,99 @@ export default function PuntaCanaPage({ onNavigateHome }) {
           </div>
         </section>
 
-        {/* WORKSHOP PRESENCIAL: EQUIPO MULTIDISCIPLINARIO Y TEMAS */}
-        <section className="section-workshop section-wrap" id="workshop" aria-labelledby="workshop-title">
-          <div className="workshop-header">
-            <div className="workshop-tag-row">
-              <span className="workshop-badge-venue">📍 Spotcast Café · Plaza Boulevard Center, Bávaro</span>
-              <span className="workshop-badge-date">Sábado 17 de Octubre</span>
-            </div>
+        {/* WORKSHOP INICIAL: EQUIPO MULTIDISCIPLINARIO */}
+        <section className="section-workshop-clean section-wrap" id="workshop" aria-labelledby="workshop-title">
+          <div className="workshop-clean-header">
+            <p className="eyebrow">SÁBADO 17 DE OCTUBRE · SPOTCAST CAFÉ</p>
             <h2 id="workshop-title">
-              Workshop presencial:<br />
-              <span className="text-brand-gradient">Equipo multidisciplinario y temas</span>
+              Workshop Inicial
             </h2>
-            <p className="workshop-intro">
-              5 enfoques especializados reunidos en una sola jornada para comprender y acompañar el desarrollo neurológico, sensorial, biomédico y educativo de tu hijo.
-            </p>
           </div>
 
-          <div className="workshop-grid-layout">
-            {/* 1. Multisensorial RD (Apertura) */}
-            <article className="workshop-feature-card">
-              <div className="workshop-card-tag">
-                <span className="workshop-order-pill">01</span>
-                <span className="workshop-area-label">Apertura · Método Tomatis® & Neurodesarrollo</span>
-              </div>
-              <div className="workshop-feature-content">
-                <div className="workshop-feature-info">
-                  <div className="workshop-entity-heading">
-                    <span className="workshop-institution">Centro Multisensorial RD</span>
-                    <span className="workshop-speakers-sub">
-                      Mery Torrealba & Carlos Eduardo Pérez · Consultores Tomatis® Nivel 4
-                    </span>
-                  </div>
-                  <h3 className="workshop-theme-title">Método Tomatis® e intervención temprana</h3>
-                  <p className="workshop-theme-desc">
-                    Cómo la estimulación neurosensorial temprana y la calibración auditiva personalizada activan el lenguaje, la atención y la autorregulación en niños con rezago o neurodivergencia.
-                  </p>
-                </div>
-                <div className="workshop-feature-logo-wrap">
-                  <img src="/assets/logo.webp" alt="Centro Multisensorial RD" className="workshop-logo-ms" loading="lazy" />
-                </div>
-              </div>
-            </article>
-
-            {/* 2. Sensorialmente (Terapia Ocupacional) */}
-            <article className="workshop-card workshop-card-sensorial">
-              <div className="workshop-card-top">
-                <span className="workshop-order-pill">02</span>
-                <span className="workshop-tag-pill pill-blue">Terapia Ocupacional</span>
-              </div>
-              <div className="workshop-card-brand">
-                <img 
-                  src="/assets/sensorialmente-logo.png" 
-                  alt="Sensorialmente - Centro de Terapia Ocupacional" 
-                  className="workshop-brand-logo logo-sensorialmente" 
-                  loading="lazy" 
-                />
-              </div>
-              <div className="workshop-card-body">
-                <h3 className="workshop-theme-title">
-                  Intervención en Terapia Ocupacional y Desorden Sensorial
-                </h3>
-                <p className="workshop-theme-desc">
-                  Manejo del desorden en el procesamiento sensorial (TPS) con planes terapéuticos a distancia diseñados para implementar con acompañamiento directo desde el hogar.
-                </p>
-              </div>
-            </article>
-
-            {/* 3 & 4. Bloque Médico (Dra. Solanyi Herrera & Dra. Idelsa Polanco) */}
-            <article className="workshop-card workshop-card-medical">
-              <div className="workshop-card-top">
-                <span className="workshop-order-pill">03 & 04</span>
-                <span className="workshop-tag-pill pill-orange">Medicina Especializada</span>
-              </div>
-              
-              <div className="workshop-medical-speakers">
-                <div className="medical-speaker-subcard">
-                  <div className="medical-doctor-badge">
-                    <strong>Dra. Solanyi Herrera</strong>
-                    <span className="doctor-specialty">Medicina Biomédica</span>
-                  </div>
-                  <h4 className="medical-theme-title">Abordaje Biomédico</h4>
-                  <p className="medical-theme-desc">
-                    Factores metabólicos, oxidativos y nutricionales que inciden directamente en la conducta, la atención y el neurodesarrollo infantil.
-                  </p>
-                </div>
-
-                <div className="medical-divider" aria-hidden="true" />
-
-                <div className="medical-speaker-subcard">
-                  <div className="medical-doctor-badge">
-                    <strong>Dra. Idelsa Polanco</strong>
-                    <span className="doctor-specialty">Gastroenterología Infantil</span>
-                  </div>
-                  <h4 className="medical-theme-title">Abordaje Gastrointestinal en TDAH y Autismo</h4>
-                  <p className="medical-theme-desc">
-                    El eje intestino-cerebro: disbiosis, inflamación digestiva y su repercusión directa en la función neurológica, la comunicación y la conducta del niño.
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            {/* 5. Ama Academy (Homeschooling por proyectos) */}
-            <article className="workshop-card workshop-card-ama">
-              <div className="workshop-card-top">
-                <span className="workshop-order-pill">05</span>
-                <span className="workshop-tag-pill pill-yellow">Educación & Homeschooling</span>
-              </div>
-              <div className="workshop-card-brand">
-                <img 
-                  src="/assets/ama-academy-logo.png" 
-                  alt="Ama Academy" 
-                  className="workshop-brand-logo logo-ama" 
-                  loading="lazy" 
-                />
-              </div>
-              <div className="workshop-card-body">
-                <h3 className="workshop-theme-title">
-                  Homeschooling por proyectos para niños con alguna condición
-                </h3>
-                <p className="workshop-theme-desc">
-                  Modelos educativos en casa adaptados y basados en proyectos, potenciando las fortalezas únicas del niño sin la rigidez de sistemas tradicionales.
-                </p>
-              </div>
-            </article>
+          {/* VIDEO DEL WORKSHOP */}
+          <div className="workshop-video-frame">
+            <video
+              className="workshop-video-player"
+              src="/workshop-video.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              title="Workshop inicial en Bávaro"
+            />
           </div>
 
-          <div className="workshop-banner-footer">
-            <div className="workshop-footer-copy">
-              <strong>Cupos limitados para el Workshop presencial</strong>
-              <p>Espacio diseñado para familias, terapeutas y educadores en Bávaro y Punta Cana.</p>
-            </div>
-            <a 
-              className="button button-workshop-reserve" 
-              href={WA_PUNTA_CANA} 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <WhatsAppIcon size={19} color="#000000" />
-              <span>Apartar cupo en el Workshop →</span>
+          {/* TÍTULO EN AZUL: LAS 5 ETAPAS DEL WORKSHOP */}
+          <h3 className="workshop-stages-heading">
+            Las 5 etapas del workshop
+          </h3>
+
+          <div className="workshop-clean-container">
+            {workshopTopics.map((item) => (
+              <div key={item.num} className="workshop-clean-row">
+                <span className="workshop-clean-num">{item.num}</span>
+                <div className="workshop-clean-body">
+                  <h3 className="workshop-clean-entity">{item.entity}</h3>
+                  <p className="workshop-clean-topic">{item.topic}</p>
+                </div>
+                {item.logo && (
+                  <div className="workshop-clean-logo-wrap">
+                    <img 
+                      src={item.logo} 
+                      alt={item.entity} 
+                      className={`workshop-clean-logo ${item.logoClass}`} 
+                      loading="lazy" 
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="workshop-clean-action">
+            <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+              <WhatsAppIcon size={18} color="#000000" />
+              <span>Consultar sobre el workshop por WhatsApp</span>
             </a>
+          </div>
+        </section>
+
+        {/* MINI SECCIÓN: MÉTODO TOMATIS® */}
+        <section className="section-mini-tomatis section-wrap" id="metodo-tomatis" aria-labelledby="tomatis-mini-title">
+          <div className="mini-tomatis-card">
+            <div className="mini-tomatis-image-wrap">
+              <img 
+                src="/tomatis_kids.webp" 
+                alt="Niños usando el Método Tomatis®" 
+                className="mini-tomatis-img" 
+                loading="lazy" 
+              />
+            </div>
+            <div className="mini-tomatis-content">
+              <span className="mini-tomatis-kicker">TERAPIA NEUROSENSORIAL</span>
+              <h3 id="tomatis-mini-title">¿Qué es el Método Tomatis®?</h3>
+              <p className="mini-tomatis-desc">
+                Terapia con audífonos especiales que ayuda a los niños a hablar, concentrarse mejor y calmar sus emociones.
+              </p>
+              <div className="mini-tomatis-action">
+                <button 
+                  type="button"
+                  onClick={() => {
+                    if (onNavigateTomatis) {
+                      onNavigateTomatis();
+                    } else if (onNavigateHome) {
+                      onNavigateHome();
+                    } else {
+                      window.location.href = '/';
+                    }
+                  }}
+                  className="button button-small mini-tomatis-btn"
+                >
+                  <span>Conocer más sobre el Método Tomatis® →</span>
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 

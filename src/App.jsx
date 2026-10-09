@@ -1910,6 +1910,7 @@ function App() {
         {(currentPage === 'jornada-este' || currentPage === 'punta-cana') && (
           <PuntaCanaPage 
             onNavigateHome={() => navigateToPage('home')}
+            onNavigateTomatis={() => handleNavigateService('tomatis')}
           />
         )}
 
