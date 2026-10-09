@@ -2065,153 +2065,171 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   max-width: 820px;
 }
 
-/* 3 FOTOS EN GRUPO */
-.intensivo-gallery {
+/* 3 PUNTOS CLAVE DE LA JORNADA */
+.intensivo-points-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-bottom: 44px;
+  margin-bottom: 34px;
 }
 
-.intensivo-photo-item {
-  margin: 0;
+.intensivo-point-card {
+  background: #ffffff;
+  border: 2px solid var(--ink);
   border-radius: 20px;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  background: #17254112;
-  border: 2px solid rgba(23, 37, 65, 0.15);
-  box-shadow: 0 8px 24px rgba(23, 37, 65, 0.08);
+  padding: 24px 22px;
+  box-shadow: 0 4px 0 var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.intensivo-photo-item img {
+.intensivo-point-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.intensivo-point-text h3 {
+  font-size: 18.5px;
+  font-weight: 900;
+  color: #000000;
+  margin: 0 0 8px 0;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.intensivo-point-text p {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(23, 37, 65, 0.88);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* MINI GALERÍA DE FOTOS DE LA JORNADA (FOTOS CHIQUITICAS) */
+.intensivo-photos-wrap {
+  margin-bottom: 30px;
+}
+
+.intensivo-photos-label {
+  font-size: 12.5px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(23, 37, 65, 0.75);
+  margin: 0 0 12px 0;
+}
+
+.intensivo-compact-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.intensivo-mini-photo {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+  background: #ffffff;
+}
+
+.intensivo-mini-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
   display: block;
-  transition: transform 0.35s ease;
+  transition: transform 0.3s ease;
 }
 
-.intensivo-photo-item:hover img {
-  transform: scale(1.04);
+.intensivo-mini-photo:hover img {
+  transform: scale(1.08);
 }
 
-/* MÉTODO TOMATIS DIRECTO EN TIPOGRAFÍA GRANDE (SIN TARJETAS CLONADAS) */
-.intensivo-tomatis-block {
-  max-width: 880px;
-  padding-top: 10px;
-}
-
-.intensivo-tomatis-kicker {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 8px;
-}
-
-.intensivo-tomatis-title {
-  font-size: clamp(26px, 3.2vw, 34px);
-  font-weight: 900;
-  color: #000000;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin: 0 0 14px 0;
-}
-
-.intensivo-tomatis-desc {
-  font-size: clamp(17px, 1.9vw, 21px);
-  font-weight: 700;
-  line-height: 1.5;
-  color: rgba(23, 37, 65, 0.88);
-  margin: 0 0 28px 0;
-  max-width: 820px;
-}
-
-.intensivo-actions {
+.intensivo-cta-action {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
+  justify-content: flex-start;
+  margin-bottom: 44px;
 }
 
-.intensivo-btn-primary {
-  background: var(--orange);
-  color: var(--ink);
-  font-size: 17px;
-  font-weight: 900;
-}
-
-.intensivo-btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 58px;
-  padding: 14px 26px;
-  font-size: 16px;
-  font-weight: 900;
-  font-family: inherit;
-  color: #ffffff;
+.intensivo-cta-btn {
   background: var(--blue);
+  color: #ffffff;
   border: 0;
   border-radius: 100px;
   box-shadow: 0 4px 0 var(--ink);
-  cursor: pointer;
+  font-weight: 800;
+  padding: 16px 28px;
+  min-height: 56px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.intensivo-btn-secondary:hover {
+.intensivo-cta-btn:hover {
+  background: #1b38cf;
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 6px 0 var(--ink);
 }
 
-.intensivo-btn-secondary:active {
+.intensivo-cta-btn:active {
   transform: translateY(2px);
   box-shadow: 0 2px 0 var(--ink);
 }
 
+.intensivo-tomatis-card {
+  margin-top: 8px;
+  border: 2px solid var(--ink);
+  box-shadow: 0 4px 0 var(--ink);
+}
+
 @media (max-width: 760px) {
   .section-intensivo-yellow {
-    padding-block: 48px 42px;
+    padding-block: 52px 44px;
   }
   .intensivo-header {
-    margin-bottom: 26px;
+    margin-bottom: 24px;
   }
   .intensivo-header h2 {
     font-size: clamp(34px, 9.5vw, 44px);
   }
   .intensivo-lead {
-    font-size: 18px;
+    font-size: 17.5px;
   }
-  .intensivo-gallery {
+  .intensivo-points-grid {
     grid-template-columns: 1fr;
     gap: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 26px;
   }
-  .intensivo-photo-item {
-    aspect-ratio: 16 / 10;
+  .intensivo-point-card {
+    padding: 18px 16px;
     border-radius: 16px;
   }
-  .intensivo-tomatis-title {
-    font-size: 24px;
+  .intensivo-compact-gallery {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
   }
-  .intensivo-tomatis-desc {
-    font-size: 16px;
-    margin-bottom: 22px;
+  .intensivo-mini-photo {
+    border-radius: 10px;
+    border-width: 1.5px;
+    box-shadow: 0 2px 0 var(--ink);
   }
-  .intensivo-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-  .intensivo-actions .button,
-  .intensivo-btn-secondary {
+  .intensivo-cta-btn {
     width: 100%;
     justify-content: center;
-    min-height: 54px;
-    font-size: 16px;
+  }
+  .intensivo-cta-action {
+    margin-bottom: 34px;
   }
 }
 

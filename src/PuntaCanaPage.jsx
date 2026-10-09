@@ -555,69 +555,130 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
               <span className="intensivo-eyebrow">19 AL 31 DE OCTUBRE · BÁVARO</span>
               <h2 id="intensivo-title">La Jornada Intensiva</h2>
               <p className="intensivo-lead">
-                13 días de terapia neurosensorial personalizada para avanzar en semanas lo que suele tomar meses.
+                13 días de terapia neurosensorial personalizada (2 horas diarias) para avanzar en semanas lo que suele tomar meses.
               </p>
             </div>
 
-            {/* 3 FOTOS DE LA TERAPIA */}
-            <div className="intensivo-gallery" aria-label="Fotos de terapia intensiva">
-              <figure className="intensivo-photo-item">
+            {/* 3 PUNTOS CLAVE DE LA JORNADA */}
+            <div className="intensivo-points-grid">
+              <div className="intensivo-point-card">
+                <span className="intensivo-point-badge">1</span>
+                <div className="intensivo-point-text">
+                  <h3>Terapia audiosensorial Tomatis®</h3>
+                  <p>
+                    Audífonos especiales con conducción ósea (por el hueso) y aérea (conductos auditivos) para activar y reeducar las vías neuronales del lenguaje, atención y conducta.
+                  </p>
+                </div>
+              </div>
+
+              <div className="intensivo-point-card">
+                <span className="intensivo-point-badge">2</span>
+                <div className="intensivo-point-text">
+                  <h3>Trabajo lúdico en mesa y suelo</h3>
+                  <p>
+                    Sesiones activas ejecutadas en mesas adaptadas y en el suelo sobre alfombras acolchadas de foam para brindar máxima comodidad, seguridad y relajación al niño.
+                  </p>
+                </div>
+              </div>
+
+              <div className="intensivo-point-card">
+                <span className="intensivo-point-badge">3</span>
+                <div className="intensivo-point-text">
+                  <h3>Juegos didácticos y motricidad</h3>
+                  <p>
+                    Actividades guiadas de pinza fina, rompecabezas, coloreado y juegos didácticos mientras los audífonos estimulan su cerebro en tiempo real.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* FOTOS DE LA JORNADA (MINIATURAS COMPACTAS) */}
+            <div className="intensivo-photos-wrap">
+              <p className="intensivo-photos-label">Momentos de las sesiones en jornada:</p>
+              <div className="intensivo-compact-gallery" aria-label="Fotos de terapia en jornada">
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-01.webp" 
+                    alt="Acompañamiento individual en mesa" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-04.webp" 
+                    alt="Actividades de pinza fina y didácticos" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-02.webp" 
+                    alt="Trabajo con rompecabezas y juego" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-06.webp" 
+                    alt="Dinámica en alfombra de foam" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-11.webp" 
+                    alt="Terapeutas guiando la sesión" 
+                    loading="lazy" 
+                  />
+                </figure>
+              </div>
+            </div>
+
+            <div className="intensivo-cta-action">
+              <a 
+                className="button intensivo-cta-btn" 
+                href={WA_PUNTA_CANA} 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Consultar cupos de la jornada por WhatsApp</span>
+              </a>
+            </div>
+
+            {/* TARJETA INDEPENDIENTE DEL MÉTODO TOMATIS® */}
+            <div className="mini-tomatis-card intensivo-tomatis-card" id="metodo-tomatis">
+              <div className="mini-tomatis-image-wrap">
                 <img 
                   src="/tomatis_kids.webp" 
-                  alt="Niños en sesión con audífonos Tomatis" 
+                  alt="Niños usando el Método Tomatis®" 
+                  className="mini-tomatis-img" 
                   loading="lazy" 
                 />
-              </figure>
-              <figure className="intensivo-photo-item">
-                <img 
-                  src="/assets/families/photo-01.webp" 
-                  alt="Acompañamiento individual en terapia" 
-                  loading="lazy" 
-                />
-              </figure>
-              <figure className="intensivo-photo-item">
-                <img 
-                  src="/assets/families/photo-04.webp" 
-                  alt="Actividades sensoriales durante la estimulación" 
-                  loading="lazy" 
-                />
-              </figure>
-            </div>
-
-            {/* MÉTODO TOMATIS INTEGRADO */}
-            <div className="intensivo-tomatis-block">
-              <span className="intensivo-tomatis-kicker">TERAPIA NEUROSENSORIAL</span>
-              <h3 className="intensivo-tomatis-title">¿Qué es el Método Tomatis®?</h3>
-              <p className="intensivo-tomatis-desc">
-                Terapia auditiva con tecnología de conducción ósea y aérea que reeduca la escucha y estimula directamente las áreas del cerebro responsables del lenguaje, la atención y la calma emocional.
-              </p>
-
-              <div className="intensivo-actions">
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (onNavigateTomatis) {
-                      onNavigateTomatis();
-                    } else if (onNavigateHome) {
-                      onNavigateHome();
-                    } else {
-                      window.location.href = '/';
-                    }
-                  }}
-                  className="intensivo-btn-secondary"
-                >
-                  <span>Conocer más sobre el Método Tomatis® →</span>
-                </button>
-
-                <a 
-                  className="button intensivo-btn-primary" 
-                  href={WA_PUNTA_CANA} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <WhatsAppIcon size={18} color="#000000" />
-                  <span>Consultar cupos intensivo</span>
-                </a>
+              </div>
+              <div className="mini-tomatis-content">
+                <span className="mini-tomatis-kicker">TERAPIA NEUROSENSORIAL</span>
+                <h3 id="tomatis-mini-title">¿Qué es el Método Tomatis®?</h3>
+                <p className="mini-tomatis-desc">
+                  Terapia con audífonos especiales que ayuda a los niños a hablar, concentrarse mejor y calmar sus emociones.
+                </p>
+                <div className="mini-tomatis-action">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      if (onNavigateTomatis) {
+                        onNavigateTomatis();
+                      } else if (onNavigateHome) {
+                        onNavigateHome();
+                      } else {
+                        window.location.href = '/';
+                      }
+                    }}
+                    className="button button-small mini-tomatis-btn"
+                  >
+                    <span>Conocer más sobre el Método Tomatis® →</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
