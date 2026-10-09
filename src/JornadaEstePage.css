@@ -1167,7 +1167,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 
 /* 4. SECCIÓN: TANDAS A ELEGIR (FONDO AMARILLO CTA, FORMATO GRID COMPACTO) */
 .section-tandas-brand {
-  padding-block: 42px 48px;
+  padding-block: 48px 58px;
   background: var(--yellow);
   border-top: 1px solid rgba(23, 37, 65, 0.08);
 }
@@ -2254,6 +2254,28 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   }
   .intensivo-cta-action {
     margin-bottom: 34px;
+  }
+}
+
+/* ==========================================================================
+   FAQS SECTION (LO ESENCIAL. SIN RODEOS.) SPACING & PADDING
+   ========================================================================== */
+.compact-page .faqs,
+.faqs {
+  padding-block: 96px 80px !important;
+}
+
+.faq-intro {
+  margin-bottom: 36px;
+}
+
+@media (max-width: 760px) {
+  .compact-page .faqs,
+  .faqs {
+    padding-block: 76px 60px !important;
+  }
+  .faq-intro {
+    margin-bottom: 28px;
   }
 }
 
