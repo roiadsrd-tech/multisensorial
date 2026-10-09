@@ -1782,17 +1782,27 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 }
 
 .workshop-clean-action .button {
-  background: var(--yellow);
+  background: var(--orange);
   color: var(--ink);
-  border: 2px solid var(--ink);
+  border: 0;
+  border-radius: 100px;
   box-shadow: 0 4px 0 var(--ink);
-  font-weight: 900;
+  font-weight: 800;
+  padding: 16px 30px;
+  min-height: 56px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .workshop-clean-action .button:hover {
-  background: #ffdb8a;
+  background: #ff9767;
+  color: var(--ink);
   transform: translateY(-2px);
   box-shadow: 0 6px 0 var(--ink);
+}
+
+.workshop-clean-action .button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--ink);
 }
 
 /* ==========================================================================
