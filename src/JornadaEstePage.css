@@ -933,10 +933,10 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   margin-top: 14px;
 }
 
-/* 2. SECCIÓN: CRONOGRAMA MINIMALISTA CON NÚMEROS GRANDES Y FONDO BEIGE */
+/* 2. SECCIÓN: CRONOGRAMA MINIMALISTA CON NÚMEROS GRANDES Y FONDO BLANCO */
 .cronograma-section {
-  padding-block: 90px;
-  background: var(--cream);
+  padding-block: 84px 50px;
+  background: #ffffff;
   color: var(--ink);
 }
 

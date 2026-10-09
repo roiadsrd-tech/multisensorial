@@ -722,8 +722,7 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
             <div className="cronograma-heading">
               <p className="eyebrow">CRONOGRAMA CONFIRMADO · BÁVARO</p>
               <h2 id="cronograma-title">
-                Paso a paso cronológico.<br />
-                <span><mark className="text-highlight highlight-blue" data-highlight>Fechas de la jornada.</mark></span>
+                Fechas de la <span>jornada.</span>
               </h2>
             </div>
 
@@ -819,6 +818,25 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
           </div>
         </section>
 
+        {/* SEDES EN BÁVARO - MAPA LIMPIO */}
+        <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
+          <div className="map-section-header">
+            <p className="eyebrow">SEDES EN BÁVARO</p>
+            <h2 id="map-heading">
+              <span>¿Dónde es?</span>
+              <MapPin className="map-heading-inline-pin" size={38} aria-hidden="true" />
+            </h2>
+          </div>
+          <div className="simple-map-container">
+            <div 
+              className="geographic-map" 
+              ref={mapRef}
+              id="locations-map" 
+              aria-label="Mapa de Punta Cana"
+            ></div>
+          </div>
+        </section>
+
         {/* SPECIALISTS SECTION */}
         <section className="program program-specialists-large" id="especialistas" aria-labelledby="specialists-title">
           <div className="section-wrap program-inner">
@@ -877,25 +895,6 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
                 </a>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* SEDES EN BÁVARO - MAPA LIMPIO */}
-        <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
-          <div className="map-section-header">
-            <p className="eyebrow">SEDES EN BÁVARO</p>
-            <h2 id="map-heading">
-              <span>¿Dónde es?</span>
-              <MapPin className="map-heading-inline-pin" size={38} aria-hidden="true" />
-            </h2>
-          </div>
-          <div className="simple-map-container">
-            <div 
-              className="geographic-map" 
-              ref={mapRef}
-              id="locations-map" 
-              aria-label="Mapa de Punta Cana"
-            ></div>
           </div>
         </section>
 
