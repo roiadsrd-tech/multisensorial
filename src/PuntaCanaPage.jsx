@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star, MessageSquare, ClipboardCheck, Headphones, FileText, MapPin } from 'lucide-react';
+import { Star, MessageSquare, ClipboardCheck, Headphones, FileText, MapPin, Layers, Puzzle } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
 
@@ -559,35 +559,35 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
               </p>
             </div>
 
-            {/* 3 PUNTOS CLAVE DE LA JORNADA */}
-            <div className="intensivo-points-grid">
-              <div className="intensivo-point-card">
-                <span className="intensivo-point-badge">1</span>
-                <div className="intensivo-point-text">
-                  <h3>Terapia audiosensorial Tomatis®</h3>
-                  <p>
-                    Audífonos especiales con conducción ósea (por el hueso) y aérea (conductos auditivos) para activar y reeducar las vías neuronales del lenguaje, atención y conducta.
-                  </p>
+            {/* 3 PILARES VISUALES (CARDLESS, CON ICONOS Y TEXTO BREVE) */}
+            <div className="intensivo-pillars-row">
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Headphones size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Audífonos Tomatis®</h3>
+                  <p>Conducción ósea y auditiva para acelerar habla y atención.</p>
                 </div>
               </div>
 
-              <div className="intensivo-point-card">
-                <span className="intensivo-point-badge">2</span>
-                <div className="intensivo-point-text">
-                  <h3>Trabajo lúdico en mesa y suelo</h3>
-                  <p>
-                    Sesiones activas ejecutadas en mesas adaptadas y en el suelo sobre alfombras acolchadas de foam para brindar máxima comodidad, seguridad y relajación al niño.
-                  </p>
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Layers size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Mesa y suelo con foam</h3>
+                  <p>Dinámicas cómodas sobre alfombras acolchadas, cero sobrecarga.</p>
                 </div>
               </div>
 
-              <div className="intensivo-point-card">
-                <span className="intensivo-point-badge">3</span>
-                <div className="intensivo-point-text">
-                  <h3>Juegos didácticos y motricidad</h3>
-                  <p>
-                    Actividades guiadas de pinza fina, rompecabezas, coloreado y juegos didácticos mientras los audífonos estimulan su cerebro en tiempo real.
-                  </p>
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Puzzle size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Juegos didácticos</h3>
+                  <p>Rompecabezas, pinza fina y coloreado mientras se estimulan.</p>
                 </div>
               </div>
             </div>
