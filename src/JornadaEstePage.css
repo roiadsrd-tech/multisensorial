@@ -1625,10 +1625,14 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 }
 
 /* ==========================================================================
-   WORKSHOP MULTIDISCIPLINARIO (VIDEO + 5 ABORDAJES MINIMALISTAS)
+   WORKSHOP MULTIDISCIPLINARIO (VIDEO + 5 ABORDAJES MINIMALISTAS - FONDO AZUL)
    ========================================================================== */
 .section-workshop-clean {
-  padding-block: 64px 54px;
+  background: var(--blue);
+  color: var(--white);
+  padding-block: 76px 64px;
+  position: relative;
+  width: 100%;
 }
 
 .workshop-clean-header {
@@ -1636,10 +1640,16 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   margin-bottom: 36px;
 }
 
+.workshop-clean-header .eyebrow {
+  color: var(--yellow) !important;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
 .workshop-clean-header h2 {
   font-size: clamp(2.8rem, 5.8vw, 4.2rem);
   font-weight: 900;
-  color: #000000 !important;
+  color: #ffffff !important;
   letter-spacing: -0.045em;
   line-height: 1.02;
   margin-top: 8px;
@@ -1652,8 +1662,8 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   margin-bottom: 44px;
   border-radius: 24px;
   overflow: hidden;
-  border: 2.5px solid var(--ink);
-  box-shadow: 0 6px 0 var(--ink), 0 12px 30px rgba(23, 37, 65, 0.1);
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0px var(--yellow), 0 12px 30px rgba(0, 0, 0, 0.25);
   background: #000000;
   line-height: 0;
 }
@@ -1668,11 +1678,11 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   background: #000000;
 }
 
-/* TÍTULO EN AZUL: LAS 5 ETAPAS DEL WORKSHOP */
+/* TÍTULO: LAS 5 ETAPAS DEL WORKSHOP (AMARILLO SOBRE AZUL) */
 .workshop-stages-heading {
   font-size: clamp(26px, 3.2vw, 34px);
   font-weight: 900;
-  color: var(--blue) !important;
+  color: var(--yellow) !important;
   letter-spacing: -0.035em;
   line-height: 1.15;
   margin: 0 0 28px 0;
@@ -1685,7 +1695,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   border: 2px solid rgba(23, 37, 65, 0.12);
   border-radius: 24px;
   padding: 12px 36px;
-  box-shadow: 0 4px 20px rgba(23, 37, 65, 0.04);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   max-width: 900px;
   margin-bottom: 34px;
 }
@@ -1769,6 +1779,20 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   display: flex;
   justify-content: flex-start;
   margin-top: 28px;
+}
+
+.workshop-clean-action .button {
+  background: var(--yellow);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 0 4px 0 var(--ink);
+  font-weight: 900;
+}
+
+.workshop-clean-action .button:hover {
+  background: #ffdb8a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--ink);
 }
 
 /* ==========================================================================
@@ -1891,6 +1915,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   .workshop-video-frame {
     border-radius: 18px;
     margin-bottom: 28px;
+    box-shadow: 4px 4px 0px var(--yellow);
   }
   .workshop-video-player {
     aspect-ratio: 4 / 3;

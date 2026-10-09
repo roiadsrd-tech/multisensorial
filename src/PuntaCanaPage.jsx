@@ -488,6 +488,66 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
           </div>
         </section>
 
+        {/* WORKSHOP INICIAL: EQUIPO MULTIDISCIPLINARIO (DESPUÉS DE '¿ES ESTA JORNADA PARA TU HIJO?') */}
+        <section className="section-workshop-clean" id="workshop" aria-labelledby="workshop-title">
+          <div className="section-wrap">
+            <div className="workshop-clean-header">
+              <p className="eyebrow">SÁBADO 17 DE OCTUBRE · SPOTCAST CAFÉ</p>
+              <h2 id="workshop-title">
+                Workshop Inicial
+              </h2>
+            </div>
+
+            {/* VIDEO DEL WORKSHOP */}
+            <div className="workshop-video-frame">
+              <video
+                className="workshop-video-player"
+                src="/workshop-video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                title="Workshop inicial en Bávaro"
+              />
+            </div>
+
+            {/* TÍTULO EN AMARILLO SOBRE AZUL: LAS 5 ETAPAS DEL WORKSHOP */}
+            <h3 className="workshop-stages-heading">
+              Las 5 etapas del workshop
+            </h3>
+
+            <div className="workshop-clean-container">
+              {workshopTopics.map((item) => (
+                <div key={item.num} className="workshop-clean-row">
+                  <span className="workshop-clean-num">{item.num}</span>
+                  <div className="workshop-clean-body">
+                    <h3 className="workshop-clean-entity">{item.entity}</h3>
+                    <p className="workshop-clean-topic">{item.topic}</p>
+                  </div>
+                  {item.logo && (
+                    <div className="workshop-clean-logo-wrap">
+                      <img 
+                        src={item.logo} 
+                        alt={item.entity} 
+                        className={`workshop-clean-logo ${item.logoClass}`} 
+                        loading="lazy" 
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="workshop-clean-action">
+              <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Consultar sobre el workshop por WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* CRONOGRAMA PASO A PASO */}
         <section className="cronograma-section" id="cronograma" aria-labelledby="cronograma-title">
           <div className="section-wrap">
@@ -649,64 +709,6 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
                 </a>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* WORKSHOP INICIAL: EQUIPO MULTIDISCIPLINARIO */}
-        <section className="section-workshop-clean section-wrap" id="workshop" aria-labelledby="workshop-title">
-          <div className="workshop-clean-header">
-            <p className="eyebrow">SÁBADO 17 DE OCTUBRE · SPOTCAST CAFÉ</p>
-            <h2 id="workshop-title">
-              Workshop Inicial
-            </h2>
-          </div>
-
-          {/* VIDEO DEL WORKSHOP */}
-          <div className="workshop-video-frame">
-            <video
-              className="workshop-video-player"
-              src="/workshop-video.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              title="Workshop inicial en Bávaro"
-            />
-          </div>
-
-          {/* TÍTULO EN AZUL: LAS 5 ETAPAS DEL WORKSHOP */}
-          <h3 className="workshop-stages-heading">
-            Las 5 etapas del workshop
-          </h3>
-
-          <div className="workshop-clean-container">
-            {workshopTopics.map((item) => (
-              <div key={item.num} className="workshop-clean-row">
-                <span className="workshop-clean-num">{item.num}</span>
-                <div className="workshop-clean-body">
-                  <h3 className="workshop-clean-entity">{item.entity}</h3>
-                  <p className="workshop-clean-topic">{item.topic}</p>
-                </div>
-                {item.logo && (
-                  <div className="workshop-clean-logo-wrap">
-                    <img 
-                      src={item.logo} 
-                      alt={item.entity} 
-                      className={`workshop-clean-logo ${item.logoClass}`} 
-                      loading="lazy" 
-                    />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="workshop-clean-action">
-            <a className="button" href={WA_PUNTA_CANA} target="_blank" rel="noopener noreferrer">
-              <WhatsAppIcon size={18} color="#000000" />
-              <span>Consultar sobre el workshop por WhatsApp</span>
-            </a>
           </div>
         </section>
 
