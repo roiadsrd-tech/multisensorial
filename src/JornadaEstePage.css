@@ -2032,7 +2032,13 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 
 .intensivo-header {
   max-width: 880px;
-  margin-bottom: 38px;
+  margin-bottom: 24px;
+}
+
+.intensivo-quotes-marquee {
+  margin-top: 0;
+  margin-bottom: 40px;
+  padding: 4px 0 16px 0;
 }
 
 .intensivo-eyebrow {
@@ -2193,7 +2199,11 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
     padding-block: 52px 44px;
   }
   .intensivo-header {
-    margin-bottom: 24px;
+    margin-bottom: 18px;
+  }
+  .intensivo-quotes-marquee {
+    margin-bottom: 26px;
+    padding: 4px 0 12px 0 !important;
   }
   .intensivo-header h2 {
     font-size: clamp(34px, 9.5vw, 44px);

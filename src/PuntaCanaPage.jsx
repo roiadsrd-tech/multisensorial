@@ -558,7 +558,40 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
                 13 días de terapia neurosensorial personalizada (2 horas diarias) para avanzar en semanas lo que suele tomar meses.
               </p>
             </div>
+          </div>
 
+          {/* Minimal Testimonials Marquee - Desktop 1 row, Mobile 2 rows */}
+          <div className="hero-quotes-marquee intensivo-quotes-marquee" aria-label="Opiniones de familias">
+            {/* Desktop Single Row */}
+            <div className="hero-quotes-track hero-quotes-track-desktop">
+              {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
+                <div key={`iq-d-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile Two Rows (strictly vertical / mobile only) */}
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+              {[...quotesRow1, ...quotesRow1, ...quotesRow1, ...quotesRow1].map((quote, idx) => (
+                <div key={`iq-m1-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+              {[...quotesRow2, ...quotesRow2, ...quotesRow2, ...quotesRow2].map((quote, idx) => (
+                <div key={`iq-m2-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="section-wrap">
             {/* 3 PILARES VISUALES (CARDLESS, CON ICONOS Y TEXTO BREVE) */}
             <div className="intensivo-pillars-row">
               <div className="intensivo-pillar-item">
