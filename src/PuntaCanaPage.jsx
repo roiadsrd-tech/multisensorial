@@ -279,7 +279,7 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
         </a>
 
         <nav aria-label="Navegación principal">
-          <a className="nav-link" href="#programa">La jornada</a>
+          <a className="nav-link" href="#intensivo">La jornada</a>
           {onNavigateHome && (
             <button 
               onClick={onNavigateHome}
@@ -548,6 +548,81 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
           </div>
         </section>
 
+        {/* JORNADA INTENSIVA (FONDO AMARILLO - TRAS EL WORKSHOP) */}
+        <section className="section-intensivo-yellow" id="intensivo" aria-labelledby="intensivo-title">
+          <div className="section-wrap">
+            <div className="intensivo-header">
+              <span className="intensivo-eyebrow">19 AL 31 DE OCTUBRE · BÁVARO</span>
+              <h2 id="intensivo-title">La Jornada Intensiva</h2>
+              <p className="intensivo-lead">
+                13 días de terapia neurosensorial personalizada para avanzar en semanas lo que suele tomar meses.
+              </p>
+            </div>
+
+            {/* 3 FOTOS DE LA TERAPIA */}
+            <div className="intensivo-gallery" aria-label="Fotos de terapia intensiva">
+              <figure className="intensivo-photo-item">
+                <img 
+                  src="/tomatis_kids.webp" 
+                  alt="Niños en sesión con audífonos Tomatis" 
+                  loading="lazy" 
+                />
+              </figure>
+              <figure className="intensivo-photo-item">
+                <img 
+                  src="/assets/families/photo-01.webp" 
+                  alt="Acompañamiento individual en terapia" 
+                  loading="lazy" 
+                />
+              </figure>
+              <figure className="intensivo-photo-item">
+                <img 
+                  src="/assets/families/photo-04.webp" 
+                  alt="Actividades sensoriales durante la estimulación" 
+                  loading="lazy" 
+                />
+              </figure>
+            </div>
+
+            {/* MÉTODO TOMATIS INTEGRADO */}
+            <div className="intensivo-tomatis-block">
+              <span className="intensivo-tomatis-kicker">TERAPIA NEUROSENSORIAL</span>
+              <h3 className="intensivo-tomatis-title">¿Qué es el Método Tomatis®?</h3>
+              <p className="intensivo-tomatis-desc">
+                Terapia auditiva con tecnología de conducción ósea y aérea que reeduca la escucha y estimula directamente las áreas del cerebro responsables del lenguaje, la atención y la calma emocional.
+              </p>
+
+              <div className="intensivo-actions">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onNavigateTomatis) {
+                      onNavigateTomatis();
+                    } else if (onNavigateHome) {
+                      onNavigateHome();
+                    } else {
+                      window.location.href = '/';
+                    }
+                  }}
+                  className="intensivo-btn-secondary"
+                >
+                  <span>Conocer más sobre el Método Tomatis® →</span>
+                </button>
+
+                <a 
+                  className="button intensivo-btn-primary" 
+                  href={WA_PUNTA_CANA} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <WhatsAppIcon size={18} color="#000000" />
+                  <span>Consultar cupos intensivo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CRONOGRAMA PASO A PASO */}
         <section className="cronograma-section" id="cronograma" aria-labelledby="cronograma-title">
           <div className="section-wrap">
@@ -712,44 +787,6 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
           </div>
         </section>
 
-        {/* MINI SECCIÓN: MÉTODO TOMATIS® */}
-        <section className="section-mini-tomatis section-wrap" id="metodo-tomatis" aria-labelledby="tomatis-mini-title">
-          <div className="mini-tomatis-card">
-            <div className="mini-tomatis-image-wrap">
-              <img 
-                src="/tomatis_kids.webp" 
-                alt="Niños usando el Método Tomatis®" 
-                className="mini-tomatis-img" 
-                loading="lazy" 
-              />
-            </div>
-            <div className="mini-tomatis-content">
-              <span className="mini-tomatis-kicker">TERAPIA NEUROSENSORIAL</span>
-              <h3 id="tomatis-mini-title">¿Qué es el Método Tomatis®?</h3>
-              <p className="mini-tomatis-desc">
-                Terapia con audífonos especiales que ayuda a los niños a hablar, concentrarse mejor y calmar sus emociones.
-              </p>
-              <div className="mini-tomatis-action">
-                <button 
-                  type="button"
-                  onClick={() => {
-                    if (onNavigateTomatis) {
-                      onNavigateTomatis();
-                    } else if (onNavigateHome) {
-                      onNavigateHome();
-                    } else {
-                      window.location.href = '/';
-                    }
-                  }}
-                  className="button button-small mini-tomatis-btn"
-                >
-                  <span>Conocer más sobre el Método Tomatis® →</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* SEDES EN BÁVARO - MAPA LIMPIO */}
         <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
           <div className="map-section-header">
@@ -817,55 +854,6 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
                 Los cupos por tanda se completan rápido por orden de inscripción.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* COLLAGE REAL MOMENTS */}
-        <section className="session-collage section-wrap" id="familias" aria-labelledby="collage-title">
-          <div className="collage-heading">
-            <div>
-              <p className="eyebrow">MOMENTOS REALES</p>
-              <h2 id="collage-title">Así se vive.<br /><span>En familia.</span></h2>
-            </div>
-          </div>
-
-          <div className="session-scenes">
-            <figure className="session-scene scene-1">
-              <img src="/assets/families/photo-01.webp" alt="Familia en sesión" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="session-scene scene-2">
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                preload="metadata" 
-                poster="/assets/families/clip-03.webp" 
-                src="/assets/families/loop-03.mp4" 
-                aria-label="Explorar juntos"
-              />
-            </figure>
-            <figure className="session-scene scene-3">
-              <img src="/assets/families/photo-04.webp" alt="Actividad de escucha" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="session-scene scene-4">
-              <img src="/assets/families/photo-11.webp" alt="Acompañamiento cercano" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="session-scene scene-5">
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                preload="metadata" 
-                poster="/assets/families/clip-18.webp" 
-                src="/assets/families/loop-18.mp4" 
-                aria-label="Interacción lúdica"
-              />
-            </figure>
-            <figure className="session-scene scene-6">
-              <img src="/assets/families/photo-03.webp" alt="Progreso en familia" loading="lazy" decoding="async" />
-            </figure>
           </div>
         </section>
 
