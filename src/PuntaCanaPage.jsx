@@ -558,6 +558,47 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
                 13 días de terapia neurosensorial personalizada (2 horas diarias) para avanzar en semanas lo que suele tomar meses.
               </p>
             </div>
+
+            {/* FOTOS DE LA JORNADA (MINIATURAS COMPACTAS) */}
+            <div className="intensivo-photos-wrap">
+              <div className="intensivo-compact-gallery" aria-label="Fotos de terapia en jornada">
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-01.webp" 
+                    alt="Acompañamiento individual en mesa" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-04.webp" 
+                    alt="Actividades de pinza fina y didácticos" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-02.webp" 
+                    alt="Trabajo con rompecabezas y juego" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-06.webp" 
+                    alt="Dinámica en alfombra de foam" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-11.webp" 
+                    alt="Terapeutas guiando la sesión" 
+                    loading="lazy" 
+                  />
+                </figure>
+              </div>
+            </div>
           </div>
 
           {/* Minimal Testimonials Marquee - Desktop 1 row, Mobile 2 rows */}
@@ -622,48 +663,6 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
                   <h3>Juegos didácticos</h3>
                   <p>Rompecabezas, pinza fina y coloreado mientras se estimulan.</p>
                 </div>
-              </div>
-            </div>
-
-            {/* FOTOS DE LA JORNADA (MINIATURAS COMPACTAS) */}
-            <div className="intensivo-photos-wrap">
-              <p className="intensivo-photos-label">Momentos de las sesiones en jornada:</p>
-              <div className="intensivo-compact-gallery" aria-label="Fotos de terapia en jornada">
-                <figure className="intensivo-mini-photo">
-                  <img 
-                    src="/assets/families/photo-01.webp" 
-                    alt="Acompañamiento individual en mesa" 
-                    loading="lazy" 
-                  />
-                </figure>
-                <figure className="intensivo-mini-photo">
-                  <img 
-                    src="/assets/families/photo-04.webp" 
-                    alt="Actividades de pinza fina y didácticos" 
-                    loading="lazy" 
-                  />
-                </figure>
-                <figure className="intensivo-mini-photo">
-                  <img 
-                    src="/assets/families/photo-02.webp" 
-                    alt="Trabajo con rompecabezas y juego" 
-                    loading="lazy" 
-                  />
-                </figure>
-                <figure className="intensivo-mini-photo">
-                  <img 
-                    src="/assets/families/photo-06.webp" 
-                    alt="Dinámica en alfombra de foam" 
-                    loading="lazy" 
-                  />
-                </figure>
-                <figure className="intensivo-mini-photo">
-                  <img 
-                    src="/assets/families/photo-11.webp" 
-                    alt="Terapeutas guiando la sesión" 
-                    loading="lazy" 
-                  />
-                </figure>
               </div>
             </div>
 

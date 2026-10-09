@@ -2201,6 +2201,9 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   .intensivo-header {
     margin-bottom: 18px;
   }
+  .intensivo-photos-wrap {
+    margin-bottom: 20px;
+  }
   .intensivo-quotes-marquee {
     margin-bottom: 26px;
     padding: 4px 0 12px 0 !important;
