@@ -2040,13 +2040,13 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 
 .intensivo-eyebrow {
   display: inline-block;
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.7);
-  padding: 5px 14px;
-  border-radius: 999px;
+  color: var(--blue);
+  background: transparent;
+  padding: 0;
   font-weight: 900;
   letter-spacing: 0.08em;
-  font-size: 12px;
+  font-size: 13px;
+  text-transform: uppercase;
   margin-bottom: 16px;
 }
 
