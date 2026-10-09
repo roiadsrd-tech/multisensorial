@@ -906,9 +906,6 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
               <h2 id="tandas-title">
                 Tandas a elegir
               </h2>
-              <div>
-                <span className="tandas-badge-pill">Solo 5 niños por grupo</span>
-              </div>
             </div>
 
             <div className="tandas-grid-large">
