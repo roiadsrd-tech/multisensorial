@@ -933,11 +933,11 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   margin-top: 14px;
 }
 
-/* 2. SECCIÓN: CRONOGRAMA MINIMALISTA CON NÚMEROS GRANDES Y FONDO AZUL */
+/* 2. SECCIÓN: CRONOGRAMA MINIMALISTA CON NÚMEROS GRANDES Y FONDO BEIGE */
 .cronograma-section {
   padding-block: 90px;
-  background: var(--blue);
-  color: var(--cream);
+  background: var(--cream);
+  color: var(--ink);
 }
 
 .cronograma-heading {
@@ -945,15 +945,19 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 }
 
 .cronograma-section .cronograma-heading .eyebrow {
-  color: var(--yellow);
+  color: var(--blue);
 }
 
 .cronograma-section .cronograma-heading h2 {
-  color: #ffffff;
+  color: #000000;
+}
+
+.cronograma-section .cronograma-heading h2 span {
+  color: var(--blue);
 }
 
 .cronograma-section .text-highlight {
-  color: var(--yellow) !important;
+  color: var(--blue) !important;
   background: transparent !important;
 }
 
@@ -983,13 +987,29 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   position: relative;
 }
 
+.chrono-num-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .chrono-big-num {
   font-family: 'Jost', sans-serif;
   font-size: 3.5rem;
   font-weight: 900;
   line-height: 1;
-  color: var(--yellow);
+  color: var(--blue);
   letter-spacing: -2px;
+}
+
+.chrono-inline-icon {
+  color: var(--blue);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.chrono-linear-step:hover .chrono-inline-icon {
+  transform: scale(1.12);
 }
 
 .chrono-step-date {
@@ -999,10 +1019,10 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   letter-spacing: -0.01em;
   color: #ffffff;
   background: #FF5500;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid var(--ink);
   padding: 6px 14px;
   border-radius: 999px;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px 0 var(--ink);
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
@@ -1012,32 +1032,8 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .chrono-linear-step:hover .chrono-step-date {
   background: #FF6E26;
   color: #FFFFFF;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 0 var(--ink);
   transform: translateY(-1px);
-}
-
-.chrono-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  position: relative;
-}
-
-.chrono-num-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.chrono-inline-icon {
-  color: var(--yellow);
-  flex-shrink: 0;
-  transition: transform 0.25s ease;
-}
-
-.chrono-linear-step:hover .chrono-inline-icon {
-  transform: scale(1.12);
 }
 
 .chrono-step-body {
@@ -1055,26 +1051,27 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
 .chrono-step-title {
   font-size: clamp(1.45rem, 2.2vw, 1.9rem);
   font-weight: 900;
-  color: #ffffff;
+  color: #000000;
   margin: 0 0 6px 0;
   line-height: 1.15;
   letter-spacing: -0.025em;
 }
 
 .chrono-step-desc {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   line-height: 1.45;
-  color: rgba(250, 249, 220, 0.88);
+  color: rgba(23, 37, 65, 0.78);
+  font-weight: 600;
   margin: 0;
 }
 
 .chrono-venue-logo {
   width: 44px;
   height: 44px;
-  border-radius: 10px;
-  border: none;
+  border-radius: 12px;
+  border: 1.5px solid rgba(23, 37, 65, 0.14);
   outline: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
 }
 
@@ -1410,7 +1407,7 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   }
   .chrono-linear-step {
     padding-bottom: 32px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(23, 37, 65, 0.12);
   }
   .chrono-linear-step:last-child {
     padding-bottom: 0;
