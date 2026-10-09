@@ -454,19 +454,6 @@ export default function PuntaCanaPage({ onNavigateHome, onNavigateTomatis }) {
 
               <div className="signal-row-item">
                 <img 
-                  src="/assets/families/photo-04.webp" 
-                  alt="Falta de atención" 
-                  className="signal-thumb" 
-                  loading="lazy" 
-                />
-                <div className="signal-content">
-                  <h3>Falta de atención</h3>
-                  <p>Lo llamas por su nombre y parece ausente o no responde.</p>
-                </div>
-              </div>
-
-              <div className="signal-row-item">
-                <img 
                   src="/assets/family-sounds.webp" 
                   alt="Sensibilidad al ruido" 
                   className="signal-thumb" 
