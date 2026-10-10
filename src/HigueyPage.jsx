@@ -1,41 +1,113 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Star, MessageSquare, ClipboardCheck, Headphones, FileText, MapPin, Layers, Puzzle } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
 
-const WA_HIGUEY = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Hig%C3%BCey.%20Quisiera%20orientaci%C3%B3n%20para%20mi%20hijo%20y%20conocer%20fechas%2C%20sede%2C%20horarios%20y%20qu%C3%A9%20incluye%20el%20programa.";
-const COORDS_HIGUEY = [18.6131313, -68.7114484];
-
-const HIGUEY_REVIEWS = [
-  {
-    id: "review-1",
-    src: "https://www.centromultisensorial.com/reviews/rev1.mp4#t=2.0",
-    title: "La decisión de empezar"
-  },
-  {
-    id: "review-2",
-    src: "https://www.centromultisensorial.com/reviews/rev3.mp4#t=2.0",
-    title: "Una experiencia compartida"
-  }
+const miniTestimonialQuotes = [
+  "“Es la mejor decisión que hemos hecho como familia.”",
+  "“Mi hijo ha avanzado muchísimo.”",
+  "“Acabo de recibir la palabra más deseada: «mamá».”",
+  "“Ya se sabe las vocales, sabe diferenciarlas.”",
+  "“El niño decía nada. Ya dice mamá y papá, mami y papi.”",
+  "“Ya me entiende cuando yo le hablo.”",
+  "“Le digo ven y viene, le digo pásame eso y me lo pasa.”",
+  "“Yo pude ver múchisimos cambios en Samuel.”",
+  "“Pude ver resultados con el método en tan solo 15 días, ya dejó de hacer los sonidos y correr de lado a lado.”",
+  "“Eso que ustedes hacen es demasiado maravilloso.”"
 ];
 
-export default function HigueyPage({ onNavigateHome }) {
-  const [videosPaused, setVideosPaused] = useState(false);
-  const [activeFaq, setActiveFaq] = useState(null);
-  const [activeReviewSound, setActiveReviewSound] = useState(null);
+const quotesRow1 = miniTestimonialQuotes.filter((_, i) => i % 2 === 0);
+const quotesRow2 = miniTestimonialQuotes.filter((_, i) => i % 2 !== 0);
 
+const WA_HIGUEY = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20Hig%C3%BCey%20en%20CPIME.%20Quisiera%20informaci%C3%B3n%20sobre%20la%20charla%20del%201%20de%20noviembre%20y%20el%20intensivo%20del%203%20al%2015.";
+const COORDS_HIGUEY = [18.6122531, -68.7084201];
+const MAP_URL_HIGUEY = "https://maps.app.goo.gl/6yzrgr5NENw8TswY8";
+
+const JORNADA_TARGET_DATE = new Date('2026-11-01T09:00:00-04:00').getTime();
+
+function getJornadaTimeLeft() {
+  const diff = JORNADA_TARGET_DATE - Date.now();
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / 1000 / 60) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
+
+const padTwo = (val) => String(val).padStart(2, '0');
+
+const workshopTopics = [
+  {
+    num: '01',
+    entity: 'Multisensorial RD®',
+    topic: 'Método Tomatis e intervención temprana',
+    logo: '/branding/logopng.webp',
+    logoClass: 'logo-multisensorial',
+  },
+  {
+    num: '02',
+    entity: 'Sensorialmente®',
+    topic: 'Terapia Ocupacional y desorden en el procesamiento sensorial (planes a distancia)',
+    logo: '/assets/sensorialmente-brand.png',
+    logoClass: 'logo-sensorialmente',
+  },
+  {
+    num: '03',
+    entity: 'Dra. Solanyi Herrera Valdez',
+    topic: 'Abordaje Biomédico integral',
+    logo: '/assets/dra-solanyi-logo.webp',
+    logoClass: 'logo-solanyi',
+  },
+  {
+    num: '04',
+    entity: 'Dra. Idelsa Polanco',
+    topic: 'Abordaje gastrointestinal del niño con TDAH y autismo',
+    logo: null,
+    logoClass: '',
+  },
+  {
+    num: '05',
+    entity: 'Ama Academy®',
+    topic: 'Homeschooling por proyectos para niños con alguna condición',
+    logo: '/assets/ama-academy-brand.png',
+    logoClass: 'logo-ama',
+  },
+];
+
+export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [showFixedCta, setShowFixedCta] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(getJornadaTimeLeft);
   const mapRef = useRef(null);
   const leafletMapInstance = useRef(null);
-  const videoRefs = useRef([]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getJornadaTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Jornada Tomatis en Higüey | Centro Multisensorial RD";
+
+    const handleScroll = () => {
+      setShowFixedCta(window.scrollY > 380);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       document.title = prevTitle;
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Leaflet map setup for Higüey
+  // Leaflet map setup for Higüey - CPIME
   useEffect(() => {
     let active = true;
 
@@ -60,31 +132,36 @@ export default function HigueyPage({ onNavigateHome }) {
         zoomControl: false,
         attributionControl: false,
         dragging: !window.L.Browser.mobile
-      }).setView(COORDS_HIGUEY, 11);
+      });
 
       window.L.control.zoom({ position: 'bottomright' }).addTo(map);
       window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        minZoom: 7,
-        maxZoom: 16,
+        minZoom: 8,
+        maxZoom: 17,
         attribution: '&copy; OpenStreetMap'
       }).addTo(map);
 
-      const marker = window.L.marker(COORDS_HIGUEY, {
-        title: 'Jornada en Higüey',
-        icon: window.L.divIcon({
-          className: 'locality-marker map-marker-selected',
-          html: '<span class="map-logo"><img src="/assets/logo.webp" alt="" /></span>',
-          iconSize: [142, 46],
-          iconAnchor: [71, 23]
-        })
-      }).addTo(map).bindTooltip('Higüey', {
-        permanent: true,
-        direction: 'top',
-        offset: [0, -27],
-        className: 'locality-label'
-      });
+      map.setView(COORDS_HIGUEY, 14);
 
-      marker.on('click', () => map.flyTo(COORDS_HIGUEY, 11, { duration: 0.85 }));
+      const markerHiguey = window.L.marker(COORDS_HIGUEY, {
+        title: 'CPIME · Centro de Atención Psicopedagógica Educativa',
+        icon: window.L.divIcon({
+          className: 'compact-map-pin-wrap',
+          html: '<div class="pin-badge pin-pequenines"><div class="pin-logo-wrap" style="width:34px;height:34px;box-shadow:0 2px 6px rgba(0,0,0,0.2);"><img src="/assets/cpime-logo.webp" alt="CPIME" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div><div class="pin-text-block"><span class="pin-label">CPIME</span><span class="pin-date-tag">1 al 15 Nov</span></div></div>',
+          iconSize: [180, 56],
+          iconAnchor: [90, 56]
+        })
+      }).addTo(map);
+
+      markerHiguey.bindPopup(
+        '<div style="text-align:center;padding:4px 2px;"><div style="width:52px;height:52px;margin:0 auto 6px;border-radius:50%;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.18);"><img src="/assets/cpime-logo.webp" alt="CPIME" style="width:100%;height:100%;object-fit:cover;display:block;" /></div><strong style="font-size:14px;color:#172541;">CPIME</strong><br><span style="font-size:11.5px;color:#64748b;display:block;margin-top:2px;">Centro de Atención Psicopedagógica Educativa</span><span style="font-size:12px;color:#1e40af;font-weight:700;display:block;margin:4px 0 2px;">Jornada Tomatis · 1 al 15 Nov</span><span style="font-size:12px;color:#334155;display:block;">Avenida 27 de Febrero, Higüey</span><a href="' + MAP_URL_HIGUEY + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;padding:5px 12px;background:#2563eb;color:#fff;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none;">Abrir en Google Maps ↗</a></div>',
+        { offset: [0, -32] }
+      );
+
+      markerHiguey.on('click', () => {
+        markerHiguey.openPopup();
+        map.flyTo(COORDS_HIGUEY, 15, { duration: 0.5 });
+      });
 
       leafletMapInstance.current = map;
     };
@@ -110,34 +187,49 @@ export default function HigueyPage({ onNavigateHome }) {
     };
   }, []);
 
-  const handleCenterMap = () => {
-    if (leafletMapInstance.current) {
-      leafletMapInstance.current.flyTo(COORDS_HIGUEY, 11, { duration: 0.85 });
-    }
-  };
-
-  const handleToggleVideos = () => {
-    const nextState = !videosPaused;
-    setVideosPaused(nextState);
-    videoRefs.current.forEach(v => {
-      if (v) {
-        if (nextState) v.pause();
-        else v.play().catch(() => {});
-      }
-    });
-  };
-
   const toggleFaq = (idx) => {
     setActiveFaq(prev => prev === idx ? null : idx);
   };
 
-  const toggleReviewSound = (idx) => {
-    setActiveReviewSound(prev => prev === idx ? null : idx);
-  };
-
   return (
-    <div className="higuey-page" data-city="Higüey">
+    <div className="compact-page" data-city="Higüey">
       <a className="skip-link" href="#contenido">Ir al contenido</a>
+
+      {/* TOP COUNTDOWN BANNER (SINGLE LINE) */}
+      <aside className="top-timer-banner" aria-label="Tiempo restante para la jornada en Higüey">
+        <div className="top-timer-inner">
+          <span className="top-timer-label">Inicia en:</span>
+
+          <div className="top-timer-countdown" role="timer" aria-live="polite">
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.days)}</strong><small>d</small>
+            </span>
+            <span className="top-timer-sep" aria-hidden="true">:</span>
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.hours)}</strong><small>h</small>
+            </span>
+            <span className="top-timer-sep" aria-hidden="true">:</span>
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.minutes)}</strong><small>m</small>
+            </span>
+            <span className="top-timer-sep" aria-hidden="true">:</span>
+            <span className="top-timer-unit">
+              <strong>{padTwo(timeLeft.seconds)}</strong><small>s</small>
+            </span>
+          </div>
+
+          <a 
+            className="top-timer-btn" 
+            href={WA_HIGUEY} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Reservar cupo en WhatsApp"
+          >
+            <span>Reservar</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </aside>
 
       {/* HEADER */}
       <header className="header">
@@ -152,11 +244,11 @@ export default function HigueyPage({ onNavigateHome }) {
             }
           }}
         >
-          <img src="/assets/logo.webp" alt="Multisensorial RD" width="260" height="48" />
+          <img src="/assets/logo.webp" alt="Multisensorial RD" width="260" height="48" fetchPriority="high" />
         </a>
 
         <nav aria-label="Navegación principal">
-          <a className="nav-link" href="#programa">La jornada</a>
+          <a className="nav-link" href="#intensivo">La jornada</a>
           {onNavigateHome && (
             <button 
               onClick={onNavigateHome}
@@ -180,352 +272,663 @@ export default function HigueyPage({ onNavigateHome }) {
 
       <main id="contenido">
         {/* HERO */}
-        <section className="hero" id="inicio" aria-labelledby="hero-title">
+        <section className="hero compact-hero" id="inicio" aria-labelledby="hero-title">
           <div className="hero-grid section-wrap">
             <div className="hero-copy">
-              <p className="eyebrow">Jornada Tomatis · Higüey</p>
+              <p className="eyebrow">SANTO DOMINGO TRASLADA SU MÉTODO EXCLUSIVO</p>
               <h1 id="hero-title">
-                ¿Qué necesita<br />
-                <span>mi hijo?</span>
+                ¡Por fin en <span className="text-brand-gradient">Higüey</span>! <span className="text-brand-highlight">Terapia intensiva</span> para niños con condición.
               </h1>
               <p className="hero-description">
-                Empieza con una <strong>evaluación individual</strong>, sesiones Tomatis y orientación para tu familia en Higüey.
+                El método neurosensorial de la capital, del 1 al 15 de noviembre en CPIME, Av. 27 de Febrero.
               </p>
               <div className="hero-actions">
-                <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
+                <a className="button hero-cta-button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon size={20} color="#000000" />
-                  <span>Quiero orientación <span aria-hidden="true">↗</span></span>
+                  <span>Consultar cupos por WhatsApp →</span>
                 </a>
               </div>
-              <p className="hero-note">Niños y jóvenes de 2–18 años · Según valoración profesional.</p>
             </div>
 
             <figure className="hero-visual">
               <div className="photo-crop">
-                <img 
-                  src="/assets/family-playing.webp" 
-                  alt="Ilustración de un padre y su hijo compartiendo un rompecabezas en casa" 
-                  width="1536" 
-                  height="1024" 
-                  fetchPriority="high" 
+                <video
+                  src="/higueyvid.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  title="Jornada Tomatis Higüey"
                 />
               </div>
-              <figcaption>Entender sus necesidades. Acompañar su proceso.</figcaption>
             </figure>
           </div>
 
-          <div className="hero-status section-wrap">
-            <span>Centro Multisensorial RD</span>
-            <span>Fecha y sede por confirmar.</span>
-          </div>
-        </section>
+          {/* Minimal Testimonials Marquee - Desktop 1 row, Mobile 2 rows */}
+          <div className="hero-quotes-marquee" aria-label="Opiniones de familias">
+            <div className="hero-quotes-track hero-quotes-track-desktop">
+              {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
+                <div key={`d-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
 
-        {/* QUOTES */}
-        <aside className="hero-quotes section-wrap" aria-label="Frases de testimonios publicados por el centro">
-          <blockquote>“Es la mejor decisión que hemos hecho como familia.”</blockquote>
-          <blockquote>“Eso que ustedes hacen es demasiado maravilloso.”</blockquote>
-        </aside>
-
-        {/* MEDIA PRESENCE */}
-        <section className="media-presence" aria-label="Presencia en medios">
-          <div className="media-heading section-wrap">
-            <p>Presencia en medios</p>
-          </div>
-          <div className="media-window">
-            <div className="media-track">
-              <div className="media-group">
-                <a className="media-logo logo-azulpodcast" href="https://www.youtube.com/watch?v=ZKI_bcbkVI0" target="_blank" rel="noopener noreferrer" aria-label="Ver aparición en Azul Podcast">
-                  <img src="/assets/media-azulpodcast.webp" alt="Azul Podcast" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-colorvision" href="https://www.youtube.com/watch?v=NSRzUZ-Tqhc" target="_blank" rel="noopener noreferrer" aria-label="Ver aparición en Color Visión">
-                  <img src="/assets/media-colorvision.webp" alt="Color Visión" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-estonoesradio" href="https://www.youtube.com/watch?v=NK1u6dsNqBo" target="_blank" rel="noopener noreferrer" aria-label="Ver aparición en Esto No Es Radio">
-                  <img src="/assets/media-estonoesradio.webp" alt="Esto No Es Radio" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-lamirada" href="https://www.youtube.com/watch?v=JiJXut5kviU" target="_blank" rel="noopener noreferrer" aria-label="Ver aparición en La Mirada">
-                  <img src="/assets/media-lamirada.webp" alt="La Mirada" width="160" height="90" loading="lazy" />
-                </a>
-                <a className="media-logo logo-rnn" href="https://www.centromultisensorial.com/" target="_blank" rel="noopener noreferrer" aria-label="Ver aparición en RNN">
-                  <img src="/assets/media-rnn.webp" alt="RNN" width="160" height="90" loading="lazy" />
-                </a>
-              </div>
-              <div className="media-group" aria-hidden="true">
-                <span className="media-logo logo-azulpodcast">
-                  <img src="/assets/media-azulpodcast.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-colorvision">
-                  <img src="/assets/media-colorvision.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-estonoesradio">
-                  <img src="/assets/media-estonoesradio.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-lamirada">
-                  <img src="/assets/media-lamirada.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-                <span className="media-logo logo-rnn">
-                  <img src="/assets/media-rnn.webp" alt="" width="160" height="90" loading="lazy" />
-                </span>
-              </div>
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+              {[...quotesRow1, ...quotesRow1, ...quotesRow1, ...quotesRow1].map((quote, idx) => (
+                <div key={`m1-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+              {[...quotesRow2, ...quotesRow2, ...quotesRow2, ...quotesRow2].map((quote, idx) => (
+                <div key={`m2-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* PROBLEM GRID */}
-        <section className="family-story" id="tu-familia" aria-labelledby="family-title">
+        {/* MEDIA PRESENCE (Static Grid matching Main Page Hero) */}
+        <section className="hero-media-static" aria-label="Presencia en medios">
+          <div className="container">
+            <div className="media-static-label">PRESENCIA EN MEDIOS:</div>
+            <div className="media-logos-grid">
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=ZKI_bcbkVI0"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Azul Podcast"
+              >
+                <img src="/logosasseenin/azulpodcast.webp" alt="Azul Podcast" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=NSRzUZ-Tqhc"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Color Visión"
+              >
+                <img src="/logosasseenin/colorvision.webp" alt="Color Visión" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=NK1u6dsNqBo"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Esto No Es Radio"
+              >
+                <img src="/logosasseenin/estonoesradio.webp" alt="Esto No Es Radio" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=JiJXut5kviU"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="La Mirada"
+              >
+                <img src="/logosasseenin/lamirada.webp" alt="La Mirada" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=1HIYwVGQikY"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="RNN"
+              >
+                <img src="/logosasseenin/rnn.webp" alt="RNN" loading="lazy" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ¿ES ESTA JORNADA PARA TU HIJO? */}
+        <section className="family-story section-signals" id="tu-familia" aria-labelledby="family-title">
           <div className="section-wrap">
             <div className="section-heading">
-              <p className="eyebrow">Lo que pasa en el día a día</p>
-              <h2 id="family-title">¿Te resulta<br /><span>familiar?</span></h2>
-              <p>Hay momentos que te dejan con más preguntas que respuestas.</p>
+              <p className="eyebrow">PERFIL DE LA JORNADA</p>
+              <h2 id="family-title">
+                ¿Es esta jornada<br />
+                <span><mark className="text-highlight" data-highlight>para tu hijo?</mark></span>
+              </h2>
+              <p className="section-subtitle">
+                Si notas alguna de estas señales en tu pequeño, este intensivo es para él:
+              </p>
             </div>
 
-            <ul className="moment-grid problem-grid">
-              <li className="moment-card">
-                <img src="/assets/family-understanding.webp" alt="Ilustración de una madre intentando comprender qué necesita su hijo" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3><span className="bullet" aria-hidden="true">•</span>Adivinar lo que necesita.</h3>
-                  <p>Señala, te lleva de la mano… y no sabes si quiere agua, ayuda o una pausa.</p>
+            <div className="signals-list-clean">
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-understanding.webp" 
+                  alt="Retraso en el habla" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Retraso en el habla</h3>
+                  <p>No dice palabras claras o se frustra al intentar comunicarse.</p>
                 </div>
-              </li>
-              <li className="moment-card">
-                <img src="/assets/family-sounds.webp" alt="Ilustración de una madre acompañando a su hijo a hacer una pausa en un parque" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3><span className="bullet" aria-hidden="true">•</span>Cambiar los planes.</h3>
-                  <p>Los ruidos o las luces le incomodan. Una salida en familia termina antes de lo esperado.</p>
-                </div>
-              </li>
-              <li className="moment-card">
-                <img src="/assets/family-questions.webp" alt="Ilustración de un padre pensando qué recomendaciones seguir mientras su hija juega" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3><span className="bullet" aria-hidden="true">•</span>No saber por dónde seguir.</h3>
-                  <p>Entre citas, consejos y videos, sigues buscando un próximo paso para tu hijo.</p>
-                </div>
-              </li>
-            </ul>
+              </div>
 
-            <p className="story-bridge">Empieza por conocer sus necesidades. No tienes que resolver cada pregunta a solas.</p>
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-sounds.webp" 
+                  alt="Sensibilidad al ruido" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Sensibilidad al ruido</h3>
+                  <p>Se tapa los oídos o colapsa con la bulla y sonidos fuertes.</p>
+                </div>
+              </div>
+
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-questions.webp" 
+                  alt="Sin avances" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Sin avances</h3>
+                  <p>Lleva meses en terapias de siempre y no arranca.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="signals-cta-action">
+              <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Apartar horario por WhatsApp</span>
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* GOALS GRID */}
-        <section className="family-goals" aria-labelledby="goals-title">
+        {/* CHARLA Y WORKSHOP INICIAL: EQUIPO MULTIDISCIPLINARIO */}
+        <section className="section-workshop-clean" id="workshop" aria-labelledby="workshop-title">
           <div className="section-wrap">
-            <div className="section-heading">
-              <p className="eyebrow">Lo que deseas para tu familia</p>
-              <h2 id="goals-title">Imagina más<br /><span>momentos así.</span></h2>
-            </div>
-            <ul className="moment-grid goal-grid">
-              <li className="moment-card tone-yellow">
-                <img src="/assets/family-connection.webp" alt="Ilustración de un padre y su hija usando tarjetas para compartir una actividad" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3><span className="bullet" aria-hidden="true">•</span>Comprender una petición.</h3>
-                  <p>Una palabra, un gesto o una tarjeta que te ayude a entender qué necesita.</p>
-                </div>
-              </li>
-              <li className="moment-card tone-pink">
-                <img src="/assets/family-park.webp" alt="Ilustración de una madre y su hija compartiendo una pausa en un parque" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3><span className="bullet" aria-hidden="true">•</span>Compartir a su ritmo.</h3>
-                  <p>Un juego o una salida con pausas y apoyos que respeten su comodidad.</p>
-                </div>
-              </li>
-              <li className="moment-card tone-blue">
-                <img src="/assets/family-guidance.webp" alt="Ilustración de una familia recibiendo orientación de una profesional" width="1536" height="1024" loading="lazy" />
-                <div className="moment-copy">
-                  <h3><span className="bullet" aria-hidden="true">•</span>Tener un siguiente paso.</h3>
-                  <p>Saber qué acompañar en casa, qué observar y con quién continuar.</p>
-                </div>
-              </li>
-            </ul>
-            <p className="goals-note">Son metas que puedes conversar en la evaluación. Cada niño tiene su propio proceso y resultados individuales.</p>
-          </div>
-        </section>
-
-        {/* PROGRAM */}
-        <section className="program" id="programa" aria-labelledby="program-title">
-          <div className="section-wrap program-inner">
-            <div className="program-heading">
-              <p className="eyebrow">La jornada en Higüey</p>
-              <h2 id="program-title">Un plan para<br /><span>acompañarlo.</span></h2>
-              <p>Evaluación individual, sesiones Tomatis y orientación familiar. Un programa de escucha con música procesada y auriculares de conducción aérea y ósea.</p>
+            <div className="workshop-clean-header">
+              <p className="eyebrow">SÁBADO 1 DE NOVIEMBRE · CPIME, HIGÜEY</p>
+              <h2 id="workshop-title">
+                Charla y Workshop Inicial
+              </h2>
             </div>
 
-            <div className="program-stats" aria-label="Duración del bloque de sesiones">
-              <div><strong>13</strong><span>días continuos</span></div>
-              <div><strong>2</strong><span>horas por día</span></div>
-              <div><strong>26</strong><span>horas de sesiones</span></div>
+            {/* VIDEO DEL WORKSHOP */}
+            <div className="workshop-video-frame">
+              <video
+                className="workshop-video-player"
+                src="/workshop-video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                title="Workshop inicial en Higüey"
+              />
             </div>
 
-            <ol className="program-steps">
-              <li>
-                <span>01</span>
-                <div>
-                  <h3>Conocerlo.</h3>
-                  <p>Evaluación para orientar los objetivos y valorar su participación.</p>
-                </div>
-              </li>
-              <li>
-                <span>02</span>
-                <div>
-                  <h3>Acompañarlo.</h3>
-                  <p>Sesiones de escucha, juego y actividades adaptadas.</p>
-                </div>
-              </li>
-              <li>
-                <span>03</span>
-                <div>
-                  <h3>Saber qué sigue.</h3>
-                  <p>Orientación familiar e informe con recomendaciones.</p>
-                </div>
-              </li>
-            </ol>
+            {/* TÍTULO: LAS 5 ETAPAS DEL WORKSHOP */}
+            <h3 className="workshop-stages-heading">
+              Las 5 etapas del workshop
+            </h3>
 
-            <div className="program-conditions">
-              <p><strong>Asistencia:</strong> Turno fijo, un adulto acompañante y asistencia a las 26 horas, incluyendo fines de semana y feriados.</p>
-              <details>
-                <summary>Etapas del programa e inscripción</summary>
-                <p>El proceso informado contempla 3 etapas con descansos de aproximadamente 4 semanas. Estos 13 días corresponden a un bloque de 26 horas; consulta cómo se organizan las etapas posteriores.</p>
-                <p>Antes de reservar, confirma fechas, sede, horarios, inversión total, qué etapas incluye, anticipo y condiciones de cancelación. Los objetivos y resultados son individuales.</p>
-              </details>
+            <div className="workshop-clean-container">
+              {workshopTopics.map((item) => (
+                <div key={item.num} className="workshop-clean-row">
+                  <span className="workshop-clean-num">{item.num}</span>
+                  <div className="workshop-clean-body">
+                    <h3 className="workshop-clean-entity">{item.entity}</h3>
+                    <p className="workshop-clean-topic">{item.topic}</p>
+                  </div>
+                  {item.logo && (
+                    <div className="workshop-clean-logo-wrap">
+                      <img 
+                        src={item.logo} 
+                        alt={item.entity} 
+                        className={`workshop-clean-logo ${item.logoClass}`} 
+                        loading="lazy" 
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="workshop-clean-action">
+              <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Consultar sobre la charla por WhatsApp</span>
+              </a>
             </div>
           </div>
         </section>
 
-        {/* TEAM */}
-        <section className="team section-wrap" aria-labelledby="team-title">
-          <div className="team-copy">
-            <p className="eyebrow">Tu equipo</p>
-            <h2 id="team-title">Un equipo que<br /><span>te escucha.</span></h2>
-            <a className="directory-link" href="https://www.tomatis.com/es/profesional/republica-dominicana/" target="_blank" rel="noopener noreferrer">
-              Nuestro equipo en el directorio oficial Tomatis®
+        {/* JORNADA INTENSIVA (FONDO AMARILLO) */}
+        <section className="section-intensivo-yellow" id="intensivo" aria-labelledby="intensivo-title">
+          <div className="section-wrap">
+            <div className="intensivo-header">
+              <span className="intensivo-eyebrow">3 AL 15 DE NOVIEMBRE · CPIME, HIGÜEY</span>
+              <h2 id="intensivo-title">La Jornada Intensiva</h2>
+              <p className="intensivo-lead">
+                13 días de terapia neurosensorial personalizada (2 horas diarias) para avanzar en semanas lo que suele tomar meses.
+              </p>
+            </div>
+
+            {/* FOTOS DE LA JORNADA */}
+            <div className="intensivo-photos-wrap">
+              <div className="intensivo-compact-gallery" aria-label="Fotos de terapia en jornada">
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-01.webp" 
+                    alt="Acompañamiento individual en mesa" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-04.webp" 
+                    alt="Actividades de pinza fina y didácticos" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-02.webp" 
+                    alt="Trabajo con rompecabezas y juego" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-06.webp" 
+                    alt="Dinámica en alfombra de foam" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-11.webp" 
+                    alt="Terapeutas guiando la sesión" 
+                    loading="lazy" 
+                  />
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          {/* Minimal Testimonials Marquee */}
+          <div className="hero-quotes-marquee intensivo-quotes-marquee" aria-label="Opiniones de familias">
+            <div className="hero-quotes-track hero-quotes-track-desktop">
+              {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
+                <div key={`iq-d-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+              {[...quotesRow1, ...quotesRow1, ...quotesRow1, ...quotesRow1].map((quote, idx) => (
+                <div key={`iq-m1-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+              {[...quotesRow2, ...quotesRow2, ...quotesRow2, ...quotesRow2].map((quote, idx) => (
+                <div key={`iq-m2-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="section-wrap">
+            {/* 3 PILARES VISUALES */}
+            <div className="intensivo-pillars-row">
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Headphones size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Audífonos Tomatis®</h3>
+                  <p>Conducción ósea y auditiva para acelerar habla y atención.</p>
+                </div>
+              </div>
+
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Layers size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Mesa y suelo con foam</h3>
+                  <p>Dinámicas cómodas sobre alfombras acolchadas, cero sobrecarga.</p>
+                </div>
+              </div>
+
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Puzzle size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Juegos didácticos</h3>
+                  <p>Rompecabezas, pinza fina y coloreado mientras se estimulan.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="intensivo-cta-action">
+              <a 
+                className="button intensivo-cta-btn" 
+                href={WA_HIGUEY} 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Consultar cupos de la jornada por WhatsApp</span>
+              </a>
+            </div>
+
+            {/* TARJETA INDEPENDIENTE DEL MÉTODO TOMATIS® */}
+            <div className="mini-tomatis-card intensivo-tomatis-card" id="metodo-tomatis">
+              <div className="mini-tomatis-image-wrap">
+                <img 
+                  src="/tomatis_kids.webp" 
+                  alt="Niños usando el Método Tomatis®" 
+                  className="mini-tomatis-img" 
+                  loading="lazy" 
+                />
+              </div>
+              <div className="mini-tomatis-content">
+                <span className="mini-tomatis-kicker">TERAPIA NEUROSENSORIAL</span>
+                <h3 id="tomatis-mini-title">¿Qué es el Método Tomatis®?</h3>
+                <p className="mini-tomatis-desc">
+                  Terapia con audífonos especiales que ayuda a los niños a hablar, concentrarse mejor y calmar sus emociones.
+                </p>
+                <div className="mini-tomatis-action">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      if (onNavigateTomatis) {
+                        onNavigateTomatis();
+                      } else if (onNavigateHome) {
+                        onNavigateHome();
+                      } else {
+                        window.location.href = '/';
+                      }
+                    }}
+                    className="button button-small mini-tomatis-btn"
+                  >
+                    <span>Conocer más sobre el Método Tomatis® →</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CRONOGRAMA PASO A PASO */}
+        <section className="cronograma-section" id="cronograma" aria-labelledby="cronograma-title">
+          <div className="section-wrap">
+            <div className="cronograma-heading">
+              <p className="eyebrow">CRONOGRAMA CONFIRMADO · HIGÜEY</p>
+              <h2 id="cronograma-title">
+                Fechas de la <span>jornada.</span>
+              </h2>
+            </div>
+
+            <div className="chrono-linear-flow">
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">01</span>
+                    <MessageSquare className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">Sáb 1 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Charla inicial</h3>
+                    <p className="chrono-step-desc">CPIME · Av. 27 de Febrero, Higüey</p>
+                  </div>
+                  <img
+                    src="/assets/cpime-logo.webp"
+                    alt="CPIME"
+                    className="chrono-venue-logo chrono-venue-logo-pequenines"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">02</span>
+                    <ClipboardCheck className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">Dom 2 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Evaluaciones diagnósticas</h3>
+                    <p className="chrono-step-desc">CPIME · Calibración personalizada</p>
+                  </div>
+                  <img
+                    src="/assets/cpime-logo.webp"
+                    alt="CPIME"
+                    className="chrono-venue-logo chrono-venue-logo-pequenines"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">03</span>
+                    <Headphones className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">3 al 15 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Terapias Tomatis®</h3>
+                    <p className="chrono-step-desc">Sede CPIME · 2h diarias continuas</p>
+                  </div>
+                  <img
+                    src="/assets/cpime-logo.webp"
+                    alt="CPIME"
+                    className="chrono-venue-logo chrono-venue-logo-pequenines"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">04</span>
+                    <FileText className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">Sáb 15 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Entrega de informe y cierre</h3>
+                    <p className="chrono-step-desc">Sede CPIME · Pautas para casa</p>
+                  </div>
+                  <img
+                    src="/assets/cpime-logo.webp"
+                    alt="CPIME"
+                    className="chrono-venue-logo chrono-venue-logo-pequenines"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEDE EN HIGÜEY - MAPA LIMPIO */}
+        <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
+          <div className="map-section-header">
+            <p className="eyebrow">SEDE EN HIGÜEY</p>
+            <h2 id="map-heading">
+              <span>¿Dónde es?</span>
+              <MapPin className="map-heading-inline-pin" size={38} aria-hidden="true" />
+            </h2>
+            <p style={{ marginTop: '8px', fontSize: '16px', color: 'rgba(23, 37, 65, 0.85)', fontWeight: 600 }}>
+              <strong>Centro de Atención Psicopedagógica Educativa CPIME</strong> · Av. 27 de Febrero, Higüey.
+            </p>
+          </div>
+          <div className="simple-map-container">
+            <div 
+              className="geographic-map" 
+              ref={mapRef}
+              id="locations-map" 
+              aria-label="Mapa de Higüey - CPIME"
+            ></div>
+          </div>
+          <div style={{ marginTop: '16px', textAlign: 'center' }}>
+            <a 
+              href={MAP_URL_HIGUEY} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="directory-link"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: 800 }}
+            >
+              <MapPin size={18} />
+              <span>Ver ubicación en Google Maps ↗</span>
             </a>
           </div>
-          <div className="team-portraits">
-            <article className="person">
-              <div className="portrait portrait-pink">
-                <img src="/assets/mery.webp" alt="Mery Torrealba" width="400" height="480" loading="lazy" />
-              </div>
-              <h3>Mery Torrealba</h3>
-              <p>Psicopedagogía<br />Consultora Tomatis®</p>
-            </article>
-            <article className="person">
-              <div className="portrait portrait-yellow">
-                <img src="/assets/carlos.webp" alt="Carlos Eduardo Pérez" width="400" height="480" loading="lazy" />
-              </div>
-              <h3>Carlos Eduardo Pérez</h3>
-              <p>Psicología clínica<br />Consultor Tomatis®</p>
-            </article>
-          </div>
         </section>
 
-        {/* COLLAGE REAL MOMENTS */}
-        <section className="session-collage section-wrap" id="familias" aria-labelledby="collage-title">
-          <div className="collage-heading">
-            <div>
-              <p className="eyebrow">Una jornada por dentro</p>
-              <h2 id="collage-title">Escuchar. Jugar.<br /><span>Estar juntos.</span></h2>
-            </div>
-            <div className="collage-aside">
-              <p>Momentos reales compartidos por el equipo.</p>
-              <button 
-                type="button" 
-                className="collage-motion" 
-                aria-pressed={videosPaused} 
-                onClick={handleToggleVideos}
-              >
-                {videosPaused ? "Reanudar videos ▶" : "Pausar videos Ⅱ"}
-              </button>
-            </div>
-          </div>
+        {/* SPECIALISTS SECTION */}
+        <section className="program program-specialists-large" id="especialistas" aria-labelledby="specialists-title">
+          <div className="section-wrap program-inner">
+            <div className="program-specialists" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
+              <div className="program-specialists-intro">
+                <p className="eyebrow">CONSULTORES CERTIFICADOS</p>
+                <h3 id="specialists-title">Especialistas a cargo de la jornada</h3>
+              </div>
 
-          <div className="session-scenes">
-            <figure className="session-scene scene-1">
-              <img src="/assets/families/photo-01.webp" alt="Una jornada, muchas familias" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="session-scene scene-2">
-              <video 
-                ref={el => videoRefs.current[0] = el}
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                preload="metadata" 
-                poster="/assets/families/clip-03.webp" 
-                src="/assets/families/loop-03.mp4" 
-                aria-label="Explorar juntos"
-              />
-            </figure>
-            <figure className="session-scene scene-3">
-              <img src="/assets/families/photo-04.webp" alt="La curiosidad también cuenta" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="session-scene scene-4">
-              <img src="/assets/families/photo-11.webp" alt="Familias que acompañan" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="session-scene scene-5">
-              <video 
-                ref={el => videoRefs.current[1] = el}
-                autoPlay 
-                muted 
-                loop 
-                playsInline 
-                preload="metadata" 
-                poster="/assets/families/clip-18.webp" 
-                src="/assets/families/loop-18.mp4" 
-                aria-label="Un recuerdo compartido"
-              />
-            </figure>
-            <figure className="session-scene scene-6">
-              <img src="/assets/families/photo-03.webp" alt="Un saludo para recordar" loading="lazy" decoding="async" />
-            </figure>
-          </div>
-        </section>
+              <div className="program-specialists-grid">
+                {/* Mery Torrealba */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#FFD6DF' }}>
+                    <img
+                      src="/mery_torrealba_new.webp"
+                      alt="Mery Torrealba"
+                      className="specialist-arch-img specialist-img-mery"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Mery Torrealba</h4>
+                    <span className="specialist-card-pill" style={{ background: '#FFD6DF' }}>
+                      Psicopedagogía & Tomatis® Nivel 4
+                    </span>
+                  </div>
+                </div>
 
-        {/* REAL REVIEWS */}
-        <section className="real-reviews section-wrap" aria-labelledby="reviews-title">
-          <div className="reviews-heading">
-            <div>
-              <p className="eyebrow">Familias reales</p>
-              <h2 id="reviews-title">Lo que dicen<br /><span>las familias.</span></h2>
-            </div>
-          </div>
-          <div className="reviews-grid">
-            {HIGUEY_REVIEWS.map((rev, idx) => (
-              <figure key={rev.id} className="review-video">
-                <video 
-                  autoPlay 
-                  muted={activeReviewSound !== idx}
-                  loop 
-                  playsInline 
-                  preload="metadata" 
-                  src={rev.src} 
-                  aria-label={`Testimonio: ${rev.title}`}
+                {/* Carlos Eduardo Pérez */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#D0EEFF' }}>
+                    <img
+                      src="/carlos_perez_new.webp"
+                      alt="Carlos Eduardo Pérez"
+                      className="specialist-arch-img specialist-img-eduardo"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Carlos Eduardo Pérez</h4>
+                    <span className="specialist-card-pill" style={{ background: '#D0EEFF' }}>
+                      Psicología & Tomatis® Nivel 4
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="program-specialists-verify">
+                <a
+                  className="directory-link"
+                  href="https://www.tomatis.com/es/profesional/republica-dominicana/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Tu navegador no puede reproducir el video.
-                </video>
-                <figcaption>
-                  <span className="review-number">0{idx + 1}</span>
-                  <strong>{rev.title}</strong>
-                  <button 
-                    className="review-sound" 
-                    type="button" 
-                    aria-pressed={activeReviewSound === idx} 
-                    onClick={() => toggleReviewSound(idx)}
-                  >
-                    {activeReviewSound === idx ? "Silenciar" : "Activar sonido"}
-                  </button>
-                  <a href={rev.src} target="_blank" rel="noopener noreferrer" aria-label={`Ver video original: ${rev.title}`}>↗</a>
-                </figcaption>
-              </figure>
-            ))}
+                  Verificar acreditación oficial en Tomatis.com ↗
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* FAQS */}
+        {/* TANDAS A ELEGIR */}
+        <section className="section-tandas-brand" id="tandas" aria-labelledby="tandas-title">
+          <div className="section-wrap">
+            <div className="tandas-brand-header">
+              <p className="eyebrow">HORARIOS DISPONIBLES</p>
+              <h2 id="tandas-title">
+                Tandas a elegir
+              </h2>
+            </div>
+
+            <div className="tandas-grid-large">
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Matutina 1</span>
+                <span className="tanda-time-display">8:00 AM – 10:00 AM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Matutina 2</span>
+                <span className="tanda-time-display">10:00 AM – 12:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Vespertina 1</span>
+                <span className="tanda-time-display">2:00 PM – 4:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Vespertina 2</span>
+                <span className="tanda-time-display">4:00 PM – 6:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+            </div>
+
+            <div className="tandas-action-wrap">
+              <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={20} color="#000000" />
+                <span>Apartar horario por WhatsApp</span>
+              </a>
+              <p className="tandas-action-note">
+                Los cupos por tanda se completan rápido por orden de inscripción.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* PREGUNTAS FRECUENTES */}
         <section className="faqs section-wrap" id="preguntas" aria-labelledby="faq-title">
           <div className="faq-intro">
-            <p className="eyebrow">Antes de dar el paso</p>
-            <h2 id="faq-title">Lo esencial.<br /><span>Sin dudas.</span></h2>
+            <p className="eyebrow">PREGUNTAS FRECUENTES</p>
+            <h2 id="faq-title">Lo esencial.<br /><span>Sin rodeos.</span></h2>
           </div>
           <div className="faq-content">
             <div className="faq-list">
@@ -539,11 +942,24 @@ export default function HigueyPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">01</span>
-                  <span>¿Es adecuado para mi hijo?</span>
+                  <span>¿Cómo me inscribo y aparto horario?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>Para niños y jóvenes de <strong>2 a 18 años</strong>. La evaluación individual permite valorar su participación y acordar objetivos con tu familia.</p>
+                  <ol className="faq-steps-list">
+                    <li>
+                      <strong>1. Escríbenos por WhatsApp</strong> solicitando tu inscripción y el horario deseado <em>(los cupos por tanda se completan rápido)</em>.
+                    </li>
+                    <li>
+                      <strong>2. Recibirás los datos</strong> para realizar el pago de reserva y tu contrato personal.
+                    </li>
+                    <li>
+                      <strong>3. Te confirmamos el cupo</strong> para la evaluación del domingo 2 de noviembre.
+                    </li>
+                  </ol>
+                  <a className="faq-inline-cta" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
+                    Solicitar inscripción por WhatsApp →
+                  </a>
                 </div>
               </details>
 
@@ -557,11 +973,11 @@ export default function HigueyPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">02</span>
-                  <span>¿Qué hace durante una sesión?</span>
+                  <span>¿Qué es el Método Tomatis®?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>Escucha música procesada con auriculares Tomatis de conducción aérea y ósea, mientras juega o realiza actividades adaptadas. Un familiar o tutor lo acompaña cada día.</p>
+                  <p>Es una tecnología de estimulación auditiva y conducción por el hueso del cráneo mediante audífonos especiales. Mientras el niño juega, estimula las vías neuronales para activar el habla, la atención y la autorregulación emocional.</p>
                 </div>
               </details>
 
@@ -575,12 +991,11 @@ export default function HigueyPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">03</span>
-                  <span>¿Cómo organizamos la asistencia?</span>
+                  <span>¿Qué hace el niño durante las 2 horas de terapia?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p><strong>13 días continuos, 2 horas al día</strong>, con turno fijo y asistencia completa, incluidos fines de semana y feriados.</p>
-                  <p>El proceso contempla 3 etapas con descansos de unas 4 semanas. Confirma qué etapas incluye tu inscripción y cómo se organizan.</p>
+                  <p>Realiza actividades lúdicas guiadas (rompecabezas, pintura, motricidad fina) sobre alfombras de foam o mesas de trabajo con los audífonos puestos.</p>
                 </div>
               </details>
 
@@ -594,11 +1009,11 @@ export default function HigueyPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">04</span>
-                  <span>¿Qué cambios puedo esperar?</span>
+                  <span>¿Debe quedarse un acompañante?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>Los objetivos se acuerdan en la evaluación y se observan durante las sesiones. Cada proceso es individual: no hay un plazo ni un resultado garantizado.</p>
+                  <p>Sí, cada niño debe asistir diariamente acompañado por mamá, papá o un tutor.</p>
                 </div>
               </details>
 
@@ -612,75 +1027,71 @@ export default function HigueyPage({ onNavigateHome }) {
               >
                 <summary>
                   <span className="faq-number">05</span>
-                  <span>¿Cómo me inscribo?</span>
+                  <span>¿Necesita un diagnóstico médico previo?</span>
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>La fecha y la sede exacta de <strong>Higüey</strong> están pendientes de confirmación.</p>
-                  <p>Consulta con nuestro equipo disponibilidad, sedes sugeridas e inversión antes de separar tu cupo.</p>
-                  <a href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
-                    Quiero orientación
-                  </a>
+                  <p>No. El domingo 2 de noviembre realizamos la evaluación previa para calibrar el protocolo específico de tu pequeño.</p>
                 </div>
               </details>
             </div>
           </div>
         </section>
 
-        {/* LOCATIONS */}
-        <section className="locations section-wrap" id="localidades" aria-labelledby="locations-title">
-          <div className="locations-heading">
-            <div>
-              <p className="eyebrow">La jornada en tu localidad</p>
-              <h2 id="locations-title">Tu próximo paso.<br /><span>En Higüey.</span></h2>
+        {/* COUNTDOWN & FINAL CONTACT CTA */}
+        <section className="compact-contact section-wrap" id="cuenta-regresiva" aria-labelledby="countdown-heading">
+          <p className="eyebrow">CUENTA REGRESIVA · INICIO DE JORNADA</p>
+          <div className="cta-headline-combo">
+            <span className="cta-callout-font">Solo 5 niños por tanda</span>
+            <h2 id="countdown-heading">
+              No volveremos a Higüey<br />
+              <span>hasta el próximo año.</span>
+            </h2>
+          </div>
+
+          {/* TIMER EN VIVO */}
+          <div className="countdown-display" role="timer" aria-live="polite" aria-label="Tiempo restante para el inicio de la jornada">
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.days)}</span>
+              <span className="countdown-label">Días</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.hours)}</span>
+              <span className="countdown-label">Horas</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.minutes)}</span>
+              <span className="countdown-label">Min</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.seconds)}</span>
+              <span className="countdown-label">Seg</span>
             </div>
           </div>
 
-          <figure className="locality-photo">
-            <img 
-              src="/assets/higuey-locality-v2.webp" 
-              alt="Vista aérea de la Basílica Nuestra Señora de la Altagracia y la ciudad de Higüey" 
-              width="1134" 
-              height="755" 
-              loading="lazy" 
-            />
-            <figcaption>
-              <span>Higüey, La Altagracia</span>
-            </figcaption>
-          </figure>
+          <p className="countdown-note">
+            Los cupos por grupo son estrictamente limitados a <strong>5 niños por tanda</strong> para garantizar máxima calma y estimulación personalizada.
+          </p>
 
-          <details className="compact-map" open>
-            <summary>
-              Explorar la zona en el mapa <span aria-hidden="true">+</span>
-            </summary>
-            <div className="locations-card">
-              <div className="locations-toolbar">
-                <strong>Higüey · República Dominicana</strong>
-                <button type="button" className="map-overview" id="map-overview" onClick={handleCenterMap}>
-                  Centrar mapa
-                </button>
-              </div>
-              <div 
-                className="geographic-map" 
-                ref={mapRef}
-                id="locations-map" 
-                data-show-marker="true" 
-                aria-label="Mapa de Higüey"
-              >
-              </div>
-              <p className="map-note">
-                El punto representa la localidad. La dirección de la sede se informará al confirmarla.
-              </p>
-            </div>
-          </details>
+          <a className="button button-countdown-action" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
+            <WhatsAppIcon size={20} color="#000000" />
+            <span>Apartar cupo por WhatsApp antes de que inicie</span>
+          </a>
+
+          <a className="compact-phone" href="tel:+18093065040">
+            📞 +1 (809) 306-5040 | Centro Multisensorial RD
+          </a>
         </section>
       </main>
 
       {/* FIXED BOTTOM CTA */}
-      <div className="fixed-cta">
+      <div className={`fixed-cta ${showFixedCta ? 'is-visible' : ''}`} aria-hidden={!showFixedCta}>
         <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
           <WhatsAppIcon size={20} color="#000000" />
-          <span>Quiero orientación</span>
+          <span>Consultar cupos por WhatsApp →</span>
         </a>
       </div>
 
@@ -709,7 +1120,7 @@ export default function HigueyPage({ onNavigateHome }) {
             }
           }}
         >
-          Visitar el sitio del centro
+          Sitio Oficial Centro Multisensorial RD
         </a>
       </footer>
     </div>
