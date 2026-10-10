@@ -293,7 +293,7 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
             <figure className="hero-visual">
               <div className="photo-crop">
                 <video
-                  src="/higueyvid.mp4"
+                  src="/vidhiguey.mp4"
                   autoPlay
                   loop
                   muted
