@@ -59,10 +59,10 @@ const workshopTopics = [
   },
   {
     num: '03',
-    entity: 'Dra. Solanyi Herrera',
+    entity: 'Dra. Solanyi Herrera Valdez',
     topic: 'Abordaje Biomédico integral',
-    logo: null,
-    logoClass: '',
+    logo: '/assets/dra-solanyi-logo.webp',
+    logoClass: 'logo-solanyi',
   },
   {
     num: '04',

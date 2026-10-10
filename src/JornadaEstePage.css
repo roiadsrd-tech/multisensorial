@@ -1777,6 +1777,11 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   height: 56px;
 }
 
+.workshop-clean-logo.logo-solanyi {
+  height: 56px;
+  max-width: 175px;
+}
+
 .workshop-clean-logo.logo-ama {
   height: 48px;
 }
@@ -1987,6 +1992,10 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   }
   .workshop-clean-logo.logo-sensorialmente {
     height: 46px;
+  }
+  .workshop-clean-logo.logo-solanyi {
+    height: 44px;
+    max-width: 135px;
   }
   .workshop-clean-logo.logo-ama {
     height: 38px;
