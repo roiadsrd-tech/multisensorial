@@ -21,6 +21,7 @@ const PuntaCanaPage = lazy(() => import('./PuntaCanaPage'));
 const HigueyPage = lazy(() => import('./HigueyPage'));
 import Footer from './Footer';
 import WhatsAppIcon from './WhatsAppIcon';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -2111,6 +2112,8 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <SpeedInsights />
     </div>
   );
 }

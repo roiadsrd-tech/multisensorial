@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Building, Award, Sparkles, MapPin, Users, CheckCircle, 
   Send, HeartHandshake, ArrowRight, Shield, Globe, Star
 } from 'lucide-react';
 import Footer from './Footer';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -15,19 +16,25 @@ const fadeUp = {
 const PropietariosPage = ({ onBack }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [activeCity, setActiveCity] = useState("nagua");
+  const [formData, setFormData] = useState({
+    nombre: '',
+    centro: '',
+    provincia: '',
+    telefono: '',
+    mensaje: ''
+  });
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://api.leadconnectorhq.com/js/form_embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleWhatsAppSubmit = (e) => {
+    e.preventDefault();
+    const text = `Hola Centro Multisensorial RD, me interesa colaborar para llevar el Método Tomatis a mi provincia:\n\n• Nombre: ${formData.nombre || 'No especificado'}\n• Centro: ${formData.centro || 'No especificado'}\n• Provincia: ${formData.provincia || 'No especificada'}\n• Teléfono: ${formData.telefono || 'No especificado'}${formData.mensaje ? `\n• Mensaje: ${formData.mensaje}` : ''}`;
+    const url = `https://wa.me/18093065040?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  };
 
   const steps = [
     {
@@ -472,7 +479,7 @@ const PropietariosPage = ({ onBack }) => {
         </div>
       </section>
 
-      {/* Section 7: Form in Split Panel layout */}
+      {/* Section 7: Form in Split Panel layout (Canal WhatsApp Directo) */}
       <section style={{ padding: '80px 0', background: '#ffffff' }}>
         <div className="container" style={{ maxWidth: '950px' }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px', alignItems: 'stretch' }}>
@@ -484,7 +491,7 @@ const PropietariosPage = ({ onBack }) => {
                 ¿Listo para colaborar?
               </h2>
               <p style={{ fontSize: '1.15rem', color: 'var(--color-primary-dark)', fontWeight: 600, marginBottom: '30px' }}>
-                Completa el formulario y nos encargamos de todo el proceso técnico.
+                Escríbenos por WhatsApp y coordinamos todo directamente con nuestro equipo.
               </p>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -495,8 +502,8 @@ const PropietariosPage = ({ onBack }) => {
                     justifyContent: 'center', fontWeight: 900, flexShrink: 0
                   }}>1</div>
                   <div>
-                    <h4 style={{ fontSize: '1.15rem', fontWeight: 800 }}>Recibimos tus datos</h4>
-                    <p style={{ fontSize: '0.95rem', color: 'var(--color-primary-dark)', fontWeight: 500 }}>Revisamos las dimensiones y ubicación de tu centro.</p>
+                    <h4 style={{ fontSize: '1.15rem', fontWeight: 800 }}>Contacto por WhatsApp</h4>
+                    <p style={{ fontSize: '0.95rem', color: 'var(--color-primary-dark)', fontWeight: 500 }}>Conversamos directamente sobre tu espacio y ubicación.</p>
                   </div>
                 </div>
                 <div style={{ display: 'flex', gap: '15px' }}>
@@ -524,32 +531,234 @@ const PropietariosPage = ({ onBack }) => {
               </div>
             </div>
 
-            {/* Right Column: Contact Form with gorgeous layout */}
+            {/* Right Column: WhatsApp Form with gorgeous layout */}
             <div style={{ flex: '1 2 450px' }}>
               <div style={{
-                background: 'white',
+                background: 'var(--color-bg, #FAF9DC)',
                 border: '4px solid var(--color-primary-dark)',
                 borderRadius: '30px',
-                padding: '35px',
+                padding: '36px 32px',
                 boxShadow: '8px 8px 0px var(--color-primary-dark)'
               }}>
-                <iframe
-                  src="https://api.leadconnectorhq.com/widget/form/Tm96BaO9R0trKrHvpTXv"
-                  style={{ width: '100%', height: '100%', border: 'none', borderRadius: '24px', minHeight: '650px' }}
-                  id="inline-Tm96BaO9R0trKrHvpTXv" 
-                  data-layout="{'id':'INLINE'}"
-                  data-trigger-type="alwaysShow"
-                  data-trigger-value=""
-                  data-activation-type="alwaysActivated"
-                  data-activation-value=""
-                  data-deactivation-type="neverDeactivate"
-                  data-deactivation-value=""
-                  data-form-name="Colaboracion"
-                  data-height="650"
-                  data-layout-iframe-id="inline-Tm96BaO9R0trKrHvpTXv"
-                  data-form-id="Tm96BaO9R0trKrHvpTXv"
-                  title="Formulario de Colaboración"
-                />
+                <div style={{ marginBottom: '22px' }}>
+                  <div style={{ 
+                    display: 'inline-flex', 
+                    alignItems: 'center', 
+                    gap: '6px', 
+                    background: '#25D366', 
+                    color: '#000000', 
+                    fontWeight: 900, 
+                    fontSize: '0.78rem', 
+                    padding: '4px 12px', 
+                    borderRadius: '100px', 
+                    border: '2px solid var(--color-primary-dark)',
+                    marginBottom: '12px'
+                  }}>
+                    <WhatsAppIcon size={14} color="#000000" />
+                    <span>CANAL DIRECTO WHATSAPP</span>
+                  </div>
+                  <h3 style={{ fontSize: '1.8rem', color: 'var(--color-primary-dark)', margin: '0 0 6px 0', lineHeight: 1.2 }}>
+                    Propuesta de Colaboración
+                  </h3>
+                  <p style={{ fontSize: '0.95rem', color: 'var(--color-primary-dark)', fontWeight: 600, margin: 0, opacity: 0.85 }}>
+                    Completa los datos de tu espacio o centro para chatear al instante.
+                  </p>
+                </div>
+
+                <form onSubmit={handleWhatsAppSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      Nombre y Apellido *
+                    </label>
+                    <input
+                      type="text"
+                      name="nombre"
+                      required
+                      value={formData.nombre}
+                      onChange={handleInputChange}
+                      placeholder="Ej. Dra. María González"
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        borderRadius: '12px',
+                        border: '2.5px solid var(--color-primary-dark)',
+                        background: '#ffffff',
+                        fontSize: '1rem',
+                        fontWeight: 600,
+                        fontFamily: 'var(--font-body)',
+                        color: 'var(--color-primary-dark)',
+                        outline: 'none',
+                        boxSizing: 'border-box'
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      Nombre de tu Centro / Espacio *
+                    </label>
+                    <input
+                      type="text"
+                      name="centro"
+                      required
+                      value={formData.centro}
+                      onChange={handleInputChange}
+                      placeholder="Ej. Centro de Aprendizaje Integral"
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        borderRadius: '12px',
+                        border: '2.5px solid var(--color-primary-dark)',
+                        background: '#ffffff',
+                        fontSize: '1rem',
+                        fontWeight: 600,
+                        fontFamily: 'var(--font-body)',
+                        color: 'var(--color-primary-dark)',
+                        outline: 'none',
+                        boxSizing: 'border-box'
+                      }}
+                    />
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        Ciudad / Provincia *
+                      </label>
+                      <input
+                        type="text"
+                        name="provincia"
+                        required
+                        value={formData.provincia}
+                        onChange={handleInputChange}
+                        placeholder="Ej. San Cristóbal, La Romana..."
+                        style={{
+                          width: '100%',
+                          padding: '12px 16px',
+                          borderRadius: '12px',
+                          border: '2.5px solid var(--color-primary-dark)',
+                          background: '#ffffff',
+                          fontSize: '1rem',
+                          fontWeight: 600,
+                          fontFamily: 'var(--font-body)',
+                          color: 'var(--color-primary-dark)',
+                          outline: 'none',
+                          boxSizing: 'border-box'
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        Teléfono / WhatsApp *
+                      </label>
+                      <input
+                        type="tel"
+                        name="telefono"
+                        required
+                        value={formData.telefono}
+                        onChange={handleInputChange}
+                        placeholder="Ej. 809-555-1234"
+                        style={{
+                          width: '100%',
+                          padding: '12px 16px',
+                          borderRadius: '12px',
+                          border: '2.5px solid var(--color-primary-dark)',
+                          background: '#ffffff',
+                          fontSize: '1rem',
+                          fontWeight: 600,
+                          fontFamily: 'var(--font-body)',
+                          color: 'var(--color-primary-dark)',
+                          outline: 'none',
+                          boxSizing: 'border-box'
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-primary-dark)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                      Detalles del espacio (opcional)
+                    </label>
+                    <textarea
+                      name="mensaje"
+                      rows="3"
+                      value={formData.mensaje}
+                      onChange={handleInputChange}
+                      placeholder="Ej. Disponemos de 2 aulas equipadas y consultorio privado para evaluaciones..."
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        borderRadius: '12px',
+                        border: '2.5px solid var(--color-primary-dark)',
+                        background: '#ffffff',
+                        fontSize: '0.95rem',
+                        fontWeight: 600,
+                        fontFamily: 'var(--font-body)',
+                        color: 'var(--color-primary-dark)',
+                        outline: 'none',
+                        resize: 'vertical',
+                        boxSizing: 'border-box'
+                      }}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    style={{
+                      width: '100%',
+                      background: 'var(--color-accent, #FF8651)',
+                      color: '#ffffff',
+                      border: '3px solid var(--color-primary-dark)',
+                      boxShadow: '4px 4px 0px var(--color-primary-dark)',
+                      borderRadius: '100px',
+                      padding: '15px 24px',
+                      fontSize: '1.05rem',
+                      fontWeight: 900,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '10px',
+                      cursor: 'pointer',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px',
+                      transition: 'all 0.15s ease',
+                      marginTop: '6px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translate(2px, 2px)';
+                      e.currentTarget.style.boxShadow = '2px 2px 0px var(--color-primary-dark)';
+                      e.currentTarget.style.background = '#ff7235';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translate(0px, 0px)';
+                      e.currentTarget.style.boxShadow = '4px 4px 0px var(--color-primary-dark)';
+                      e.currentTarget.style.background = 'var(--color-accent, #FF8651)';
+                    }}
+                  >
+                    <WhatsAppIcon size={20} color="#ffffff" />
+                    <span>Enviar propuesta por WhatsApp</span>
+                  </button>
+
+                  <div style={{ textAlign: 'center', marginTop: '4px' }}>
+                    <a
+                      href="https://wa.me/18093065040?text=Hola%2C%20soy%20propietario%20de%20un%20centro%20y%20me%20interesa%20colaborar%20con%20el%20Centro%20Multisensorial%20para%20un%20operativo%20del%20M%C3%A9todo%20Tomatis."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: 'var(--color-primary-dark)',
+                        fontWeight: 800,
+                        fontSize: '0.9rem',
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}
+                    >
+                      <span>O chatear directo al WhatsApp (+1 809-306-5040) →</span>
+                    </a>
+                  </div>
+                </form>
               </div>
             </div>
 
