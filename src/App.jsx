@@ -2073,11 +2073,14 @@ function App() {
               className="floating-popup-close"
               aria-label="Cerrar aviso"
             >
-              <X size={16} />
+              <X size={15} strokeWidth={2.5} />
             </button>
 
             <div className="floating-popup-header">
-              <span className="floating-popup-badge">🌴 PUNTA CANA & BÁVARO</span>
+              <span className="floating-popup-badge">
+                <Sparkles size={13} />
+                <span>Punta Cana & Bávaro</span>
+              </span>
             </div>
 
             <div className="floating-popup-body">
@@ -2103,7 +2106,7 @@ function App() {
               className="floating-popup-cta"
             >
               <span>Ver Jornada Punta Cana</span>
-              <ArrowRight size={14} />
+              <ArrowRight size={15} strokeWidth={2.5} />
             </button>
           </motion.div>
         )}

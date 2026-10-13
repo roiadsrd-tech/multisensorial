@@ -6053,44 +6053,50 @@ section, footer {
   }
 }
 
-/* Floating Punta Cana Pop-Up */
+/* Floating Punta Cana Pop-Up (Multisensorial Brand Identity) */
 .floating-puntacana-popup {
   position: fixed;
   bottom: 24px;
   left: 24px;
   z-index: 9999;
-  width: 330px;
+  width: 340px;
   max-width: calc(100vw - 32px);
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 16px;
-  border: 1.5px solid rgba(255, 134, 81, 0.35);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25);
+  background: var(--color-bg, #FAF9DC);
+  border-radius: 22px;
+  padding: 16px 18px 16px;
+  border: 3px solid var(--color-border, #2347EF);
+  box-shadow: 6px 6px 0px var(--color-primary-dark, #2347EF);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  font-family: var(--font-body, 'Nunito', sans-serif);
 }
 
 .floating-popup-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #a0aec0;
-  padding: 4px;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  background: var(--color-surface, #A6DFFD);
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 2px 2px 0px var(--color-primary-dark, #2347EF);
   border-radius: 50%;
+  cursor: pointer;
+  color: var(--color-primary-dark, #2347EF);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition: all 0.15s ease;
   z-index: 10;
+  padding: 0;
 }
 
 .floating-popup-close:hover {
-  color: #2d3748;
-  background: #edf2f7;
+  background: var(--color-primary-dark, #2347EF);
+  color: var(--color-bg, #FAF9DC);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--color-primary-dark, #2347EF);
 }
 
 .floating-popup-header {
@@ -6099,14 +6105,20 @@ section, footer {
 }
 
 .floating-popup-badge {
-  background: rgba(255, 134, 81, 0.15);
-  color: #c2531a;
-  font-size: 0.68rem;
+  background: var(--color-secondary, #FDD072);
+  color: var(--color-primary-dark, #2347EF);
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 2px 2px 0px var(--color-primary-dark, #2347EF);
+  font-family: var(--font-heading, 'Jost', sans-serif);
+  font-size: 0.72rem;
   font-weight: 900;
-  letter-spacing: 0.05em;
-  padding: 3px 8px;
-  border-radius: 6px;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 999px;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .floating-popup-body {
@@ -6116,13 +6128,14 @@ section, footer {
 }
 
 .floating-popup-img-wrap {
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
-  border: 1px solid #E2E8F0;
-  background: #f7fafc;
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 3px 3px 0px var(--color-primary-dark, #2347EF);
+  background: #ffffff;
 }
 
 .floating-popup-img {
@@ -6134,39 +6147,47 @@ section, footer {
 
 .floating-popup-text h4 {
   margin: 0;
-  font-size: 0.94rem;
+  font-family: var(--font-heading, 'Jost', sans-serif);
+  font-size: 0.98rem;
   font-weight: 800;
-  color: #1a202c;
+  color: var(--color-primary-dark, #2347EF);
   line-height: 1.25;
 }
 
 .floating-popup-text p {
   margin: 4px 0 0;
-  font-size: 0.78rem;
-  color: #718096;
+  font-family: var(--font-body, 'Nunito', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #172541;
   line-height: 1.35;
 }
 
 .floating-popup-cta {
-  background: #FF8651;
+  background: var(--color-accent, #FF8651);
   color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 14px;
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 4px 4px 0px var(--color-primary-dark, #2347EF);
+  border-radius: 100px;
+  padding: 11px 18px;
+  font-family: var(--font-body, 'Nunito', sans-serif);
   font-weight: 800;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   cursor: pointer;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: background 0.2s ease, transform 0.15s ease;
+  gap: 8px;
+  transition: all 0.15s ease;
 }
 
 .floating-popup-cta:hover {
-  background: #f57338;
-  transform: translateY(-1px);
+  background: #ff7235;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--color-primary-dark, #2347EF);
 }
 
 @media (max-width: 640px) {

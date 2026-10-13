@@ -1783,6 +1783,11 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   max-width: 155px;
 }
 
+.workshop-clean-logo.logo-idelsa {
+  height: 56px;
+  max-width: 150px;
+}
+
 .workshop-clean-logo.logo-ama {
   height: 48px;
 }
@@ -1998,6 +2003,10 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   .workshop-clean-logo.logo-solanyi {
     height: 38px;
     max-width: 120px;
+  }
+  .workshop-clean-logo.logo-idelsa {
+    height: 44px;
+    max-width: 115px;
   }
   .workshop-clean-logo.logo-ama {
     height: 38px;

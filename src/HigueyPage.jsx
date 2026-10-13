@@ -66,8 +66,8 @@ const workshopTopics = [
     num: '04',
     entity: 'Dra. Idelsa Polanco',
     topic: 'Abordaje gastrointestinal del niño con TDAH y autismo',
-    logo: null,
-    logoClass: '',
+    logo: '/assets/dra-idelsa-logo.webp',
+    logoClass: 'logo-idelsa',
   },
   {
     num: '05',
