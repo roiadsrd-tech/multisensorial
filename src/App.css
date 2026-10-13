@@ -6053,20 +6053,19 @@ section, footer {
   }
 }
 
-/* Floating Punta Cana Pop-Up (Minimalist Blue Identity) */
+/* Floating Punta Cana Pop-Up (Multisensorial Brand Identity) */
 .floating-puntacana-popup {
   position: fixed;
   bottom: 24px;
   left: 24px;
   z-index: 9999;
-  width: 350px;
+  width: 340px;
   max-width: calc(100vw - 32px);
-  background: linear-gradient(145deg, #2347EF 0%, #1938C2 100%);
-  border-radius: 20px;
-  padding: 18px 20px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 16px 36px -6px rgba(16, 37, 138, 0.45), 0 4px 14px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(12px);
+  background: var(--color-bg, #FAF9DC);
+  border-radius: 22px;
+  padding: 16px 18px 16px;
+  border: 3px solid var(--color-border, #2347EF);
+  box-shadow: 6px 6px 0px var(--color-primary-dark, #2347EF);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -6079,22 +6078,25 @@ section, footer {
   right: 12px;
   width: 28px;
   height: 28px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--color-surface, #A6DFFD);
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 2px 2px 0px var(--color-primary-dark, #2347EF);
   border-radius: 50%;
   cursor: pointer;
-  color: #ffffff;
+  color: var(--color-primary-dark, #2347EF);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   z-index: 10;
   padding: 0;
 }
 
 .floating-popup-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.08);
+  background: var(--color-primary-dark, #2347EF);
+  color: var(--color-bg, #FAF9DC);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--color-primary-dark, #2347EF);
 }
 
 .floating-popup-header {
@@ -6103,19 +6105,20 @@ section, footer {
 }
 
 .floating-popup-badge {
-  background: rgba(255, 255, 255, 0.16);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: var(--color-secondary, #FDD072);
+  color: var(--color-primary-dark, #2347EF);
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 2px 2px 0px var(--color-primary-dark, #2347EF);
   font-family: var(--font-heading, 'Jost', sans-serif);
   font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
   padding: 4px 10px;
   border-radius: 999px;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .floating-popup-body {
@@ -6125,14 +6128,14 @@ section, footer {
 }
 
 .floating-popup-img-wrap {
-  width: 66px;
-  height: 66px;
-  border-radius: 12px;
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 3px 3px 0px var(--color-primary-dark, #2347EF);
+  background: #ffffff;
 }
 
 .floating-popup-img {
@@ -6147,29 +6150,29 @@ section, footer {
   font-family: var(--font-heading, 'Jost', sans-serif);
   font-size: 0.98rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--color-primary-dark, #2347EF);
   line-height: 1.25;
 }
 
 .floating-popup-text p {
   margin: 4px 0 0;
   font-family: var(--font-body, 'Nunito', sans-serif);
-  font-size: 0.79rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #172541;
   line-height: 1.35;
 }
 
 .floating-popup-cta {
-  background: #ffffff;
-  color: #2347EF;
-  border: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  background: var(--color-accent, #FF8651);
+  color: #ffffff;
+  border: 2px solid var(--color-border, #2347EF);
+  box-shadow: 4px 4px 0px var(--color-primary-dark, #2347EF);
   border-radius: 100px;
   padding: 11px 18px;
   font-family: var(--font-body, 'Nunito', sans-serif);
   font-weight: 800;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   cursor: pointer;
@@ -6178,14 +6181,13 @@ section, footer {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .floating-popup-cta:hover {
-  background: #f4f6fc;
-  color: #1732BC;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  background: #ff7235;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--color-primary-dark, #2347EF);
 }
 
 @media (max-width: 640px) {
