@@ -1,7 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Star, MessageSquare, ClipboardCheck, Headphones, FileText, MapPin, Layers, Puzzle } from 'lucide-react';
+import { Star, MessageSquare, ClipboardCheck, Headphones, FileText, MapPin, Layers, Puzzle, ChevronDown, Volume2, VolumeX, Menu, X } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import './JornadaEstePage.css';
+
+const HERO_TOPICS = [
+  { id: 'tu-familia', label: '¿Para quién es?' },
+  { id: 'workshop', label: 'Charla Inicial' },
+  { id: 'intensivo', label: 'Terapia Intensiva' },
+  { id: 'cronograma', label: 'Cronograma' },
+  { id: 'mapa', label: 'Ubicación' },
+  { id: 'tandas', label: 'Horarios y Cupos' },
+];
+
+const DRAWER_NAV_LINKS = [
+  { id: 'tu-familia', label: '¿Para quién es?' },
+  { id: 'workshop', label: 'Charla Inicial (Sáb 1 Nov)' },
+  { id: 'intensivo', label: 'Terapia Intensiva 13 Días' },
+  { id: 'cronograma', label: 'Cronograma Día a Día' },
+  { id: 'especialistas', label: 'Especialistas Clínicos' },
+  { id: 'mapa', label: 'Sede CPIME y Ubicación' },
+  { id: 'tandas', label: 'Horarios y Cupos' },
+  { id: 'preguntas', label: 'Preguntas Frecuentes' },
+];
 
 const miniTestimonialQuotes = [
   "“Es la mejor decisión que hemos hecho como familia.”",
@@ -82,8 +102,39 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showFixedCta, setShowFixedCta] = useState(false);
   const [timeLeft, setTimeLeft] = useState(getJornadaTimeLeft);
+  const [isHeroMuted, setIsHeroMuted] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const heroVideoRef = useRef(null);
   const mapRef = useRef(null);
   const leafletMapInstance = useRef(null);
+
+  const toggleHeroSound = () => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.muted = !heroVideoRef.current.muted;
+      setIsHeroMuted(heroVideoRef.current.muted);
+    }
+  };
+
+  const handleScrollTo = (e, targetId) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const topOffset = window.innerWidth <= 600 ? 70 : 80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset - topOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -195,80 +246,83 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
     <div className="compact-page" data-city="Higüey">
       <a className="skip-link" href="#contenido">Ir al contenido</a>
 
-      {/* TOP COUNTDOWN BANNER (SINGLE LINE) */}
-      <aside className="top-timer-banner" aria-label="Tiempo restante para la jornada en Higüey">
-        <div className="top-timer-inner">
-          <span className="top-timer-label">Inicia en:</span>
-
-          <div className="top-timer-countdown" role="timer" aria-live="polite">
-            <span className="top-timer-unit">
-              <strong>{padTwo(timeLeft.days)}</strong><small>d</small>
-            </span>
-            <span className="top-timer-sep" aria-hidden="true">:</span>
-            <span className="top-timer-unit">
-              <strong>{padTwo(timeLeft.hours)}</strong><small>h</small>
-            </span>
-            <span className="top-timer-sep" aria-hidden="true">:</span>
-            <span className="top-timer-unit">
-              <strong>{padTwo(timeLeft.minutes)}</strong><small>m</small>
-            </span>
-            <span className="top-timer-sep" aria-hidden="true">:</span>
-            <span className="top-timer-unit">
-              <strong>{padTwo(timeLeft.seconds)}</strong><small>s</small>
-            </span>
-          </div>
-
+      {/* TOP NAVBAR (CLEAN, BOLD WITH HAMBURGER) */}
+      <header className="jornada-top-nav" aria-label="Navegación superior">
+        <div className="top-nav-inner">
           <a 
-            className="top-timer-btn" 
-            href={WA_HIGUEY} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Reservar cupo en WhatsApp"
+            href="#inicio" 
+            className="top-nav-brand"
+            onClick={(e) => handleScrollTo(e, 'inicio')}
           >
-            <span>Reservar</span>
-            <span aria-hidden="true">→</span>
+            <span className="nav-brand-main">Multisensorial RD</span>
           </a>
+
+          <button
+            type="button"
+            className="top-nav-hamburger"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-expanded={isMenuOpen}
+            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú de navegación"}
+          >
+            <span>{isMenuOpen ? "Cerrar" : "Menú"}</span>
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-      </aside>
-
-      {/* HEADER */}
-      <header className="header">
-        <a 
-          className="brand" 
-          href="#inicio" 
-          aria-label="Centro Multisensorial inicio"
-          onClick={(e) => {
-            if (onNavigateHome) {
-              e.preventDefault();
-              onNavigateHome();
-            }
-          }}
-        >
-          <img src="/assets/logo.webp" alt="Multisensorial RD" width="260" height="48" fetchPriority="high" />
-        </a>
-
-        <nav aria-label="Navegación principal">
-          <a className="nav-link" href="#intensivo">La jornada</a>
-          {onNavigateHome && (
-            <button 
-              onClick={onNavigateHome}
-              className="text-link"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-              Portada Principal ↗
-            </button>
-          )}
-          <a 
-            className="button button-small" 
-            href={WA_HIGUEY} 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <WhatsAppIcon size={17} color="#000000" />
-            <span>Quiero orientación</span>
-          </a>
-        </nav>
       </header>
+
+      {/* HAMBURGER DRAWER */}
+      {isMenuOpen && (
+        <div className="nav-drawer-backdrop" onClick={() => setIsMenuOpen(false)}>
+          <nav 
+            className="nav-drawer-content" 
+            onClick={(e) => e.stopPropagation()}
+            aria-label="Menú de navegación"
+          >
+            <div className="nav-drawer-header">
+              <strong>Temas de la Jornada</strong>
+              <button 
+                type="button" 
+                className="nav-drawer-close"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Cerrar menú"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="nav-drawer-links">
+              {HERO_TOPICS.map((link) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className="drawer-link"
+                  onClick={(e) => {
+                    handleScrollTo(e, link.id);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <span className="drawer-link-text">{link.label}</span>
+                  <span className="drawer-link-arrow" aria-hidden="true">→</span>
+                </a>
+              ))}
+            </div>
+
+            <div className="nav-drawer-footer">
+              <a 
+                href={WA_HIGUEY} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="drawer-wa-btn"
+              >
+                <WhatsAppIcon size={20} color="#172541" />
+                <span>Consultar por WhatsApp</span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
+
+
 
       <main id="contenido">
         {/* HERO */}
@@ -282,10 +336,32 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
               <p className="hero-description">
                 El método neurosensorial de la capital, del 1 al 15 de noviembre en CPIME, Av. 27 de Febrero.
               </p>
-              <div className="hero-actions">
-                <a className="button hero-cta-button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
-                  <WhatsAppIcon size={20} color="#000000" />
-                  <span>Consultar cupos por WhatsApp →</span>
+              {/* HERO TOPIC BUTTONS (6 BUTTONS SYMMETRIC 2-COL GRID) */}
+              <div className="hero-nav-topics">
+                <span className="hero-nav-label">Temas clave de la jornada:</span>
+                <div className="hero-topic-grid">
+                  {HERO_TOPICS.map((topic) => (
+                    <button
+                      key={topic.id}
+                      type="button"
+                      className="topic-grid-btn"
+                      onClick={(e) => handleScrollTo(e, topic.id)}
+                    >
+                      <span className="topic-btn-text">{topic.label}</span>
+                      <span className="topic-btn-arrow" aria-hidden="true">↓</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* DIRECT EDITORIAL SCROLL CUE (NOT A CARD) */}
+                <a 
+                  href="#tu-familia" 
+                  className="hero-scroll-cue-editorial"
+                  onClick={(e) => handleScrollTo(e, 'tu-familia')}
+                  aria-label="Baja para ver toda la información"
+                >
+                  <span>Baja para ver toda la información</span>
+                  <ChevronDown size={28} className="scroll-cue-icon" aria-hidden="true" />
                 </a>
               </div>
             </div>
@@ -293,14 +369,23 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
             <figure className="hero-visual">
               <div className="photo-crop">
                 <video
+                  ref={heroVideoRef}
                   src="/vidhiguey.mp4"
                   autoPlay
                   loop
-                  muted
+                  muted={isHeroMuted}
                   playsInline
                   preload="metadata"
                   title="Jornada Tomatis Higüey"
                 />
+                <button
+                  type="button"
+                  className="video-sound-toggle"
+                  onClick={toggleHeroSound}
+                  aria-label={isHeroMuted ? "Activar audio" : "Silenciar audio"}
+                >
+                  {isHeroMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                </button>
               </div>
             </figure>
           </div>
@@ -334,6 +419,10 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
             </div>
           </div>
         </section>
+
+
+
+
 
         {/* MEDIA PRESENCE (Static Grid matching Main Page Hero) */}
         <section className="hero-media-static" aria-label="Presencia en medios">
@@ -1087,13 +1176,34 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
         </section>
       </main>
 
-      {/* FIXED BOTTOM CTA */}
-      <div className={`fixed-cta ${showFixedCta ? 'is-visible' : ''}`} aria-hidden={!showFixedCta}>
-        <a className="button" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
-          <WhatsAppIcon size={20} color="#000000" />
-          <span>Consultar cupos por WhatsApp →</span>
-        </a>
-      </div>
+      {/* FIXED BOTTOM TIMER BAR (Replaces old floating button as requested) */}
+      <aside className={`fixed-bottom-timer ${showFixedCta ? 'is-visible' : ''}`} aria-label="Tiempo restante para la jornada">
+        <div className="fixed-timer-inner">
+          <div className="fixed-timer-countdown" role="timer" aria-live="polite">
+            <span className="fixed-timer-label">Inicia en:</span>
+            <div className="fixed-timer-digits">
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.days)}</strong><small>d</small></span>
+              <span className="fixed-timer-sep">:</span>
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.hours)}</strong><small>h</small></span>
+              <span className="fixed-timer-sep">:</span>
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.minutes)}</strong><small>m</small></span>
+              <span className="fixed-timer-sep">:</span>
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.seconds)}</strong><small>s</small></span>
+            </div>
+          </div>
+
+          <a 
+            className="fixed-timer-cta" 
+            href={WA_HIGUEY} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Reservar cupo en WhatsApp"
+          >
+            <WhatsAppIcon size={18} color="#000000" />
+            <span>Reservar cupo →</span>
+          </a>
+        </div>
+      </aside>
 
       {/* FOOTER */}
       <footer className="footer section-wrap">
