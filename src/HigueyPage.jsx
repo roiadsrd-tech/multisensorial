@@ -14,7 +14,7 @@ const HERO_TOPICS = [
 
 const DRAWER_NAV_LINKS = [
   { id: 'tu-familia', label: '¿Para quién es?' },
-  { id: 'workshop', label: 'Charla Inicial (Sáb 1 Nov)' },
+  { id: 'workshop', label: 'Charla Inicial (Dom 1 Nov)' },
   { id: 'intensivo', label: 'Terapia Intensiva 13 Días' },
   { id: 'cronograma', label: 'Cronograma Día a Día' },
   { id: 'especialistas', label: 'Especialistas Clínicos' },
@@ -546,7 +546,7 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
         <section className="section-workshop-clean" id="workshop" aria-labelledby="workshop-title">
           <div className="section-wrap">
             <div className="workshop-clean-header">
-              <p className="eyebrow">SÁBADO 1 DE NOVIEMBRE · CPIME, HIGÜEY</p>
+              <p className="eyebrow">DOMINGO 1 DE NOVIEMBRE · CPIME, HIGÜEY</p>
               <h2 id="workshop-title">
                 Charla y Workshop Inicial
               </h2>
@@ -785,7 +785,7 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
                     <span className="chrono-big-num">01</span>
                     <MessageSquare className="chrono-inline-icon" size={26} aria-hidden="true" />
                   </div>
-                  <span className="chrono-step-date">Sáb 1 Nov</span>
+                  <span className="chrono-step-date">Dom 1 Nov</span>
                 </div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
@@ -807,7 +807,7 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
                     <span className="chrono-big-num">02</span>
                     <ClipboardCheck className="chrono-inline-icon" size={26} aria-hidden="true" />
                   </div>
-                  <span className="chrono-step-date">Dom 2 Nov</span>
+                  <span className="chrono-step-date">Lun 2 Nov</span>
                 </div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
@@ -851,7 +851,7 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
                     <span className="chrono-big-num">04</span>
                     <FileText className="chrono-inline-icon" size={26} aria-hidden="true" />
                   </div>
-                  <span className="chrono-step-date">Sáb 15 Nov</span>
+                  <span className="chrono-step-date">Dom 15 Nov</span>
                 </div>
                 <div className="chrono-step-body">
                   <div className="chrono-step-main">
@@ -1043,7 +1043,7 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
                       <strong>2. Recibirás los datos</strong> para realizar el pago de reserva y tu contrato personal.
                     </li>
                     <li>
-                      <strong>3. Te confirmamos el cupo</strong> para la evaluación del domingo 2 de noviembre.
+                      <strong>3. Te confirmamos el cupo</strong> para la evaluación del lunes 2 de noviembre.
                     </li>
                   </ol>
                   <a className="faq-inline-cta" href={WA_HIGUEY} target="_blank" rel="noopener noreferrer">
@@ -1120,7 +1120,7 @@ export default function HigueyPage({ onNavigateHome, onNavigateTomatis }) {
                   <span className="faq-toggle" aria-hidden="true"></span>
                 </summary>
                 <div className="faq-answer">
-                  <p>No. El domingo 2 de noviembre realizamos la evaluación previa para calibrar el protocolo específico de tu pequeño.</p>
+                  <p>No. El lunes 2 de noviembre realizamos la evaluación previa para calibrar el protocolo específico de tu pequeño.</p>
                 </div>
               </details>
             </div>
