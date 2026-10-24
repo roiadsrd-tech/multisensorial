@@ -356,7 +356,7 @@ export default function LaRomanaPage({ onNavigateHome, onNavigateTomatis }) {
               <div className="photo-crop">
                 <video
                   ref={heroVideoRef}
-                  src="/vidhiguey.mp4"
+                  src="/VSL%20La%20Romana.mp4"
                   autoPlay
                   loop
                   muted={isHeroMuted}
