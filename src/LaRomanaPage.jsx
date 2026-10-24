@@ -1,0 +1,1287 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { Star, MessageSquare, ClipboardCheck, Headphones, FileText, MapPin, Layers, Puzzle, ChevronDown, Volume2, VolumeX, Menu, X, ShieldCheck, Zap } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
+import './JornadaEstePage.css';
+
+const HERO_TOPICS = [
+  { id: 'tu-familia', label: '¿Para quién es?' },
+  { id: 'workshop', label: 'Charla Virtual' },
+  { id: 'intensivo', label: 'Terapia Intensiva' },
+  { id: 'cronograma', label: 'Cronograma' },
+  { id: 'mapa', label: 'Ubicación' },
+  { id: 'tandas', label: 'Horarios y Cupos' },
+];
+
+const miniTestimonialQuotes = [
+  "“Es la mejor decisión que hemos hecho como familia.”",
+  "“Mi hijo ha avanzado muchísimo.”",
+  "“Acabo de recibir la palabra más deseada: «mamá».”",
+  "“Ya se sabe las vocales, sabe diferenciarlas.”",
+  "“El niño decía nada. Ya dice mamá y papá, mami y papi.”",
+  "“Ya me entiende cuando yo le hablo.”",
+  "“Le digo ven y viene, le digo pásame eso y me lo pasa.”",
+  "“Yo pude ver múchisimos cambios en Samuel.”",
+  "“Pude ver resultados con el método en tan solo 15 días, ya dejó de hacer los sonidos y correr de lado a lado.”",
+  "“Eso que ustedes hacen es demasiado maravilloso.”"
+];
+
+const quotesRow1 = miniTestimonialQuotes.filter((_, i) => i % 2 === 0);
+const quotesRow2 = miniTestimonialQuotes.filter((_, i) => i % 2 !== 0);
+
+const WA_LA_ROMANA = "https://wa.me/18093065040?text=Hola%2C%20me%20interesa%20la%20jornada%20Tomatis%20en%20La%20Romana%20en%20Centro%20Psicopedag%C3%B3gico%20DALA.%20Quisiera%20informaci%C3%B3n%20sobre%20la%20charla%20virtual%20del%2014%20de%20noviembre%20y%20el%20intensivo%20del%2015%20al%2028.";
+const COORDS_LA_ROMANA = [18.4085, -68.9814];
+const MAP_URL_LA_ROMANA = "https://www.google.com/maps/search/?api=1&query=Centro+Psicopedag%C3%B3gico+DALA+Vista+Catalina+La+Romana";
+
+const JORNADA_TARGET_DATE = new Date('2026-11-14T09:00:00-04:00').getTime();
+
+function getJornadaTimeLeft() {
+  const diff = JORNADA_TARGET_DATE - Date.now();
+  if (diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / 1000 / 60) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
+
+const padTwo = (val) => String(val).padStart(2, '0');
+
+const workshopTopics = [
+  {
+    num: '01',
+    entity: 'Multisensorial RD®',
+    topic: 'Método Tomatis e intervención temprana',
+    logo: '/branding/logopng.webp',
+    logoClass: 'logo-multisensorial',
+  },
+  {
+    num: '02',
+    entity: 'Sensorialmente®',
+    topic: 'Terapia Ocupacional y desorden en el procesamiento sensorial (planes a distancia)',
+    logo: '/assets/sensorialmente-brand.png',
+    logoClass: 'logo-sensorialmente',
+  },
+  {
+    num: '03',
+    entity: 'Dra. Solanyi Herrera Valdez',
+    topic: 'Abordaje Biomédico integral',
+    logo: '/assets/dra-solanyi-logo.webp',
+    logoClass: 'logo-solanyi',
+  },
+  {
+    num: '04',
+    entity: 'Dra. Idelsa Polanco',
+    topic: 'Abordaje gastrointestinal del niño con TDAH y autismo',
+    logo: '/assets/dra-idelsa-logo.webp',
+    logoClass: 'logo-idelsa',
+  },
+  {
+    num: '05',
+    entity: 'Ama Academy®',
+    topic: 'Homeschooling por proyectos para niños con alguna condición',
+    logo: '/assets/ama-academy-brand.png',
+    logoClass: 'logo-ama',
+  },
+];
+
+export default function LaRomanaPage({ onNavigateHome, onNavigateTomatis }) {
+  const [activeFaq, setActiveFaq] = useState(null);
+  const [showFixedCta, setShowFixedCta] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(getJornadaTimeLeft);
+  const [isHeroMuted, setIsHeroMuted] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const heroVideoRef = useRef(null);
+  const mapRef = useRef(null);
+  const leafletMapInstance = useRef(null);
+
+  const toggleHeroSound = () => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.muted = !heroVideoRef.current.muted;
+      setIsHeroMuted(heroVideoRef.current.muted);
+    }
+  };
+
+  const handleScrollTo = (e, targetId) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const topOffset = window.innerWidth <= 600 ? 70 : 80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset - topOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(getJornadaTimeLeft());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = "Jornada Tomatis en La Romana | Centro Multisensorial RD";
+
+    const handleScroll = () => {
+      setShowFixedCta(window.scrollY > 380);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      document.title = prevTitle;
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Leaflet map setup for La Romana - Centro Psicopedagógico DALA
+  useEffect(() => {
+    let active = true;
+
+    if (!document.getElementById('leaflet-css')) {
+      const link = document.createElement('link');
+      link.id = 'leaflet-css';
+      link.rel = 'stylesheet';
+      link.href = '/vendor/leaflet/leaflet.css';
+      document.head.appendChild(link);
+    }
+
+    const initMap = () => {
+      if (!active || !mapRef.current || !window.L) return;
+
+      if (leafletMapInstance.current) {
+        leafletMapInstance.current.remove();
+        leafletMapInstance.current = null;
+      }
+
+      const map = window.L.map(mapRef.current, {
+        scrollWheelZoom: false,
+        zoomControl: false,
+        attributionControl: false,
+        dragging: !window.L.Browser.mobile
+      });
+
+      window.L.control.zoom({ position: 'bottomright' }).addTo(map);
+      window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        minZoom: 8,
+        maxZoom: 17,
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+
+      map.setView(COORDS_LA_ROMANA, 14);
+
+      const markerLaRomana = window.L.marker(COORDS_LA_ROMANA, {
+        title: 'Centro Psicopedagógico DALA · La Romana',
+        icon: window.L.divIcon({
+          className: 'compact-map-pin-wrap',
+          html: '<div class="pin-badge pin-pequenines"><div class="pin-logo-wrap" style="width:40px;height:40px;box-shadow:0 2px 6px rgba(0,0,0,0.2);background:#fff;border-radius:8px;padding:2px;"><img src="/assets/dala-logo.png" alt="Centro DALA" style="width:100%;height:100%;object-fit:contain;" /></div><div class="pin-text-block"><span class="pin-label">Centro DALA</span><span class="pin-date-tag">14 al 28 Nov</span></div></div>',
+          iconSize: [190, 56],
+          iconAnchor: [95, 56]
+        })
+      }).addTo(map);
+
+      markerLaRomana.bindPopup(
+        '<div style="text-align:center;padding:4px 2px;"><div style="width:90px;height:36px;margin:0 auto 6px;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.18);background:#fff;padding:2px;"><img src="/assets/dala-logo.png" alt="Centro DALA" style="width:100%;height:100%;object-fit:contain;display:block;" /></div><strong style="font-size:14px;color:#172541;">Centro Psicopedagógico DALA</strong><br><span style="font-size:11.5px;color:#64748b;display:block;margin-top:2px;">Atención psicopedagógica y neurodesarrollo</span><span style="font-size:12px;color:#1e40af;font-weight:700;display:block;margin:4px 0 2px;">Jornada Tomatis · 14 al 28 Nov</span><span style="font-size:12px;color:#334155;display:block;">Calle 11 #13, Vista Catalina, La Romana</span><a href="' + MAP_URL_LA_ROMANA + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;padding:5px 12px;background:#2563eb;color:#fff;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none;">Abrir en Google Maps ↗</a></div>',
+        { offset: [0, -32] }
+      );
+
+      markerLaRomana.on('click', () => {
+        markerLaRomana.openPopup();
+        map.flyTo(COORDS_LA_ROMANA, 15, { duration: 0.5 });
+      });
+
+      leafletMapInstance.current = map;
+    };
+
+    if (window.L) {
+      initMap();
+    } else {
+      const script = document.createElement('script');
+      script.src = '/vendor/leaflet/leaflet.js';
+      script.async = true;
+      script.onload = () => {
+        if (active) initMap();
+      };
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      active = false;
+      if (leafletMapInstance.current) {
+        leafletMapInstance.current.remove();
+        leafletMapInstance.current = null;
+      }
+    };
+  }, []);
+
+  const toggleFaq = (idx) => {
+    setActiveFaq(prev => prev === idx ? null : idx);
+  };
+
+  return (
+    <div className="compact-page la-romana-page" data-city="La Romana">
+      <a className="skip-link" href="#contenido">Ir al contenido</a>
+
+      {/* TOP NAVBAR (CLEAN, BOLD WITH HAMBURGER) */}
+      <header className="jornada-top-nav" aria-label="Navegación superior">
+        <div className="top-nav-inner">
+          <a 
+            href="#inicio" 
+            className="top-nav-brand"
+            onClick={(e) => handleScrollTo(e, 'inicio')}
+          >
+            <span className="nav-brand-main">Multisensorial RD</span>
+          </a>
+
+          <button
+            type="button"
+            className="top-nav-hamburger"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-expanded={isMenuOpen}
+            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú de navegación"}
+          >
+            <span>{isMenuOpen ? "Cerrar" : "Menú"}</span>
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </header>
+
+      {/* HAMBURGER DRAWER */}
+      {isMenuOpen && (
+        <div className="nav-drawer-backdrop" onClick={() => setIsMenuOpen(false)}>
+          <nav 
+            className="nav-drawer-content" 
+            onClick={(e) => e.stopPropagation()}
+            aria-label="Menú de navegación"
+          >
+            <div className="nav-drawer-header">
+              <strong>Temas de la Jornada</strong>
+              <button 
+                type="button" 
+                className="nav-drawer-close"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Cerrar menú"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="nav-drawer-links">
+              {HERO_TOPICS.map((link) => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className="drawer-link"
+                  onClick={(e) => {
+                    handleScrollTo(e, link.id);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <span className="drawer-link-text">{link.label}</span>
+                  <span className="drawer-link-arrow" aria-hidden="true">→</span>
+                </a>
+              ))}
+            </div>
+
+            <div className="nav-drawer-footer">
+              <a 
+                href={WA_LA_ROMANA} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="drawer-wa-btn"
+              >
+                <WhatsAppIcon size={20} color="#172541" />
+                <span>Consultar por WhatsApp</span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
+
+      <main id="contenido">
+        {/* HERO */}
+        <section className="hero compact-hero" id="inicio" aria-labelledby="hero-title">
+          <div className="hero-grid section-wrap">
+            <div className="hero-copy">
+              <p className="eyebrow">SANTO DOMINGO TRASLADA SU MÉTODO EXCLUSIVO</p>
+              <h1 id="hero-title">
+                ¡Por fin en <span className="text-brand-gradient">La Romana</span>! <span className="text-brand-highlight">Terapia intensiva</span> para niños con algún trastorno del Neurodesarrollo.
+              </h1>
+              <p className="hero-description">
+                El método neurosensorial de la capital, del 14 al 28 de noviembre en Centro Psicopedagógico DALA, Vista Catalina.
+              </p>
+              {/* HERO TOPIC BUTTONS */}
+              <div className="hero-nav-topics">
+                <span className="hero-nav-label">Temas clave de la jornada:</span>
+                <div className="hero-topic-grid">
+                  {HERO_TOPICS.map((topic) => (
+                    <button
+                      key={topic.id}
+                      type="button"
+                      className="topic-grid-btn"
+                      onClick={(e) => handleScrollTo(e, topic.id)}
+                    >
+                      <span className="topic-btn-text">{topic.label}</span>
+                      <span className="topic-btn-arrow" aria-hidden="true">↓</span>
+                    </button>
+                  ))}
+                </div>
+
+                <a 
+                  href="#tu-familia" 
+                  className="hero-scroll-cue-editorial"
+                  onClick={(e) => handleScrollTo(e, 'tu-familia')}
+                  aria-label="Baja para ver toda la información"
+                >
+                  <span>Baja para ver toda la información</span>
+                  <ChevronDown size={28} className="scroll-cue-icon" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+
+            <figure className="hero-visual">
+              <div className="photo-crop">
+                <video
+                  ref={heroVideoRef}
+                  src="/vidhiguey.mp4"
+                  autoPlay
+                  loop
+                  muted={isHeroMuted}
+                  playsInline
+                  preload="metadata"
+                  title="Jornada Tomatis La Romana"
+                />
+                <button
+                  type="button"
+                  className="video-sound-toggle"
+                  onClick={toggleHeroSound}
+                  aria-label={isHeroMuted ? "Activar audio" : "Silenciar audio"}
+                >
+                  {isHeroMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                </button>
+              </div>
+            </figure>
+          </div>
+
+          {/* Minimal Testimonials Marquee */}
+          <div className="hero-quotes-marquee" aria-label="Opiniones de familias">
+            <div className="hero-quotes-track hero-quotes-track-desktop">
+              {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
+                <div key={`d-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+              {[...quotesRow1, ...quotesRow1, ...quotesRow1, ...quotesRow1].map((quote, idx) => (
+                <div key={`m1-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+              {[...quotesRow2, ...quotesRow2, ...quotesRow2, ...quotesRow2].map((quote, idx) => (
+                <div key={`m2-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* MEDIA PRESENCE */}
+        <section className="hero-media-static" aria-label="Presencia en medios">
+          <div className="container">
+            <div className="media-static-label">PRESENCIA EN MEDIOS:</div>
+            <div className="media-logos-grid">
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=ZKI_bcbkVI0"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Azul Podcast"
+              >
+                <img src="/logosasseenin/azulpodcast.webp" alt="Azul Podcast" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=NSRzUZ-Tqhc"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Color Visión"
+              >
+                <img src="/logosasseenin/colorvision.webp" alt="Color Visión" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=NK1u6dsNqBo"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Esto No Es Radio"
+              >
+                <img src="/logosasseenin/estonoesradio.webp" alt="Esto No Es Radio" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=JiJXut5kviU"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="La Mirada"
+              >
+                <img src="/logosasseenin/lamirada.webp" alt="La Mirada" loading="lazy" />
+              </a>
+              <a
+                className="media-logo-item"
+                href="https://www.youtube.com/watch?v=1HIYwVGQikY"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="RNN"
+              >
+                <img src="/logosasseenin/rnn.webp" alt="RNN" loading="lazy" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ¿ES ESTA JORNADA PARA TU HIJO? */}
+        <section className="family-story section-signals" id="tu-familia" aria-labelledby="family-title">
+          <div className="section-wrap">
+            <div className="section-heading">
+              <p className="eyebrow">PERFIL DE LA JORNADA</p>
+              <h2 id="family-title">
+                ¿Es esta jornada<br />
+                <span><mark className="text-highlight" data-highlight>para tu hijo?</mark></span>
+              </h2>
+              <p className="section-subtitle">
+                Si notas alguna de estas señales en tu pequeño, este intensivo es para él:
+              </p>
+            </div>
+
+            <div className="signals-list-clean">
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-understanding.webp" 
+                  alt="Retraso en el habla" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Retraso en el habla</h3>
+                  <p>No dice palabras claras o se frustra al intentar comunicarse.</p>
+                </div>
+              </div>
+
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-sounds.webp" 
+                  alt="Sensibilidad al ruido" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Sensibilidad al ruido</h3>
+                  <p>Se tapa los oídos o colapsa con la bulla y sonidos fuertes.</p>
+                </div>
+              </div>
+
+              <div className="signal-row-item">
+                <img 
+                  src="/assets/family-questions.webp" 
+                  alt="Sin avances" 
+                  className="signal-thumb" 
+                  loading="lazy" 
+                />
+                <div className="signal-content">
+                  <h3>Sin avances</h3>
+                  <p>Lleva meses en terapias de siempre y no arranca.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="signals-cta-action">
+              <a className="button" href={WA_LA_ROMANA} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Apartar horario por WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* CHARLA Y WORKSHOP INICIAL: VIRTUAL ONLINE */}
+        <section className="section-workshop-clean" id="workshop" aria-labelledby="workshop-title">
+          <div className="section-wrap">
+            <div className="workshop-clean-header">
+              <p className="eyebrow">SÁBADO 14 DE NOVIEMBRE · CHARLA VIRTUAL ONLINE</p>
+              <h2 id="workshop-title">
+                Charla y Workshop Inicial (Virtual)
+              </h2>
+              <p className="section-subtitle" style={{ marginTop: '8px' }}>
+                Transmisión online en vivo para todas las familias de La Romana antes de iniciar las evaluaciones presenciales.
+              </p>
+            </div>
+
+            {/* VIDEO DEL WORKSHOP */}
+            <div className="workshop-video-frame">
+              <video
+                className="workshop-video-player"
+                src="/workshop-video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                title="Workshop inicial virtual"
+              />
+            </div>
+
+            {/* TÍTULO: LAS 5 ETAPAS DEL WORKSHOP */}
+            <h3 className="workshop-stages-heading">
+              Las 5 etapas del workshop
+            </h3>
+
+            <div className="workshop-clean-container">
+              {workshopTopics.map((item) => (
+                <div key={item.num} className="workshop-clean-row">
+                  <span className="workshop-clean-num">{item.num}</span>
+                  <div className="workshop-clean-body">
+                    <h3 className="workshop-clean-entity">{item.entity}</h3>
+                    <p className="workshop-clean-topic">{item.topic}</p>
+                  </div>
+                  {item.logo && (
+                    <div className="workshop-clean-logo-wrap">
+                      <img 
+                        src={item.logo} 
+                        alt={item.entity} 
+                        className={`workshop-clean-logo ${item.logoClass}`} 
+                        loading="lazy" 
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="workshop-clean-action">
+              <a className="button" href={WA_LA_ROMANA} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Consultar sobre la charla virtual por WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* JORNADA INTENSIVA (FONDO AMARILLO) */}
+        <section className="section-intensivo-yellow" id="intensivo" aria-labelledby="intensivo-title">
+          <div className="section-wrap">
+            <div className="intensivo-header">
+              <span className="intensivo-eyebrow">16 AL 28 DE NOVIEMBRE · CENTRO DALA, LA ROMANA</span>
+              <h2 id="intensivo-title">La Jornada Intensiva</h2>
+              <p className="intensivo-lead">
+                13 días de terapia neurosensorial personalizada (2 horas diarias) para avanzar en semanas lo que suele tomar meses.
+              </p>
+            </div>
+
+            {/* INSTALACIONES Y COMODIDADES CONFIRMADAS */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '16px',
+              margin: '28px 0 36px',
+            }}>
+              <div style={{
+                background: '#ffffff',
+                border: '2.5px solid #172541',
+                borderRadius: '16px',
+                padding: '18px 20px',
+                boxShadow: '4px 4px 0px #172541',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <Zap size={28} color="#2563eb" style={{ flexShrink: 0 }} />
+                <div>
+                  <strong style={{ display: 'block', fontSize: '15px', color: '#172541' }}>Inversor & Aire Acondicionado</strong>
+                  <span style={{ fontSize: '12.5px', color: '#64748b' }}>Espacio en 2do nivel con energía continua y baño privado</span>
+                </div>
+              </div>
+
+              <div style={{
+                background: '#ffffff',
+                border: '2.5px solid #172541',
+                borderRadius: '16px',
+                padding: '18px 20px',
+                boxShadow: '4px 4px 0px #172541',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <ShieldCheck size={28} color="#16a34a" style={{ flexShrink: 0 }} />
+                <div>
+                  <strong style={{ display: 'block', fontSize: '15px', color: '#172541' }}>Facturación para Seguro Médico</strong>
+                  <span style={{ fontSize: '12.5px', color: '#64748b' }}>Credenciales autorizadas para solicitud de reembolso</span>
+                </div>
+              </div>
+            </div>
+
+            {/* FOTOS DE LA JORNADA */}
+            <div className="intensivo-photos-wrap">
+              <div className="intensivo-compact-gallery" aria-label="Fotos de terapia en jornada">
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-01.webp" 
+                    alt="Acompañamiento individual en mesa" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-04.webp" 
+                    alt="Actividades de pinza fina y didácticos" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-02.webp" 
+                    alt="Trabajo con rompecabezas y juego" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-06.webp" 
+                    alt="Dinámica en alfombra de foam" 
+                    loading="lazy" 
+                  />
+                </figure>
+                <figure className="intensivo-mini-photo">
+                  <img 
+                    src="/assets/families/photo-11.webp" 
+                    alt="Terapeutas guiando la sesión" 
+                    loading="lazy" 
+                  />
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          {/* Minimal Testimonials Marquee */}
+          <div className="hero-quotes-marquee intensivo-quotes-marquee" aria-label="Opiniones de familias">
+            <div className="hero-quotes-track hero-quotes-track-desktop">
+              {[...miniTestimonialQuotes, ...miniTestimonialQuotes].map((quote, idx) => (
+                <div key={`iq-d-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-1">
+              {[...quotesRow1, ...quotesRow1, ...quotesRow1, ...quotesRow1].map((quote, idx) => (
+                <div key={`iq-m1-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hero-quotes-track hero-quotes-track-mobile track-row-2">
+              {[...quotesRow2, ...quotesRow2, ...quotesRow2, ...quotesRow2].map((quote, idx) => (
+                <div key={`iq-m2-${idx}`} className="hero-quote-item">
+                  <span className="hero-quote-stars" aria-hidden="true">★★★★★</span>
+                  <span className="hero-quote-text">{quote}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="section-wrap">
+            {/* 3 PILARES VISUALES */}
+            <div className="intensivo-pillars-row">
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Headphones size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Audífonos Tomatis®</h3>
+                  <p>Conducción ósea y auditiva para acelerar habla y atención.</p>
+                </div>
+              </div>
+
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Layers size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Mesa y suelo con foam</h3>
+                  <p>Dinámicas cómodas sobre alfombras acolchadas, cero sobrecarga.</p>
+                </div>
+              </div>
+
+              <div className="intensivo-pillar-item">
+                <div className="intensivo-pillar-icon-wrap" aria-hidden="true">
+                  <Puzzle size={26} strokeWidth={2.5} />
+                </div>
+                <div className="intensivo-pillar-info">
+                  <h3>Juegos didácticos</h3>
+                  <p>Rompecabezas, pinza fina y coloreado mientras se estimulan.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="intensivo-cta-action">
+              <a 
+                className="button intensivo-cta-btn" 
+                href={WA_LA_ROMANA} 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <WhatsAppIcon size={18} color="#000000" />
+                <span>Consultar cupos de la jornada por WhatsApp</span>
+              </a>
+            </div>
+
+            {/* TARJETA INDEPENDIENTE DEL MÉTODO TOMATIS® */}
+            <div className="mini-tomatis-card intensivo-tomatis-card" id="metodo-tomatis">
+              <div className="mini-tomatis-image-wrap">
+                <img 
+                  src="/tomatis_kids.webp" 
+                  alt="Niños usando el Método Tomatis®" 
+                  className="mini-tomatis-img" 
+                  loading="lazy" 
+                />
+              </div>
+              <div className="mini-tomatis-content">
+                <span className="mini-tomatis-kicker">TERAPIA NEUROSENSORIAL</span>
+                <h3 id="tomatis-mini-title">¿Qué es el Método Tomatis®?</h3>
+                <p className="mini-tomatis-desc">
+                  Terapia con audífonos especiales que ayuda a los niños a hablar, concentrarse mejor y calmar sus emociones.
+                </p>
+                <div className="mini-tomatis-action">
+                  <button 
+                    type="button"
+                    onClick={() => {
+                      if (onNavigateTomatis) {
+                        onNavigateTomatis();
+                      } else if (onNavigateHome) {
+                        onNavigateHome();
+                      } else {
+                        window.location.href = '/';
+                      }
+                    }}
+                    className="button button-small mini-tomatis-btn"
+                  >
+                    <span>Conocer más sobre el Método Tomatis® →</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CRONOGRAMA PASO A PASO */}
+        <section className="cronograma-section" id="cronograma" aria-labelledby="cronograma-title">
+          <div className="section-wrap">
+            <div className="cronograma-heading">
+              <p className="eyebrow">CRONOGRAMA CONFIRMADO · LA ROMANA</p>
+              <h2 id="cronograma-title">
+                Fechas de la <span>jornada.</span>
+              </h2>
+            </div>
+
+            <div className="chrono-linear-flow">
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">01</span>
+                    <MessageSquare className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">Sáb 14 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Charla inicial (Virtual)</h3>
+                    <p className="chrono-step-desc">Transmisión online · Exclusiva para familias inscritas</p>
+                  </div>
+                  <img
+                    src="/branding/logopng.webp"
+                    alt="Multisensorial RD"
+                    className="chrono-venue-logo chrono-venue-logo-dala"
+                    loading="lazy"
+                    style={{ background: '#fff', objectFit: 'contain' }}
+                  />
+                </div>
+              </div>
+
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">02</span>
+                    <ClipboardCheck className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">Dom 15 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Evaluaciones diagnósticas</h3>
+                    <p className="chrono-step-desc">Centro DALA · Calibración personalizada</p>
+                  </div>
+                  <img
+                    src="/assets/dala-logo.png"
+                    alt="Centro Psicopedagógico DALA"
+                    className="chrono-venue-logo chrono-venue-logo-dala"
+                    loading="lazy"
+                    style={{ background: '#fff', objectFit: 'contain' }}
+                  />
+                </div>
+              </div>
+
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">03</span>
+                    <Headphones className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">16 al 28 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Terapias Tomatis® Intensivas</h3>
+                    <p className="chrono-step-desc">Centro DALA · 2h diarias continuas (13 días)</p>
+                  </div>
+                  <img
+                    src="/assets/dala-logo.png"
+                    alt="Centro Psicopedagógico DALA"
+                    className="chrono-venue-logo chrono-venue-logo-dala"
+                    loading="lazy"
+                    style={{ background: '#fff', objectFit: 'contain' }}
+                  />
+                </div>
+              </div>
+
+              <div className="chrono-linear-step">
+                <div className="chrono-top-bar">
+                  <div className="chrono-num-group">
+                    <span className="chrono-big-num">04</span>
+                    <FileText className="chrono-inline-icon" size={26} aria-hidden="true" />
+                  </div>
+                  <span className="chrono-step-date">Sáb 28 Nov</span>
+                </div>
+                <div className="chrono-step-body">
+                  <div className="chrono-step-main">
+                    <h3 className="chrono-step-title">Entrega de informe y cierre</h3>
+                    <p className="chrono-step-desc">Centro DALA · Métricas y pautas para casa</p>
+                  </div>
+                  <img
+                    src="/assets/dala-logo.png"
+                    alt="Centro Psicopedagógico DALA"
+                    className="chrono-venue-logo chrono-venue-logo-dala"
+                    loading="lazy"
+                    style={{ background: '#fff', objectFit: 'contain' }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SEDE EN LA ROMANA - MAPA LIMPIO */}
+        <section className="section-map-wrap section-wrap" id="mapa" aria-labelledby="map-heading">
+          <div className="map-section-header">
+            <p className="eyebrow">SEDE EN LA ROMANA</p>
+            <h2 id="map-heading">
+              <span>¿Dónde es?</span>
+              <MapPin className="map-heading-inline-pin" size={38} aria-hidden="true" />
+            </h2>
+            <p style={{ marginTop: '8px', fontSize: '16px', color: 'rgba(23, 37, 65, 0.85)', fontWeight: 600 }}>
+              <strong>Centro Psicopedagógico DALA</strong> · Calle 11, Casa No. 13, Sector Vista Catalina, La Romana.
+            </p>
+          </div>
+          <div className="simple-map-container">
+            <div 
+              className="geographic-map" 
+              ref={mapRef}
+              id="locations-map" 
+              aria-label="Mapa de La Romana - Centro DALA"
+            ></div>
+          </div>
+          <div style={{ marginTop: '16px', textAlign: 'center' }}>
+            <a 
+              href={MAP_URL_LA_ROMANA} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="directory-link"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: 800 }}
+            >
+              <MapPin size={18} />
+              <span>Ver ubicación en Google Maps ↗</span>
+            </a>
+          </div>
+        </section>
+
+        {/* SPECIALISTS SECTION */}
+        <section className="program program-specialists-large" id="especialistas" aria-labelledby="specialists-title">
+          <div className="section-wrap program-inner">
+            <div className="program-specialists" style={{ marginTop: 0, paddingTop: 0, borderTop: 'none' }}>
+              <div className="program-specialists-intro">
+                <p className="eyebrow">CONSULTORES CERTIFICADOS</p>
+                <h3 id="specialists-title">Especialistas a cargo de la jornada</h3>
+              </div>
+
+              <div className="program-specialists-grid">
+                {/* Mery Torrealba */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#FFD6DF' }}>
+                    <img
+                      src="/mery_torrealba_new.webp"
+                      alt="Mery Torrealba"
+                      className="specialist-arch-img specialist-img-mery"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Mery Torrealba</h4>
+                    <span className="specialist-card-pill" style={{ background: '#FFD6DF' }}>
+                      Psicopedagogía & Tomatis® Nivel 4
+                    </span>
+                  </div>
+                </div>
+
+                {/* Carlos Eduardo Pérez */}
+                <div className="program-specialist-card">
+                  <div className="specialist-arch-stage" style={{ background: '#D0EEFF' }}>
+                    <img
+                      src="/carlos_perez_new.webp"
+                      alt="Carlos Eduardo Pérez"
+                      className="specialist-arch-img specialist-img-eduardo"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="specialist-card-info">
+                    <h4 className="specialist-card-name">Carlos Eduardo Pérez</h4>
+                    <span className="specialist-card-pill" style={{ background: '#D0EEFF' }}>
+                      Psicología & Tomatis® Nivel 4
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="program-specialists-verify">
+                <a
+                  className="directory-link"
+                  href="https://www.tomatis.com/es/profesional/republica-dominicana/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Verificar acreditación oficial en Tomatis.com ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* TANDAS A ELEGIR */}
+        <section className="section-tandas-brand" id="tandas" aria-labelledby="tandas-title">
+          <div className="section-wrap">
+            <div className="tandas-brand-header">
+              <p className="eyebrow">HORARIOS DISPONIBLES</p>
+              <h2 id="tandas-title">
+                Tandas a elegir
+              </h2>
+            </div>
+
+            <div className="tandas-grid-large">
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Matutina 1</span>
+                <span className="tanda-time-display">8:00 AM – 10:00 AM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Matutina 2</span>
+                <span className="tanda-time-display">10:00 AM – 12:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Vespertina 1</span>
+                <span className="tanda-time-display">2:00 PM – 4:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+
+              <div className="tanda-card-large">
+                <span className="tanda-tag-label">Tanda Vespertina 2</span>
+                <span className="tanda-time-display">4:00 PM – 6:00 PM</span>
+                <span className="tanda-capacity-tag">5 cupos</span>
+              </div>
+            </div>
+
+            <div className="tandas-action-wrap">
+              <a className="button" href={WA_LA_ROMANA} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon size={20} color="#000000" />
+                <span>Apartar horario por WhatsApp</span>
+              </a>
+              <p className="tandas-action-note">
+                Los cupos por tanda se completan rápido por orden de inscripción.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* PREGUNTAS FRECUENTES */}
+        <section className="faqs section-wrap" id="preguntas" aria-labelledby="faq-title">
+          <div className="faq-intro">
+            <p className="eyebrow">PREGUNTAS FRECUENTES</p>
+            <h2 id="faq-title">Lo esencial.<br /><span>Sin rodeos.</span></h2>
+          </div>
+          <div className="faq-content">
+            <div className="faq-list">
+              <details 
+                className={`faq-item ${activeFaq === 1 ? 'is-open' : ''}`}
+                open={activeFaq === 1}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(1);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">01</span>
+                  <span>¿Cómo me inscribo y aparto horario?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <ol className="faq-steps-list">
+                    <li>
+                      <strong>1. Escríbenos por WhatsApp</strong> solicitando tu inscripción y el horario deseado <em>(los cupos por tanda son estrictamente limitados)</em>.
+                    </li>
+                    <li>
+                      <strong>2. Recibirás los datos</strong> para realizar el pago de reserva y tu contrato personal.
+                    </li>
+                    <li>
+                      <strong>3. Te confirmamos el cupo</strong> para la charla virtual del sábado 14 de noviembre y tu evaluación presencial del domingo 15 de noviembre.
+                    </li>
+                  </ol>
+                  <a className="faq-inline-cta" href={WA_LA_ROMANA} target="_blank" rel="noopener noreferrer">
+                    Solicitar inscripción por WhatsApp →
+                  </a>
+                </div>
+              </details>
+
+              <details 
+                className={`faq-item ${activeFaq === 2 ? 'is-open' : ''}`}
+                open={activeFaq === 2}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(2);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">02</span>
+                  <span>¿Qué es el Método Tomatis®?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>Es una tecnología de estimulación auditiva y conducción por el hueso del cráneo mediante audífonos especiales. Mientras el niño juega, estimula las vías neuronales para activar el habla, la atención y la autorregulación emocional.</p>
+                </div>
+              </details>
+
+              <details 
+                className={`faq-item ${activeFaq === 3 ? 'is-open' : ''}`}
+                open={activeFaq === 3}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(3);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">03</span>
+                  <span>¿Qué hace el niño durante las 2 horas de terapia?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>Realiza actividades lúdicas guiadas (rompecabezas, pintura, motricidad fina) sobre alfombras de foam o mesas de trabajo con los audífonos puestos.</p>
+                </div>
+              </details>
+
+              <details 
+                className={`faq-item ${activeFaq === 4 ? 'is-open' : ''}`}
+                open={activeFaq === 4}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(4);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">04</span>
+                  <span>¿Debe quedarse un acompañante?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>Sí, cada niño debe asistir diariamente acompañado por mamá, papá o un tutor.</p>
+                </div>
+              </details>
+
+              <details 
+                className={`faq-item ${activeFaq === 5 ? 'is-open' : ''}`}
+                open={activeFaq === 5}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(5);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">05</span>
+                  <span>¿Se puede solicitar reembolso con seguro médico?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>Sí. Se proporciona facturación formal con las credenciales profesionales del centro y de los especialistas para que los padres puedan tramitar el reembolso con sus aseguradoras de salud.</p>
+                </div>
+              </details>
+
+              <details 
+                className={`faq-item ${activeFaq === 6 ? 'is-open' : ''}`}
+                open={activeFaq === 6}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFaq(6);
+                }}
+              >
+                <summary>
+                  <span className="faq-number">06</span>
+                  <span>¿Necesita un diagnóstico médico previo?</span>
+                  <span className="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div className="faq-answer">
+                  <p>No. El domingo 15 de noviembre realizamos la evaluación diagnóstica previa para calibrar el protocolo específico de tu pequeño.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* COUNTDOWN & FINAL CONTACT CTA */}
+        <section className="compact-contact section-wrap" id="cuenta-regresiva" aria-labelledby="countdown-heading">
+          <p className="eyebrow">CUENTA REGRESIVA · INICIO DE JORNADA</p>
+          <div className="cta-headline-combo">
+            <span className="cta-callout-font">Solo 5 niños por tanda</span>
+            <h2 id="countdown-heading">
+              No volveremos a La Romana<br />
+              <span>hasta el próximo año.</span>
+            </h2>
+          </div>
+
+          {/* TIMER EN VIVO */}
+          <div className="countdown-display" role="timer" aria-live="polite" aria-label="Tiempo restante para el inicio de la jornada">
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.days)}</span>
+              <span className="countdown-label">Días</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.hours)}</span>
+              <span className="countdown-label">Horas</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.minutes)}</span>
+              <span className="countdown-label">Min</span>
+            </div>
+            <span className="countdown-separator" aria-hidden="true">:</span>
+            <div className="countdown-unit">
+              <span className="countdown-number">{padTwo(timeLeft.seconds)}</span>
+              <span className="countdown-label">Seg</span>
+            </div>
+          </div>
+
+          <p className="countdown-note">
+            Los cupos por grupo son estrictamente limitados a <strong>5 niños por tanda</strong> para garantizar máxima calma y estimulación personalizada.
+          </p>
+
+          <a className="button button-countdown-action" href={WA_LA_ROMANA} target="_blank" rel="noopener noreferrer">
+            <WhatsAppIcon size={20} color="#000000" />
+            <span>Apartar cupo por WhatsApp antes de que inicie</span>
+          </a>
+
+          <a className="compact-phone" href="tel:+18093065040">
+            📞 +1 (809) 306-5040 | Centro Multisensorial RD
+          </a>
+        </section>
+      </main>
+
+      {/* FIXED BOTTOM TIMER BAR */}
+      <aside className={`fixed-bottom-timer ${showFixedCta ? 'is-visible' : ''}`} aria-label="Tiempo restante para la jornada">
+        <div className="fixed-timer-inner">
+          <div className="fixed-timer-countdown" role="timer" aria-live="polite">
+            <span className="fixed-timer-label">Inicia en:</span>
+            <div className="fixed-timer-digits">
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.days)}</strong><small>d</small></span>
+              <span className="fixed-timer-sep">:</span>
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.hours)}</strong><small>h</small></span>
+              <span className="fixed-timer-sep">:</span>
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.minutes)}</strong><small>m</small></span>
+              <span className="fixed-timer-sep">:</span>
+              <span className="fixed-timer-unit"><strong>{padTwo(timeLeft.seconds)}</strong><small>s</small></span>
+            </div>
+          </div>
+
+          <a 
+            className="fixed-timer-cta" 
+            href={WA_LA_ROMANA} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Reservar cupo en WhatsApp"
+          >
+            <WhatsAppIcon size={18} color="#000000" />
+            <span>Reservar cupo →</span>
+          </a>
+        </div>
+      </aside>
+
+      {/* FOOTER */}
+      <footer className="footer section-wrap">
+        <a 
+          className="brand" 
+          href="#inicio" 
+          aria-label="Volver al inicio"
+          onClick={(e) => {
+            if (onNavigateHome) {
+              e.preventDefault();
+              onNavigateHome();
+            }
+          }}
+        >
+          <img src="/assets/logo.webp" alt="Multisensorial RD" width="230" height="42" loading="lazy" />
+        </a>
+        <a href="tel:+18093065040">+1 (809) 306-5040</a>
+        <a 
+          href="https://www.centromultisensorial.com/" 
+          onClick={(e) => {
+            if (onNavigateHome) {
+              e.preventDefault();
+              onNavigateHome();
+            }
+          }}
+        >
+          Sitio Oficial Centro Multisensorial RD
+        </a>
+      </footer>
+    </div>
+  );
+}

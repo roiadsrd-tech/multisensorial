@@ -1086,6 +1086,14 @@ body[data-city="Higüey"] .locality-photo img[src*="higuey-locality-v2"]{height:
   padding: 3px;
 }
 
+.chrono-venue-logo-dala {
+  object-fit: contain;
+  background: #ffffff;
+  padding: 3px 6px;
+  width: 58px;
+  height: 44px;
+}
+
 /* 3. SECCIÓN: MAPA SENCILLO Y LIMPIO (SIN BOTONERA NI INFORMACIÓN REDUNDANTE) */
 .section-map-wrap {
   padding-block: 40px 70px;

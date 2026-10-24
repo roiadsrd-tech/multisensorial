@@ -19,6 +19,7 @@ const TerapiaConductualPage = lazy(() => import('./TerapiaConductualPage'));
 const TomatisEnRutaPage = lazy(() => import('./TomatisEnRutaPage'));
 const PuntaCanaPage = lazy(() => import('./PuntaCanaPage'));
 const HigueyPage = lazy(() => import('./HigueyPage'));
+const LaRomanaPage = lazy(() => import('./LaRomanaPage'));
 import Footer from './Footer';
 import WhatsAppIcon from './WhatsAppIcon';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -251,6 +252,16 @@ function App() {
   const [currentPage, setCurrentPage] = useState(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      if (
+        path === '/la-romana' ||
+        path === '/laromana' ||
+        path === '/romana' ||
+        path === '/jornada-la-romana' ||
+        path === '/jornada-laromana' ||
+        path === '/jornada-romana'
+      ) {
+        return 'la-romana';
+      }
       if (path === '/higuey') {
         return 'higuey';
       }
@@ -277,7 +288,16 @@ function App() {
     const handlePopState = () => {
       if (typeof window !== 'undefined') {
         const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
-        if (path === '/higuey') {
+        if (
+          path === '/la-romana' ||
+          path === '/laromana' ||
+          path === '/romana' ||
+          path === '/jornada-la-romana' ||
+          path === '/jornada-laromana' ||
+          path === '/jornada-romana'
+        ) {
+          setCurrentPage('la-romana');
+        } else if (path === '/higuey') {
           setCurrentPage('higuey');
         } else if (
           path === '/jornada-este' ||
@@ -303,7 +323,9 @@ function App() {
   const navigateToPage = (pageName, pathSlug = null) => {
     setCurrentPage(pageName);
     if (typeof window !== 'undefined') {
-      if (pageName === 'punta-cana' || pageName === 'jornada-este') {
+      if (pageName === 'la-romana') {
+        window.history.pushState({}, '', pathSlug || '/la-romana');
+      } else if (pageName === 'punta-cana' || pageName === 'jornada-este') {
         window.history.pushState({}, '', pathSlug || '/punta-cana');
       } else if (pageName === 'higuey') {
         window.history.pushState({}, '', pathSlug || '/higuey');
@@ -448,7 +470,7 @@ function App() {
   return (
     <div className="app">
       {/* Navbar (Only rendered when not on dedicated Jornada Este landing page) */}
-      {currentPage !== 'jornada-este' && currentPage !== 'punta-cana' && currentPage !== 'higuey' && (
+      {currentPage !== 'jornada-este' && currentPage !== 'punta-cana' && currentPage !== 'higuey' && currentPage !== 'la-romana' && (
         <nav className="navbar">
           {/* Promotional Banner */}
           <div 
@@ -1918,6 +1940,13 @@ function App() {
         {currentPage === 'higuey' && (
           <HigueyPage 
             onNavigateHome={() => navigateToPage('home')}
+          />
+        )}
+
+        {currentPage === 'la-romana' && (
+          <LaRomanaPage 
+            onNavigateHome={() => navigateToPage('home')}
+            onNavigateTomatis={() => handleNavigateService('tomatis')}
           />
         )}
       </Suspense>
