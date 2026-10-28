@@ -510,7 +510,7 @@ export default function JornadaEstePage({ onNavigateHome, initialCity = 'punta-c
                 <div>
                   <strong>Mery Torrealba y Carlos Eduardo Pérez</strong>
                   <p>Consultores Tomatis®</p>
-                  <a className="directory-link" href="https://www.tomatis.com/es/profesional/republica-dominicana/" target="_blank" rel="noopener noreferrer">
+                  <a className="directory-link" href="https://www.tomatis.com/en/professional/dominican-republic/santo-domingo/centro-tomatis-multisensorialrd/" target="_blank" rel="noopener noreferrer">
                     Ver equipo en el directorio oficial
                   </a>
                 </div>
@@ -525,7 +525,7 @@ export default function JornadaEstePage({ onNavigateHome, initialCity = 'punta-c
             <div className="team-copy">
               <p className="eyebrow">Tu equipo</p>
               <h2 id="team-title">Un equipo que<br /><span>te escucha.</span></h2>
-              <a className="directory-link" href="https://www.tomatis.com/es/profesional/republica-dominicana/" target="_blank" rel="noopener noreferrer">
+              <a className="directory-link" href="https://www.tomatis.com/en/professional/dominican-republic/santo-domingo/centro-tomatis-multisensorialrd/" target="_blank" rel="noopener noreferrer">
                 Nuestro equipo en el directorio oficial Tomatis®
               </a>
             </div>

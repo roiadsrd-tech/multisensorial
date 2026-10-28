@@ -985,7 +985,7 @@ export default function LaRomanaPage({ onNavigateHome, onNavigateTomatis }) {
               <div className="program-specialists-verify">
                 <a
                   className="directory-link"
-                  href="https://www.tomatis.com/es/profesional/republica-dominicana/"
+                  href="https://www.tomatis.com/en/professional/dominican-republic/santo-domingo/centro-tomatis-multisensorialrd/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

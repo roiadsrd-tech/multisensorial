@@ -624,7 +624,7 @@ const TomatisPage = ({ onBack, onBook, onNavigateService }) => {
               </div>
 
               <a 
-                href="https://www.tomatis.com/es/profesional/republica-dominicana/" 
+                href="https://www.tomatis.com/en/professional/dominican-republic/santo-domingo/centro-tomatis-multisensorialrd/" 
                 target="_blank" 
                 rel="noreferrer"
                 className="btn-primary tomatis-cert-btn"
@@ -639,7 +639,7 @@ const TomatisPage = ({ onBack, onBook, onNavigateService }) => {
                   <span className="cert-dot cert-dot-red"></span>
                   <span className="cert-dot cert-dot-yellow"></span>
                   <span className="cert-dot cert-dot-green"></span>
-                  <span className="tomatis-cert-img-url">tomatis.com/es/profesional/republica-dominicana</span>
+                  <span className="tomatis-cert-img-url">tomatis.com/en/professional/.../centro-tomatis-multisensorialrd</span>
                 </div>
                 <img 
                   src="/oficialscreenshot.png" 

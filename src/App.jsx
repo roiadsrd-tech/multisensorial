@@ -342,7 +342,7 @@ function App() {
     }, 2000);
 
     const popupTimer = setTimeout(() => {
-      const hasBeenDismissed = sessionStorage.getItem('puntacana_popup_dismissed');
+      const hasBeenDismissed = sessionStorage.getItem('higuey_popup_dismissed');
       if (!hasBeenDismissed) {
         setShowProvincialPopup(true);
       }
@@ -475,17 +475,17 @@ function App() {
           {/* Promotional Banner */}
           <div 
             onClick={() => {
-              navigateToPage('punta-cana');
+              navigateToPage('higuey');
             }}
             className="top-promo-banner"
           >
             <Sparkles size={14} fill="white" className="hide-mobile" />
             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span>📍 <strong>Jornada Tomatis en Punta Cana</strong>: 13 días intensivos.</span>
-              <span className="hide-mobile-inline"> Cupos limitados a 6 niños.</span>
+              <span>📍 <strong>Jornada Tomatis en Higüey</strong>: 1 al 15 de Noviembre.</span>
+              <span className="hide-mobile-inline"> En CPIME, Av. 27 de Febrero.</span>
             </span>
             <span className="top-promo-btn">
-              Ver Jornada Punta Cana <ArrowRight size={12} />
+              Ver Jornada Higüey <ArrowRight size={12} />
             </span>
           </div>
 
@@ -761,7 +761,7 @@ function App() {
                     className="mobile-menu-link"
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      navigateToPage('punta-cana');
+                      navigateToPage('higuey');
                     }}
                     style={{
                       background: 'var(--color-accent)',
@@ -778,7 +778,7 @@ function App() {
                       marginTop: '8px'
                     }}
                   >
-                    <Sparkles size={18} /> Jornada Punta Cana
+                    <Sparkles size={18} /> Jornada Higüey
                   </button>
 
                   <button 
@@ -1068,7 +1068,7 @@ function App() {
 
           {/* Integrated Certification Authority Bar */}
           <motion.a
-            href="https://www.tomatis.com/es/profesional/republica-dominicana/"
+            href="https://www.tomatis.com/en/professional/dominican-republic/santo-domingo/centro-tomatis-multisensorialrd/"
             target="_blank"
             rel="noreferrer"
             className="tomatis-integrated-cert-bar"
@@ -2085,7 +2085,7 @@ function App() {
             </motion.div>
           </motion.div>
 
-      {/* Floating Punta Cana Pop-Up */}
+      {/* Floating Higüey Pop-Up */}
       <AnimatePresence>
         {showProvincialPopup && currentPage === 'home' && (
           <motion.div
@@ -2098,7 +2098,7 @@ function App() {
             <button
               onClick={() => {
                 setShowProvincialPopup(false);
-                sessionStorage.setItem('puntacana_popup_dismissed', 'true');
+                sessionStorage.setItem('higuey_popup_dismissed', 'true');
               }}
               className="floating-popup-close"
               aria-label="Cerrar aviso"
@@ -2109,33 +2109,33 @@ function App() {
             <div className="floating-popup-header">
               <span className="floating-popup-badge">
                 <Sparkles size={13} />
-                <span>Punta Cana & Bávaro</span>
+                <span>Higüey · CPIME</span>
               </span>
             </div>
 
             <div className="floating-popup-body">
               <div className="floating-popup-img-wrap">
                 <img 
-                  src="/assets/punta-cana-coast-v2.webp" 
-                  alt="Jornada Tomatis Punta Cana" 
+                  src="/assets/higuey-locality-v2.webp" 
+                  alt="Jornada Tomatis Higüey" 
                   className="floating-popup-img" 
                 />
               </div>
               <div className="floating-popup-text">
-                <h4>¿Buscas la Jornada en Punta Cana?</h4>
-                <p>13 días intensivos del Método Tomatis® (18–31 Octubre). Solo 6 cupos disponibles.</p>
+                <h4>¿Buscas la Jornada en Higüey?</h4>
+                <p>1 al 15 de Noviembre en CPIME (Av. 27 de Febrero). Terapia intensiva Método Tomatis®.</p>
               </div>
             </div>
 
             <button
               onClick={() => {
                 setShowProvincialPopup(false);
-                sessionStorage.setItem('puntacana_popup_dismissed', 'true');
-                navigateToPage('punta-cana');
+                sessionStorage.setItem('higuey_popup_dismissed', 'true');
+                navigateToPage('higuey');
               }}
               className="floating-popup-cta"
             >
-              <span>Ver Jornada Punta Cana</span>
+              <span>Ver Jornada Higüey</span>
               <ArrowRight size={15} strokeWidth={2.5} />
             </button>
           </motion.div>
